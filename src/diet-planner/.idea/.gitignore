@@ -2,7 +2,7 @@
 /shelf/
 /workspace.xml
 # Datasource local storage ignored files
-/../../../../../:\Users\IgorS\Desktop\.idea/dataSources/
+/../../../../../../../../:\Users\IgorS\Desktop\diet-planner\src\diet-planner\.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
