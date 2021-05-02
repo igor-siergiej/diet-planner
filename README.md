@@ -12,3 +12,4 @@ Passing information to different scenes = controller constructor - Done
 * Save something to local storage in JSON? - need to find library
 * UI Application - Done + CSS to make it look better
 * Create two methods to save data from application to either JSON or Database. (Guest user friendly).
+* Allergy Alerts!
