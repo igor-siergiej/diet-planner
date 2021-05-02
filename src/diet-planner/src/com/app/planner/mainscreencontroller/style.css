@@ -2,3 +2,11 @@
     -fx-background-color: red;
     -fx-text-fill: white;
 }
+
+.label {
+    -fx-text-fill: green;
+}
+
+.root {
+    -fx-background-color: #222222;
+}
