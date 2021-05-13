@@ -18,3 +18,5 @@
 * Create two methods to save data from application to either JSON or Database. (Guest user friendly).
 * Figure out schema for database
 * Plan out program and separate into classes (Design Diagram)
+* Write spikework to figure out how to pass data between controllers
+* https://stackoverflow.com/questions/14187963/passing-parameters-javafx-fxml
