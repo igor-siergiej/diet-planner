@@ -9,7 +9,12 @@
 
 ### What do I want?
 * Database with accounts to store profile data, recipes, food bank - Connection spikework done, need to figure out schema 
-* Save something to local storage in JSON? - need to implement saving to file
+* Save something to local storage in JSON? 
 * UI Application + CSS **DONE**
-* Create two methods to save data from application to either JSON or Database. (Guest user friendly).
 * Allergy Alerts!
+
+### TO-DO
+* Implement saving JSON to file and reading from file
+* Create two methods to save data from application to either JSON or Database. (Guest user friendly).
+* Figure out schema for database
+* Plan out program and separate into classes (Design Diagram)
