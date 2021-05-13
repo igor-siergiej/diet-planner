@@ -12,6 +12,5 @@ public class GsonStorage {
 
         Food burger = gson.fromJson(json, Food.class);
         System.out.println(burger.toString());
-
     }
 }

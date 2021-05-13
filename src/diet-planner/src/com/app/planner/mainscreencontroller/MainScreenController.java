@@ -14,10 +14,9 @@ public class MainScreenController {
     public void goToConfiguration(ActionEvent event) throws IOException {
         Parent configScreenParent = FXMLLoader.load(getClass().getResource("../configcontroller/configScreen.fxml"));
         Scene configScreenScene = new Scene(configScreenParent);
+        configScreenScene.getStylesheets().add("com/app/planner/util/style.css");
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(configScreenScene);
         window.show();
-
-        System.out.println("works");
     }
 }
