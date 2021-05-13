@@ -10,6 +10,6 @@ Passing information to different scenes = controller constructor - Done
 ### What do I want?
 * Database with accounts to store profile data, recipes, food bank - Connection spikework done, need to figure out schema 
 * Save something to local storage in JSON? - need to find library
-* UI Application - Done + CSS to make it look better
+* UI Application + CSS **DONE**
 * Create two methods to save data from application to either JSON or Database. (Guest user friendly).
 * Allergy Alerts!
