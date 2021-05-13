@@ -2,8 +2,8 @@
 ## Requirements
 * Design Diagram
 * Learn JavaFX **DONE**
-JavaFX Application = several scenes for several screens - FXML and controller classes **DONE**
-Passing information to different scenes = controller constructor **DONE**
+* JavaFX Application = several scenes for several screens - FXML and controller classes **DONE**
+* Passing information to different scenes = controller constructor **DONE**
 * Research more libraries **DONE**
 ![Untitled](https://user-images.githubusercontent.com/79415930/116477226-3b548680-a874-11eb-9a6b-a43bf9132909.png)
 
