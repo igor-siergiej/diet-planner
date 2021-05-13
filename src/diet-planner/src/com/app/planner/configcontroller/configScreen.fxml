@@ -8,7 +8,7 @@
     <center>
         <VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="150.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="goToOptionsButton" mnemonicParsing="false" onAction="#goToMainScreen" text="Options" />
+                <Button fx:id="goToOptionsButton" alignment="CENTER" mnemonicParsing="false" onAction="#goToMainScreen" text="Back" textAlignment="CENTER" />
             </children></VBox>
     </center>
     <top>

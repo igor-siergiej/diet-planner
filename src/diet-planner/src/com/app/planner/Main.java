@@ -14,7 +14,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("mainscreencontroller/mainScreen.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("com/app/planner/mainscreencontroller/style.css");
+        scene.getStylesheets().add("com/app/planner/util/style.css");
         stage.setScene(scene);
         stage.show();
     }
