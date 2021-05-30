@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 
 public class GsonStorage {
     public void saveObjectToJson() {
-        Food pizza = new Food("flour","passata","cheese","olive oil","salt");
+        Food pizza = new Food();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(pizza);
         System.out.println(json);

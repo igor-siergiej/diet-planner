@@ -25,6 +25,8 @@ public class Main extends Application {
         db.testConnection();
         GsonStorage gsonStorage = new GsonStorage();
         gsonStorage.saveObjectToJson();
+        JsonFixxer fixxer= new JsonFixxer();
+        fixxer.fixJson();
         launch(args);
     }
 }
