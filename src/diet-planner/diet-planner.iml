@@ -11,5 +11,6 @@
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="gson-2.8.6" level="project" />
     <orderEntry type="library" name="javax.json-1.1" level="project" />
+    <orderEntry type="library" name="unirest-java-1.4.7" level="project" />
   </component>
 </module>
