@@ -11,9 +11,9 @@ public class Nutrient {
 
     @Override
     public String toString() {
-        return "Nutrient{" +
+        return "\n Nutrient{" +
                 "nutrientName='" + nutrientName + '\'' +
                 ", nutrientValue=" + nutrientValue +
-                '}';
+                "}";
     }
 }

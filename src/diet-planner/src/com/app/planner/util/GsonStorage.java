@@ -2,11 +2,16 @@ package com.app.planner.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class GsonStorage {
@@ -15,9 +20,11 @@ public class GsonStorage {
 
         try {
             // reads the entire array in the file
-            Reader reader = Files.newBufferedReader(Paths.get("test.json"));
-            Food burger = gson.fromJson(reader, Food.class);
-            System.out.println(burger.toString());
+            JsonReader reader = new JsonReader(new FileReader("data.json"));
+            Food[] foods = gson.fromJson(reader,Food[].class);
+            List<Food> foodsList = Arrays.asList(foods);
+            System.out.println(foodsList.toString());
+
 
         } catch (FileNotFoundException e) {
             System.out.println("WARNING: History File Not Found.");

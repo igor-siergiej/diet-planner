@@ -17,6 +17,6 @@ public class Food {
         return "Food{" +
                 "foodName='" + foodName + '\'' +
                 ", nutrients=" + nutrients +
-                '}';
+                "} \n";
     }
 }
