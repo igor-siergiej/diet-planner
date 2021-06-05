@@ -1,9 +1,8 @@
 package com.app.planner.util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class Food {
+public class Food{
     private String foodName;
     private ArrayList<Nutrient> nutrients;
 
@@ -16,7 +15,15 @@ public class Food {
     public String toString() {
         return "Food{" +
                 "foodName='" + foodName + '\'' +
-                ", nutrients=" + nutrients +
-                "} \n";
+                ",  \n";
+    }
+
+    public String getFoodName() {
+        return foodName;
+    }
+
+    public ArrayList<Nutrient> getNutrients() {
+        return nutrients;
     }
 }
+

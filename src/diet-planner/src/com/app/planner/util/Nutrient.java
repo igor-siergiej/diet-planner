@@ -16,4 +16,20 @@ public class Nutrient {
                 ", nutrientValue=" + nutrientValue +
                 "}";
     }
+
+    public String getNutrientName() {
+        return nutrientName;
+    }
+
+    public void setNutrientName(String nutrientName) {
+        this.nutrientName = nutrientName;
+    }
+
+    public float getNutrientValue() {
+        return nutrientValue;
+    }
+
+    public void setNutrientValue(float nutrientValue) {
+        this.nutrientValue = nutrientValue;
+    }
 }
