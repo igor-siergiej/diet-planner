@@ -92,8 +92,8 @@ public class Main extends Application {
         ArrayList<Food> data = main.initialiseData(new File("data.json"));
 
         Meal meal = new Meal();
-        meal.setMealName("egg breakfast");
-        meal.addFoods(main.sortedFoodSearch(data,"eggs boiled"));
+        meal.setMealName("ciabatta");
+        meal.addFoods(main.sortedFoodSearch(data,"tomatoes"));
 
 
         Entry entry = new Entry(meal,LocalDateTime.now(),EntryType.BREAKFAST);
