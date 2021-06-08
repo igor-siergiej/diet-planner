@@ -16,6 +16,7 @@
                </padding>
             </Label>
             <Button alignment="CENTER" mnemonicParsing="false" text="Next Month" textAlignment="CENTER" translateX="-30.0" />
+            <Button mnemonicParsing="false" text="See Insights" translateX="75.0" />
          </children>
       </HBox>
       <HBox prefHeight="22.0" prefWidth="600.0">

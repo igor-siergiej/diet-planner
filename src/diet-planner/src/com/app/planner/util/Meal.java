@@ -1,13 +1,15 @@
 package com.app.planner.util;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Meal {
     private String mealName;
     private ArrayList<Food> Foods = new ArrayList<>();
-    private int[] foodPortion;
+    private int[] portions = new int[MAX_FOOD_COUNT];
+
+    private static final int MAX_FOOD_COUNT = 50;
 
     public void setMealName(String mealName) {
         this.mealName = mealName;
@@ -21,6 +23,9 @@ public class Meal {
         System.out.println("Enter which food to add from the above list");
         int num = in.nextInt();
         Foods.add(foodArrayList.get(num));
+        System.out.println("Enter the portion of the food");
+        int portion = in.nextInt();
+        portions[Foods.size() -1] = portion;
         System.out.println(Foods.toString());
     }
 
@@ -29,6 +34,27 @@ public class Meal {
         return "Meal{" +
                 "mealName='" + mealName + '\'' +
                 ", Foods=" + Foods +
+                ", portions=" + Arrays.toString(portions) +
                 '}';
+    }
+
+    public String getMealName() {
+        return mealName;
+    }
+
+    public ArrayList<Food> getFoods() {
+        return Foods;
+    }
+
+    public void setFoods(ArrayList<Food> foods) {
+        Foods = foods;
+    }
+
+    public int[] getPortions() {
+        return portions;
+    }
+
+    public void setPortions(int[] portions) {
+        this.portions = portions;
     }
 }

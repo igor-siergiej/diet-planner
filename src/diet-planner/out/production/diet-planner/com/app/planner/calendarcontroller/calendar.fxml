@@ -1,25 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="NEVER">
          <children>
-            <ButtonBar prefHeight="40.0" prefWidth="200.0">
-              <buttons>
-                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Button" />
-              </buttons>
-            </ButtonBar>
-            <TextFlow prefHeight="200.0" prefWidth="200.0" />
-            <ButtonBar prefHeight="40.0" prefWidth="200.0">
-               <buttons>
-                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="28.0" prefWidth="122.0" text="Button" textAlignment="CENTER" />
-               </buttons>
-            </ButtonBar>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Back" translateX="-125.0" HBox.hgrow="NEVER" />
+            <Button alignment="CENTER" layoutX="323.0" layoutY="23.0" mnemonicParsing="false" text="Previous Month" translateX="-30.0" />
+            <Label alignment="CENTER" text="Month Name" translateX="-30.0">
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
+            </Label>
+            <Button alignment="CENTER" mnemonicParsing="false" text="Next Month" textAlignment="CENTER" translateX="-30.0" />
+            <Button mnemonicParsing="false" text="See Insights" translateX="75.0" />
+         </children>
+      </HBox>
+      <HBox prefHeight="22.0" prefWidth="600.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="27.0" prefWidth="86.0" text="Sunday">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="86.0" text="Monday">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="96.0" layoutY="10.0" prefHeight="27.0" prefWidth="86.0" text="Tuesday">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="182.0" layoutY="10.0" prefHeight="27.0" prefWidth="86.0" text="Wednesday">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="268.0" layoutY="10.0" prefHeight="27.0" prefWidth="86.0" text="Thursday">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="354.0" layoutY="10.0" prefHeight="27.0" prefWidth="86.0" text="Friday">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="440.0" layoutY="10.0" prefHeight="27.0" prefWidth="86.0" text="Saturday">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </Label>
          </children>
       </HBox>
       <GridPane alignment="CENTER" gridLinesVisible="true" VBox.vgrow="ALWAYS">
@@ -33,11 +69,12 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
    </children>
