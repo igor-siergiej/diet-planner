@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class Main extends Application {
@@ -72,14 +73,12 @@ public class Main extends Application {
     public ArrayList<Food> foodSearch(ArrayList<Food> searchList,String searchFood) {
         searchFood = searchFood.toLowerCase();
         List<String> searchFoodList = Arrays.asList(searchFood.split(" "));
-        System.out.println(searchFoodList.toString());
         ArrayList<Food> returnList = new ArrayList<>();
 
         for (Food food: searchList) {
             List<String> foodNameList = Arrays.asList(food.getFoodName().toLowerCase().split(", "));
             if (foodNameList.containsAll(searchFoodList)) {
                 returnList.add(food);
-                System.out.println("i");
             }
         }
         return returnList;
@@ -95,11 +94,26 @@ public class Main extends Application {
         meal.setMealName("ciabatta");
         meal.addFoods(main.sortedFoodSearch(data,"tomatoes"));
 
-
         Entry entry = new Entry(meal,LocalDateTime.now(),EntryType.BREAKFAST);
+        Entry entry1 = new Entry(meal,LocalDateTime.now(),EntryType.BREAKFAST);
         Diary diary = new Diary();
         diary.addEntry(entry);
+        diary.addEntry(entry1);
 
+        ArrayList<Nutrient> nutrientArrayList = new ArrayList<>();
+        for (Entry entry5: diary.getEntriesDay(8)) {
+            for (Food food: entry5.getMeal().getFoods()) {
+                nutrientArrayList.addAll(food.getNutrients());
+            }
+        }
+
+        System.out.println(nutrientArrayList.toString());
+
+        List<Nutrient> addedUpNutrientArrayList = nutrientArrayList.stream().collect(Collectors.groupingBy(nutrient -> nutrient.getNutrientName())).entrySet().stream()
+                .map(e -> e.getValue().stream().reduce((f1, f2) -> new Nutrient(f1.getNutrientName(), f1.getNutrientValue() + f2.getNutrientValue())))
+                .map(f -> f.get()).collect(Collectors.toList());
+
+        System.out.println(addedUpNutrientArrayList.toString());
 
         Profile profile1 = new Profile("profile1",diary);
         System.out.println(profile1.toString());

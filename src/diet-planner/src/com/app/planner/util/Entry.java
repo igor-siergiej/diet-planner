@@ -13,6 +13,30 @@ public class Entry {
         this.entryType = entryType;
     }
 
+    public Meal getMeal() {
+        return meal;
+    }
+
+    public void setMeal(Meal meal) {
+        this.meal = meal;
+    }
+
+    public LocalDateTime getTimeEaten() {
+        return timeEaten;
+    }
+
+    public void setTimeEaten(LocalDateTime timeEaten) {
+        this.timeEaten = timeEaten;
+    }
+
+    public EntryType getEntryType() {
+        return entryType;
+    }
+
+    public void setEntryType(EntryType entryType) {
+        this.entryType = entryType;
+    }
+
     @Override
     public String toString() {
         return "Entry{" +
