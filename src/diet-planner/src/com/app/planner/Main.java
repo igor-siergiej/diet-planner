@@ -40,7 +40,6 @@ public class Main extends Application {
 
         int returnValue = jfc.showOpenDialog(null);
 
-
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = jfc.getSelectedFile();
             System.out.println(selectedFile.getAbsolutePath());
@@ -84,6 +83,17 @@ public class Main extends Application {
         return returnList;
     }
 
+    public ArrayList<Nutrient> combineNutrientList(ArrayList<Nutrient> sourceList) {
+        ArrayList<Nutrient> returnList = new ArrayList<>();
+
+        List<Nutrient> addedUpNutrientArrayList = sourceList.stream().collect(Collectors.groupingBy(nutrient -> nutrient.getNutrientName())).entrySet().stream()
+                .map(e -> e.getValue().stream().reduce((f1, f2) -> new Nutrient(f1.getNutrientName(), f1.getNutrientValue() + f2.getNutrientValue())))
+                .map(f -> f.get()).collect(Collectors.toList());
+
+        returnList.addAll(addedUpNutrientArrayList);
+        return returnList;
+    }
+
     public static void main(String[] args) {
         Main main = new Main();
         DatabaseConnection db = new DatabaseConnection();
@@ -101,7 +111,7 @@ public class Main extends Application {
         diary.addEntry(entry1);
 
         ArrayList<Nutrient> nutrientArrayList = new ArrayList<>();
-        for (Entry entry5: diary.getEntriesDay(8)) {
+        for (Entry entry5: diary.getEntriesDay(LocalDateTime.now().getDayOfMonth())) {
             for (Food food: entry5.getMeal().getFoods()) {
                 nutrientArrayList.addAll(food.getNutrients());
             }
@@ -109,11 +119,7 @@ public class Main extends Application {
 
         System.out.println(nutrientArrayList.toString());
 
-        List<Nutrient> addedUpNutrientArrayList = nutrientArrayList.stream().collect(Collectors.groupingBy(nutrient -> nutrient.getNutrientName())).entrySet().stream()
-                .map(e -> e.getValue().stream().reduce((f1, f2) -> new Nutrient(f1.getNutrientName(), f1.getNutrientValue() + f2.getNutrientValue())))
-                .map(f -> f.get()).collect(Collectors.toList());
-
-        System.out.println(addedUpNutrientArrayList.toString());
+        System.out.println(main.combineNutrientList(nutrientArrayList).toString());
 
         Profile profile1 = new Profile("profile1",diary);
         System.out.println(profile1.toString());

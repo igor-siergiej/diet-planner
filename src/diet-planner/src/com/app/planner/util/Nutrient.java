@@ -1,5 +1,7 @@
 package com.app.planner.util;
 
+import java.text.DecimalFormat;
+
 public class Nutrient {
     private String nutrientName;
     private float nutrientValue;
@@ -11,9 +13,10 @@ public class Nutrient {
 
     @Override
     public String toString() {
+        DecimalFormat df = new DecimalFormat("0.00");
         return "\n Nutrient{" +
                 "nutrientName='" + nutrientName + '\'' +
-                ", nutrientValue=" + nutrientValue +
+                ", nutrientValue=" + df.format(nutrientValue) +
                 "}";
     }
 

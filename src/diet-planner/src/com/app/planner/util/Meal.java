@@ -9,7 +9,7 @@ public class Meal {
     private ArrayList<Food> Foods = new ArrayList<>();
     private int[] portions = new int[MAX_FOOD_COUNT];
 
-    private static final int MAX_FOOD_COUNT = 50;
+    private static final int MAX_FOOD_COUNT = 30;
 
     public void setMealName(String mealName) {
         this.mealName = mealName;
@@ -43,6 +43,11 @@ public class Meal {
     }
 
     public ArrayList<Food> getFoods() {
+        for (int i = 0; i < Foods.size(); i++) {
+            for (int j = 0; j < Foods.get(i).getNutrients().size(); j++) {
+                Foods.get(i).getNutrients().get(j).setNutrientValue(Foods.get(i).getNutrients().get(j).getNutrientValue() / 100 * portions[i]);
+            }
+        }
         return Foods;
     }
 
