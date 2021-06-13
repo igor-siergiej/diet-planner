@@ -1,4 +1,4 @@
-package com.app.planner.util;
+package com.app.planner;
 
 import java.util.Comparator;
 
