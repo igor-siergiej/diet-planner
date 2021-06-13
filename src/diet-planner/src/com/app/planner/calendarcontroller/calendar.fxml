@@ -8,7 +8,7 @@
    <children>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="NEVER">
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Back" translateX="-125.0" HBox.hgrow="NEVER" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Back" translateX="-75.0" HBox.hgrow="NEVER" />
             <Button alignment="CENTER" layoutX="323.0" layoutY="23.0" mnemonicParsing="false" text="Previous Month" translateX="-30.0" />
             <Label alignment="CENTER" text="Month Name" translateX="-30.0">
                <padding>

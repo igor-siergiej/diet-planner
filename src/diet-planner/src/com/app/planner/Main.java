@@ -1,6 +1,5 @@
 package com.app.planner;
 
-import com.app.planner.util.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
@@ -15,7 +14,6 @@ import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,21 +27,9 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("mainscreencontroller/mainScreen.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("com/app/planner/util/style.css");
+        scene.getStylesheets().add("com/app/planner/style.css");
         stage.setScene(scene);
         stage.show();
-    }
-
-    public void fileChooser() {
-        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-        int returnValue = jfc.showOpenDialog(null);
-
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = jfc.getSelectedFile();
-            System.out.println(selectedFile.getAbsolutePath());
-        }
     }
 
     public ArrayList<Food> initialiseData(File dataFile) {
@@ -51,7 +37,7 @@ public class Main extends Application {
         try {
             // reads the entire array in the file
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            JsonReader reader = new JsonReader(new FileReader("data.json"));
+            JsonReader reader = new JsonReader(new FileReader(new File("data.json")));
             Food[] foods = gson.fromJson(reader,Food[].class);
             List<Food> foodsList = Arrays.asList(foods);
             returnList.addAll(foodsList);
@@ -59,6 +45,47 @@ public class Main extends Application {
         } catch (FileNotFoundException e) {
             System.out.println("WARNING: History File Not Found.");
         }
+        return returnList;
+    }
+
+    public File chooseFile() {
+        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        File selectedFile = null;
+        jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        int returnValue = jfc.showOpenDialog(null);
+
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            selectedFile = jfc.getSelectedFile();
+        } else if (returnValue == JFileChooser.CANCEL_OPTION){
+            System.out.println("FileChooser cancelled");
+        }
+        return selectedFile;
+    }
+
+    public File chooseDirectory() {
+        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        File selectedFile = null;
+        jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        int returnValue = jfc.showOpenDialog(null);
+
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            selectedFile = jfc.getSelectedFile();
+        } else if (returnValue == JFileChooser.CANCEL_OPTION){
+            System.out.println("FileChooser cancelled");
+        }
+        return selectedFile;
+    }
+
+    public ArrayList<Nutrient> combineNutrientList(ArrayList<Nutrient> sourceList) {
+        ArrayList<Nutrient> returnList = new ArrayList<>();
+
+        List<Nutrient> addedUpNutrientArrayList = sourceList.stream().collect(Collectors.groupingBy(nutrient -> nutrient.getNutrientName())).entrySet().stream()
+                .map(e -> e.getValue().stream().reduce((f1, f2) -> new Nutrient(f1.getNutrientName(), f1.getNutrientValue() + f2.getNutrientValue())))
+                .map(f -> f.get()).collect(Collectors.toList());
+
+        returnList.addAll(addedUpNutrientArrayList);
         return returnList;
     }
 
@@ -83,47 +110,7 @@ public class Main extends Application {
         return returnList;
     }
 
-    public ArrayList<Nutrient> combineNutrientList(ArrayList<Nutrient> sourceList) {
-        ArrayList<Nutrient> returnList = new ArrayList<>();
-
-        List<Nutrient> addedUpNutrientArrayList = sourceList.stream().collect(Collectors.groupingBy(nutrient -> nutrient.getNutrientName())).entrySet().stream()
-                .map(e -> e.getValue().stream().reduce((f1, f2) -> new Nutrient(f1.getNutrientName(), f1.getNutrientValue() + f2.getNutrientValue())))
-                .map(f -> f.get()).collect(Collectors.toList());
-
-        returnList.addAll(addedUpNutrientArrayList);
-        return returnList;
-    }
-
     public static void main(String[] args) {
-        Main main = new Main();
-        DatabaseConnection db = new DatabaseConnection();
-        db.testConnection();
-        ArrayList<Food> data = main.initialiseData(new File("data.json"));
-
-        Meal meal = new Meal();
-        meal.setMealName("ciabatta");
-        meal.addFoods(main.sortedFoodSearch(data,"tomatoes"));
-
-        Entry entry = new Entry(meal,LocalDateTime.now(),EntryType.BREAKFAST);
-        Entry entry1 = new Entry(meal,LocalDateTime.now(),EntryType.BREAKFAST);
-        Diary diary = new Diary();
-        diary.addEntry(entry);
-        diary.addEntry(entry1);
-
-        ArrayList<Nutrient> nutrientArrayList = new ArrayList<>();
-        for (Entry entry5: diary.getEntriesDay(LocalDateTime.now().getDayOfMonth())) {
-            for (Food food: entry5.getMeal().getFoods()) {
-                nutrientArrayList.addAll(food.getNutrients());
-            }
-        }
-
-        System.out.println(nutrientArrayList.toString());
-
-        System.out.println(main.combineNutrientList(nutrientArrayList).toString());
-
-        Profile profile1 = new Profile("profile1",diary);
-        System.out.println(profile1.toString());
-
         launch(args);
     }
 }
