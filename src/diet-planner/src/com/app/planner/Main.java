@@ -11,9 +11,7 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -32,19 +30,16 @@ public class Main extends Application {
         stage.show();
     }
 
-    public ArrayList<Food> initialiseData(File dataFile) {
+    public ArrayList<Food> initialiseData() {
         ArrayList<Food> returnList = new ArrayList<>();
-        try {
-            // reads the entire array in the file
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            JsonReader reader = new JsonReader(new FileReader(new File("data.json")));
-            Food[] foods = gson.fromJson(reader,Food[].class);
-            List<Food> foodsList = Arrays.asList(foods);
-            returnList.addAll(foodsList);
+        // reads the entire array in the file
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        InputStream in = getClass().getResourceAsStream("/data.json");
+        JsonReader reader = new JsonReader(new InputStreamReader(in));
+        Food[] foods = gson.fromJson(reader,Food[].class);
+        List<Food> foodsList = Arrays.asList(foods);
+        returnList.addAll(foodsList);
 
-        } catch (FileNotFoundException e) {
-            System.out.println("WARNING: History File Not Found.");
-        }
         return returnList;
     }
 

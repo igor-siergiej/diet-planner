@@ -2,12 +2,9 @@ package com.app.planner;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Application {
-
-    private static final File dataFile = new File("data.json");
     public static void main(String[] args) throws IOException {
 
         Main main = new Main();
@@ -15,12 +12,13 @@ public class Application {
         db.testConnection();
 
         Profile profile = new Profile();
-        ArrayList<Food> data = main.initialiseData(dataFile);
+        ArrayList<Food> data = main.initialiseData();
+        System.out.println(data.toString());
 
         new File("profiles").mkdirs();
 
-        profile.loadFromFile(main.chooseFile("load"));
-        System.out.println(profile.toString());
+        //profile.loadFromFile(main.chooseFile("load"));
+        //System.out.println(profile.toString());
 
 
 
