@@ -5,10 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class Profile {
     private String profileName;
@@ -46,22 +42,20 @@ public class Profile {
         this.diary = diary;
     }
 
-    public void saveToFile(File file, Boolean overwrite) throws IOException {
+    public void saveToFile(File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Writer writer = new FileWriter(file);
+        gson.toJson(this,writer);
+        writer.flush();
+        writer.close();
+    }
 
+    public void loadFromFile(File file) throws FileNotFoundException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JsonReader reader = new JsonReader(new FileReader(file));
-        Profile[] profiles = gson.fromJson(reader,Profile[].class);
-        ArrayList<Profile> profileArrayList = new ArrayList<>();
-        Collections.addAll(profileArrayList,profiles);
-
-        for (Profile profile : profileArrayList) {
-            if (profile.getProfileName().equals(this.getProfileName()) && overwrite) {
-                profileArrayList.set(profileArrayList.indexOf(profile),this);
-            } else {
-                profileArrayList.add(this);
-            }
-        }
-        gson.toJson(profileArrayList,new FileWriter(file,false));
+        Profile profile = gson.fromJson(reader,Profile.class);
+        this.setDiary(profile.getDiary());
+        this.setProfileName(profile.getProfileName());
     }
 }
 
