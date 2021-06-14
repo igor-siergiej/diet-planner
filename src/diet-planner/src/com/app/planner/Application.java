@@ -1,31 +1,39 @@
 package com.app.planner;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Application {
-    public static void main(String[] args) {
+
+    private static final File dataFile = new File("data.json");
+    public static void main(String[] args) throws IOException {
 
         Main main = new Main();
         DatabaseConnection db = new DatabaseConnection();
         db.testConnection();
 
         Profile profile = new Profile();
-        ArrayList<Food> data = main.initialiseData(main.chooseFile());
-        System.out.println(data.toString());
+        ArrayList<Food> data = main.initialiseData(dataFile);
+
+        new File("profiles").mkdirs();
+
+        profile.loadFromFile(main.chooseFile("load"));
+        System.out.println(profile.toString());
 
 
 
 
-        /*
-        Meal meal = new Meal();
+
+        /*Meal meal = new Meal();
         meal.setMealName("ciabatta");
         meal.addFoods(main.sortedFoodSearch(data,"tomatoes"));
 
-        Entry entry = new Entry(meal,LocalDateTime.now(),EntryType.BREAKFAST);
-        Entry entry1 = new Entry(meal,LocalDateTime.now(),EntryType.BREAKFAST);
+        Entry entry = new Entry(meal, LocalDateTime.now(),EntryType.BREAKFAST);
         Diary diary = new Diary();
         diary.addEntry(entry);
-        diary.addEntry(entry1);
+        diary.addEntry(entry);
 
         ArrayList<Nutrient> nutrientArrayList = new ArrayList<>();
         for (Entry entry5: diary.getEntriesDay(LocalDateTime.now().getDayOfMonth())) {
@@ -38,8 +46,11 @@ public class Application {
 
         System.out.println(main.combineNutrientList(nutrientArrayList).toString());
 
-        Profile profile1 = new Profile("profile1",diary);
-        System.out.println(profile1.toString());*/
+        profile.setDiary(diary);
+        profile.setProfileName("profile1");
+        File file = main.chooseFile("save");
+        profile.saveToFile(file);*/
+
         Main.main(args);
     }
 }

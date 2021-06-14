@@ -48,27 +48,16 @@ public class Main extends Application {
         return returnList;
     }
 
-    public File chooseFile() {
+    public File chooseFile(String windowType) {
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         File selectedFile = null;
         jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
-        int returnValue = jfc.showOpenDialog(null);
-
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            selectedFile = jfc.getSelectedFile();
-        } else if (returnValue == JFileChooser.CANCEL_OPTION){
-            System.out.println("FileChooser cancelled");
+        int returnValue;
+        if (windowType.equals("save")) {
+             returnValue =  jfc.showSaveDialog(null);
+        } else {
+            returnValue = jfc.showOpenDialog(null);
         }
-        return selectedFile;
-    }
-
-    public File chooseDirectory() {
-        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        File selectedFile = null;
-        jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-        int returnValue = jfc.showOpenDialog(null);
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             selectedFile = jfc.getSelectedFile();
