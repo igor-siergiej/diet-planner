@@ -43,8 +43,10 @@ public class Main extends Application {
         return returnList;
     }
 
-    public File chooseFile(String windowType) {
+    public File chooseFile(String windowType) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         File selectedFile = null;
         jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int returnValue;

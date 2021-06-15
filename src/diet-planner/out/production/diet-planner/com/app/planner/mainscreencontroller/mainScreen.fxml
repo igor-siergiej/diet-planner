@@ -1,23 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.291" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
-   <center>
-      <VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="150.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="goToOptionsButton" mnemonicParsing="false" onAction="#goToConfiguration" text="Options" />
-         </children></VBox>
-   </center>
-   <top>
-      <Label text="Main Menu" textAlignment="CENTER" BorderPane.alignment="CENTER">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="425.0" layoutY="10.0" text="Diet-Planner Logo" textAlignment="CENTER">
          <font>
-            <Font size="60.0" />
+            <Font name="Arial" size="55.0" />
+         </font></Label>
+      <HBox prefHeight="800.0" prefWidth="1200.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="800.0" prefWidth="600.0">
+               <children>
+                  <Label text="Load Profile from File" translateY="-100.0">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#loadProfile" prefHeight="65.0" prefWidth="287.0" text="Load Profile" textAlignment="CENTER">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#createNewProfile" text="Create New Profile">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Button>
+               </children></VBox>
+            <VBox alignment="CENTER" prefHeight="800.0" prefWidth="600.0">
+               <children>
+                  <Label text="Log In to Account" translateY="-50.0">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label text="Enter Username">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" />
+                  <Label text="Enter Password">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <PasswordField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" />
+                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="65.0" prefWidth="147.0" text="Login" textAlignment="CENTER">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="236.0" layoutY="455.0" mnemonicParsing="false" text="Register">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button alignment="CENTER" mnemonicParsing="false" onAction="#goToConfiguration" text="Options" translateX="50.0" translateY="700.0">
+         <font>
+            <Font size="30.0" />
          </font>
-      </Label>
-   </top>
-</BorderPane>
+      </Button>
+   </children>
+</Pane>

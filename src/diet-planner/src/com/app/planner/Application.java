@@ -2,12 +2,14 @@ package com.app.planner;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 public class Application {
     public static void main(String[] args) throws IOException {
 
-        Main main = new Main();
+        /*Main main = new Main();
         DatabaseConnection db = new DatabaseConnection();
         db.testConnection();
 
@@ -17,14 +19,14 @@ public class Application {
 
         new File("profiles").mkdirs();
 
-        //profile.loadFromFile(main.chooseFile("load"));
-        //System.out.println(profile.toString());
+        profile.loadFromFile(main.chooseFile("load"));
+        System.out.println(profile.toString());
 
 
 
 
 
-        /*Meal meal = new Meal();
+        Meal meal = new Meal();
         meal.setMealName("ciabatta");
         meal.addFoods(main.sortedFoodSearch(data,"tomatoes"));
 
