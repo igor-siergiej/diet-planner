@@ -2,11 +2,10 @@ package com.app.planner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Meal {
     private String mealName;
-    private ArrayList<Food> Foods = new ArrayList<>();
+    private ArrayList<Food> foods = new ArrayList<>();
     private int[] portions = new int[MAX_FOOD_COUNT];
 
     private static final int MAX_FOOD_COUNT = 30;
@@ -15,25 +14,23 @@ public class Meal {
         this.mealName = mealName;
     }
 
-    public void addFoods(ArrayList<Food> foodArrayList) {
-        Scanner in = new Scanner(System.in);
-        for (int i = 0; i < foodArrayList.size(); i++) {
-            System.out.println(i + foodArrayList.get(i).toString());
+    //sets the nutritional values to be scaled with portions
+    public void addFoods(ArrayList<Food> foodArrayList,int[] foodPortions) {
+        foods = foodArrayList;
+        portions = foodPortions;
+
+        for (int i = 0; i < foods.size(); i++) {
+            for (int j = 0; j < foods.get(i).getNutrients().size(); j++) {
+                foods.get(i).getNutrients().get(j).setNutrientValue(foods.get(i).getNutrients().get(j).getNutrientValue() / 100 * portions[i]);
+            }
         }
-        System.out.println("Enter which food to add from the above list");
-        int num = in.nextInt();
-        Foods.add(foodArrayList.get(num));
-        System.out.println("Enter the portion of the food");
-        int portion = in.nextInt();
-        portions[Foods.size() -1] = portion;
-        System.out.println(Foods.toString());
     }
 
     @Override
     public String toString() {
         return "Meal{" +
                 "mealName='" + mealName + '\'' +
-                ", Foods=" + Foods +
+                ", Foods=" + foods +
                 ", portions=" + Arrays.toString(portions) +
                 '}';
     }
@@ -43,16 +40,11 @@ public class Meal {
     }
 
     public ArrayList<Food> getFoods() {
-        for (int i = 0; i < Foods.size(); i++) {
-            for (int j = 0; j < Foods.get(i).getNutrients().size(); j++) {
-                Foods.get(i).getNutrients().get(j).setNutrientValue(Foods.get(i).getNutrients().get(j).getNutrientValue() / 100 * portions[i]);
-            }
-        }
-        return Foods;
+        return foods;
     }
 
     public void setFoods(ArrayList<Food> foods) {
-        Foods = foods;
+        this.foods = foods;
     }
 
     public int[] getPortions() {
