@@ -1,6 +1,7 @@
 package com.app.planner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Diary {
     private ArrayList<Entry> entries = new ArrayList<>();
@@ -34,6 +35,14 @@ public class Diary {
             }
         }
         return returnList;
+    }
+
+    public void sortEntries() {
+        Collections.sort(entries);
+    }
+
+    public void reverseSortEntries() {
+        Collections.reverse(entries);
     }
 
     public ArrayList<Entry> getAllEntries() {
