@@ -1,23 +1,17 @@
 import com.app.planner.*;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DiaryTest {
 
     private Diary diary = new Diary();
 
-    @Before
+    @BeforeEach
     public void setUp() {
         LocalDateTime localDateTime = LocalDateTime.parse("2021-06-15T06:30:00");
         LocalDateTime localDateTime1 = LocalDateTime.parse("2021-06-16T06:30:00");
@@ -37,17 +31,42 @@ public class DiaryTest {
         diary.addEntry(entry3);
         diary.addEntry(entry4);
         diary.addEntry(entry5);
+        diary.sortEntries();
     }
 
     @Test
     public void testGetEntriesDay() {
-        assertEquals("Size of arrayList should be 2",2,diary.getEntriesDay(16).size());
-        assertEquals("Size of arrayList should be 1",1,diary.getEntriesDay(17).size());
+        assertEquals(2,diary.getEntriesDay(16).size(),"Size of arrayList should be 2");
+        assertEquals(1,diary.getEntriesDay(17).size(),"Size of arrayList should be 1");
     }
 
     @Test
     public void testGetEntriesWeek() {
-        assertEquals("Size of arrayList should be 4",4,diary.getEntriesWeek(15).size());
-        assertEquals("Size of arrayList should be 2",2,diary.getEntriesWeek(1).size());
+        assertEquals(4,diary.getEntriesWeek(15).size(),"Size of arrayList should be 4");
+        assertEquals(2,diary.getEntriesWeek(1).size(),"Size of arrayList should be 2");
     }
+
+    @Test
+    public void testEntriesSort() {
+        assertEquals(diary.getAllEntries().get(0).getTimeEaten(), LocalDateTime.parse("2021-06-17T06:30:00"), "Entries should be sorted");
+    }
+
+    @Nested
+    class TestNest{
+
+        @BeforeEach
+        public void init() {
+            diary.reverseSortEntries();
+        }
+
+        @Test
+        public void testEntiresReverseSort() {
+            assertEquals(diary.getAllEntries().get(0).getTimeEaten(), LocalDateTime.parse("2021-06-01T06:30:00"), "Entries should be reversed");
+        }
+
+
+
+    }
+
+
 }

@@ -3,9 +3,10 @@ import com.app.planner.Meal;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,7 +18,7 @@ public class MealTest {
 
     private Meal meal;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         meal = new Meal();
         ArrayList<Food> returnList = new ArrayList<>();
@@ -34,8 +35,8 @@ public class MealTest {
 
     @Test
     public void testGetFoods() {
-        assertEquals("Size of the foods should be 3",3, meal.getFoods().size());
-        assertEquals("Size of the nutrients should be 53",53,meal.getFoods().get(0).getNutrients().size());
+        assertEquals(3,meal.getFoods().size(),"Size of the foods should be 3");
+        assertEquals(53,meal.getFoods().get(0).getNutrients().size(),"Size of the foods should be 53");
     }
 
     @Test

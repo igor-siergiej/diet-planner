@@ -2,7 +2,7 @@ package com.app.planner;
 
 import java.time.LocalDateTime;
 
-public class Entry {
+public class Entry implements Comparable{
     private Meal meal;
     private LocalDateTime timeEaten;
     private EntryType entryType;
@@ -44,5 +44,11 @@ public class Entry {
                 ", timeEaten=" + timeEaten +
                 ", entryType=" + entryType +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Entry entry = (Entry)o;
+        return entry.getTimeEaten().compareTo(this.getTimeEaten());
     }
 }
