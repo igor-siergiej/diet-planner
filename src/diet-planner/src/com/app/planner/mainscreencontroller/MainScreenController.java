@@ -40,10 +40,6 @@ public class MainScreenController {
         enterProfilePane.setVisible(true);
     }
 
-    public void setEnterProfilePaneInvisible() {
-        enterProfilePane.setVisible(false);
-    }
-
     public void setProfile(ActionEvent event) throws IOException {
         Profile profile = new Profile();
         Diary diary = new Diary();
