@@ -35,7 +35,6 @@ public class MealTest {
     @Test
     public void testGetFoods() {
         assertEquals("Size of the foods should be 3",3, meal.getFoods().size());
-
         assertEquals("Size of the nutrients should be 53",53,meal.getFoods().get(0).getNutrients().size());
     }
 
