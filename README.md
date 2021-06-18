@@ -10,3 +10,6 @@
 - Viewing nutrients for a single day
 - viewing nutrients for a week
 - Viewing all entries in diary
+
+#### Other things to do:
+- Implement creating custom food/recipe + UI
