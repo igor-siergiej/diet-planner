@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.profilescreencontroller.ProfileScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.291" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.profilescreencontroller.ProfileScreenController">
    <children>
       <Button layoutX="189.0" layoutY="221.0" mnemonicParsing="false" onAction="#showProfileData" text="Show Profile Data" />
       <Label contentDisplay="CENTER" layoutX="425.0" layoutY="10.0" text="Diet-Planner Logo" textAlignment="CENTER">
