@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.calendarcontroller.CalendarController">
    <children>
-      <GridPane alignment="CENTER" gridLinesVisible="true" layoutY="92.0" prefHeight="708.0" prefWidth="1200.0">
+      <GridPane fx:id="calendar" alignment="CENTER" gridLinesVisible="true" layoutY="92.0" prefHeight="708.0" prefWidth="1200.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -27,37 +27,58 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="64.0" layoutY="12.0" text="Monday" />
+                  <Label layoutX="50.0" layoutY="5.0" text="Monday">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Label layoutX="64.0" layoutY="12.0" text="Tuesday" />
+                  <Label layoutX="50.0" layoutY="5.0" text="Tuesday">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
-                  <Label layoutX="55.0" layoutY="12.0" text="Wednesday" />
+                  <Label layoutX="35.0" layoutY="5.0" text="Wednesday">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
                <children>
-                  <Label layoutX="61.0" layoutY="12.0" text="Thursday" />
+                  <Label layoutX="45.0" layoutY="5.0" text="Thursday">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
                <children>
-                  <Label layoutX="70.0" layoutY="12.0" text="Friday" />
+                  <Label layoutX="59.0" layoutY="5.0" text="Friday">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
                <children>
-                  <Label layoutX="62.0" layoutY="12.0" text="Saturday" />
+                  <Label layoutX="47.0" layoutY="5.0" text="Saturday">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6">
                <children>
-                  <Label layoutX="66.0" layoutY="12.0" text="Sunday" />
+                  <Label layoutX="53.0" layoutY="5.0" text="Sunday">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
                </children>
             </Pane>
          </children>
@@ -77,12 +98,12 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <Button layoutX="436.0" layoutY="25.0" mnemonicParsing="false" text="&lt;&lt;&lt;">
+      <Button layoutX="436.0" layoutY="25.0" mnemonicParsing="false" onAction="#previousMonth" text="&lt;&lt;&lt;">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="689.0" layoutY="25.0" mnemonicParsing="false" text="&gt;&gt;&gt;">
+      <Button layoutX="689.0" layoutY="25.0" mnemonicParsing="false" onAction="#nextMonth" text="&gt;&gt;&gt;">
          <font>
             <Font size="20.0" />
          </font>
