@@ -1,5 +1,6 @@
 package com.app.planner.calendarcontroller;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -38,9 +40,9 @@ public class CalendarController {
         while (!calendarDate.getDayOfWeek().toString().equals("MONDAY") ) {
             calendarDate = calendarDate.minusDays(1);
         }
-        // TO-DO implement adding day numbers to calendar gridPane
 
-        calendar.getChildren().retainAll(calendar.getChildren().get(0));
+        //Replace this with new method to remove all labels in the gridpane using removeNodeByRowColumnIndex()
+        //calendar.getChildren().retainAll(calendar.getChildren().get(0));
 
         for (int i = 1; i <6;i++) {
             for (int j = 0; j < 7; j++) {
@@ -62,6 +64,27 @@ public class CalendarController {
     public void previousMonth() {
         yearMonth = yearMonth.minusMonths(1);
         populateCalendar(yearMonth);
+    }
+
+    @FXML
+    private void mouseEntered(MouseEvent e) {
+        Node source = (Node)e.getTarget() ;
+        Integer colIndex = GridPane.getColumnIndex(source);
+        Integer rowIndex = GridPane.getRowIndex(source);
+        if (colIndex == null) {
+            colIndex = 0;
+        }
+        System.out.printf("Mouse entered cell [%d, %d]%n", colIndex.intValue(), rowIndex.intValue());
+    }
+
+    public void removeNodeByRowColumnIndex(final int row,final int column,GridPane gridPane) {
+        ObservableList<Node> children = gridPane.getChildren();
+        for(Node node : children) {
+            if(node instanceof Label && gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
+                gridPane.getChildren().remove(node);
+                break;
+            }
+        }
     }
 
 

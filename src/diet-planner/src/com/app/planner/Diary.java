@@ -19,7 +19,6 @@ public class Diary {
             if (entry.getTimeEaten().getDayOfMonth() == day) {
                 returnList.add(entry);
             }
-
         }
         return returnList;
     }
