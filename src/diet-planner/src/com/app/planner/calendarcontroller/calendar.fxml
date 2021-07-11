@@ -28,57 +28,57 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="50.0" layoutY="5.0" text="Monday">
+                  <Label layoutX="41.0" layoutY="2.0" text="Monday">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="25.0" />
                      </font></Label>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Label layoutX="50.0" layoutY="5.0" text="Tuesday">
+                  <Label layoutX="41.0" layoutY="2.0" text="Tuesday">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="25.0" />
                      </font></Label>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
-                  <Label layoutX="35.0" layoutY="5.0" text="Wednesday">
+                  <Label layoutX="22.0" layoutY="2.0" text="Wednesday">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="25.0" />
                      </font></Label>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
                <children>
-                  <Label layoutX="45.0" layoutY="5.0" text="Thursday">
+                  <Label layoutX="35.0" layoutY="2.0" text="Thursday">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="25.0" />
                      </font></Label>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
                <children>
-                  <Label layoutX="59.0" layoutY="5.0" text="Friday">
+                  <Label layoutX="52.0" layoutY="2.0" text="Friday">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="25.0" />
                      </font></Label>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
                <children>
-                  <Label layoutX="47.0" layoutY="5.0" text="Saturday">
+                  <Label layoutX="37.0" layoutY="2.0" text="Saturday">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="25.0" />
                      </font></Label>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6">
                <children>
-                  <Label layoutX="53.0" layoutY="5.0" text="Sunday">
+                  <Label layoutX="45.0" layoutY="2.0" text="Sunday">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="25.0" />
                      </font></Label>
                </children>
             </Pane>
@@ -119,7 +119,7 @@
             <Pane onMouseClicked="#mouseEntered" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5" />
          </children>
          <cursor>
-            <Cursor fx:constant="WAIT" />
+            <Cursor fx:constant="DEFAULT" />
          </cursor>
       </GridPane>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back">
@@ -132,17 +132,17 @@
             <Font size="30.0" />
          </font>
       </Button>
-      <Label fx:id="monthLabel" layoutX="522.0" layoutY="29.0" text="CurrentMonth" textAlignment="CENTER">
+      <Label fx:id="monthLabel" alignment="CENTER" layoutX="508.0" layoutY="29.0" prefHeight="36.0" prefWidth="204.0" text="CurrentMonth">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Button layoutX="436.0" layoutY="25.0" mnemonicParsing="false" onAction="#previousMonth" text="&lt;&lt;&lt;">
+      <Button layoutX="424.0" layoutY="25.0" mnemonicParsing="false" onAction="#previousMonth" text="&lt;&lt;&lt;">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="689.0" layoutY="25.0" mnemonicParsing="false" onAction="#nextMonth" text="&gt;&gt;&gt;">
+      <Button layoutX="729.0" layoutY="25.0" mnemonicParsing="false" onAction="#nextMonth" text="&gt;&gt;&gt;">
          <font>
             <Font size="20.0" />
          </font>
