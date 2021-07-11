@@ -132,7 +132,7 @@
             <Font size="30.0" />
          </font>
       </Button>
-      <Label fx:id="monthLabel" layoutX="522.0" layoutY="29.0" text="CurrentMonth">
+      <Label fx:id="monthLabel" layoutX="522.0" layoutY="29.0" text="CurrentMonth" textAlignment="CENTER">
          <font>
             <Font size="25.0" />
          </font>
