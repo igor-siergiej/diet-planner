@@ -10,3 +10,8 @@
 .root {
     -fx-background-color: #00ffca;
 }
+
+#currentDay {
+    -fx-border-width: 10;
+    -fx-border-color: green;
+}

@@ -1,21 +1,14 @@
 package com.app.planner.calendarcontroller;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import javafx.scene.text.Font;
 
-import javax.annotation.Resources;
-import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
@@ -37,8 +30,12 @@ public class CalendarController {
     }
 
     public void populateCalendar(YearMonth yearMonth1) {
-        // Get the date we want to start with on the calendar
+        //clear the Id's on all nodes of the calendar
+        for (Node node: calendar.getChildren()) {
+            node.setId("");
+        }
 
+        // Get the date we want to start with on the calendar
         LocalDate calendarDate = LocalDate.of(yearMonth1.getYear(), yearMonth1.getMonthValue(), 1);
         while (!calendarDate.getDayOfWeek().toString().equals("MONDAY") ) {
             calendarDate = calendarDate.minusDays(1);
@@ -58,6 +55,11 @@ public class CalendarController {
             for (int j = 0; j < 7; j++) {
                 Label label = new Label();
                 label.setText(String.valueOf(calendarDate.getDayOfMonth()));
+                label.setTranslateX(10);
+                label.setFont(Font.font(20));
+                if (calendarDate.equals(LocalDate.now())) {
+                    getNodeByRowColumnIndex(i,j,calendar).setId("currentDay");
+                }
                 calendar.add(label,j,i);
                 calendarDate = calendarDate.plusDays(1);
             }
@@ -84,5 +86,17 @@ public class CalendarController {
             colIndex = 0;
         }
         System.out.printf("Mouse entered cell [%d, %d]%n", colIndex.intValue(), rowIndex.intValue());
+    }
+
+    public Node getNodeByRowColumnIndex (Integer row, final Integer column, GridPane gridPane) {
+        Node result = null;
+        ObservableList<Node> children = gridPane.getChildren();
+        for (Node node : children) {
+            if(GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
+                result = node;
+                break;
+            }
+        }
+        return result;
     }
 }
