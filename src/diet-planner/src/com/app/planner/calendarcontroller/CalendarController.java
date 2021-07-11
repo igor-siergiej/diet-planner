@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CalendarController {
     private LocalDate localDate = LocalDate.now();
@@ -36,13 +38,21 @@ public class CalendarController {
 
     public void populateCalendar(YearMonth yearMonth1) {
         // Get the date we want to start with on the calendar
+
         LocalDate calendarDate = LocalDate.of(yearMonth1.getYear(), yearMonth1.getMonthValue(), 1);
         while (!calendarDate.getDayOfWeek().toString().equals("MONDAY") ) {
             calendarDate = calendarDate.minusDays(1);
         }
 
-        //Replace this with new method to remove all labels in the gridpane using removeNodeByRowColumnIndex()
-        //calendar.getChildren().retainAll(calendar.getChildren().get(0));
+        //removes all of the labels from the calendar so that the new months days can the displayed
+        final List<Node> removalCandidates = new ArrayList<>();
+        for (Node node : calendar.getChildren()) {
+            if (node instanceof Label) {
+                Label label = (Label) node;
+                removalCandidates.add(label);
+            }
+        }
+        calendar.getChildren().removeAll(removalCandidates);
 
         for (int i = 1; i <6;i++) {
             for (int j = 0; j < 7; j++) {
@@ -52,7 +62,6 @@ public class CalendarController {
                 calendarDate = calendarDate.plusDays(1);
             }
         }
-
         monthLabel.setText(yearMonth1.getMonth().toString() + " " + String.valueOf(yearMonth1.getYear()));
     }
 
@@ -76,16 +85,4 @@ public class CalendarController {
         }
         System.out.printf("Mouse entered cell [%d, %d]%n", colIndex.intValue(), rowIndex.intValue());
     }
-
-    public void removeNodeByRowColumnIndex(final int row,final int column,GridPane gridPane) {
-        ObservableList<Node> children = gridPane.getChildren();
-        for(Node node : children) {
-            if(node instanceof Label && gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
-                gridPane.getChildren().remove(node);
-                break;
-            }
-        }
-    }
-
-
 }
