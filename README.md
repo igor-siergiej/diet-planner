@@ -11,5 +11,9 @@
 - viewing nutrients for a week
 - Viewing all entries in diary
 
+#### Write functionality for Calendar:
+- Populating calendar with diary entries
+- ??
+
 #### Other things to do:
 - Implement creating custom food/recipe + UI
