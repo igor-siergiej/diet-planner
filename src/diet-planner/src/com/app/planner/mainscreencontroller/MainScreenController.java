@@ -5,7 +5,6 @@ import com.app.planner.Main;
 import com.app.planner.Profile;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,10 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import javax.swing.*;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class MainScreenController {
@@ -63,7 +59,7 @@ public class MainScreenController {
         window.show();
     }
 
-    public void loadProfile(ActionEvent event) throws IOException, ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+    public void loadProfile(ActionEvent event) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         Main main = new Main();
         Profile profile = new Profile();
         profile.loadFromFile(main.chooseFile("load"));

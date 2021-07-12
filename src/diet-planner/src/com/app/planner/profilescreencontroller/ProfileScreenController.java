@@ -1,6 +1,5 @@
 package com.app.planner.profilescreencontroller;
 
-import com.app.planner.Diary;
 import com.app.planner.Profile;
 import com.app.planner.calendarcontroller.CalendarController;
 import javafx.event.ActionEvent;
@@ -11,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 
@@ -23,7 +21,7 @@ public class ProfileScreenController {
     private TextArea profileDataTextArea;
 
     public void getProfile(ActionEvent event) throws IOException {
-         goToCalendarScreen(event,profile);
+        goToCalendarScreen(event,this.profile);
     }
 
     private void goToCalendarScreen(ActionEvent event, Profile profile) throws IOException {
@@ -40,8 +38,8 @@ public class ProfileScreenController {
         window.show();
     }
 
-    public void setProfile(Profile profile1) throws IOException {
-        this.profile = profile1;
+    public void setProfile(Profile profile) throws IOException {
+        this.profile = profile;
     }
 
     public void showProfileData() {

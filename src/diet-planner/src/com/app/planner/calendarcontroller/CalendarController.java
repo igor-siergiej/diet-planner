@@ -1,11 +1,9 @@
 package com.app.planner.calendarcontroller;
 
 import com.app.planner.Profile;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,7 +12,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -92,6 +89,11 @@ public class CalendarController {
 
     @FXML
     private void mouseEntered(MouseEvent e) {
+        for (Node node: calendar.getChildren()) {
+            if (node.getId() != null && node.getId().equals("selectedDay")) {
+                node.setId("");
+            }
+        }
         Node source = (Node)e.getTarget() ;
         Integer colIndex = GridPane.getColumnIndex(source);
         Integer rowIndex = GridPane.getRowIndex(source);
@@ -99,6 +101,10 @@ public class CalendarController {
             colIndex = 0;
         }
         System.out.printf("Mouse entered cell [%d, %d]%n", colIndex.intValue(), rowIndex.intValue());
+        Node node = getNodeFromGridPane(colIndex,rowIndex,calendar);
+        if (!(node.getId().equals("currentDay"))) {
+            node.setId("selectedDay");
+        }
     }
 
     private Node getNodeFromGridPane(int col, int row,GridPane gridPane) {
