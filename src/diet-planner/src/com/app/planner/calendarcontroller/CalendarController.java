@@ -1,20 +1,33 @@
 package com.app.planner.calendarcontroller;
 
+import com.app.planner.Profile;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CalendarController {
+    private Profile profile;
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
     private LocalDate localDate = LocalDate.now();
     private YearMonth yearMonth = YearMonth.of(localDate.getYear(), localDate.getMonth().getValue());
 
@@ -58,7 +71,7 @@ public class CalendarController {
                 label.setTranslateX(10);
                 label.setFont(Font.font(20));
                 if (calendarDate.equals(LocalDate.now())) {
-                    getNodeByRowColumnIndex(i,j,calendar).setId("currentDay");
+                    getNodeFromGridPane(j,i,calendar).setId("currentDay"); //i and j swapped because GridPane.getChildren() gets the list in reverse order I think
                 }
                 calendar.add(label,j,i);
                 calendarDate = calendarDate.plusDays(1);
@@ -88,15 +101,33 @@ public class CalendarController {
         System.out.printf("Mouse entered cell [%d, %d]%n", colIndex.intValue(), rowIndex.intValue());
     }
 
-    public Node getNodeByRowColumnIndex (Integer row, final Integer column, GridPane gridPane) {
-        Node result = null;
-        ObservableList<Node> children = gridPane.getChildren();
-        for (Node node : children) {
-            if(GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
-                result = node;
-                break;
+    private Node getNodeFromGridPane(int col, int row,GridPane gridPane) {
+        Integer gridCol = new Integer(0);
+        Integer gridRow = new Integer(0);
+        for (Node node : gridPane.getChildren()) {
+            if (GridPane.getRowIndex(node) == null) {
+                gridRow = 0;
+            } else {
+                gridRow = GridPane.getRowIndex(node);
+            }
+            if (GridPane.getColumnIndex(node) == null) {
+                gridCol = 0;
+            } else {
+                gridCol = GridPane.getColumnIndex(node);
+            }
+            if (gridCol == col && gridRow == row) {
+                return node;
             }
         }
-        return result;
+        return null;
+    }
+
+    public void goToMainScreen(ActionEvent event) throws IOException {
+        Parent mainScreenParent = FXMLLoader.load(getClass().getResource("/com/app/planner/mainscreencontroller/mainScreen.fxml"));
+        Scene mainScreenScene = new Scene(mainScreenParent);
+        mainScreenScene.getStylesheets().add("com/app/planner/style.css");
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(mainScreenScene);
+        window.show();
     }
 }
