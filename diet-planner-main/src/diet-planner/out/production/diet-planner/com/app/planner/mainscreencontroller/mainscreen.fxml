@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
+   <children>
+      <HBox prefHeight="800.0" prefWidth="1200.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="800.0" prefWidth="600.0">
+               <children>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#loadProfile" prefHeight="65.0" prefWidth="287.0" text="Load Profile" textAlignment="CENTER">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#createNewProfile" text="Create New Profile">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Button>
+               </children></VBox>
+            <VBox alignment="CENTER" prefHeight="800.0" prefWidth="600.0">
+               <children>
+                  <Label text="Log In to Account" translateY="-50.0">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label text="Enter Username">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" />
+                  <Label text="Enter Password">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <PasswordField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" />
+                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="65.0" prefWidth="147.0" text="Login" textAlignment="CENTER">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="236.0" layoutY="455.0" mnemonicParsing="false" text="Register">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Pane prefHeight="25.0" prefWidth="1200.0">
+         <children>
+            <Button alignment="CENTER" layoutX="108.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToConfiguration" prefHeight="25.0" prefWidth="120.0" snapToPixel="false" text="Options" />
+            <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Profile">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Select Profile" />
+                <MenuItem mnemonicParsing="false" text="Create Profile" />
+              </items>
+            </MenuButton>
+         </children>
+      </Pane>
+   </children>
+</Pane>
