@@ -15,5 +15,9 @@
 - Populating calendar with diary entries
 - ??
 
+#### Write test classes for:
+- Profile loading/saving from/to file
+- ??
+
 #### Other things to do:
 - Implement creating custom food/recipe + UI
