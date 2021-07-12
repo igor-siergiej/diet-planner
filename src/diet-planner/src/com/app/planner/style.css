@@ -15,3 +15,8 @@
     -fx-border-width: 10;
     -fx-border-color: green;
 }
+
+#selectedDay {
+    -fx-border-width: 10;
+    -fx-border-color: blue;
+}
