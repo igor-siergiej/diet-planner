@@ -1,5 +1,5 @@
-import com.app.planner.Food;
-import com.app.planner.Meal;
+package com.app.planner;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
