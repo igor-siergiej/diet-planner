@@ -12,6 +12,6 @@
             <Font name="Arial" size="55.0" />
          </font></Label>
       <TextArea fx:id="profileDataTextArea" layoutX="307.0" layoutY="146.0" prefHeight="200.0" prefWidth="278.0" />
-      <Button layoutX="628.0" layoutY="181.0" mnemonicParsing="false" onAction="#goToCalendarScreen" text="Go to Calendar" />
+      <Button layoutX="628.0" layoutY="181.0" mnemonicParsing="false" onAction="#getProfile" text="Go to Calendar" />
    </children>
 </Pane>

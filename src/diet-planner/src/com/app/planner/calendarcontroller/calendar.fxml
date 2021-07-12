@@ -122,7 +122,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </GridPane>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back">
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToMainScreen" text="Back">
          <font>
             <Font size="30.0" />
          </font>
@@ -132,7 +132,7 @@
             <Font size="30.0" />
          </font>
       </Button>
-      <Label fx:id="monthLabel" alignment="CENTER" layoutX="508.0" layoutY="29.0" prefHeight="36.0" prefWidth="204.0" text="CurrentMonth">
+      <Label fx:id="monthLabel" alignment="CENTER" layoutX="498.0" layoutY="29.0" prefHeight="36.0" prefWidth="224.0" text="CurrentMonth">
          <font>
             <Font size="25.0" />
          </font>

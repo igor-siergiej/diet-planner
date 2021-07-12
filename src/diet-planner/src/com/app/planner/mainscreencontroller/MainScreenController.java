@@ -5,6 +5,7 @@ import com.app.planner.Main;
 import com.app.planner.Profile;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -45,7 +46,7 @@ public class MainScreenController {
         Diary diary = new Diary();
         profile.setDiary(diary);
         profile.setProfileName(enterProfileNameTextField.getText());
-        goToProfileScreen(event,profile);
+        goToProfileScreen(event, profile);
     }
 
     private void goToProfileScreen(ActionEvent event, Profile profile) throws IOException {
@@ -53,7 +54,7 @@ public class MainScreenController {
         Parent root = loader.load();
 
         ProfileScreenController profileScreenController = loader.getController();
-        profileScreenController.getProfile(profile);
+        profileScreenController.setProfile(profile);
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
