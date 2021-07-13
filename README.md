@@ -17,3 +17,5 @@
 
 #### Other things to do:
 - Implement creating custom food/recipe + UI
+- Write more tests
+- Link LogIn/Register to UI
