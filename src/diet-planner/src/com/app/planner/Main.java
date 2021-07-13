@@ -40,7 +40,6 @@ public class Main extends Application {
         Food[] foods = gson.fromJson(reader,Food[].class);
         List<Food> foodsList = Arrays.asList(foods);
         returnList.addAll(foodsList);
-
         return returnList;
     }
 
