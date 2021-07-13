@@ -1,6 +1,5 @@
 package com.app.planner;
 
-import com.app.planner.mainscreencontroller.MainScreenController;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
@@ -9,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.io.*;
@@ -97,7 +95,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        DatabaseConnection.login("kaj","test");
+        //DatabaseConnection.register("test","testpass");
 
         launch(args);
     }
