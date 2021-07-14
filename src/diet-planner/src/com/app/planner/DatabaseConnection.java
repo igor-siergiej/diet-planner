@@ -44,11 +44,6 @@ public class DatabaseConnection {
                 System.out.println("wrong login");
             }
 
-
-            if (!resultSet.isBeforeFirst() ) {
-                return false;
-            }
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
