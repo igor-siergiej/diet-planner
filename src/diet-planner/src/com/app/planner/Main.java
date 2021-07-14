@@ -95,7 +95,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        //DatabaseConnection.register("test","testpass");
+        DatabaseConnection.login("test","testpass");
 
         launch(args);
     }
