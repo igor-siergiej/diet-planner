@@ -25,13 +25,12 @@ public class DatabaseConnection {
             }
             preparedStatement.executeUpdate();
             preparedStatement.close();
+            connection.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
-        } finally {
-            try {connection.close(); } catch (Exception e) { /* Ignored */ }
-            return true;
         }
+        return true;
     }
 
     public static boolean login(String username, String password)  {
@@ -46,6 +45,7 @@ public class DatabaseConnection {
             String salt = resultSet.getString("salt");
             resultSet.close();
             preparedStatement.close();
+            connection.close();
 
             if (PasswordUtils.verifyUserPassword(password,securePassword,salt)) {
                 return true;
@@ -53,10 +53,8 @@ public class DatabaseConnection {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
-        } finally {
-            try {connection.close(); } catch (Exception e) { /* Ignored */ }
-            return false;
         }
+        return true;
     }
 
     public static Profile getProfileFromDb(String username) {
@@ -71,16 +69,15 @@ public class DatabaseConnection {
             profileData = resultSet.getString("profileData");
             resultSet.close();
             preparedStatement.close();
+            connection.close();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return null;
-        } finally {
-            try {connection.close(); } catch (Exception e) { /* Ignored */ }
-            Profile profile = new Profile();
-            profile.loadFromString(profileData);
-            return profile;
         }
+        Profile profile = new Profile();
+        profile.loadFromString(profileData);
+        return profile;
     }
 
     public static boolean saveProfileToDb(String username,Profile profile) {
@@ -92,13 +89,11 @@ public class DatabaseConnection {
             }
             preparedStatement.executeUpdate();
             preparedStatement.close();
+            connection.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
-        } finally {
-            try {connection.close(); } catch (Exception e) { /* Ignored */ }
-            return true;
-        }
+        } return true;
     }
 
     private static Connection connect() {

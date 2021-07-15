@@ -24,7 +24,7 @@ public class MealTest {
         ArrayList<Food> returnList = new ArrayList<>();
         // reads the testData.json file which contains the first 3 foods from the database
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        InputStream in = getClass().getResourceAsStream("testData.json");
+        InputStream in = getClass().getResourceAsStream("testData/testData.json");
         JsonReader reader = new JsonReader(new InputStreamReader(in));
         Food[] foods = gson.fromJson(reader,Food[].class);
         List<Food> foodsList = Arrays.asList(foods);
