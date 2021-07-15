@@ -4,51 +4,113 @@ import java.sql.*;
 
 public class DatabaseConnection {
 
-    private static final String SQL_INSERT = "INSERT INTO users (username, password,salt) VALUES (?,?,?)";
+    private static final String SQL_INSERT = "INSERT INTO users (username,password,salt,profiledata) VALUES (?,?,?,?)";
     private static final String SQL_SELECT = "SELECT * FROM users WHERE username = ?";
+    private static final String SQL_INSERT_SAVE = "UPDATE Users SET profiledata = ? WHERE username = ?";
 
     public static boolean register(String username, String password) {
+        Profile profile = new Profile();
+        profile.setProfileName(username);
+        Diary diary = new Diary();
+        profile.setDiary(diary);
         String salt = PasswordUtils.getSalt(30);
         String securePassword = PasswordUtils.generateSecurePassword(password,salt);
-        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://ec2-54-74-60-70.eu-west-1.compute.amazonaws.com/d7p8thbvo4s0gr", "tehdblxcjrcior", "26bb184833b93b3bd5e568ddf5a93d07c3b55af476f6b0f3424f55f80d58f5d8")) {
+        Connection connection = connect();
+        try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT); {
-
                 preparedStatement.setString(1, username);
                 preparedStatement.setString(2, securePassword);
                 preparedStatement.setString(3, salt);
-
-        }
+                preparedStatement.setString(4, profile.saveToString());
+            }
             preparedStatement.executeUpdate();
-
-    } catch (SQLException throwables) {
+            preparedStatement.close();
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
+        } finally {
+            try {connection.close(); } catch (Exception e) { /* Ignored */ }
+            return true;
         }
-        return true;
     }
 
-    public static boolean login(String username, String password) {
-        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://ec2-54-74-60-70.eu-west-1.compute.amazonaws.com/d7p8thbvo4s0gr", "tehdblxcjrcior", "26bb184833b93b3bd5e568ddf5a93d07c3b55af476f6b0f3424f55f80d58f5d8")) {
+    public static boolean login(String username, String password)  {
+        Connection connection = connect();
+        try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT); {
-
                 preparedStatement.setString(1, username);
             }
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             String securePassword = resultSet.getString("password");
             String salt = resultSet.getString("salt");
+            resultSet.close();
+            preparedStatement.close();
 
             if (PasswordUtils.verifyUserPassword(password,securePassword,salt)) {
-                System.out.println("logged in");
-            } else {
-                System.out.println("wrong login");
+                return true;
             }
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
+        } finally {
+            try {connection.close(); } catch (Exception e) { /* Ignored */ }
+            return false;
         }
-        return true;
     }
 
+    public static Profile getProfileFromDb(String username) {
+        Connection connection = connect();
+        String profileData = "";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT); {
+                preparedStatement.setString(1, username);
+            }
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            profileData = resultSet.getString("profileData");
+            resultSet.close();
+            preparedStatement.close();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        } finally {
+            try {connection.close(); } catch (Exception e) { /* Ignored */ }
+            Profile profile = new Profile();
+            profile.loadFromString(profileData);
+            return profile;
+        }
+    }
+
+    public static boolean saveProfileToDb(String username,Profile profile) {
+        Connection connection = connect();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_SAVE); {
+                preparedStatement.setString(1, profile.saveToString());
+                preparedStatement.setString(2, username);
+            }
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        } finally {
+            try {connection.close(); } catch (Exception e) { /* Ignored */ }
+            return true;
+        }
+    }
+
+    private static Connection connect() {
+        try {
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:postgresql://ec2-54-74-60-70.eu-west-1.compute.amazonaws.com/d7p8thbvo4s0gr",
+                    "tehdblxcjrcior",
+                    "26bb184833b93b3bd5e568ddf5a93d07c3b55af476f6b0f3424f55f80d58f5d8");
+            return connection;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
 }

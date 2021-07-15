@@ -43,6 +43,7 @@ public class Profile {
     }
 
     public void saveToFile(File file) throws IOException {
+        // TO-DO = catch exception
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Writer writer = new FileWriter(file);
         gson.toJson(this,writer);
@@ -51,11 +52,25 @@ public class Profile {
     }
 
     public void loadFromFile(File file) throws FileNotFoundException {
+        // TO-DO = catch exception
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JsonReader reader = new JsonReader(new FileReader(file));
         Profile profile = gson.fromJson(reader,Profile.class);
         this.setDiary(profile.getDiary());
         this.setProfileName(profile.getProfileName());
+    }
+
+    public void loadFromString(String loadString) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Profile profile = gson.fromJson(loadString,Profile.class);
+        this.setProfileName(profile.getProfileName());
+        this.setDiary(profile.getDiary());
+    }
+
+    public String saveToString() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String returnString = gson.toJson(this);
+        return returnString;
     }
 }
 
