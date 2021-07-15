@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 public class Main extends Application {
 
     @Override
@@ -95,6 +94,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        System.out.println(DatabaseConnection.getProfileFromDb("test").toString());
         launch(args);
     }
 }
