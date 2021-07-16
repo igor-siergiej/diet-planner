@@ -8,7 +8,7 @@ public class DatabaseConnection {
     private static final String SQL_SELECT = "SELECT * FROM users WHERE username = ?";
     private static final String SQL_INSERT_SAVE = "UPDATE Users SET profiledata = ? WHERE username = ?";
 
-    public static boolean register(String username, String password) {
+    public static boolean register(String username, String password) { // call when you are creating a new login to db
         Profile profile = new Profile();
         profile.setProfileName(username);
         Diary diary = new Diary();
@@ -33,7 +33,7 @@ public class DatabaseConnection {
         return true;
     }
 
-    public static boolean login(String username, String password)  {
+    public static boolean login(String username, String password) { // call when you are trying to verify login from db
         Connection connection = connect();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT); {
@@ -57,7 +57,7 @@ public class DatabaseConnection {
         return true;
     }
 
-    public static Profile getProfileFromDb(String username) {
+    public static Profile getProfileFromDb(String username) { // call when you are loading profile data from db
         Connection connection = connect();
         String profileData = "";
         try {
@@ -80,7 +80,7 @@ public class DatabaseConnection {
         return profile;
     }
 
-    public static boolean saveProfileToDb(String username,Profile profile) {
+    public static boolean saveProfileToDb(String username,Profile profile) { // call when you are saving profile data to db
         Connection connection = connect();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_SAVE); {

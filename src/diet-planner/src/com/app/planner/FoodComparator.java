@@ -2,6 +2,9 @@ package com.app.planner;
 
 import java.util.Comparator;
 
+// Hard class to understand
+// This is used to sort when searching json data
+
 public class FoodComparator implements Comparator<Food> {
     private final String compareString;
 

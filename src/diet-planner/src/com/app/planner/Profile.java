@@ -42,22 +42,29 @@ public class Profile {
         this.diary = diary;
     }
 
-    public void saveToFile(File file) throws IOException {
-        // TO-DO = catch exception
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Writer writer = new FileWriter(file);
-        gson.toJson(this,writer);
-        writer.flush();
-        writer.close();
+    public void saveToFile(File file) {
+        try {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            Writer writer = new FileWriter(file);
+            gson.toJson(this,writer);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
-    public void loadFromFile(File file) throws FileNotFoundException {
-        // TO-DO = catch exception
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        JsonReader reader = new JsonReader(new FileReader(file));
-        Profile profile = gson.fromJson(reader,Profile.class);
-        this.setDiary(profile.getDiary());
-        this.setProfileName(profile.getProfileName());
+    public void loadFromFile(File file) {
+        try {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonReader reader = new JsonReader(new FileReader(file));
+            Profile profile = gson.fromJson(reader,Profile.class);
+            this.setDiary(profile.getDiary());
+            this.setProfileName(profile.getProfileName());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadFromString(String loadString) {
