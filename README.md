@@ -21,4 +21,4 @@
 
 ### IGOR TO DO
 - Make Log in work.
-- Populating calendar with diary entries.
+- Code Clean UP
