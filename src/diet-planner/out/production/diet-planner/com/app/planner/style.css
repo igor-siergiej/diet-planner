@@ -20,3 +20,10 @@
     -fx-border-width: 10;
     -fx-border-color: blue;
 }
+
+#entryLabel {
+    -fx-font-size: 17;
+    -fx-border-width: 2;
+    -fx-border-color: blue;
+    -fx-border-style: solid;
+}

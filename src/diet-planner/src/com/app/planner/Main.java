@@ -20,19 +20,23 @@ import java.util.stream.Collectors;
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("mainscreencontroller/mainScreen.fxml"));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("com/app/planner/style.css");
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage stage) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("mainscreencontroller/mainScreen.fxml"));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("com/app/planner/style.css");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public ArrayList<Food> initialiseData() {
+    public static ArrayList<Food> initialiseData() { //this will load the json file with the dataset to an arraylist
         ArrayList<Food> returnList = new ArrayList<>();
         // reads the entire array in the file
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        InputStream in = getClass().getResourceAsStream("/data.json");
+        InputStream in = Main.class.getResourceAsStream("/data.json");
         JsonReader reader = new JsonReader(new InputStreamReader(in));
         Food[] foods = gson.fromJson(reader,Food[].class);
         List<Food> foodsList = Arrays.asList(foods);
@@ -40,28 +44,38 @@ public class Main extends Application {
         return returnList;
     }
 
-    public File chooseFile(String windowType) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+    public static File chooseFile(String windowType) {  //used to pick file to save or load from
         File selectedFile = null;
-        jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        int returnValue;
-        if (windowType.equals("save")) {
-             returnValue =  jfc.showSaveDialog(null);
-        } else {
-            returnValue = jfc.showOpenDialog(null);
-        }
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+            jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            int returnValue;
+            if (windowType.equals("save")) {
+                returnValue = jfc.showSaveDialog(null);
+            } else {
+                returnValue = jfc.showOpenDialog(null);
+            }
 
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            selectedFile = jfc.getSelectedFile();
-        } else if (returnValue == JFileChooser.CANCEL_OPTION){
-            System.out.println("FileChooser cancelled");
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                selectedFile = jfc.getSelectedFile();
+            } else if (returnValue == JFileChooser.CANCEL_OPTION){
+                System.out.println("FileChooser cancelled");
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         return selectedFile;
     }
 
-    public ArrayList<Nutrient> combineNutrientList(ArrayList<Nutrient> sourceList) {
+    public static ArrayList<Nutrient> combineNutrientList(ArrayList<Nutrient> sourceList) { //given a long list of duplicate list of nutrients it will join all of them into one by adding together all the nutrients if they match names
         ArrayList<Nutrient> returnList = new ArrayList<>();
 
         List<Nutrient> addedUpNutrientArrayList = sourceList.stream().collect(Collectors.groupingBy(nutrient -> nutrient.getNutrientName())).entrySet().stream()
@@ -72,14 +86,14 @@ public class Main extends Application {
         return returnList;
     }
 
-    public ArrayList<Food> sortedFoodSearch(ArrayList<Food> foodsList, String searchWord) {
+    public static ArrayList<Food> sortedFoodSearch(ArrayList<Food> foodsList, String searchWord) { // will list the results of serach from dataset in order of closest to the string searchWord
         ArrayList<Food> resultList = foodSearch(foodsList,searchWord);
         resultList.sort(new FoodComparator(searchWord));
         Collections.reverse(resultList);
         return resultList;
     }
 
-    public ArrayList<Food> foodSearch(ArrayList<Food> searchList,String searchFood) {
+    public static ArrayList<Food> foodSearch(ArrayList<Food> searchList,String searchFood) {
         searchFood = searchFood.toLowerCase();
         List<String> searchFoodList = Arrays.asList(searchFood.split(" "));
         ArrayList<Food> returnList = new ArrayList<>();
@@ -94,7 +108,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-
         launch(args);
     }
 }

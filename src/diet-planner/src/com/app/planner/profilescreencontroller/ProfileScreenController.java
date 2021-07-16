@@ -25,24 +25,23 @@ public class ProfileScreenController {
         goToCalendarScreen(event,profile);
     }
 
+    private void goToCalendarScreen(ActionEvent event, Profile profile) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/app/planner/calendarcontroller/calendar.fxml"));
+            Parent root = loader.load();//if profile is used in the initialize method it will crash because the profile is not loaded yet
 
+            CalendarController calendarController = loader.getController();
+            calendarController.setProfile(profile);
+            calendarController.load();
 
-    private void goToCalendarScreen(ActionEvent event, Profile profile) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/app/planner/calendarcontroller/calendar.fxml"));
-        Parent root = loader.load();//if profile is used in the initialize method it will crash because the profile is not loaded yet
-
-        CalendarController calendarController = loader.getController();
-        calendarController.setProfile(profile);
-        calendarController.load();
-
-
-
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/com/app/planner/style.css");
-        window.setScene(scene);
-        window.show();
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("/com/app/planner/style.css");
+            window.setScene(scene);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setProfile(Profile profile) {
