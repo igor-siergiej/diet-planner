@@ -30,7 +30,7 @@
             <Font size="25.0" />
          </font>
       </Button>
-      <Button layoutX="25.0" layoutY="310.0" mnemonicParsing="false" prefWidth="250.0" text="Create New Profile">
+      <Button layoutX="25.0" layoutY="310.0" mnemonicParsing="false" onAction="#goToProfileScreen" prefWidth="250.0" text="Create New Profile">
          <font>
             <Font size="25.0" />
          </font>

@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 
 public class MainScreenController {
@@ -37,15 +38,18 @@ public class MainScreenController {
         enterProfilePane.setVisible(true);
     }
 
-    public void setProfile(ActionEvent event) throws IOException {
+    /*public void setProfile(ActionEvent event) throws IOException {
         Profile profile = new Profile();
         Diary diary = new Diary();
         profile.setDiary(diary);
         profile.setProfileName(enterProfileNameTextField.getText());
         goToProfileScreen(event, profile);
-    }
+    }*/
 
-    private void goToProfileScreen(ActionEvent event, Profile profile) throws IOException {
+    public void goToProfileScreen(ActionEvent event) throws IOException {
+        Profile profile = new Profile();
+        profile.loadFromFile(new File("./test/com/app/planner/testData/profile1.JSON"));
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/app/planner/profilescreencontroller/profileScreen.fxml"));
         Parent root = loader.load();
 
@@ -65,7 +69,7 @@ public class MainScreenController {
         profile.loadFromFile(main.chooseFile("load"));
 
 
-        goToProfileScreen(event, profile);
+        //goToProfileScreen(event, profile);
     }
 
 }
