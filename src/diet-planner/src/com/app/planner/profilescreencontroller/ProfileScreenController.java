@@ -1,5 +1,6 @@
 package com.app.planner.profilescreencontroller;
 
+import com.app.planner.Main;
 import com.app.planner.Profile;
 import com.app.planner.calendarcontroller.CalendarController;
 import javafx.event.ActionEvent;
@@ -21,15 +22,21 @@ public class ProfileScreenController {
     private TextArea profileDataTextArea;
 
     public void getProfile(ActionEvent event) throws IOException {
-        goToCalendarScreen(event,this.profile);
+        goToCalendarScreen(event,profile);
     }
 
+
+
     private void goToCalendarScreen(ActionEvent event, Profile profile) throws IOException {
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/app/planner/calendarcontroller/calendar.fxml"));
-        Parent root = loader.load();
+        Parent root = loader.load();//if profile is used in the initialize method it will crash because the profile is not loaded yet
 
         CalendarController calendarController = loader.getController();
         calendarController.setProfile(profile);
+        calendarController.load();
+
+
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -38,7 +45,7 @@ public class ProfileScreenController {
         window.show();
     }
 
-    public void setProfile(Profile profile) throws IOException {
+    public void setProfile(Profile profile) {
         this.profile = profile;
     }
 

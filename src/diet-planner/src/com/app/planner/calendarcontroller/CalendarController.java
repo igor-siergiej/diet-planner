@@ -1,17 +1,20 @@
 package com.app.planner.calendarcontroller;
 
+import com.app.planner.Entry;
 import com.app.planner.Profile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -19,12 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CalendarController {
-    private Profile profile;
-
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }
-
+    public Profile profile;
     private LocalDate localDate = LocalDate.now();
     private YearMonth yearMonth = YearMonth.of(localDate.getYear(), localDate.getMonth().getValue());
 
@@ -34,9 +32,12 @@ public class CalendarController {
     @FXML
     private GridPane calendar;
 
-    @FXML
-    protected void initialize() {
+    public void load() {
         populateCalendar(yearMonth);
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
     public void populateCalendar(YearMonth yearMonth1) {
@@ -54,9 +55,8 @@ public class CalendarController {
         //removes all of the labels from the calendar so that the new months days can the displayed
         final List<Node> removalCandidates = new ArrayList<>();
         for (Node node : calendar.getChildren()) {
-            if (node instanceof Label) {
-                Label label = (Label) node;
-                removalCandidates.add(label);
+            if (node instanceof Label || node instanceof VBox) {
+                removalCandidates.add(node);
             }
         }
         calendar.getChildren().removeAll(removalCandidates);
@@ -71,10 +71,33 @@ public class CalendarController {
                     getNodeFromGridPane(j,i,calendar).setId("currentDay"); //i and j swapped because GridPane.getChildren() gets the list in reverse order I think
                 }
                 calendar.add(label,j,i);
+                ArrayList<Entry> entriesToday = getEntriesToday(profile.getDiary().getAllEntries(), calendarDate);
+                VBox vBox = new VBox();
+                vBox.setAlignment(Pos.CENTER);
+                for (Entry entry : entriesToday) {
+                    Label entryLabel = new Label();
+                    label.setAlignment(Pos.CENTER);
+                    entryLabel.setText((entry.getMeal().getMealName() + entry.getTimeEaten().getHour()) + entry.getTimeEaten().getMinute());
+                    entryLabel.setId("entryLabel");
+                    entryLabel.setTranslateX(15);
+                    vBox.getChildren().add(entryLabel);
+                }
+                calendar.add(vBox,j,i);
                 calendarDate = calendarDate.plusDays(1);
             }
         }
-        monthLabel.setText(yearMonth1.getMonth().toString() + " " + String.valueOf(yearMonth1.getYear()));
+        monthLabel.setText(yearMonth1.getMonth().toString() + " " + yearMonth1.getYear());
+    }
+
+    public ArrayList<Entry> getEntriesToday(ArrayList<Entry> entries, LocalDate date) {
+        ArrayList<Entry> returnList = new ArrayList<>();
+        for (Entry entry : entries) {
+            if (entry.getTimeEaten().toLocalDate().isEqual(date)) {
+                returnList.add(entry);
+            }
+        }
+
+        return returnList;
     }
 
     public void nextMonth() {
@@ -87,20 +110,22 @@ public class CalendarController {
         populateCalendar(yearMonth);
     }
 
-    @FXML
-    private void mouseEntered(MouseEvent e) {
+    public void mouseEntered(MouseEvent e) {
         for (Node node: calendar.getChildren()) {
             if (node.getId() != null && node.getId().equals("selectedDay")) {
                 node.setId("");
             }
         }
-        Node source = (Node)e.getTarget() ;
+        Node source = (Node)e.getTarget();
+        while (!(source instanceof Pane)) { //get the parent pane of the source clicked
+            source = source.getParent();
+        }
         Integer colIndex = GridPane.getColumnIndex(source);
         Integer rowIndex = GridPane.getRowIndex(source);
         if (colIndex == null) {
             colIndex = 0;
         }
-        System.out.printf("Mouse entered cell [%d, %d]%n", colIndex.intValue(), rowIndex.intValue());
+
         Node node = getNodeFromGridPane(colIndex,rowIndex,calendar);
         if (!(node.getId().equals("currentDay"))) {
             node.setId("selectedDay");
@@ -108,8 +133,8 @@ public class CalendarController {
     }
 
     private Node getNodeFromGridPane(int col, int row,GridPane gridPane) {
-        Integer gridCol = new Integer(0);
-        Integer gridRow = new Integer(0);
+        Integer gridCol;
+        Integer gridRow;
         for (Node node : gridPane.getChildren()) {
             if (GridPane.getRowIndex(node) == null) {
                 gridRow = 0;
