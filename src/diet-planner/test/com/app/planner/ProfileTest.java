@@ -32,14 +32,14 @@ class ProfileTest {
     public void testSaveProfile() throws IOException {
         boolean fileExists = false;
         File test = new File(testDataPath);
-        profile.saveToFile(new File(testDataPath + "/profile2.JSON"));
+        profile.saveToFile(new File(testDataPath + "/profile1.JSON"));
         for (String file : test.list()) {
-            if (file.equals("profile2.JSON")) {
+            if (file.equals("profile1.JSON")) {
                 fileExists = true;
             }
         }
         assertEquals(true,fileExists,"saved file should exist in the folder");
-        profile.loadFromFile(new File(testDataPath + "/profile2.JSON"));
+        profile.loadFromFile(new File(testDataPath + "/profile1.JSON"));
         assertEquals("test123",profile.getProfileName(),"profile name should be loaded correctly from file");
     }
 }
