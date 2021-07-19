@@ -10,7 +10,7 @@
    <children>
       <Pane layoutX="14.0" layoutY="289.0" prefHeight="165.0" prefWidth="298.0">
          <children>
-            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="263.0" text="Create New Profile">
+            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#createNewProfile" prefHeight="138.0" prefWidth="263.0" text="Create New Profile">
                <font>
                   <Font size="25.0" />
                </font>
@@ -36,7 +36,7 @@
       </Pane>
       <Pane layoutX="610.0" layoutY="289.0" prefHeight="165.0" prefWidth="298.0">
          <children>
-            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="263.0" text="Options">
+            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToConfigurationScreen" prefHeight="138.0" prefWidth="263.0" text="Options">
                <font>
                   <Font size="25.0" />
                </font>
@@ -49,7 +49,7 @@
       </Pane>
       <Pane layoutX="610.0" layoutY="124.0" prefHeight="165.0" prefWidth="298.0">
          <children>
-            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="263.0" text="Import File">
+            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadProfile" prefHeight="138.0" prefWidth="263.0" text="Import File">
                <font>
                   <Font size="25.0" />
                </font>
@@ -66,7 +66,7 @@
       </Pane>
       <Pane layoutX="313.0" layoutY="124.0" prefHeight="165.0" prefWidth="298.0">
          <children>
-            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="263.0" text="Register">
+            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToRegistrationScreen" prefHeight="138.0" prefWidth="263.0" text="Register">
                <font>
                   <Font size="25.0" />
                </font>
@@ -79,7 +79,7 @@
       </Pane>
       <Pane layoutX="14.0" layoutY="124.0" prefHeight="165.0" prefWidth="298.0">
          <children>
-            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="263.0" text="Log In">
+            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToLoginScreen" prefHeight="138.0" prefWidth="263.0" text="Log In">
                <font>
                   <Font size="25.0" />
                </font>
