@@ -25,21 +25,21 @@ class ProfileTest {
     public void testLoadProfile() throws FileNotFoundException {
         profile.loadFromFile(new File("./test/com/app/planner/testData/profile1.JSON"));
         assertEquals("profile1",profile.getProfileName(),"profile name should be loaded correctly from file");
-        assertEquals("ciabatta",profile.getDiary().getAllEntries().get(0).getMeal().getMealName(),"meal name should be loaded correctly from file");
+        assertEquals("Tomatoes, canned, whole contents",profile.getDiary().getAllEntries().get(0).getMeal().getFoods().get(0).getFoodName(),"Food name should be loaded correctly from file");
     }
 
     @Test
     public void testSaveProfile() throws IOException {
         boolean fileExists = false;
         File test = new File(testDataPath);
-        profile.saveToFile(new File(testDataPath + "/profile1.JSON"));
+        profile.saveToFile(new File(testDataPath + "/profile2.JSON"));
         for (String file : test.list()) {
-            if (file.equals("profile1.JSON")) {
+            if (file.equals("profile2.JSON")) {
                 fileExists = true;
             }
         }
         assertEquals(true,fileExists,"saved file should exist in the folder");
-        profile.loadFromFile(new File(testDataPath + "/profile1.JSON"));
+        profile.loadFromFile(new File(testDataPath + "/profile2.JSON"));
         assertEquals("test123",profile.getProfileName(),"profile name should be loaded correctly from file");
     }
 }
