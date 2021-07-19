@@ -1,49 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="522.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="918.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
    <children>
-      <Label contentDisplay="CENTER" layoutX="23.0" layoutY="14.0" text="LOGO PLACEHOLDER" textAlignment="CENTER">
-         <font>
-            <Font name="Arial" size="24.0" />
-         </font></Label>
-      <Label fx:id="titleMessage" layoutX="10.0" layoutY="48.0" prefHeight="35.0" prefWidth="285.0" text="Welcome to Diet PLanner!">
-         <font>
-            <Font name="Arial" size="24.0" />
-         </font>
-      </Label>
-      <Button layoutX="28.0" layoutY="240.0" mnemonicParsing="false" prefWidth="250.0" text="Import File">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Button>
-      <Button layoutX="28.0" layoutY="100.0" mnemonicParsing="false" prefWidth="250.0" text="Log In">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Button>
-      <Button layoutX="28.0" layoutY="170.0" mnemonicParsing="false" prefWidth="250.0" text="Register">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Button>
-      <Button layoutX="25.0" layoutY="310.0" mnemonicParsing="false" onAction="#goToProfileScreen" prefWidth="250.0" text="Create New Profile">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Button>
-      <Button layoutX="28.0" layoutY="380.0" mnemonicParsing="false" onAction="#goToConfiguration" prefWidth="250.0" text="Options">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Button>
-      <Button layoutX="28.0" layoutY="450.0" mnemonicParsing="false" prefWidth="250.0" text="Feedback">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Button>
+      <Pane layoutX="14.0" layoutY="289.0" prefHeight="165.0" prefWidth="298.0">
+         <children>
+            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="263.0" text="Create New Profile">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="75.0" fitWidth="90.0" layoutX="112.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/newProfile.png" />
+               </image></ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="312.0" layoutY="289.0" prefHeight="165.0" prefWidth="298.0">
+         <children>
+            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="263.0" text="Feedback">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="75.0" fitWidth="90.0" layoutX="112.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/feedback.png" />
+               </image></ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="610.0" layoutY="289.0" prefHeight="165.0" prefWidth="298.0">
+         <children>
+            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="263.0" text="Options">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="75.0" fitWidth="90.0" layoutX="112.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/option.png" />
+               </image></ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="610.0" layoutY="124.0" prefHeight="165.0" prefWidth="298.0">
+         <children>
+            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="263.0" text="Import File">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="75.0" fitWidth="90.0" layoutX="112.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/import.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="313.0" layoutY="124.0" prefHeight="165.0" prefWidth="298.0">
+         <children>
+            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="263.0" text="Register">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="75.0" fitWidth="90.0" layoutX="112.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/register.png" />
+               </image></ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="14.0" layoutY="124.0" prefHeight="165.0" prefWidth="298.0">
+         <children>
+            <Button alignment="BOTTOM_CENTER" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="263.0" text="Log In">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="75.0" fitWidth="90.0" layoutX="112.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/login.png" />
+               </image></ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="347.0" layoutY="442.0" prefHeight="35.0" prefWidth="224.0">
+         <children>
+            <Hyperlink alignment="CENTER" layoutY="6.0" onAction="#openHyperlink" prefHeight="23.0" prefWidth="224.0" text="Link to icons used: https://icons8.com/" textAlignment="CENTER" />
+         </children>
+      </Pane>
+      <ImageView fitHeight="113.0" fitWidth="353.0" layoutX="329.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/logo.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

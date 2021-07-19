@@ -1,14 +1,18 @@
 .button {
-    -fx-background-color: red;
+    -fx-background-color: #007bff;
     -fx-text-fill: white;
 }
 
 .label {
-    -fx-text-fill: green;
+    -fx-text-fill: #ffffff;
 }
 
 .root {
-    -fx-background-color: #00ffca;
+    -fx-background-color: #1a1a1a;
+}
+
+.pane {
+    -fx-background-color: #2d2d2d;
 }
 
 #currentDay {
