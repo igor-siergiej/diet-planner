@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Objects;
 
 public class MainScreenController {
 
@@ -33,7 +34,7 @@ public class MainScreenController {
         window.show();
     }
     public void goToRegistrationScreen(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/mainscreencontroller/registrationscreen.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/app/planner/mainscreencontroller/registrationscreen.fxml")));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/com/app/planner/style.css");
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -42,6 +43,14 @@ public class MainScreenController {
     }
     public void goToLoginScreen(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/mainscreencontroller/loginscreen.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/com/app/planner/style.css");
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+    }
+    public void goToMainScreen(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/mainscreencontroller/mainScreen.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/com/app/planner/style.css");
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

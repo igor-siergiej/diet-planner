@@ -21,8 +21,16 @@ public class ProfileScreenController {
     @FXML
     private TextArea profileDataTextArea;
 
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public void showProfileData() {
+        profileDataTextArea.setText(profile.toString());
+    }
+
     public void getProfile(ActionEvent event) throws IOException {
-        goToCalendarScreen(event,profile);
+        goToCalendarScreen(event, profile);
     }
 
     private void goToCalendarScreen(ActionEvent event, Profile profile) {
@@ -34,7 +42,7 @@ public class ProfileScreenController {
             calendarController.setProfile(profile);
             calendarController.load();
 
-            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             scene.getStylesheets().add("/com/app/planner/style.css");
             window.setScene(scene);
@@ -44,12 +52,12 @@ public class ProfileScreenController {
         }
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void goToMainScreen(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/mainscreencontroller/mainScreen.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/com/app/planner/style.css");
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
     }
-
-    public void showProfileData() {
-        profileDataTextArea.setText(profile.toString());
-    }
-
 }
