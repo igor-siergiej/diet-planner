@@ -12,7 +12,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class MainScreenController {
 
@@ -32,7 +37,8 @@ public class MainScreenController {
         Profile profile = new Profile();
         Diary diary = new Diary();
         profile.setDiary(diary);
-        profile.setProfileName(enterProfileNameTextField.getText());
+        profile.loadFromFile(new File("./test/com/app/planner/testData/profile1.JSON"));
+        //profile.setProfileName(enterProfileNameTextField.getText());
         //if we add more variables to Profile class here you will assign more info from ui components
         goToProfileScreen(event, profile);
     }
@@ -59,6 +65,17 @@ public class MainScreenController {
         Profile profile = new Profile();
         profile.loadFromFile(Main.chooseFile("load"));
         goToProfileScreen(event, profile);
+    }
+
+    public void openHyperlink() {
+        Desktop desktop = Desktop.getDesktop();
+        try {
+            desktop.browse(new URI("https://icons8.com/"));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

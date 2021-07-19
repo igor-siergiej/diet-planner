@@ -2,7 +2,7 @@ package com.app.planner;
 
 import java.text.DecimalFormat;
 
-public class Nutrient {
+public class Nutrient implements Comparable{
     private String nutrientName;
     private float nutrientValue;
 
@@ -35,4 +35,12 @@ public class Nutrient {
     public void setNutrientValue(float nutrientValue) {
         this.nutrientValue = nutrientValue;
     }
+
+    @Override
+    public int compareTo(Object o) {
+        Nutrient nutrient = (Nutrient) o;
+        return nutrient.getNutrientName().compareTo(this.getNutrientName());
+    }
 }
+
+
