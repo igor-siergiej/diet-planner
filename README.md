@@ -12,6 +12,12 @@
 #### FUTURE PLANS:
 - Implement creating custom food/recipe + UI
 - Multiple profiles per account/file
+- Add more profile data like age, sex, breastfeeding, pregnant.
+- Actually implement daily intake values
+- Alter the daily intake values depending on this profile data
+- https://www.foodtips.org/recommended-daily-intake/
+- https://www.convertcsv.com/html-table-to-csv.htm
+- Each file = different group of people, depending on profile data, load different file.
 
 #### KAJ TO DO
 - Sort out UI + get buttons to work
