@@ -8,6 +8,10 @@ import java.io.*;
 
 public class Profile {
     private String profileName;
+    private int age;
+    private String sex;
+    private boolean pregnant;
+    private boolean breastFeeding;
     private Diary diary;
 
     public Profile(String profileName, Diary diary) {
@@ -24,6 +28,38 @@ public class Profile {
                 "profileName='" + profileName + '\'' +
                 ", diary=" + diary +
                 '}';
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public boolean isPregnant() {
+        return pregnant;
+    }
+
+    public void setPregnant(boolean pregnant) {
+        this.pregnant = pregnant;
+    }
+
+    public boolean isBreastFeeding() {
+        return breastFeeding;
+    }
+
+    public void setBreastFeeding(boolean breastFeeding) {
+        this.breastFeeding = breastFeeding;
     }
 
     public String getProfileName() {

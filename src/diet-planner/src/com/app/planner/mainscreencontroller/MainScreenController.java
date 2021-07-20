@@ -1,8 +1,6 @@
 package com.app.planner.mainscreencontroller;
 
-import com.app.planner.Diary;
-import com.app.planner.Main;
-import com.app.planner.Profile;
+import com.app.planner.*;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,10 +12,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.awt.image.AreaAveragingScaleFilter;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainScreenController {
@@ -60,9 +61,18 @@ public class MainScreenController {
 
     public void createNewProfile(ActionEvent event) throws IOException { //add this method to the new profile button
         Profile profile = new Profile();
+        profile.setProfileName("profile1");
         Diary diary = new Diary();
+        Meal meal = new Meal();
+        meal.setMealName("breakfast1");
+        ArrayList<Food> data = Main.initialiseData();
+        ArrayList<Food> foods = new ArrayList<>();
+        foods.add(Main.sortedFoodSearch(data,"tomatoes").get(0));
+        foods.add(Main.sortedFoodSearch(data,"beef").get(0));
+        meal.addFoods(foods,new int[] {1000,100});
+        Entry entry = new Entry(meal, LocalDateTime.now(),EntryType.DINNER);
+        diary.addEntry(entry);
         profile.setDiary(diary);
-        profile.loadFromFile(new File("./test/com/app/planner/testData/profile1.JSON"));
         //profile.setProfileName(enterProfileNameTextField.getText());
         //if we add more variables to Profile class here you will assign more info from ui components
         goToProfileScreen(event, profile);
