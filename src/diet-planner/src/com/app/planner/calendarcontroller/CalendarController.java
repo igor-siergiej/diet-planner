@@ -2,6 +2,8 @@ package com.app.planner.calendarcontroller;
 
 import com.app.planner.Entry;
 import com.app.planner.Profile;
+import com.app.planner.profilescreencontroller.ProfileScreenController;
+import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +39,7 @@ public class CalendarController {
     }
 
     public void setProfile(Profile profile) {
+        calendar.setId("calendar");
         this.profile = profile;
     }
 
@@ -57,6 +60,8 @@ public class CalendarController {
         for (Node node : calendar.getChildren()) {
             if (node instanceof Label || node instanceof VBox) {
                 removalCandidates.add(node);
+            } else if (node instanceof Pane) {
+                node.setId("calendarPane");
             }
         }
         calendar.getChildren().removeAll(removalCandidates);
@@ -96,7 +101,6 @@ public class CalendarController {
                 returnList.add(entry);
             }
         }
-
         return returnList;
     }
 
@@ -114,6 +118,9 @@ public class CalendarController {
         for (Node node: calendar.getChildren()) {
             if (node.getId() != null && node.getId().equals("selectedDay")) {
                 node.setId("");
+                if (node instanceof Pane) {
+                    node.setId("calendarPane");
+                }
             }
         }
         Node source = (Node)e.getTarget();
@@ -160,5 +167,24 @@ public class CalendarController {
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(mainScreenScene);
         window.show();
+    }
+
+    public void goToViewNutrientsScreen(ActionEvent event) { // this method will open the profile screen window
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/app/planner/viewnutrientscontroller/viewNutrientsScreen.fxml"));
+            Parent root = loader.load();
+
+            ViewNutrientsController viewNutrientsController = loader.getController();
+            viewNutrientsController.setProfile(profile);
+            viewNutrientsController.populateScreen();
+
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("/com/app/planner/style.css");
+            window.setScene(scene);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
