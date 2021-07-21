@@ -69,7 +69,9 @@ public class MainScreenController {
         ArrayList<Food> foods = new ArrayList<>();
         foods.add(Main.sortedFoodSearch(data,"tomatoes").get(0));
         foods.add(Main.sortedFoodSearch(data,"beef").get(0));
-        meal.addFoods(foods,new int[] {1000,100});
+        foods.add(Main.sortedFoodSearch(data,"potato").get(0));
+        foods.add(Main.sortedFoodSearch(data,"eggs").get(0));
+        meal.addFoods(foods,new int[] {1000,1000,1000,1000});
         Entry entry = new Entry(meal, LocalDateTime.now(),EntryType.DINNER);
         diary.addEntry(entry);
         profile.setDiary(diary);
