@@ -38,3 +38,22 @@
     -fx-padding: 0 10 5 10;
     -fx-background-radius: 5;
 }
+
+.chart-pie-label-line {
+    -fx-stroke: white;
+    -fx-fill: white;
+}
+
+.chart-pie-label { /*this is what you need for labels*/
+    -fx-fill: white;
+    -fx-font-size: 1em;
+}
+
+.chart-pie {
+    -fx-border-color: derive(-fx-pie-color, -40%);
+    -fx-border-width: 3px;
+}
+
+.data0.chart-pie { -fx-pie-color: #3A58C5; }
+.data1.chart-pie { -fx-pie-color: #623AC5; }
+.data2.chart-pie { -fx-pie-color: #3A9DC5; }

@@ -4,8 +4,11 @@ import com.app.planner.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
@@ -38,6 +41,12 @@ public class ViewNutrientsController {
     @FXML
     private VBox otherVBox;
 
+    @FXML
+    private VBox macroVBox;
+
+    @FXML
+    private PieChart macroPieChart;
+
     public void setProfile(Profile profile) {
         profile.setAge(20);
         profile.setBreastFeeding(false);
@@ -57,32 +66,34 @@ public class ViewNutrientsController {
         ArrayList<Nutrient> combinedList = Main.combineNutrientList(nutrients);
         Collections.sort(combinedList);
         Collections.reverse(combinedList);
-        /*for (Nutrient nutrient : sugarList) {
-            nutrient.setNutrientName(nutrient.getNutrientName().replace("",""));
-        }*/
 
         ArrayList<String> vitaminNameList = new ArrayList<>();
-        String[] vitaminNameStrings = {"Vitamin A ","Carotene ","Vitamin D " ,"Vitamin E ","Vitamin K ","Vitamin B1 ","Vitamin B2 ","Vitamin B3 ","Tryptophan ","Vitamin B6 ","Vitamin B12 ","Vitamin B9 ","Vitamin B5 ","Vitamin B7 ","Vitamin C "};
+        String[] vitaminNameStrings = {"Vitamin A","Carotene","Vitamin D" ,"Vitamin E","Vitamin K","Vitamin B1","Vitamin B2","Vitamin B3","Tryptophan","Vitamin B6","Vitamin B12","Vitamin B9","Vitamin B5","Vitamin B7","Vitamin C"};
         vitaminNameList.addAll(Arrays.asList(vitaminNameStrings));
         ArrayList<Nutrient> vitaminList = new ArrayList<>();
 
         ArrayList<String> mineralNameList = new ArrayList<>();
-        String[] mineralNameStrings = {"Sodium ","Potassium ","Calcium ","Magnesium ","Phosphorus ","Iron ","Copper ","Zinc ","Chloride ","Manganese ","Selenium ","Iodine "};
+        String[] mineralNameStrings = {"Sodium","Potassium","Calcium","Magnesium","Phosphorus","Iron","Copper","Zinc","Chloride","Manganese","Selenium","Iodine"};
         mineralNameList.addAll(Arrays.asList(mineralNameStrings));
         ArrayList<Nutrient> mineralList = new ArrayList<>();
 
         ArrayList<String> sugarNameList = new ArrayList<>();
-        String[] sugarNameStrings = {"Total sugars ","Glucose ","Galactose ","Fructose ","Sucrose ","Maltose ","Lactose "};
+        String[] sugarNameStrings = {"Total Sugar","Glucose","Galactose","Fructose","Sucrose","Maltose","Lactose"};
         sugarNameList.addAll(Arrays.asList(sugarNameStrings));
         ArrayList<Nutrient> sugarList = new ArrayList<>();
 
         ArrayList<String> fatNameList = new ArrayList<>();
-        String[] fatNameStrings = {"Trans FAs ","Saturated Fat","Omega 6 ","Omega 3 ","Mono FA  ","Poly FA ","Cholesterol"};
+        String[] fatNameStrings = {"Trans FA","Saturated Fat","Omega 6","Omega 3","Mono FA","Poly FA","Cholesterol"};
         fatNameList.addAll(Arrays.asList(fatNameStrings));
         ArrayList<Nutrient> fatList = new ArrayList<>();
 
+        ArrayList<String> macroNameList = new ArrayList<>();
+        String[] macroNameStrings = {"Protein","Fat","Carbohydrates"};
+        macroNameList.addAll(Arrays.asList(macroNameStrings));
+        ArrayList<Nutrient> macroList = new ArrayList<>();
+
         ArrayList<String> otherNameList = new ArrayList<>();
-        String[] otherNameStrings = {"Water","Total nitrogen ","Protein","Fat","Carbohydrates","Energy (kcal)","Energy (kJ)","Starch ","NSP ","AOAC fibre "};
+        String[] otherNameStrings = {"Water","Total Nitrogen","Energy (kcal)","Energy (kJ)","Starch","NSP Fibre","AOAC Fibre"};
         otherNameList.addAll(Arrays.asList(otherNameStrings));
         ArrayList<Nutrient> otherList = new ArrayList<>();
 
@@ -98,12 +109,10 @@ public class ViewNutrientsController {
                 fatList.add(nutrient);
             } else if (otherNameList.contains(nutrient.getNutrientName())) {
                 otherList.add(nutrient);
+            } else if (macroNameList.contains(nutrient.getNutrientName())) {
+                macroList.add(nutrient);
             }
         }
-
-
-
-
         rdiArrayList = loadRDI();
 
         populateVBox(sugarList,sugarVBox);
@@ -111,13 +120,20 @@ public class ViewNutrientsController {
         populateVBox(vitaminList,vitaminVBox);
         populateVBox(mineralList,mineralVBox);
         populateVBox(otherList,otherVBox);
-
-        System.out.println(otherList);
-
+        populateVBox(macroList,macroVBox);
 
 
+        float total = macroList.get(1).getNutrientValue() + macroList.get(2).getNutrientValue() + macroList.get(0).getNutrientValue();
 
+        PieChart.Data slice1 = new PieChart.Data("Fat " + String.format("%.1f", macroList.get(1).getNutrientValue() / total * 100) + "%", macroList.get(1).getNutrientValue() );
+        PieChart.Data slice2 = new PieChart.Data("Carbohydrates " + String.format("%.1f", macroList.get(2).getNutrientValue() / total * 100) + "%", macroList.get(2).getNutrientValue() );
+        PieChart.Data slice3 = new PieChart.Data("Protein " + String.format("%.1f", macroList.get(0).getNutrientValue() / total * 100) + "%", macroList.get(0).getNutrientValue());
 
+        macroPieChart.getData().add(slice1);
+        macroPieChart.getData().add(slice2);
+        macroPieChart.getData().add(slice3);
+
+        macroPieChart.setLegendVisible(false);
 
     }
 
