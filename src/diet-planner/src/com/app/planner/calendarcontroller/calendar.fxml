@@ -135,7 +135,7 @@
             <Font size="30.0" />
          </font>
       </Button>
-      <Button layoutX="1056.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToViewNutrientsScreen" text="Button">
+      <Button layoutX="951.0" layoutY="15.0" mnemonicParsing="false" onAction="#goToViewNutrientsScreen" text="View Nutrients">
          <font>
             <Font size="30.0" />
          </font>

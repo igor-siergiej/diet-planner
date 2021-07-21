@@ -2,7 +2,6 @@ package com.app.planner.calendarcontroller;
 
 import com.app.planner.Entry;
 import com.app.planner.Profile;
-import com.app.planner.profilescreencontroller.ProfileScreenController;
 import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -4,8 +4,6 @@ import com.app.planner.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
@@ -132,9 +130,6 @@ public class ViewNutrientsController {
         macroPieChart.getData().add(slice1);
         macroPieChart.getData().add(slice2);
         macroPieChart.getData().add(slice3);
-
-        macroPieChart.setLegendVisible(false);
-
     }
 
     public void populateVBox(ArrayList<Nutrient> list, VBox vbox) {

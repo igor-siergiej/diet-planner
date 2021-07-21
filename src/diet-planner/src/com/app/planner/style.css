@@ -27,10 +27,15 @@
     -fx-border-color: blue;
 }
 
+/*#vitaminVBox,#sugarVBox,#fatVBox,#macroVBox,#mineralVBox,#otherVBox{
+    -fx-border-color: #007bff;
+    -fx-border-width: 4px;
+}*/
+
 #notFound { -fx-accent: red; }
 
 #entryLabel {
-    -fx-font-size: 20;
+    -fx-font-size: 15;
     -fx-text-fill: black;
     -fx-border-width: 0 0 0 2;
     -fx-border-color: blue;
@@ -42,6 +47,10 @@
 .chart-pie-label-line {
     -fx-stroke: white;
     -fx-fill: white;
+}
+
+.nutrients-label {
+    -fx-underline: true;
 }
 
 .chart-pie-label { /*this is what you need for labels*/
