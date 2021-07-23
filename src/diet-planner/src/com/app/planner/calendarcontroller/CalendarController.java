@@ -71,6 +71,7 @@ public class CalendarController {
                 label.setText(String.valueOf(calendarDate.getDayOfMonth()));
                 label.setTranslateX(10);
                 label.setFont(Font.font(20));
+                label.setId("whiteLabel");
                 if (calendarDate.equals(LocalDate.now())) {
                     getNodeFromGridPane(j,i,calendar).setId("currentDay"); //i and j swapped because GridPane.getChildren() gets the list in reverse order I think
                 }
@@ -175,7 +176,6 @@ public class CalendarController {
 
             ViewNutrientsController viewNutrientsController = loader.getController();
             viewNutrientsController.setProfile(profile);
-            viewNutrientsController.populateScreen();
 
             Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);

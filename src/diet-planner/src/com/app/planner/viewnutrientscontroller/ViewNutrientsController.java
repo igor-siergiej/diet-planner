@@ -4,21 +4,24 @@ import com.app.planner.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 
 public class ViewNutrientsController {
     private Profile profile;
@@ -45,16 +48,49 @@ public class ViewNutrientsController {
     @FXML
     private PieChart macroPieChart;
 
+    @FXML
+    private VBox entryVBox;
+
+    @FXML
+    private DatePicker datePicker;
+
+    @FXML
+    private Pane nutrientPane;
+
+    @FXML
+    private ComboBox comboBox;
+
     public void setProfile(Profile profile) {
         profile.setAge(20);
         profile.setBreastFeeding(false);
         profile.setPregnant(false);
         profile.setSex("male");
         this.profile = profile;
+        datePicker.showWeekNumbersProperty().set(false);
     }
 
-    public void populateScreen() {
-        ArrayList<Entry> entries = profile.getDiary().getAllEntries();
+    //2 versions of this method, 1 for individual entries and another for a week or an entire day of entries
+    public void populateEntries(ArrayList<Entry> entries) {
+        entryVBox.getChildren().clear();
+        for (Entry entry: entries) {
+            ArrayList<Entry> entryArrayList = new ArrayList<>();
+            entryArrayList.add(entry);
+            Button button = new Button();
+            button.setText(entry.getMeal().getMealName() + entry.getTimeEaten());
+            button.setFont(new Font(30));
+            button.setOnMouseClicked(event -> {
+                showNutrients(entryArrayList);
+            });
+            entryVBox.getChildren().add(button);
+        }
+    }
+
+    public void populateAllEntries() {
+        populateEntries(profile.getDiary().getAllEntries());
+    }
+
+    public void showNutrients(ArrayList<Entry> entries) {
+        nutrientPane.setVisible(true);
         ArrayList<Nutrient> nutrients = new ArrayList<>();
         for (Entry entry : entries) {
             for (Food food :entry.getMeal().getFoods()) {
@@ -95,7 +131,6 @@ public class ViewNutrientsController {
         otherNameList.addAll(Arrays.asList(otherNameStrings));
         ArrayList<Nutrient> otherList = new ArrayList<>();
 
-
         for (Nutrient nutrient: combinedList) {
             if (vitaminNameList.contains(nutrient.getNutrientName())) {
                 vitaminList.add(nutrient);
@@ -120,16 +155,28 @@ public class ViewNutrientsController {
         populateVBox(otherList,otherVBox);
         populateVBox(macroList,macroVBox);
 
-
         float total = macroList.get(1).getNutrientValue() + macroList.get(2).getNutrientValue() + macroList.get(0).getNutrientValue();
 
-        PieChart.Data slice1 = new PieChart.Data("Fat " + String.format("%.1f", macroList.get(1).getNutrientValue() / total * 100) + "%", macroList.get(1).getNutrientValue() );
-        PieChart.Data slice2 = new PieChart.Data("Carbohydrates " + String.format("%.1f", macroList.get(2).getNutrientValue() / total * 100) + "%", macroList.get(2).getNutrientValue() );
-        PieChart.Data slice3 = new PieChart.Data("Protein " + String.format("%.1f", macroList.get(0).getNutrientValue() / total * 100) + "%", macroList.get(0).getNutrientValue());
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("Fat " + String.format("%.1f", macroList.get(1).getNutrientValue() / total * 100) + "%", macroList.get(1).getNutrientValue()),
+                        new PieChart.Data("Carbohydrates " + String.format("%.1f", macroList.get(0).getNutrientValue() / total * 100) + "%", macroList.get(0).getNutrientValue()),
+                        new PieChart.Data("Protein " + String.format("%.1f", macroList.get(2).getNutrientValue() / total * 100) + "%", macroList.get(2).getNutrientValue()));
+        macroPieChart.setData(pieChartData);
+    }
 
-        macroPieChart.getData().add(slice1);
-        macroPieChart.getData().add(slice2);
-        macroPieChart.getData().add(slice3);
+    public void searchEntries() {
+        String comboBoxValue = (String) comboBox.getValue();
+        LocalDate date = datePicker.getValue();
+
+        ArrayList<Entry> searchedEntries;
+        if (comboBoxValue.equals("Get Day")) {
+            searchedEntries = profile.getDiary().getEntriesDay(date);
+        } else {
+            searchedEntries = profile.getDiary().getEntriesWeek(date);
+        }
+        System.out.println(searchedEntries);
+        populateEntries(searchedEntries);
     }
 
     public void populateVBox(ArrayList<Nutrient> list, VBox vbox) {
@@ -150,6 +197,11 @@ public class ViewNutrientsController {
                     } else {
                         float percent = list.get(counter).getNutrientValue()/searchRDIListValue(list.get(counter).getNutrientName());
                         progressBar.setProgress(percent);
+                        if (percent >= 1) {
+                            progressBar.setStyle("-fx-accent: green;");
+                        } else {
+                            progressBar.setStyle("-fx-accent: #007bff;");
+                        }
                     }
                 } else if (childNode.getId().equals("percentLabel")) {
                     Label label = (Label) childNode;
@@ -205,5 +257,4 @@ public class ViewNutrientsController {
         }
         return returnValue;
     }
-
 }

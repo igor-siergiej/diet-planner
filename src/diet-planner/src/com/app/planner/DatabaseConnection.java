@@ -35,26 +35,28 @@ public class DatabaseConnection {
 
     public static boolean login(String username, String password) { // call when you are trying to verify login from db
         Connection connection = connect();
+        String securePassword = "";
+        String salt = "";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT); {
                 preparedStatement.setString(1, username);
             }
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            String securePassword = resultSet.getString("password");
-            String salt = resultSet.getString("salt");
+            securePassword = resultSet.getString("password");
+            salt = resultSet.getString("salt");
             resultSet.close();
             preparedStatement.close();
             connection.close();
-
-            if (PasswordUtils.verifyUserPassword(password,securePassword,salt)) {
-                return true;
-            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
         }
-        return true;
+        if (PasswordUtils.verifyUserPassword(password,securePassword,salt)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static Profile getProfileFromDb(String username) { // call when you are loading profile data from db
