@@ -1,4 +1,5 @@
 # diet-planner
+[![CodeFactor](https://www.codefactor.io/repository/github/igor-siergiej/diet-planner/badge)](https://www.codefactor.io/repository/github/igor-siergiej/diet-planner)
 ### TO-DO
 #### Design UI and write Controllers for the following functionality:
 - Creating new profile
