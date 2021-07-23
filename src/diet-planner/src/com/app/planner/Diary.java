@@ -1,5 +1,7 @@
 package com.app.planner;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -13,22 +15,22 @@ public class Diary {
         entries.add(entry);
     }
 
-    public ArrayList<Entry> getEntriesDay(int day) {
+    public ArrayList<Entry> getEntriesDay(LocalDate localDate) {
         ArrayList<Entry> returnList = new ArrayList<>();
         for (Entry entry : entries) {
-            if (entry.getTimeEaten().getDayOfMonth() == day) {
+            if (entry.getTimeEaten().getDayOfYear() == localDate.getDayOfYear() && entry.getTimeEaten().getYear() == localDate.getYear()) {
                 returnList.add(entry);
             }
         }
         return returnList;
     }
 
-    public ArrayList<Entry> getEntriesWeek(int day) {
+    public ArrayList<Entry> getEntriesWeek(LocalDate localDate) {
         ArrayList<Entry> returnList = new ArrayList<>();
-        int[] intArray = new int[] {day,day+1,day+2,day+3,day+4,day+5,day+6};
+        LocalDate[] days = new LocalDate[] {localDate, localDate.plusDays(1), localDate.plusDays(2), localDate.plusDays(3), localDate.plusDays(4), localDate.plusDays(5), localDate.plusDays(6)};
         for (Entry entry : entries) {
-            for (int element: intArray) {
-                if (entry.getTimeEaten().getDayOfMonth() == element) {
+            for (LocalDate day: days) {
+                if (entry.getTimeEaten().getDayOfYear() == day.getDayOfYear()) {
                     returnList.add(entry);
                 }
             }

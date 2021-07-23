@@ -28,7 +28,7 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0">
                <children>
-                  <Label layoutX="41.0" layoutY="2.0" text="Monday">
+                  <Label id="whiteLabel" layoutX="41.0" layoutY="2.0" text="Monday">
                      <font>
                         <Font size="25.0" />
                      </font></Label>
@@ -36,7 +36,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Label layoutX="41.0" layoutY="2.0" text="Tuesday">
+                  <Label id="whiteLabel" layoutX="41.0" layoutY="2.0" text="Tuesday">
                      <font>
                         <Font size="25.0" />
                      </font></Label>
@@ -44,7 +44,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
-                  <Label layoutX="22.0" layoutY="2.0" text="Wednesday">
+                  <Label id="whiteLabel" layoutX="22.0" layoutY="2.0" text="Wednesday">
                      <font>
                         <Font size="25.0" />
                      </font></Label>
@@ -52,7 +52,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
                <children>
-                  <Label layoutX="35.0" layoutY="2.0" text="Thursday">
+                  <Label id="whiteLabel" layoutX="35.0" layoutY="2.0" text="Thursday">
                      <font>
                         <Font size="25.0" />
                      </font></Label>
@@ -60,7 +60,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
                <children>
-                  <Label layoutX="52.0" layoutY="2.0" text="Friday">
+                  <Label id="whiteLabel" layoutX="52.0" layoutY="2.0" text="Friday">
                      <font>
                         <Font size="25.0" />
                      </font></Label>
@@ -68,7 +68,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
                <children>
-                  <Label layoutX="37.0" layoutY="2.0" text="Saturday">
+                  <Label id="whiteLabel" layoutX="37.0" layoutY="2.0" text="Saturday">
                      <font>
                         <Font size="25.0" />
                      </font></Label>
@@ -76,7 +76,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6">
                <children>
-                  <Label layoutX="45.0" layoutY="2.0" text="Sunday">
+                  <Label id="whiteLabel" layoutX="45.0" layoutY="2.0" text="Sunday">
                      <font>
                         <Font size="25.0" />
                      </font></Label>
@@ -140,7 +140,7 @@
             <Font size="30.0" />
          </font>
       </Button>
-      <Label fx:id="monthLabel" alignment="CENTER" layoutX="498.0" layoutY="29.0" prefHeight="36.0" prefWidth="224.0" text="CurrentMonth">
+      <Label id="whiteLabel" fx:id="monthLabel" alignment="CENTER" layoutX="498.0" layoutY="29.0" prefHeight="36.0" prefWidth="224.0" text="CurrentMonth">
          <font>
             <Font size="25.0" />
          </font>
