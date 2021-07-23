@@ -20,11 +20,9 @@
 - Each file = different group of people, depending on profile data, load different file.
 
 #### KAJ TO DO
-- Sort out UI + get buttons to work
 - Create new .fxml file for creating new profile. (just to enter profile name and go to profile)
 - Input Validation - Find out what will possibly screw up with the SQL db (sql injections)
 - 2 static methods ^^^^
 
 ### IGOR TO DO
-- Make Log in work.
-- Code Clean UP
+
