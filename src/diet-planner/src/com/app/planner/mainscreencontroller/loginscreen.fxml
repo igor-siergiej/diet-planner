@@ -23,5 +23,6 @@
       <Label id="whiteLabel" alignment="CENTER" layoutX="126.0" layoutY="176.0" prefHeight="17.0" prefWidth="149.0" text="Password" />
       <Label id="whiteLabel" alignment="CENTER" layoutX="170.0" layoutY="121.0" prefHeight="17.0" prefWidth="60.0" text="Username" />
       <Label id="whiteLabel" alignment="CENTER" layoutX="155.0" layoutY="306.0" prefHeight="17.0" prefWidth="91.0" text="No account?" />
+      <Label id="whiteLabel" fx:id="loginMessage" alignment="CENTER" layoutX="95.0" layoutY="272.0" prefHeight="17.0" prefWidth="211.0" />
    </children>
 </Pane>
