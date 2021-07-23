@@ -40,7 +40,7 @@
     -fx-border-width: 0 0 0 2;
     -fx-border-color: blue;
     -fx-background-color: #0c8de3;
-    -fx-padding: 0 10 5 10;
+    -fx-padding: 10 5 10;
     -fx-background-radius: 5;
 }
 
@@ -98,7 +98,7 @@
 .scroll-bar:vertical .track{
     -fx-background-color :transparent;
     -fx-border-color :transparent;
-    -fx-background-radius : 0.0em;
+    -fx-background-radius : 0;
     -fx-border-radius :2.0em;
 }
 
@@ -106,15 +106,15 @@
 .scroll-bar:horizontal .increment-button ,
 .scroll-bar:horizontal .decrement-button {
     -fx-background-color :transparent;
-    -fx-background-radius : 0.0em;
-    -fx-padding :0.0 0.0 10.0 0.0;
+    -fx-background-radius : 0;
+    -fx-padding :0.0 0.0 10.0;
 
 }
 
 .scroll-bar:vertical .increment-button ,
 .scroll-bar:vertical .decrement-button {
     -fx-background-color :transparent;
-    -fx-background-radius : 0.0em;
+    -fx-background-radius : 0;
     -fx-padding :0.0 10.0 0.0 0.0;
 
 }
