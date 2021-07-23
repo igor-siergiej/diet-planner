@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,18 +37,17 @@ public class DiaryTest {
         diary.sortEntries();
     }
 
-    // TO DO getEntries method were updated, update these to work
-    /*@Test
+    @Test
     public void testGetEntriesDay() {
-        assertEquals(2,diary.getEntriesDay(16).size(),"Size of arrayList should be 2");
-        assertEquals(1,diary.getEntriesDay(17).size(),"Size of arrayList should be 1");
+        assertEquals(2,diary.getEntriesDay(LocalDate.parse("2021-06-16")).size(),"Size of arrayList should be 2");
+        assertEquals(1,diary.getEntriesDay(LocalDate.parse("2021-06-15")).size(),"Size of arrayList should be 1");
     }
 
     @Test
     public void testGetEntriesWeek() {
-        assertEquals(4,diary.getEntriesWeek(15).size(),"Size of arrayList should be 4");
-        assertEquals(2,diary.getEntriesWeek(1).size(),"Size of arrayList should be 2");
-    }*/
+        assertEquals(4,diary.getEntriesWeek(LocalDate.parse("2021-06-15")).size(),"Size of arrayList should be 4");
+        assertEquals(2,diary.getEntriesWeek(LocalDate.parse("2021-06-01")).size(),"Size of arrayList should be 2");
+    }
 
     @Test
     public void testEntriesSort() {
