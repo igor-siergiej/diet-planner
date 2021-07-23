@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -31,6 +32,21 @@ public class MainScreenController {
 
     @FXML
     private PasswordField passwordField;
+
+    @FXML
+    private TextField registrationUsernameField;
+
+    @FXML
+    private PasswordField registrationPasswordField;
+
+    @FXML
+    private PasswordField retypePasswordField;
+
+    @FXML
+    private Label registerMessage;
+
+    @FXML
+    private Label loginMessage;
 
     public void goToConfigurationScreen(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/configcontroller/configScreen.fxml"));
@@ -142,13 +158,31 @@ public class MainScreenController {
     public void logIn() {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        //LOGIN VALIDATION HERE???
+        //INPUT VALIDATION HERE
         if (DatabaseConnection.login(username,password)) {
             System.out.println("logged in");
             profile = DatabaseConnection.getProfileFromDb(username);
             System.out.println(profile);
         } else {
             System.out.println("wrong logIn");
+        }
+    }
+
+    public void register() {
+        String username = registrationUsernameField.getText();
+        String password = registrationPasswordField.getText();
+        String retypePassword = retypePasswordField.getText();
+
+        //INPUT VALIDATION HERE
+        if (password.equals(retypePassword)) {
+            if (DatabaseConnection.register(username,password)) {
+                System.out.println("registered");
+                System.out.println(profile);
+            } else {
+                registerMessage.setText("Username Already Exists");
+            }
+        } else {
+            registerMessage.setText("Passwords don't match");
         }
     }
 
