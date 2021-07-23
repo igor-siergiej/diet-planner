@@ -19,7 +19,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class MainScreenController {
     Profile profile;
@@ -57,7 +56,7 @@ public class MainScreenController {
         window.show();
     }
     public void goToRegistrationScreen(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load((getClass().getResource("/com/app/planner/mainscreencontroller/registrationscreen.fxml")));
+        Parent root = FXMLLoader.load((getClass().getResource("/com/app/planner/mainscreencontroller/registrationScreen.fxml")));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/com/app/planner/style.css");
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -65,7 +64,7 @@ public class MainScreenController {
         window.show();
     }
     public void goToLoginScreen(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/mainscreencontroller/loginscreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/mainscreencontroller/loginScreen.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/com/app/planner/style.css");
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
