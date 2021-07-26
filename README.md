@@ -4,6 +4,7 @@
 
 #### KAJ TO-DO
 - Clean up InputValidation and write tests
+- Update login and register fxml
 
 #### IGOR TO-DO
  - Create Profile Screen UI
