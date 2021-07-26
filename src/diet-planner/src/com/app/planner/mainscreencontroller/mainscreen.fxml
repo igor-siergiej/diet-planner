@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="918.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
+   <children>
+      <Pane layoutX="347.0" layoutY="442.0" prefHeight="35.0" prefWidth="224.0">
+         <children>
+            <Hyperlink alignment="CENTER" layoutY="3.0" onAction="#openHyperlink" prefHeight="23.0" prefWidth="224.0" text="Link to icons used: https://icons8.com/" textAlignment="CENTER" />
+         </children>
+      </Pane>
+      <ImageView fitHeight="113.0" fitWidth="353.0" layoutX="329.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/logo.png" />
+         </image>
+      </ImageView>
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="41.0" layoutY="139.0" mnemonicParsing="false" onAction="#goToLoginScreen" prefHeight="138.0" prefWidth="263.0" text="Log In">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="75.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/login.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button alignment="CENTER" contentDisplay="TOP" layoutX="41.0" layoutY="304.0" mnemonicParsing="false" onAction="#goToRegistrationScreen" prefHeight="138.0" prefWidth="263.0" text="Register">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="75.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/register.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button alignment="CENTER" contentDisplay="TOP" layoutX="328.0" layoutY="139.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#loadProfile" prefHeight="138.0" prefWidth="263.0" text="Import File">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="75.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/import.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="328.0" layoutY="304.0" mnemonicParsing="false" onAction="#goToCreateProfileScreen" prefHeight="138.0" prefWidth="263.0" text="Create New Profile">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="75.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/newProfile.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="615.0" layoutY="139.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="263.0" text="Feedback">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="75.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/feedback.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="615.0" layoutY="304.0" mnemonicParsing="false" onAction="#goToConfigurationScreen" prefHeight="138.0" prefWidth="263.0" text="Options">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="75.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/option.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</Pane>

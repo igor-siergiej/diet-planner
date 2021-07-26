@@ -6,8 +6,8 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
    <children>
-      <TextField fx:id="usernameField" layoutX="126.0" layoutY="138.0" />
-      <PasswordField fx:id="passwordField" layoutX="126.0" layoutY="193.0" />
+      <TextField fx:id="registrationUsernameField" layoutX="126.0" layoutY="138.0" onAction="#logIn" />
+      <PasswordField fx:id="retypePasswordField" layoutX="126.0" layoutY="193.0" />
       <Button defaultButton="true" layoutX="142.0" layoutY="220.0" mnemonicParsing="false" onAction="#logIn" prefHeight="54.0" prefWidth="118.0" text="Log In">
          <font>
             <Font size="25.0" />
