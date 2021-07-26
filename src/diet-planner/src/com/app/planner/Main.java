@@ -4,10 +4,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
@@ -30,9 +34,23 @@ public class Main extends Application {
             stage.getIcons().add(new Image("com/app/planner/img/icon.png"));
             stage.setScene(scene);
             stage.show();
+            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            stage.setX((primScreenBounds.getWidth() - stage.getWidth()) /2);
+            stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void setWindow(ActionEvent event, Parent root) {
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/com/app/planner/style.css");
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        window.setX((primScreenBounds.getWidth() - window.getWidth()) /2);
+        window.setY((primScreenBounds.getHeight() - window.getHeight()) / 2);
     }
 
     public static ArrayList<Food> initialiseData() { //this will load the json file with the dataset to an arraylist

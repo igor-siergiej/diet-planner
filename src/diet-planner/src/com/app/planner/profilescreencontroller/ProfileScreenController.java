@@ -1,5 +1,6 @@
 package com.app.planner.profilescreencontroller;
 
+import com.app.planner.Main;
 import com.app.planner.Profile;
 import com.app.planner.calendarcontroller.CalendarController;
 import com.app.planner.mainscreencontroller.MainScreenController;
@@ -58,7 +59,7 @@ public class ProfileScreenController {
     }
 
     private void setScene(ActionEvent event, Parent root) {
-        MainScreenController.setWindow(event, root);
+        Main.setWindow(event, root);
     }
 
     private void goToCalendarScreen(ActionEvent event, Profile profile) {
