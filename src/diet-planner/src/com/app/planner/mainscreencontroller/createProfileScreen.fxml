@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
+   <children>
+      <Label layoutX="497.0" layoutY="14.0" text="Create New Profile">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Button layoutX="14.0" layoutY="761.0" mnemonicParsing="false" onAction="#goToMainScreen" text="Back" />
+      <Button layoutX="1079.0" layoutY="761.0" mnemonicParsing="false" onAction="#createTestProfile" text="Create Test Profile" />
+   </children>
+</Pane>

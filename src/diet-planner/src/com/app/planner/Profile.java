@@ -14,8 +14,12 @@ public class Profile {
     private boolean breastFeeding;
     private Diary diary;
 
-    public Profile(String profileName, Diary diary) {
+    public Profile(String profileName, int age, String sex, boolean pregnant, boolean breastFeeding, Diary diary) {
         this.profileName = profileName;
+        this.age = age;
+        this.sex = sex;
+        this.pregnant = pregnant;
+        this.breastFeeding = breastFeeding;
         this.diary = diary;
     }
 
@@ -26,6 +30,10 @@ public class Profile {
     public String toString() {
         return "Profile{" +
                 "profileName='" + profileName + '\'' +
+                ", age=" + age +
+                ", sex='" + sex + '\'' +
+                ", pregnant=" + pregnant +
+                ", breastFeeding=" + breastFeeding +
                 ", diary=" + diary +
                 '}';
     }
