@@ -1,15 +1,17 @@
 package com.app.planner.profilescreencontroller;
 
-import com.app.planner.Main;
 import com.app.planner.Profile;
 import com.app.planner.calendarcontroller.CalendarController;
+import com.app.planner.mainscreencontroller.MainScreenController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -29,35 +31,43 @@ public class ProfileScreenController {
         profileDataTextArea.setText(profile.toString());
     }
 
-    public void getProfile(ActionEvent event) throws IOException {
+    public void getProfile(ActionEvent event) {
         goToCalendarScreen(event, profile);
     }
 
-    private void goToCalendarScreen(ActionEvent event, Profile profile) {
+    private void goToScreen(ActionEvent event, String fxmlFilePath) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/app/planner/calendarcontroller/calendar.fxml"));
-            Parent root = loader.load();//if profile is used in the initialize method it will crash because the profile is not loaded yet
-
-            CalendarController calendarController = loader.getController();
-            calendarController.setProfile(profile);
-            calendarController.load();
-
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add("/com/app/planner/style.css");
-            window.setScene(scene);
-            window.show();
+            Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/" + fxmlFilePath));
+            setScene(event, root);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void goToMainScreen(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/mainscreencontroller/mainScreen.fxml"));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/com/app/planner/style.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
+    private FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) {
+        Parent root = null;
+        FXMLLoader loader = null;
+        try {
+            loader = new FXMLLoader(getClass().getResource("/com/app/planner/" + fxmlFilePath));
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setScene(event, root);
+        return loader;
+    }
+
+    private void setScene(ActionEvent event, Parent root) {
+        MainScreenController.setWindow(event, root);
+    }
+
+    private void goToCalendarScreen(ActionEvent event, Profile profile) {
+        CalendarController calendarController = goToScreenWithProfile(event,"calendarcontroller/calendar.fxml").getController();
+        calendarController.setProfile(profile);
+        calendarController.load();
+    }
+
+    public void goToMainScreen(ActionEvent event) {
+        goToScreen(event,"mainscreencontroller/mainScreen.fxml");
     }
 }

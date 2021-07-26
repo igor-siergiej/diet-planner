@@ -2,11 +2,14 @@ package com.app.planner.calendarcontroller;
 
 import com.app.planner.Entry;
 import com.app.planner.Profile;
+import com.app.planner.mainscreencontroller.MainScreenController;
+import com.app.planner.profilescreencontroller.ProfileScreenController;
 import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -40,6 +44,41 @@ public class CalendarController {
     public void setProfile(Profile profile) {
         calendar.setId("calendar");
         this.profile = profile;
+    }
+
+    private void goToScreen(ActionEvent event, String fxmlFilePath) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/" + fxmlFilePath));
+            setScene(event, root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) {
+        Parent root = null;
+        FXMLLoader loader = null;
+        try {
+            loader = new FXMLLoader(getClass().getResource("/com/app/planner/" + fxmlFilePath));
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setScene(event, root);
+        return loader;
+    }
+
+    private void setScene(ActionEvent event, Parent root) {
+        MainScreenController.setWindow(event, root);
+    }
+
+    public void goToMainScreen(ActionEvent event) {
+        goToScreen(event,"mainscreencontroller/mainScreen.fxml");
+    }
+
+    public void goToViewNutrientsScreen(ActionEvent event) { // this method will open the profile screen window
+        ViewNutrientsController viewNutrientsController = goToScreenWithProfile(event,"viewnutrientscontroller/viewNutrientsScreen.fxml").getController();
+        viewNutrientsController.setProfile(profile);
     }
 
     public void populateCalendar(YearMonth yearMonth1) {
@@ -160,30 +199,5 @@ public class CalendarController {
         return null;
     }
 
-    public void goToMainScreen(ActionEvent event) throws IOException {
-        Parent mainScreenParent = FXMLLoader.load(getClass().getResource("/com/app/planner/mainscreencontroller/mainScreen.fxml"));
-        Scene mainScreenScene = new Scene(mainScreenParent);
-        mainScreenScene.getStylesheets().add("com/app/planner/style.css");
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(mainScreenScene);
-        window.show();
-    }
 
-    public void goToViewNutrientsScreen(ActionEvent event) { // this method will open the profile screen window
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/app/planner/viewnutrientscontroller/viewNutrientsScreen.fxml"));
-            Parent root = loader.load();
-
-            ViewNutrientsController viewNutrientsController = loader.getController();
-            viewNutrientsController.setProfile(profile);
-
-            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add("/com/app/planner/style.css");
-            window.setScene(scene);
-            window.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

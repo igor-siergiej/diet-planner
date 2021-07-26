@@ -5,12 +5,14 @@ import com.app.planner.profilescreencontroller.ProfileScreenController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -47,42 +49,74 @@ public class MainScreenController {
     @FXML
     private Label loginMessage;
 
-    public void goToConfigurationScreen(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/configcontroller/configScreen.fxml"));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/com/app/planner/style.css");
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
+    public void goToConfigurationScreen(ActionEvent event) {
+        goToScreen(event,"configcontroller/configScreen.fxml");
     }
-    public void goToRegistrationScreen(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load((getClass().getResource("/com/app/planner/mainscreencontroller/registrationScreen.fxml")));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/com/app/planner/style.css");
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
+    public void goToRegistrationScreen(ActionEvent event) {
+        goToScreen(event,"mainscreencontroller/registrationScreen.fxml");
     }
-    public void goToLoginScreen(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/mainscreencontroller/loginScreen.fxml"));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/com/app/planner/style.css");
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
+
+    public void goToLoginScreen(ActionEvent event) {
+        goToScreen(event, "mainscreencontroller/loginScreen.fxml");
     }
-    public void goToMainScreen(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/mainscreencontroller/mainScreen.fxml"));
+
+    public void goToMainScreen(ActionEvent event) {
+        goToScreen(event, "mainscreencontroller/mainScreen.fxml");
+    }
+
+    public void goToProfileScreen(ActionEvent event, Profile profile) { // this method will open the profile screen window
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/profileScreen.fxml").getController();
+        profileScreenController.setProfile(profile);
+    }
+
+    public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
+        goToScreen(event,"mainscreencontroller/createProfileScreen.fxml");
+    }
+
+    private void goToScreen(ActionEvent event, String fxmlFilePath) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/" + fxmlFilePath));
+            setScene(event, root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) {
+        Parent root = null;
+        FXMLLoader loader = null;
+        try {
+            loader = new FXMLLoader(getClass().getResource("/com/app/planner/" + fxmlFilePath));
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setScene(event, root);
+        return loader;
+    }
+
+    private void setScene(ActionEvent event, Parent root) {
+        setWindow(event, root);
+    }
+
+    public static void setWindow(ActionEvent event, Parent root) {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/com/app/planner/style.css");
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(scene);
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        window.setX((primScreenBounds.getWidth() - window.getWidth()) /2);
+        window.setY((primScreenBounds.getHeight() - window.getHeight()) / 2);
         window.show();
     }
 
-    public void createNewProfile(ActionEvent event) { //add this method to the new profile button
+    public void createTestProfile(ActionEvent event) {
         Profile profile = new Profile();
-        profile.setProfileName("profile1");
+        profile.setProfileName("testProfile");
+        profile.setSex("male");
+        profile.setPregnant(false);
+        profile.setBreastFeeding(false);
+        profile.setAge(20);
         Diary diary = new Diary();
 
         Meal meal = new Meal();
@@ -113,28 +147,14 @@ public class MainScreenController {
         diary.addEntry(entry1);
         diary.addEntry(entry2);
         diary.addEntry(entry3);
+
         profile.setDiary(diary);
-        //profile.setProfileName(enterProfileNameTextField.getText());
-        //if we add more variables to Profile class here you will assign more info from ui components
-        goToProfileScreen(event, profile);
+
+        goToProfileScreen(event,profile);
     }
 
-    public void goToProfileScreen(ActionEvent event,Profile profile) { // this method will open the profile screen window
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/app/planner/profilescreencontroller/profileScreen.fxml"));
-            Parent root = loader.load();
+    public void createNewProfile() {
 
-            ProfileScreenController profileScreenController = loader.getController();
-            profileScreenController.setProfile(profile);
-
-            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add("/com/app/planner/style.css");
-            window.setScene(scene);
-            window.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void loadProfile(ActionEvent event) { // this is the method to call when load profile from file is pressed
@@ -184,5 +204,4 @@ public class MainScreenController {
             registerMessage.setText("Passwords don't match");
         }
     }
-
 }

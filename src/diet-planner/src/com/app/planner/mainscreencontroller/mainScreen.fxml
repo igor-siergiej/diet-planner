@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Rectangle2D?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="918.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="918.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
    <children>
       <Pane layoutX="347.0" layoutY="442.0" prefHeight="35.0" prefWidth="224.0">
          <children>
@@ -59,7 +57,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="328.0" layoutY="304.0" mnemonicParsing="false" onAction="#createNewProfile" prefHeight="138.0" prefWidth="263.0" text="Create New Profile">
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="328.0" layoutY="304.0" mnemonicParsing="false" onAction="#goToCreateProfileScreen" prefHeight="138.0" prefWidth="263.0" text="Create New Profile">
          <font>
             <Font size="25.0" />
          </font>
