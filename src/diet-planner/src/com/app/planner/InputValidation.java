@@ -1,5 +1,52 @@
 package com.app.planner;
 
+class UsernameValidator
+{
+    public UsernameValidator()
+    {
+        super();
+    }
+    public static void main(String[] args)
+    {
+        UsernameValidator usernameValidator = new UsernameValidator();
+
+        String userName = "techdive";
+        String passWord = "java2011";
+        System.out.println("Input : UserName "+userName+" PassWord -> "+passWord);
+
+        usernameValidator.usernameValidation(userName,passWord);
+        System.out.println();
+        passWord = "Java2011*";
+        System.out.println("Input : UserName "+userName+" PassWord -> "+passWord);
+        usernameValidator.usernameValidation(userName,passWord);
+    }
+
+    /*
+     * Password should be less than 15 and more than 8 characters in length.
+     * Password should contain at least one upper case and one lower case alphabet.
+     * Password should contain at least one number.
+     * Password should contain at least one special character.
+     */
+
+    public void usernameValidation(String password, String userName)
+    {
+        boolean valid = true;
+        if (userName.length() > 20 || password.length() < 4)
+        {
+            System.out.println("Password should be less than 20 and more than 4 characters in length.");
+            valid = false;
+        }
+        if (password.indexOf(userName) > -1)
+        {
+            System.out.println("Username Should not be same as password");
+            valid = false;
+        }
+        if (valid)
+        {
+            System.out.println("Password is valid.");
+        }
+    }
+}
 class PasswordValidator
 {
     public PasswordValidator()
