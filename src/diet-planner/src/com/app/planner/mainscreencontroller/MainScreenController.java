@@ -5,20 +5,16 @@ import com.app.planner.profilescreencontroller.ProfileScreenController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -52,6 +48,7 @@ public class MainScreenController {
     public void goToConfigurationScreen(ActionEvent event) {
         goToScreen(event,"configcontroller/configScreen.fxml");
     }
+
     public void goToRegistrationScreen(ActionEvent event) {
         goToScreen(event,"mainscreencontroller/registrationScreen.fxml");
     }
@@ -76,7 +73,7 @@ public class MainScreenController {
     private void goToScreen(ActionEvent event, String fxmlFilePath) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/" + fxmlFilePath));
-            setScene(event, root);
+            Main.setWindow(event, root);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,15 +88,9 @@ public class MainScreenController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setScene(event, root);
+        Main.setWindow(event, root);
         return loader;
     }
-
-    private void setScene(ActionEvent event, Parent root) {
-        Main.setWindow(event, root);
-    }
-
-
 
     public void createTestProfile(ActionEvent event) {
         Profile profile = new Profile();
@@ -178,7 +169,7 @@ public class MainScreenController {
         }
     }
 
-    public void register() {
+    public void register() throws SQLException {
         String username = registrationUsernameField.getText();
         String password = registrationPasswordField.getText();
         String retypePassword = retypePasswordField.getText();

@@ -52,7 +52,7 @@ public class DatabaseConnection {
             throwables.printStackTrace();
             return false;
         }
-        return !PasswordUtils.verifyUserPassword(password,securePassword,salt);
+        return PasswordUtils.verifyUserPassword(password,securePassword,salt);
     }
 
     public static Profile getProfileFromDb(String username) { // call when you are loading profile data from db

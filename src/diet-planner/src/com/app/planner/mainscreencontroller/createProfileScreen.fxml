@@ -6,12 +6,36 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
    <children>
-      <Label layoutX="497.0" layoutY="14.0" text="Create New Profile">
+      <Label layoutX="436.0" layoutY="14.0" text="Create New Profile">
          <font>
-            <Font size="25.0" />
+            <Font size="40.0" />
          </font>
       </Label>
-      <Button layoutX="14.0" layoutY="761.0" mnemonicParsing="false" onAction="#goToMainScreen" text="Back" />
-      <Button layoutX="1079.0" layoutY="761.0" mnemonicParsing="false" onAction="#createTestProfile" text="Create Test Profile" />
+      <Button layoutX="14.0" layoutY="734.0" mnemonicParsing="false" onAction="#goToMainScreen" text="Back">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
+      <Button layoutX="951.0" layoutY="734.0" mnemonicParsing="false" onAction="#createTestProfile" text="Create Test Profile">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
+      <Label layoutX="40.0" layoutY="115.0" text="Enter Profile Name" />
+      <TextField layoutX="169.0" layoutY="111.0" />
+      <Label layoutX="64.0" layoutY="154.0" text="Enter Age" />
+      <TextField layoutX="169.0" layoutY="150.0" />
+      <Label layoutX="65.0" layoutY="194.0" text="Enter Sex" />
+      <ComboBox layoutX="168.0" layoutY="190.0" prefWidth="150.0" />
+      <Pane layoutX="34.0" layoutY="227.0" prefHeight="97.0" prefWidth="303.0">
+         <children>
+            <Label layoutX="24.0" layoutY="14.0" text="Breastfeeding?" />
+            <ComboBox layoutX="133.0" layoutY="10.0" prefWidth="150.0" />
+            <Label layoutX="24.0" layoutY="62.0" text="Pregnant?" />
+            <ComboBox layoutX="133.0" layoutY="58.0" prefWidth="150.0" />
+         </children>
+      </Pane>
+      <Button layoutX="1003.0" layoutY="667.0" mnemonicParsing="false" text="Create Profile">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
    </children>
 </Pane>

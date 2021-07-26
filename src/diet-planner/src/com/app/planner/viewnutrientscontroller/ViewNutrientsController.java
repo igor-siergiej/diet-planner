@@ -1,13 +1,17 @@
 package com.app.planner.viewnutrientscontroller;
 
 import com.app.planner.*;
+import com.app.planner.profilescreencontroller.ProfileScreenController;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -17,6 +21,7 @@ import javafx.scene.text.Font;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,6 +74,24 @@ public class ViewNutrientsController {
         datePicker.showWeekNumbersProperty().set(false);
     }
 
+    private FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) {
+        Parent root = null;
+        FXMLLoader loader = null;
+        try {
+            loader = new FXMLLoader(getClass().getResource("/com/app/planner/" + fxmlFilePath));
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Main.setWindow(event, root);
+        return loader;
+    }
+
+    public void goToProfileScreen(ActionEvent event) {
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/profileScreen.fxml").getController();
+        profileScreenController.setProfile(this.profile);
+    }
+
     //2 versions of this method, 1 for individual entries and another for a week or an entire day of entries
     public void populateEntries(ArrayList<Entry> entries) {
         entryVBox.getChildren().clear();
@@ -77,7 +100,6 @@ public class ViewNutrientsController {
             entryArrayList.add(entry);
             Button button = new Button();
             button.setText(entry.getMeal().getMealName() + entry.getTimeEaten());
-            button.setFont(new Font(30));
             button.setOnMouseClicked(event -> {
                 showNutrients(entryArrayList);
             });
