@@ -34,11 +34,6 @@ class UsernameValidator
             System.out.println("Password should be less than 20 and more than 4 characters in length.");
             valid = false;
         }
-        if (userName.indexOf(password) > -1)
-        {
-            System.out.println("Username Should not be same as password");
-            valid = false;
-        }
         if (valid)
         {
             System.out.println("Password is valid.");
