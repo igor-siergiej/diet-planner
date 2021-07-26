@@ -39,7 +39,7 @@ public class ProfileScreenController {
     private void goToScreen(ActionEvent event, String fxmlFilePath) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/" + fxmlFilePath));
-            setScene(event, root);
+            Main.setWindow(event, root);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,12 +54,8 @@ public class ProfileScreenController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setScene(event, root);
-        return loader;
-    }
-
-    private void setScene(ActionEvent event, Parent root) {
         Main.setWindow(event, root);
+        return loader;
     }
 
     private void goToCalendarScreen(ActionEvent event, Profile profile) {

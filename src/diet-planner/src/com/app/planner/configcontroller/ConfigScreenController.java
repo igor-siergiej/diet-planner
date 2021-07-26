@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
 public class ConfigScreenController {
 
     public void goToMainScreen(ActionEvent event) throws IOException {

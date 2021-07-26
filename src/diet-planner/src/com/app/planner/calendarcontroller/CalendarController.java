@@ -3,23 +3,18 @@ package com.app.planner.calendarcontroller;
 import com.app.planner.Entry;
 import com.app.planner.Main;
 import com.app.planner.Profile;
-import com.app.planner.mainscreencontroller.MainScreenController;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
 import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -50,7 +45,7 @@ public class CalendarController {
     private void goToScreen(ActionEvent event, String fxmlFilePath) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/" + fxmlFilePath));
-            setScene(event, root);
+            Main.setWindow(event, root);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,16 +60,13 @@ public class CalendarController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setScene(event, root);
+        Main.setWindow(event, root);
         return loader;
     }
 
-    private void setScene(ActionEvent event, Parent root) {
-        Main.setWindow(event, root);
-    }
-
-    public void goToMainScreen(ActionEvent event) {
-        goToScreen(event,"mainscreencontroller/mainScreen.fxml");
+    public void goToProfileScreen(ActionEvent event) {
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/profileScreen.fxml").getController();
+        profileScreenController.setProfile(profile);
     }
 
     public void goToViewNutrientsScreen(ActionEvent event) { // this method will open the profile screen window

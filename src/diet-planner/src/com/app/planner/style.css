@@ -2,9 +2,16 @@
     -fx-background-color: #007bff;
     -fx-text-fill: white;
     -fx-background-radius: 15px;
+    -fx-font-size: 25px;
+    -fx-border-color: white;
+    -fx-border-radius: 15px;
 }
 
-#whiteLabel {
+.button:hover {
+    -fx-background-color: #004599;
+}
+
+.label {
     -fx-text-fill: #ffffff;
 }
 
@@ -42,6 +49,11 @@
     -fx-background-color: #0c8de3;
     -fx-padding: 10 5;
     -fx-background-radius: 5;
+}
+
+.hyperlink {
+    -fx-border-color: transparent;
+    -fx-padding: 4 0 4 0;
 }
 
 .chart-pie-label-line {
@@ -87,6 +99,10 @@
 
 #valueLabel {
     -fx-text-fill: #ffffff;
+}
+
+#datePicker .label {
+    -fx-text-fill: black;
 }
 
 .data0.chart-pie { -fx-pie-color: #3A58C5; }
