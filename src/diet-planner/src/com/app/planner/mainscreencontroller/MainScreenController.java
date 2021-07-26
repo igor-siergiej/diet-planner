@@ -96,19 +96,10 @@ public class MainScreenController {
     }
 
     private void setScene(ActionEvent event, Parent root) {
-        setWindow(event, root);
+        Main.setWindow(event, root);
     }
 
-    public static void setWindow(ActionEvent event, Parent root) {
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/com/app/planner/style.css");
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        window.setX((primScreenBounds.getWidth() - window.getWidth()) /2);
-        window.setY((primScreenBounds.getHeight() - window.getHeight()) / 2);
-        window.show();
-    }
+
 
     public void createTestProfile(ActionEvent event) {
         Profile profile = new Profile();

@@ -1,6 +1,7 @@
 package com.app.planner.calendarcontroller;
 
 import com.app.planner.Entry;
+import com.app.planner.Main;
 import com.app.planner.Profile;
 import com.app.planner.mainscreencontroller.MainScreenController;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
@@ -69,7 +70,7 @@ public class CalendarController {
     }
 
     private void setScene(ActionEvent event, Parent root) {
-        MainScreenController.setWindow(event, root);
+        Main.setWindow(event, root);
     }
 
     public void goToMainScreen(ActionEvent event) {
