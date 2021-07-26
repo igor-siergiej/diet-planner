@@ -22,8 +22,8 @@ class UsernameValidator
     }
 
     /*
-    Username should between 20 characters and 8 characters
-    Username should not be the same as the password
+    *Username should between 20 characters and 8 characters
+    *Username should not be the same as the password
      */
 
     public void usernameValidation(String password, String userName)
