@@ -22,10 +22,8 @@ class UsernameValidator
     }
 
     /*
-     * Password should be less than 15 and more than 8 characters in length.
-     * Password should contain at least one upper case and one lower case alphabet.
-     * Password should contain at least one number.
-     * Password should contain at least one special character.
+    Username should between 20 characters and 8 characters
+    Username should not be the same as the password
      */
 
     public void usernameValidation(String password, String userName)
@@ -36,7 +34,7 @@ class UsernameValidator
             System.out.println("Password should be less than 20 and more than 4 characters in length.");
             valid = false;
         }
-        if (password.indexOf(userName) > -1)
+        if (userName.indexOf(password) > -1)
         {
             System.out.println("Username Should not be same as password");
             valid = false;
