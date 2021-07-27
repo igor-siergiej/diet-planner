@@ -17,7 +17,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -99,7 +98,7 @@ public class ViewNutrientsController {
             ArrayList<Entry> entryArrayList = new ArrayList<>();
             entryArrayList.add(entry);
             Button button = new Button();
-            button.setText(entry.getMeal().getMealName() + entry.getTimeEaten());
+            button.setText(entry.getMeal().getMealName() + " " + entry.getTimeEaten().toLocalDate());
             button.setOnMouseClicked(event -> {
                 showNutrients(entryArrayList);
             });

@@ -19,6 +19,10 @@
     -fx-background-color: #1a1a1a;
 }
 
+.spinner {
+    -fx-font-size: 25px;
+}
+
 #calendarPane {
     -fx-border-width: 2px;
     -fx-border-color: #007bff;

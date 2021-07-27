@@ -6,22 +6,37 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.profilescreencontroller.ProfileScreenController">
    <children>
-      <Button layoutX="67.0" layoutY="146.0" mnemonicParsing="false" onAction="#showProfileData" text="Show Profile Data">
-         <font>
-            <Font size="25.0" />
-         </font></Button>
-      <Label contentDisplay="CENTER" layoutX="425.0" layoutY="10.0" text="Diet-Planner Logo" textAlignment="CENTER">
+      <Label contentDisplay="CENTER" layoutX="378.0" layoutY="14.0" text="Diet-Planner Logo" textAlignment="CENTER">
          <font>
             <Font name="Arial" size="55.0" />
          </font></Label>
-      <TextArea fx:id="profileDataTextArea" layoutX="307.0" layoutY="146.0" prefHeight="200.0" prefWidth="278.0" />
-      <Button layoutX="600.0" layoutY="146.0" mnemonicParsing="false" onAction="#getProfile" text="Go to Calendar">
+      <Button layoutX="499.0" layoutY="325.0" mnemonicParsing="false" onAction="#goToCalendarButton" text="Go to Calendar">
          <font>
             <Font size="25.0" />
          </font></Button>
-      <Button layoutX="1100.0" layoutY="732.0" mnemonicParsing="false" onAction="#goToMainScreen" text="Back">
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToMainScreen" text="Back">
          <font>
             <Font size="25.0" />
          </font></Button>
+      <Label layoutX="405.0" layoutY="94.0" text="Profile Name =">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="profileNameLabel" layoutX="583.0" layoutY="94.0" prefHeight="36.0" prefWidth="153.0">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Button layoutX="465.0" layoutY="400.0" mnemonicParsing="false" onAction="#goToViewNutrientsScreen" text="Go To View Nutrients">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Button layoutX="471.0" layoutY="474.0" mnemonicParsing="false" onAction="#goToProfileDetailsScreen" text="Go To Profile Details">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

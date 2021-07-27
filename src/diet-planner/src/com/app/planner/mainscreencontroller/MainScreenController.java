@@ -2,27 +2,26 @@ package com.app.planner.mainscreencontroller;
 
 import com.app.planner.*;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.*;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class MainScreenController {
     Profile profile;
-
-    @FXML
-    private TextField enterProfileNameTextField;// create this textField in the create profile screen
 
     @FXML
     private TextField usernameField;
@@ -44,6 +43,26 @@ public class MainScreenController {
 
     @FXML
     private Label loginMessage;
+
+    @FXML
+    private ComboBox sexComboBox;
+
+    @FXML
+    private Pane femalePane;
+
+    @FXML
+    private TextField profileNameTextField;
+
+    @FXML
+    private TextField ageTextField;
+
+    @FXML
+    private ComboBox breastfeedingComboBox;
+
+    @FXML
+    private ComboBox pregnantComboBox;
+
+    protected static final String INITAL_VALUE = "0";
 
     public void goToConfigurationScreen(ActionEvent event) {
         goToScreen(event,"configcontroller/configScreen.fxml");
@@ -67,7 +86,8 @@ public class MainScreenController {
     }
 
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
-        goToScreen(event,"mainscreencontroller/createProfileScreen.fxml");
+        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/createProfileScreen.fxml").getController();
+        mainScreenController.setAgeTextFieldEventHandler();
     }
 
     private void goToScreen(ActionEvent event, String fxmlFilePath) {
@@ -135,8 +155,48 @@ public class MainScreenController {
         goToProfileScreen(event,profile);
     }
 
-    public void createNewProfile() {
+    public void setAgeTextFieldEventHandler() {
+        ageTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    ageTextField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+                if (newValue.length() > 2) {
+                    ageTextField.setText(newValue.substring(0,2));
+                }
+            }
+        });
+    }
 
+    public void createNewProfile(ActionEvent event) {
+        String sex = (String) sexComboBox.getValue();
+        int age = Integer.parseInt(ageTextField.getText());
+        String profileName = profileNameTextField.getText();
+        boolean isPregnant = false;
+        boolean isBreastfeeding = false;
+
+        if (sex.equals("Female")) {
+            if (pregnantComboBox.getValue().equals("Yes")) {
+                isPregnant = true;
+            }
+            if (breastfeedingComboBox.getValue().equals("Yes")) {
+                isBreastfeeding = true;
+            }
+        }
+
+        Profile profile = new Profile(profileName,age,sex,isPregnant,isBreastfeeding,new Diary());
+        goToProfileScreen(event,profile);
+    }
+
+    public void loadFemalePane() {
+        String sex = (String) sexComboBox.getValue();
+        if (sex.equals("Female")) {
+            femalePane.setVisible(true);
+        } else {
+            femalePane.setVisible(false);
+        }
     }
 
     public void loadProfile(ActionEvent event) { // this is the method to call when load profile from file is pressed
@@ -169,7 +229,7 @@ public class MainScreenController {
         }
     }
 
-    public void register() throws SQLException {
+    public void register() {
         String username = registrationUsernameField.getText();
         String password = registrationPasswordField.getText();
         String retypePassword = retypePasswordField.getText();
