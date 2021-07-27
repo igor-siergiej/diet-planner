@@ -3,7 +3,8 @@
 ### TO-DO
 
 #### KAJ TO-DO
-- Input Validation - Find out what will possibly screw up with the SQL db (sql injections) and write methods in a class to validate it
+- Clean up InputValidation and write tests
+- Update login and register fxml
 
 #### IGOR TO-DO
  - Create Profile Screen UI
