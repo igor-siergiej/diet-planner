@@ -1,74 +1,22 @@
 package com.app.planner;
 
-class UsernameValidator
-{
-    public UsernameValidator()
-    {
-        super();
-    }
-    public static void main(String[] args)
-    {
-        UsernameValidator usernameValidator = new UsernameValidator();
-
-        String userName = "techdive";
-        String passWord = "java2011";
-        System.out.println("Input : UserName "+userName+" PassWord -> "+passWord);
-
-        usernameValidator.usernameValidation(userName,passWord);
-        System.out.println();
-        passWord = "Java2011*";
-        System.out.println("Input : UserName "+userName+" PassWord -> "+passWord);
-        usernameValidator.usernameValidation(userName,passWord);
-    }
-
+public class InputValidation {
     /*
     *Username should between 20 characters and 8 characters
     *Username should not be the same as the password
      */
-
-    public void usernameValidation(String password, String userName)
-    {
+    public static boolean usernameValidation(String userName) {
         boolean valid = true;
-        if (userName.length() > 20 || password.length() < 4)
+        System.out.println(userName.length());
+        if (userName.length() > 20 || userName.length() < 4)
         {
-            System.out.println("Password should be less than 20 and more than 4 characters in length.");
+            System.out.println("Password should be less than 20 and more than 4 characters in length."); //change
             valid = false;
         }
-        if (valid)
-        {
-            System.out.println("Password is valid.");
-        }
-    }
-}
-class PasswordValidator
-{
-    public PasswordValidator()
-    {
-        super();
-    }
-    public static void main(String[] args)
-    {
-        PasswordValidator passwordValidator = new PasswordValidator();
-
-        String userName = "techdive";
-        String passWord = "java2011";
-        System.out.println("Input : UserName "+userName+" PassWord -> "+passWord);
-
-        passwordValidator.passwordValidation(userName,passWord);
-        System.out.println();
-        passWord = "Java2011*";
-        System.out.println("Input : UserName "+userName+" PassWord -> "+passWord);
-        passwordValidator.passwordValidation(userName,passWord);
+        return valid;
     }
 
-    /*
-     * Password should be less than 15 and more than 8 characters in length.
-     * Password should contain at least one upper case and one lower case alphabet.
-     * Password should contain at least one number.
-     * Password should contain at least one special character.
-     */
-
-    public void passwordValidation(String userName, String password)
+    public static boolean passwordValidation(String userName, String password)
     {
         boolean valid = true;
         if (password.length() > 15 || password.length() < 8)
@@ -109,5 +57,28 @@ class PasswordValidator
         {
             System.out.println("Password is valid.");
         }
+        return valid;
     }
 }
+
+
+
+
+    /*
+     * Password should be less than 15 and more than 8 characters in length.
+     * Password should contain at least one upper case and one lower case alphabet.
+     * Password should contain at least one number.
+     * Password should contain at least one special character.
+     *
+     *
+        System.out.println("Input : UserName "+userName+" PassWord -> "+passWord);
+
+        usernameValidator.usernameValidation(userName,passWord);
+        System.out.println();
+        passWord = "Java2011*";
+        System.out.println("Input : UserName "+userName+" PassWord -> "+passWord);
+        usernameValidator.usernameValidation(userName,passWord);
+     *
+     */
+
+
