@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.profilescreencontroller.ProfileScreenController">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="378.0" layoutY="14.0" text="Diet-Planner Logo" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="55.0" />
+         </font></Label>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToProfileScreen" text="Back">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
+      <Label layoutX="14.0" layoutY="94.0" text="Profile Name =">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="profileNameLabel" layoutX="182.0" layoutY="94.0" prefHeight="36.0" prefWidth="153.0">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="64.0" layoutY="134.0" text="Age = ">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="65.0" layoutY="174.0" text="Sex = ">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="8.0" layoutY="214.0" text="Breastfeeding = ">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="33.0" layoutY="254.0" text="Pregnant = ">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="ageLabel" layoutX="182.0" layoutY="134.0" prefHeight="36.0" prefWidth="153.0">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="sexLabel" layoutX="182.0" layoutY="174.0" prefHeight="36.0" prefWidth="153.0">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="breastfeedingLabel" layoutX="182.0" layoutY="214.0" prefHeight="36.0" prefWidth="153.0">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="pregnantLabel" layoutX="182.0" layoutY="254.0" prefHeight="36.0" prefWidth="153.0">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
