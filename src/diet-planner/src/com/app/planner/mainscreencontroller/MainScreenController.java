@@ -174,7 +174,7 @@ public class MainScreenController {
         String password = registrationPasswordField.getText();
         String retypePassword = retypePasswordField.getText();
 
-        //INPUT VALIDATION HERE
+
         if (password.equals(retypePassword)) {
             if (DatabaseConnection.register(username,password)) {
                 System.out.println("registered");
