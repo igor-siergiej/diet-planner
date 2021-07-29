@@ -65,6 +65,10 @@ public class ProfileScreenController {
         }
     }
 
+    public void saveProfile() {
+        profile.saveToFile(Main.chooseFile("save"));
+    }
+
     private FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) {
         Parent root = null;
         FXMLLoader loader = null;

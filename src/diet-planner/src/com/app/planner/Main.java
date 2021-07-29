@@ -87,6 +87,10 @@ public class Main extends Application {
         } catch (IllegalAccessException | ClassNotFoundException | InstantiationException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+        String filePath = selectedFile.getAbsolutePath();
+        if(!filePath.endsWith(".json")) {
+            selectedFile = new File(filePath + ".json");
+        }
         return selectedFile;
     }
 
