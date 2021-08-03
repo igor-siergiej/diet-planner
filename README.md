@@ -15,6 +15,7 @@
 - Creating meal
 
 #### Other TO-DO :
+- Add hoverable messages about input constrictions in UI
 - Alter the daily intake values depending on this profile data
 - https://www.foodtips.org/recommended-daily-intake/
 - https://www.convertcsv.com/html-table-to-csv.htm
