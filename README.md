@@ -8,6 +8,7 @@
 
 #### IGOR TO-DO
  - Make better input validation for creating new screen
+ - Finish addEntry screen
 
 #### Functionality to be implemented:
 - Searching foods from dataset
