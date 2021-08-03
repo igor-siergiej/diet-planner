@@ -2,11 +2,11 @@ package com.app.planner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Meal {
     private String mealName;
     private ArrayList<Food> foods = new ArrayList<>();
-    private int[] portions = new int[MAX_FOOD_COUNT];
 
     private static final int MAX_FOOD_COUNT = 30;
 
@@ -15,23 +15,27 @@ public class Meal {
     }
 
     //sets the nutritional values to be scaled with portions
-    public void addFoods(ArrayList<Food> foodArrayList,int[] foodPortions) {
-        foods = foodArrayList;
-        portions = foodPortions;
-
-        for (int i = 0; i < foods.size(); i++) {
-            for (int j = 0; j < foods.get(i).getNutrients().size(); j++) {
-                foods.get(i).getNutrients().get(j).setNutrientValue(foods.get(i).getNutrients().get(j).getNutrientValue() / 100 * portions[i]);
+    public void addFoods(ArrayList<Food> foodArrayList,List<Integer> foodPortions) {
+        for (int i = 0; i < foodArrayList.size(); i++) {
+            for (int j = 0; j < foodArrayList.get(i).getNutrients().size(); j++) {
+                foodArrayList.get(i).getNutrients().get(j).setNutrientValue(foodArrayList.get(i).getNutrients().get(j).getNutrientValue() / 100 * foodPortions.get(i));
             }
         }
+        foods = foodArrayList;
+    }
+
+    public void addFood(Food food, Integer portion) {
+        for (Nutrient nutrient : food.getNutrients()) {
+            nutrient.setNutrientValue(nutrient.getNutrientValue()/100*portion);
+        }
+        foods.add(food);
     }
 
     @Override
     public String toString() {
         return "Meal{" +
                 "mealName='" + mealName + '\'' +
-                ", Foods=" + foods +
-                ", portions=" + Arrays.toString(portions) +
+                ", foods=" + foods +
                 '}';
     }
 
@@ -47,11 +51,5 @@ public class Meal {
         this.foods = foods;
     }
 
-    public int[] getPortions() {
-        return portions;
-    }
 
-    public void setPortions(int[] portions) {
-        this.portions = portions;
-    }
 }
