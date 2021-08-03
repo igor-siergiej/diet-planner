@@ -19,6 +19,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainScreenController {
     Profile profile;
@@ -133,12 +134,12 @@ public class MainScreenController {
         foods.add(Main.sortedFoodSearch(data,"chicken").get(0));
         foods.add(Main.sortedFoodSearch(data,"liver").get(0));
         foods.add(Main.sortedFoodSearch(data,"eggs").get(0));
-        meal.addFoods(foods,new int[] {100,100,100});
+        meal.addFoods(foods,new ArrayList<>(Arrays.asList(100,100,100)));
 
         ArrayList<Food> foods1 = new ArrayList<>();
         foods1.add(Main.sortedFoodSearch(data,"chicken").get(0));
         foods1.add(Main.sortedFoodSearch(data,"liver").get(0));
-        meal1.addFoods(foods1,new int[] {100,100});
+        meal1.addFoods(foods1,new ArrayList<>(Arrays.asList(100,100)));
 
         Entry entry = new Entry(meal, LocalDateTime.now(),EntryType.DINNER);
         Entry entry1 = new Entry(meal1, LocalDateTime.now().minusDays(1),EntryType.DINNER);
@@ -156,17 +157,8 @@ public class MainScreenController {
     }
 
     public void setAgeTextFieldEventHandler() {
-        ageTextField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    ageTextField.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-                if (newValue.length() > 2) {
-                    ageTextField.setText(newValue.substring(0,2));
-                }
-            }
+        ageTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            ageTextField.setText(InputValidation.ageValidation(newValue));
         });
     }
 

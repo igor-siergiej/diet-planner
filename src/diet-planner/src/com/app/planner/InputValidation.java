@@ -59,6 +59,16 @@ public class InputValidation {
         }
         return valid;
     }
+
+    static public String ageValidation(String age) {
+        if (!age.matches("\\d*")) {
+            return age.replaceAll("[^\\d]", "");
+        }
+        if (age.length() > 2) {
+            return age.substring(0,2);
+        }
+        return age;
+    }
 }
 
 

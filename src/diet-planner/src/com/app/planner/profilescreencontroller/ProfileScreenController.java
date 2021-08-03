@@ -2,6 +2,7 @@ package com.app.planner.profilescreencontroller;
 
 import com.app.planner.Main;
 import com.app.planner.Profile;
+import com.app.planner.addentrycontroller.AddEntryController;
 import com.app.planner.calendarcontroller.CalendarController;
 import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.event.ActionEvent;
@@ -91,6 +92,11 @@ public class ProfileScreenController {
     public void goToViewNutrientsScreen(ActionEvent event) {
         ViewNutrientsController viewNutrientsController = goToScreenWithProfile(event,"viewnutrientscontroller/viewNutrientsScreen.fxml").getController();
         viewNutrientsController.setProfile(profile);
+    }
+
+    public void goToAddEntryScreen(ActionEvent event) {
+        AddEntryController addEntryController = goToScreenWithProfile(event,"addentrycontroller/addEntryScreen.fxml").getController();
+        addEntryController.setProfile(profile);
     }
 
     public void goToProfileDetailsScreen(ActionEvent event) {

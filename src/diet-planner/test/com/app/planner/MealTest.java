@@ -29,7 +29,7 @@ public class MealTest {
         Food[] foods = gson.fromJson(reader,Food[].class);
         List<Food> foodsList = Arrays.asList(foods);
         returnList.addAll(foodsList);
-        meal.addFoods(returnList,new int[]{200,300,100}); //These are the testing portions
+        meal.addFoods(returnList, new ArrayList<>(Arrays.asList(100,200,300))); //These are the testing portions
         System.out.println(meal.toString());
     }
 

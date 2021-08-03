@@ -23,6 +23,10 @@
     -fx-font-size: 25px;
 }
 
+.combo-box {
+    -fx-font-size: 25px;
+}
+
 #calendarPane {
     -fx-border-width: 2px;
     -fx-border-color: #007bff;
