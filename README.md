@@ -7,7 +7,7 @@
 - Update login and register fxml
 
 #### IGOR TO-DO
- - Create Profile Screen UI
+ - Make better input validation for creating new screen
 
 #### Functionality to be implemented:
 - Searching foods from dataset
