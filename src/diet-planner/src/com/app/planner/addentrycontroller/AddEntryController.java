@@ -10,12 +10,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
@@ -32,8 +35,6 @@ public class AddEntryController {
     private Profile profile;
     private ArrayList<RDI> rdiArrayList;
     private Entry entry;
-    private ArrayList<Food> dataset;
-    private Meal meal;
 
     @FXML
     private VBox sugarVBox;
@@ -76,7 +77,6 @@ public class AddEntryController {
 
     public void setProfile(Profile profile) {
         this.profile = profile;
-        dataset = Main.initialiseData();
         setSearchTextFieldEventHandler();
     }
 
@@ -119,6 +119,7 @@ public class AddEntryController {
     }
 
     public void populateSearchResult() {
+        ArrayList<Food> dataset = Main.initialiseData();
         ArrayList<Food> searchedFoods = Main.sortedFoodSearch(dataset,searchTextField.getText());
         for (Food food : searchedFoods) {
             Button button = new Button();
@@ -130,7 +131,8 @@ public class AddEntryController {
     }
 
     public void updateNutrients() {
-        meal = new Meal();
+        ArrayList<Food> dataset = Main.initialiseData();
+        Meal meal = new Meal();
         for (Node node: foodVBox.getChildren()) {
             if (node instanceof HBox) {
                 String labelText = "";
@@ -144,7 +146,7 @@ public class AddEntryController {
                         portion = Integer.valueOf(textField.getText());
                     }
                 }
-                meal.addFood(Main.sortedFoodSearch(dataset,labelText).get(0),portion);//write new method to seach exact names from dataset
+                meal.addFood(Main.exactFoodSearch(dataset,labelText),portion);//write new method to seach exact names from dataset
             }
         }
         showNutrients(meal.getFoods());
@@ -152,13 +154,25 @@ public class AddEntryController {
 
     public void addToFoodVBox(Food food) {
         HBox hbox = new HBox();
+
+        hbox.setPrefWidth(440);
         Label label = new Label();
-        System.out.println(food.toString());
+        label.setId("fakeButton");
         label.setText(food.getFoodName());
         TextField portionTextField = new TextField();
+        hbox.setAlignment(Pos.CENTER_LEFT);
+        hbox.setSpacing(10);
+        portionTextField.setAlignment(Pos.CENTER);
+        Button button = new Button();
+        button.setText("X");
+        button.setAlignment(Pos.CENTER_RIGHT);
+        button.setFont(new Font(10));
+        HBox.setHgrow(portionTextField, Priority.ALWAYS);
         setFoodPortionEventHandler(portionTextField);
+
         hbox.getChildren().add(label);
         hbox.getChildren().add(portionTextField);
+        hbox.getChildren().add(button);
         foodVBox.getChildren().add(hbox);
     }
 

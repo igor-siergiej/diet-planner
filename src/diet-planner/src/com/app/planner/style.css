@@ -7,6 +7,16 @@
     -fx-border-radius: 15px;
 }
 
+#fakeButton{
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-background-radius: 15px;
+    -fx-font-size: 10px;
+    -fx-border-color: white;
+    -fx-border-radius: 15px;
+    -fx-padding: 10;
+}
+
 .button:hover {
     -fx-background-color: #004599;
 }
