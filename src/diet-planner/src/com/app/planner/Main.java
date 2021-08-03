@@ -112,6 +112,16 @@ public class Main extends Application {
         return resultList;
     }
 
+    public static Food exactFoodSearch(ArrayList<Food> searchList, String searchFood) {
+        Food returnFood = null;
+        for (Food food: searchList) {
+            if (food.getFoodName().equals(searchFood)) {
+                returnFood = food;
+            }
+        }
+        return returnFood;
+    }
+
     public static ArrayList<Food> foodSearch(ArrayList<Food> searchList,String searchFood) {
         searchFood = searchFood.toLowerCase();
         List<String> searchFoodList = Arrays.asList(searchFood.split(" "));

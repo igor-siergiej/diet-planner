@@ -23,7 +23,7 @@
          <font>
             <Font size="25.0" />
          </font></Button>
-      <Pane fx:id="nutrientPane" layoutX="466.0" prefHeight="800.0" prefWidth="691.0" visible="false">
+      <Pane fx:id="nutrientPane" layoutX="466.0" prefHeight="800.0" prefWidth="691.0">
          <children>
             <Label layoutX="14.0" layoutY="619.0" styleClass="nutrients-label" text="Sugars">
                <font>

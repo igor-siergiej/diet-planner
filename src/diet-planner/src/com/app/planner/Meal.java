@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Meal {
     private String mealName;
-    private ArrayList<Food> foods = new ArrayList<>();
+    private ArrayList<Food> foods = new ArrayList<>(MAX_FOOD_COUNT);
 
     private static final int MAX_FOOD_COUNT = 30;
 
@@ -46,10 +46,4 @@ public class Meal {
     public ArrayList<Food> getFoods() {
         return foods;
     }
-
-    public void setFoods(ArrayList<Food> foods) {
-        this.foods = foods;
-    }
-
-
 }
