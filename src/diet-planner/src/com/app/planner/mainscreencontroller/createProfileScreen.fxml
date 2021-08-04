@@ -73,7 +73,7 @@
             </ComboBox>
          </children>
       </Pane>
-      <Button layoutX="1003.0" layoutY="667.0" mnemonicParsing="false" onAction="#createNewProfile" text="Create Profile">
+      <Button fx:id="createProfileButton" layoutX="1003.0" layoutY="667.0" mnemonicParsing="false" onAction="#createNewProfile" text="Create Profile">
          <font>
             <Font size="25.0" />
          </font></Button>
