@@ -1,63 +1,43 @@
 package com.app.planner;
 
 public class InputValidation {
-    /*
-    *Username should between 20 characters and 8 characters
-    *Username should not be the same as the password
-     */
-    public static boolean usernameValidation(String userName) {
-        boolean valid = true;
-        System.out.println(userName.length());
+
+    public static String usernameValidation(String userName) {
         if (userName.length() > 20 || userName.length() < 4)
         {
-            System.out.println("Password should be less than 20 and more than 4 characters in length."); //change
-            valid = false;
-        }
-        return valid;
-    }
+           return "Username should be less than 20 and more than 4 characters in length.";
 
-    public static boolean passwordValidation(String userName, String password)
+        }
+        return "valid";
+    }
+    public static String passwordValidation(String password)
     {
-        boolean valid = true;
         if (password.length() > 15 || password.length() < 8)
         {
-            System.out.println("Password should be less than 15 and more than 8 characters in length.");
-            valid = false;
-        }
-        if (password.indexOf(userName) > -1)
-        {
-            System.out.println("Password Should not be same as user name");
-            valid = false;
+            return "Password should be less than 15 and more than 8 characters in length.";
         }
         String upperCaseChars = "(.*[A-Z].*)";
         if (!password.matches(upperCaseChars ))
         {
-            System.out.println("Password should contain atleast one upper case alphabet");
-            valid = false;
+
+            return "Password should contain atleast one upper case alphabet";
         }
         String lowerCaseChars = "(.*[a-z].*)";
         if (!password.matches(lowerCaseChars ))
         {
-            System.out.println("Password should contain atleast one lower case alphabet");
-            valid = false;
+            return "Password should contain atleast one lower case alphabet";
         }
         String numbers = "(.*[0-9].*)";
         if (!password.matches(numbers ))
         {
-            System.out.println("Password should contain atleast one number.");
-            valid = false;
+            return "Password should contain atleast one number.";
         }
         String specialChars = "(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)";
         if (!password.matches(specialChars ))
         {
-            System.out.println("Password should contain atleast one special character");
-            valid = false;
+            return "Password should contain atleast one special character";
         }
-        if (valid)
-        {
-            System.out.println("Password is valid.");
-        }
-        return valid;
+        return "valid";
     }
 
     static public String ageValidation(String age) {
@@ -70,25 +50,5 @@ public class InputValidation {
         return age;
     }
 }
-
-
-
-
-    /*
-     * Password should be less than 15 and more than 8 characters in length.
-     * Password should contain at least one upper case and one lower case alphabet.
-     * Password should contain at least one number.
-     * Password should contain at least one special character.
-     *
-     *
-        System.out.println("Input : UserName "+userName+" PassWord -> "+passWord);
-
-        usernameValidator.usernameValidation(userName,passWord);
-        System.out.println();
-        passWord = "Java2011*";
-        System.out.println("Input : UserName "+userName+" PassWord -> "+passWord);
-        usernameValidator.usernameValidation(userName,passWord);
-     *
-     */
 
 

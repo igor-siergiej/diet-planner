@@ -2,7 +2,7 @@
     -fx-background-color: #007bff;
     -fx-text-fill: white;
     -fx-background-radius: 15px;
-    -fx-font-size: 25px;
+    -fx-font-size: 20px;
     -fx-border-color: white;
     -fx-border-radius: 15px;
 }
@@ -30,11 +30,11 @@
 }
 
 .spinner {
-    -fx-font-size: 25px;
+    -fx-font-size: 20px;
 }
 
 .combo-box {
-    -fx-font-size: 25px;
+    -fx-font-size: 20px;
 }
 
 #calendarPane {
