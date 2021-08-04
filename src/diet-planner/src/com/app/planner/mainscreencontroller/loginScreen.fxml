@@ -4,25 +4,48 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="480.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
    <children>
-      <TextField fx:id="registrationUsernameField" layoutX="126.0" layoutY="138.0" onAction="#logIn" />
-      <PasswordField fx:id="retypePasswordField" layoutX="126.0" layoutY="193.0" />
-      <Button defaultButton="true" layoutX="142.0" layoutY="220.0" mnemonicParsing="false" onAction="#logIn" prefHeight="54.0" prefWidth="118.0" text="Log In">
+      <TextField fx:id="loginUsernameTextField" layoutX="122.0" layoutY="151.0" onAction="#logIn">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
+      <PasswordField fx:id="loginPasswordField" layoutX="122.0" layoutY="233.0">
+         <font>
+            <Font size="20.0" />
+         </font></PasswordField>
+      <Button fx:id="loginButton" defaultButton="true" layoutX="181.0" layoutY="293.0" mnemonicParsing="false" onAction="#logIn" prefHeight="54.0" prefWidth="118.0" text="Log In">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button layoutX="178.0" layoutY="506.0" mnemonicParsing="false" onAction="#goToRegistrationScreen" prefHeight="44.0" prefWidth="125.0" text="Register">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button layoutX="198.0" layoutY="580.0" mnemonicParsing="false" onAction="#goToMainScreen" prefHeight="30.0" prefWidth="84.0" stylesheets="@../style.css" text="Back">
          <font>
             <Font size="25.0" />
          </font></Button>
-      <Button layoutX="167.0" layoutY="330.0" mnemonicParsing="false" onAction="#goToRegistrationScreen" prefHeight="25.0" prefWidth="67.0" text="Register" />
-      <Button layoutX="167.0" layoutY="401.0" mnemonicParsing="false" onAction="#goToMainScreen" prefHeight="25.0" prefWidth="67.0" text="Back" />
-      <Button layoutX="283.0" layoutY="193.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" text="?" />
-      <Label alignment="CENTER" layoutX="20.0" layoutY="14.0" prefHeight="115.0" prefWidth="360.0" text="Log In">
+      <Label alignment="CENTER" layoutX="60.0" layoutY="14.0" prefHeight="115.0" prefWidth="360.0" text="Log In">
          <font>
             <Font size="49.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="126.0" layoutY="176.0" prefHeight="17.0" prefWidth="149.0" text="Password" />
-      <Label alignment="CENTER" layoutX="170.0" layoutY="121.0" prefHeight="17.0" prefWidth="60.0" text="Username" />
-      <Label alignment="CENTER" layoutX="155.0" layoutY="306.0" prefHeight="17.0" prefWidth="91.0" text="No account?" />
-      <Label fx:id="loginMessage" alignment="CENTER" layoutX="95.0" layoutY="272.0" prefHeight="17.0" prefWidth="211.0" />
+      <Label alignment="CENTER" layoutX="201.0" layoutY="203.0" prefHeight="30.0" prefWidth="91.0" text="Password">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label alignment="CENTER" layoutX="201.0" layoutY="121.0" prefHeight="30.0" prefWidth="91.0" text="Username">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label alignment="CENTER" layoutX="188.0" layoutY="453.0" prefHeight="30.0" prefWidth="118.0" text="No account?">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="loginMessage" alignment="CENTER" layoutX="84.0" layoutY="379.0" prefHeight="30.0" prefWidth="325.0">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
    </children>
 </Pane>

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.calendarcontroller.CalendarController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.calendarcontroller.CalendarController">
    <children>
       <GridPane fx:id="calendar" alignment="CENTER" layoutY="92.0" onMouseClicked="#mouseEntered" prefHeight="708.0" prefWidth="1200.0">
         <columnConstraints>
@@ -132,12 +136,12 @@
       </GridPane>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToProfileScreen" text="Back">
          <font>
-            <Font size="25.0" />
+            <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="990.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToViewNutrientsScreen" text="View Nutrients">
+      <Button layoutX="1030.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToViewNutrientsScreen" text="View Nutrients">
          <font>
-            <Font size="25.0" />
+            <Font size="20.0" />
          </font>
       </Button>
       <Label fx:id="monthLabel" alignment="CENTER" layoutX="498.0" layoutY="29.0" prefHeight="36.0" prefWidth="224.0" text="CurrentMonth">

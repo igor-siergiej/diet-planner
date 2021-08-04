@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import jdk.internal.util.xml.impl.Input;
 
 import java.awt.*;
 import java.io.IOException;
@@ -28,19 +29,25 @@ public class MainScreenController {
     Profile profile;
 
     @FXML
-    private TextField usernameField;
+    private TextField loginUsernameTextField;
 
     @FXML
-    private PasswordField passwordField;
+    private PasswordField loginPasswordField;
 
     @FXML
-    private TextField registrationUsernameField;
+    private Button loginButton;
+
+    @FXML
+    private Button registerButton;
+
+    @FXML
+    private TextField registrationUsernameTextField;
 
     @FXML
     private PasswordField registrationPasswordField;
 
     @FXML
-    private PasswordField retypePasswordField;
+    private PasswordField registrationRetypePasswordField;
 
     @FXML
     private Label registerMessage;
@@ -73,12 +80,14 @@ public class MainScreenController {
         goToScreen(event,"configcontroller/configScreen.fxml");
     }
 
-    public void goToRegistrationScreen(ActionEvent event) {
-        goToScreen(event,"mainscreencontroller/registrationScreen.fxml");
+    public void goToRegistrationScreen(ActionEvent event) { // this method will open the profile screen window
+        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/registrationScreen.fxml").getController();
+        mainScreenController.setRegistrationButtonDisable();
     }
 
-    public void goToLoginScreen(ActionEvent event) {
-        goToScreen(event, "mainscreencontroller/loginScreen.fxml");
+    public void goToLoginScreen(ActionEvent event) { // this method will open the profile screen window
+        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/loginScreen.fxml").getController();
+        mainScreenController.setLoginButtonDisable();
     }
 
     public void goToMainScreen(ActionEvent event) {
@@ -93,7 +102,7 @@ public class MainScreenController {
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
         MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/createProfileScreen.fxml").getController();
         mainScreenController.setAgeTextFieldEventHandler();
-        mainScreenController.setButtonDisable();
+        mainScreenController.setCreateProfileButtonDisable();
     }
 
     private void goToScreen(ActionEvent event, String fxmlFilePath) {
@@ -118,12 +127,20 @@ public class MainScreenController {
         return loader;
     }
 
-    public void setButtonDisable() {
+    public void setCreateProfileButtonDisable() {
         createProfileButton.disableProperty().bind(profileNameTextField.textProperty().isEmpty().or(ageTextField.textProperty().isEmpty()).or(sexComboBox.valueProperty().isNull()));
         //disabling the create profile button until the form is filled out
 
         breastfeedingComboBox.getSelectionModel().select(1); //setting default value for comboBoxes
         pregnantComboBox.getSelectionModel().select(1);
+    }
+
+    public void setLoginButtonDisable() {
+        loginButton.disableProperty().bind(loginUsernameTextField.textProperty().isEmpty().or(loginPasswordField.textProperty().isEmpty()));
+    }
+
+    public void setRegistrationButtonDisable() {
+        registerButton.disableProperty().bind(registrationUsernameTextField.textProperty().isEmpty().or(registrationPasswordField.textProperty().isEmpty()).or(registrationRetypePasswordField.textProperty().isEmpty()));
     }
 
     public void createTestProfile(ActionEvent event) {
@@ -222,22 +239,40 @@ public class MainScreenController {
     }
 
     public void logIn() {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
+        String username = loginUsernameTextField.getText();
+        String password = loginPasswordField.getText();
         //INPUT VALIDATION HERE
         if (DatabaseConnection.login(username,password)) {
-            System.out.println("logged in");
+            loginMessage.setText("Logged IN");
             profile = DatabaseConnection.getProfileFromDb(username);
             System.out.println(profile);
         } else {
-            System.out.println("wrong logIn");
+            loginMessage.setText("Error Logging in");
         }
     }
 
-    public void register() {
-        String username = registrationUsernameField.getText();
+    public void register(ActionEvent event) {
+        String username = registrationUsernameTextField.getText();
         String password = registrationPasswordField.getText();
-        String retypePassword = retypePasswordField.getText();
+        String retypePassword = registrationRetypePasswordField.getText();
+        if (password.equals(retypePassword)) {
+            if (InputValidation.usernameValidation(username).equals("valid")) {
+                if (InputValidation.passwordValidation(password).equals("valid")) {
+                    if (DatabaseConnection.register(username,password)) {
+                        goToProfileScreen(event,DatabaseConnection.getProfileFromDb(username));
+                    } else {
+                        registerMessage.setText("Username Already exists");
+                    }
+                } else {
+                    registerMessage.setText(InputValidation.passwordValidation(password));
+                }
+            } else {
+                registerMessage.setText("Invalid Username");
+            }
+        } else {
+            registerMessage.setText("Username and Password Not matching");
+        }
+
 
 
         if (password.equals(retypePassword)) {
@@ -245,7 +280,7 @@ public class MainScreenController {
                 System.out.println("registered");
                 System.out.println(profile);
             } else {
-                registerMessage.setText("Username Already Exists");
+
             }
         } else {
             registerMessage.setText("Passwords don't match");
