@@ -2,6 +2,8 @@ package com.app.planner.mainscreencontroller;
 
 import com.app.planner.*;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -9,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -63,7 +66,8 @@ public class MainScreenController {
     @FXML
     private ComboBox pregnantComboBox;
 
-    protected static final String INITAL_VALUE = "0";
+    @FXML
+    private Button createProfileButton;
 
     public void goToConfigurationScreen(ActionEvent event) {
         goToScreen(event,"configcontroller/configScreen.fxml");
@@ -89,6 +93,7 @@ public class MainScreenController {
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
         MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/createProfileScreen.fxml").getController();
         mainScreenController.setAgeTextFieldEventHandler();
+        mainScreenController.setButtonDisable();
     }
 
     private void goToScreen(ActionEvent event, String fxmlFilePath) {
@@ -111,6 +116,14 @@ public class MainScreenController {
         }
         Main.setWindow(event, root);
         return loader;
+    }
+
+    public void setButtonDisable() {
+        createProfileButton.disableProperty().bind(profileNameTextField.textProperty().isEmpty().or(ageTextField.textProperty().isEmpty()).or(sexComboBox.valueProperty().isNull()));
+        //disabling the create profile button until the form is filled out
+
+        breastfeedingComboBox.getSelectionModel().select(1); //setting default value for comboBoxes
+        pregnantComboBox.getSelectionModel().select(1);
     }
 
     public void createTestProfile(ActionEvent event) {
