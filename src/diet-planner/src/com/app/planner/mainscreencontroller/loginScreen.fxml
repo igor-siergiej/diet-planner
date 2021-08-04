@@ -43,9 +43,10 @@
          <font>
             <Font size="20.0" />
          </font></Label>
-      <Label fx:id="loginMessage" alignment="CENTER" layoutX="84.0" layoutY="379.0" prefHeight="30.0" prefWidth="325.0">
+      <Label id="message" fx:id="loginMessage" alignment="CENTER" layoutX="67.0" layoutY="357.0" prefHeight="78.0" prefWidth="360.0" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="20.0" />
-         </font></Label>
+         </font>
+      </Label>
    </children>
 </Pane>

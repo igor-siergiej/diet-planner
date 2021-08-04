@@ -38,12 +38,12 @@
             <Font size="20.0" />
          </font></Label>
       <Button layoutX="208.0" layoutY="572.0" mnemonicParsing="false" onAction="#goToMainScreen" text="Back" />
-      <Label alignment="CENTER" layoutX="121.0" layoutY="458.0" prefHeight="30.0" prefWidth="241.0" text="Already have an account?">
+      <Label alignment="CENTER" layoutX="123.0" layoutY="477.0" prefHeight="30.0" prefWidth="241.0" text="Already have an account?">
          <font>
             <Font size="20.0" />
          </font></Label>
       <Button layoutX="176.0" layoutY="507.0" mnemonicParsing="false" onAction="#goToLoginScreen" prefHeight="44.0" prefWidth="133.0" text="Log In" />
-      <Label fx:id="registerMessage" alignment="CENTER" layoutX="90.0" layoutY="421.0" prefHeight="30.0" prefWidth="304.0">
+      <Label id="message" fx:id="registerMessage" alignment="CENTER" layoutX="60.0" layoutY="404.0" prefHeight="78.0" prefWidth="360.0" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="20.0" />
          </font></Label>

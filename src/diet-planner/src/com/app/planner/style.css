@@ -123,6 +123,10 @@
     -fx-text-fill: black;
 }
 
+#message {
+    -fx-text-fill: red;
+}
+
 .data0.chart-pie { -fx-pie-color: #3A58C5; }
 .data1.chart-pie { -fx-pie-color: #623AC5; }
 .data2.chart-pie { -fx-pie-color: #3A9DC5; }
