@@ -3,12 +3,12 @@
 ### TO-DO
 
 #### KAJ TO-DO
-- Clean up InputValidation and write tests
-- Update login and register fxml
 
 #### IGOR TO-DO
- - Make better input validation for creating new screen
+ - Implement input validation for login screen
  - Finish addEntry screen
+ - create the hover messages over the ? buttons in login and register
+ - fix regression fails for database
 
 #### Functionality to be implemented:
 - Searching foods from dataset
