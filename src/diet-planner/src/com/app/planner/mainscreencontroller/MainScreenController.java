@@ -259,31 +259,22 @@ public class MainScreenController {
             if (InputValidation.usernameValidation(username).equals("valid")) {
                 if (InputValidation.passwordValidation(password).equals("valid")) {
                     if (DatabaseConnection.register(username,password)) {
-                        goToProfileScreen(event,DatabaseConnection.getProfileFromDb(username));
+                        goToCreateProfileScreen(event);
                     } else {
                         registerMessage.setText("Username Already exists");
+                        return;
                     }
                 } else {
                     registerMessage.setText(InputValidation.passwordValidation(password));
+                    return;
                 }
             } else {
                 registerMessage.setText("Invalid Username");
+                return;
             }
         } else {
-            registerMessage.setText("Username and Password Not matching");
-        }
-
-
-
-        if (password.equals(retypePassword)) {
-            if (DatabaseConnection.register(username,password)) {
-                System.out.println("registered");
-                System.out.println(profile);
-            } else {
-
-            }
-        } else {
-            registerMessage.setText("Passwords don't match");
+            registerMessage.setText("Passwords Not matching");
+            return;
         }
     }
 }
