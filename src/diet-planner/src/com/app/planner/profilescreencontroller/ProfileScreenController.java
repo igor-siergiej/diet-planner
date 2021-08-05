@@ -1,5 +1,6 @@
 package com.app.planner.profilescreencontroller;
 
+import com.app.planner.DatabaseConnection;
 import com.app.planner.Main;
 import com.app.planner.Profile;
 import com.app.planner.addentrycontroller.AddEntryController;
@@ -66,8 +67,12 @@ public class ProfileScreenController {
         }
     }
 
-    public void saveProfile() {
+    public void saveProfileToFile() {
         profile.saveToFile(Main.chooseFile("save"));
+    }
+
+    public void saveProfileToDB() {
+        DatabaseConnection.saveProfileToDb(profile.getProfileName(),profile);
     }
 
     private FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) {

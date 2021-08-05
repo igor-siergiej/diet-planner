@@ -238,16 +238,24 @@ public class MainScreenController {
         }
     }
 
-    public void logIn() {
+    public void logIn(ActionEvent event) {
         String username = loginUsernameTextField.getText();
         String password = loginPasswordField.getText();
-        //INPUT VALIDATION HERE
-        if (DatabaseConnection.login(username,password)) {
-            loginMessage.setText("Logged IN");
-            profile = DatabaseConnection.getProfileFromDb(username);
-            System.out.println(profile);
+        if (InputValidation.usernameValidation(username).equals("valid")) {
+            if (InputValidation.passwordValidation(password).equals("valid")) {
+                if (DatabaseConnection.login(username,password)) {
+                    goToProfileScreen(event,DatabaseConnection.getProfileFromDb(username));
+                } else {
+                    loginMessage.setText("Account does not exist");
+                    return;
+                }
+            } else {
+                loginMessage.setText("Invalid Password");
+                return;
+            }
         } else {
-            loginMessage.setText("Error Logging in");
+            loginMessage.setText("Invalid Username");
+            return;
         }
     }
 
@@ -276,5 +284,10 @@ public class MainScreenController {
             registerMessage.setText("Passwords Not matching");
             return;
         }
+    }
+
+    public void testLogin(ActionEvent event) {
+        DatabaseConnection.login("test","testpass!I1");
+        goToProfileScreen(event,DatabaseConnection.getProfileFromDb("test"));
     }
 }

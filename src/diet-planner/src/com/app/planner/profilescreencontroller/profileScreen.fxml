@@ -38,12 +38,17 @@
             <Font size="25.0" />
          </font>
       </Button>
-      <Button layoutX="518.0" layoutY="541.0" mnemonicParsing="false" onAction="#saveProfile" text="Save Profile">
+      <Button layoutX="518.0" layoutY="541.0" mnemonicParsing="false" onAction="#saveProfileToFile" text="Save Profile">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
       <Button layoutX="528.0" layoutY="605.0" mnemonicParsing="false" onAction="#goToAddEntryScreen" text="Add Entry">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Button layoutX="483.0" layoutY="676.0" mnemonicParsing="false" onAction="#saveProfileToDB" text="Save profile to DB">
          <font>
             <Font size="25.0" />
          </font>
