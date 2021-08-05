@@ -1,5 +1,5 @@
 .button {
-    -fx-background-color: #007bff;
+    -fx-background-color: #0056B3;
     -fx-text-fill: white;
     -fx-background-radius: 15px;
     -fx-font-size: 20px;
@@ -8,7 +8,7 @@
 }
 
 #fakeButton{
-    -fx-background-color: #007bff;
+    -fx-background-color: #0056B3;
     -fx-text-fill: white;
     -fx-background-radius: 15px;
     -fx-font-size: 10px;
@@ -39,7 +39,7 @@
 
 #calendarPane {
     -fx-border-width: 2px;
-    -fx-border-color: #007bff;
+    -fx-border-color: #0056B3;
 }
 
 #currentDay {
@@ -64,7 +64,7 @@
     -fx-text-fill: black;
     -fx-border-width: 0 0 0 2;
     -fx-border-color: blue;
-    -fx-background-color: #0c8de3;
+    -fx-background-color: #0056B3;
     -fx-padding: 10 5;
     -fx-background-radius: 5;
 }
@@ -84,7 +84,7 @@
 }
 
 #menuButton {
-    -fx-background-color: #007bff;
+    -fx-background-color: #0056B3;
     -fx-text-fill: white;
     -fx-background-radius: 15px;
 }
@@ -92,6 +92,10 @@
 .chart-pie-label { /*this is what you need for labels*/
     -fx-fill: white;
     -fx-font-size: 1em;
+}
+
+#mainMenuButton {
+    -fx-font-size: 25;
 }
 
 .chart-pie {

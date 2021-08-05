@@ -5,8 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseConnectionTest {
+
     String username = "test";
-    String password = "testpass";
+    String password = "testpass!I1";
     String encryptedPassword = "1E6fd8MHqGla85xFKylnXUseFTJEZmfbinKK1OEu8Q0=";
     String salt = "f2MD9N5m5g4ymOUyOuzkiaDhpBRFAR";
 

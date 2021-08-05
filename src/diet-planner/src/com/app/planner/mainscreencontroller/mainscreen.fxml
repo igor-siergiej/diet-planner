@@ -18,7 +18,7 @@
             <Image url="@../img/logo.png" />
          </image>
       </ImageView>
-      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="41.0" layoutY="139.0" mnemonicParsing="false" onAction="#goToLoginScreen" prefHeight="138.0" prefWidth="263.0" text="Log In">
+      <Button id="mainMenuButton" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="41.0" layoutY="139.0" mnemonicParsing="false" onAction="#goToLoginScreen" prefHeight="138.0" prefWidth="263.0" text="Log In">
          <font>
             <Font size="25.0" />
          </font>
@@ -30,7 +30,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button alignment="CENTER" contentDisplay="TOP" layoutX="41.0" layoutY="304.0" mnemonicParsing="false" onAction="#goToRegistrationScreen" prefHeight="138.0" prefWidth="263.0" text="Register">
+      <Button id="mainMenuButton" alignment="CENTER" contentDisplay="TOP" layoutX="41.0" layoutY="304.0" mnemonicParsing="false" onAction="#goToRegistrationScreen" prefHeight="138.0" prefWidth="263.0" text="Register">
          <font>
             <Font size="25.0" />
          </font>
@@ -42,7 +42,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button alignment="CENTER" contentDisplay="TOP" layoutX="328.0" layoutY="139.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#loadProfile" prefHeight="138.0" prefWidth="263.0" text="Import File">
+      <Button id="mainMenuButton" alignment="CENTER" contentDisplay="TOP" layoutX="328.0" layoutY="139.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#loadProfile" prefHeight="138.0" prefWidth="263.0" text="Import File">
          <font>
             <Font size="25.0" />
          </font>
@@ -57,7 +57,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="328.0" layoutY="304.0" mnemonicParsing="false" onAction="#goToCreateProfileScreen" prefHeight="138.0" prefWidth="263.0" text="Create New Profile">
+      <Button id="mainMenuButton" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="328.0" layoutY="304.0" mnemonicParsing="false" onAction="#goToCreateProfileScreen" prefHeight="138.0" prefWidth="263.0" text="Create New Profile">
          <font>
             <Font size="25.0" />
          </font>
@@ -69,7 +69,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="615.0" layoutY="139.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="263.0" text="Feedback">
+      <Button id="mainMenuButton" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="615.0" layoutY="139.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="263.0" text="Feedback">
          <font>
             <Font size="25.0" />
          </font>
@@ -81,7 +81,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="615.0" layoutY="304.0" mnemonicParsing="false" onAction="#goToConfigurationScreen" prefHeight="138.0" prefWidth="263.0" text="Options">
+      <Button id="mainMenuButton" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="615.0" layoutY="304.0" mnemonicParsing="false" onAction="#goToConfigurationScreen" prefHeight="138.0" prefWidth="263.0" text="Options">
          <font>
             <Font size="25.0" />
          </font>
