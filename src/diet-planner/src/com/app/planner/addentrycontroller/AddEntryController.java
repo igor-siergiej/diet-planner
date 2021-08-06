@@ -5,12 +5,10 @@ import com.app.planner.profilescreencontroller.ProfileScreenController;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -25,11 +23,13 @@ import javafx.scene.text.Font;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import static javafx.collections.FXCollections.observableArrayList;
 
 public class AddEntryController {
     private Profile profile;
@@ -75,6 +75,9 @@ public class AddEntryController {
     @FXML
     private ComboBox mealTypeComboBox;
 
+    @FXML
+    private Button addEntryButton;
+
     public void setProfile(Profile profile) {
         this.profile = profile;
         setSearchTextFieldEventHandler();
@@ -99,6 +102,9 @@ public class AddEntryController {
     }
 
     public void addEntry(ActionEvent event) {
+        Meal meal = getMeal();
+        meal.setMealName(mealNameTextField.getText());
+        entry = new Entry(meal, LocalDateTime.now(), (EntryType) mealTypeComboBox.getValue());
         profile.getDiary().addEntry(entry);
 
         ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/profileScreen.fxml").getController();
@@ -115,7 +121,18 @@ public class AddEntryController {
     public void setFoodPortionEventHandler(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             textField.setText(InputValidation.ageValidation(newValue));
+            updateNutrients();
         });
+    }
+
+    public void populateMealTypeComboBox() {
+        mealTypeComboBox.setItems(observableArrayList(EntryType.values()));
+    }
+
+    public void setAddEntryButtonDisable() {
+        addEntryButton.disableProperty().bind(mealNameTextField.textProperty().isEmpty().or((mealTypeComboBox.valueProperty().isNull())));
+        //disabling the button until the form is filled out
+
     }
 
     public void populateSearchResult() {
@@ -131,6 +148,10 @@ public class AddEntryController {
     }
 
     public void updateNutrients() {
+        showNutrients(getMeal().getFoods());
+    }
+
+    public Meal getMeal() {
         ArrayList<Food> dataset = Main.initialiseData();
         Meal meal = new Meal();
         for (Node node: foodVBox.getChildren()) {
@@ -141,15 +162,21 @@ public class AddEntryController {
                     if (node1 instanceof Label) {
                         Label label = (Label) node1;
                         labelText = label.getText();
-                    } else {
+                    } else if (node1 instanceof TextField){
                         TextField textField = (TextField) node1;
+                        if (textField.getText().equals("")) {
+                            textField.setText("0");
+                        }
                         portion = Integer.valueOf(textField.getText());
                     }
                 }
-                meal.addFood(Main.exactFoodSearch(dataset,labelText),portion);//write new method to seach exact names from dataset
+                meal.addFood(Main.exactFoodSearch(dataset,labelText),portion);
             }
         }
-        showNutrients(meal.getFoods());
+        return meal;
+    }
+
+    public void removeFood() {
     }
 
     public void addToFoodVBox(Food food) {
@@ -244,7 +271,7 @@ public class AddEntryController {
         float total = macroList.get(1).getNutrientValue() + macroList.get(2).getNutrientValue() + macroList.get(0).getNutrientValue();
 
         ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
+                observableArrayList(
                         new PieChart.Data("Fat " + String.format("%.1f", macroList.get(1).getNutrientValue() / total * 100) + "%", macroList.get(1).getNutrientValue()),
                         new PieChart.Data("Carbohydrates " + String.format("%.1f", macroList.get(0).getNutrientValue() / total * 100) + "%", macroList.get(0).getNutrientValue()),
                         new PieChart.Data("Protein " + String.format("%.1f", macroList.get(2).getNutrientValue() / total * 100) + "%", macroList.get(2).getNutrientValue()));

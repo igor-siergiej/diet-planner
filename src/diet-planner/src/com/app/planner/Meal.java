@@ -10,6 +10,14 @@ public class Meal {
 
     private static final int MAX_FOOD_COUNT = 30;
 
+    public Meal(String mealName, ArrayList<Food> foods) {
+        this.mealName = mealName;
+        this.foods = foods;
+    }
+
+    public Meal() {
+    }
+
     public void setMealName(String mealName) {
         this.mealName = mealName;
     }
