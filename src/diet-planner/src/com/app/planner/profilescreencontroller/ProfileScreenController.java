@@ -102,6 +102,8 @@ public class ProfileScreenController {
     public void goToAddEntryScreen(ActionEvent event) {
         AddEntryController addEntryController = goToScreenWithProfile(event,"addentrycontroller/addEntryScreen.fxml").getController();
         addEntryController.setProfile(profile);
+        addEntryController.setAddEntryButtonDisable();
+        addEntryController.populateMealTypeComboBox();
     }
 
     public void goToProfileDetailsScreen(ActionEvent event) {
