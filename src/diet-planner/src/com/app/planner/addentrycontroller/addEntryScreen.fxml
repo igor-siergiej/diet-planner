@@ -482,17 +482,17 @@
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="searchTextField" layoutX="15.0" layoutY="160.0">
+      <TextField fx:id="searchTextField" layoutX="15.0" layoutY="155.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <ScrollPane id="resultsPane" fitToWidth="true" layoutX="14.0" layoutY="492.0" prefHeight="294.0" prefWidth="452.0">
+      <ScrollPane id="resultsPane" fx:id="entryScrollPane" fitToWidth="true" layoutX="14.0" layoutY="492.0" prefHeight="294.0" prefWidth="452.0">
          <content>
             <VBox fx:id="foodVBox" prefHeight="291.0" prefWidth="449.0" />
          </content>
       </ScrollPane>
-      <ScrollPane id="resultsPane" fitToWidth="true" layoutX="14.0" layoutY="199.0" prefHeight="284.0" prefWidth="452.0">
+      <ScrollPane id="resultsPane" fx:id="searchScrollPane" fitToWidth="true" layoutX="14.0" layoutY="199.0" prefHeight="284.0" prefWidth="452.0">
          <content>
             <VBox fx:id="searchVBox" prefHeight="280.0" prefWidth="448.0" />
          </content>
@@ -503,7 +503,7 @@
          </font>
       </Button>
       <ComboBox fx:id="mealTypeComboBox" layoutX="276.0" layoutY="86.0" prefHeight="30.0" prefWidth="248.0" promptText="Meal Type" />
-      <Label layoutX="15.0" layoutY="130.0" prefHeight="36.0" prefWidth="207.0" text="Search for Foods:">
+      <Label layoutX="15.0" layoutY="124.0" prefHeight="36.0" prefWidth="207.0" text="Search for Foods:">
          <font>
             <Font size="20.0" />
          </font>

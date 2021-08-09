@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
@@ -19,6 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -77,6 +79,12 @@ public class AddEntryController {
 
     @FXML
     private Button addEntryButton;
+
+    @FXML
+    private ScrollPane entryScrollPane;
+
+    @FXML
+    private ScrollPane searchScrollPane;
 
     public void setProfile(Profile profile) {
         this.profile = profile;
@@ -140,10 +148,11 @@ public class AddEntryController {
         ArrayList<Food> searchedFoods = Main.sortedFoodSearch(dataset,searchTextField.getText());
         for (Food food : searchedFoods) {
             Button button = new Button();
+            button.setWrapText(true);
             button.setText(food.getFoodName());
-            button.setFont(new Font(15));
-            searchVBox.getChildren().add(button);
+            button.setMinHeight(80);
             button.setOnMouseClicked( event -> {addToFoodVBox(food);});
+            searchVBox.getChildren().add(button);
         }
     }
 
@@ -176,34 +185,56 @@ public class AddEntryController {
         return meal;
     }
 
-    public void removeFood() {
+    public void removeFood(String foodName) {
+        Node removeNode = null;
+        for (Node node : foodVBox.getChildren()) {
+            if (node instanceof HBox) {
+                for (Node node1 : ((HBox) node).getChildren()) {
+                    if (node1 instanceof Label) {
+                        Label label = (Label) node1;
+                        if (label.getText().equals(foodName)) {
+                            removeNode = node;
+                        }
+                    }
+                }
+            }
+        }
+        foodVBox.getChildren().remove(removeNode);
     }
 
     public void addToFoodVBox(Food food) {
         HBox hbox = new HBox();
 
-        hbox.setPrefWidth(440);
         Label label = new Label();
         label.setId("fakeButton");
         label.setText(food.getFoodName());
+        label.setWrapText(true);
+        label.setMinHeight(70);
+        label.setFont(new Font(15));
+
         TextField portionTextField = new TextField();
-        hbox.setAlignment(Pos.CENTER_LEFT);
-        hbox.setSpacing(10);
-        portionTextField.setAlignment(Pos.CENTER);
+        portionTextField.setPrefWidth(250);
+
+        setFoodPortionEventHandler(portionTextField);
+
         Button button = new Button();
         button.setText("X");
         button.setAlignment(Pos.CENTER_RIGHT);
-        button.setFont(new Font(10));
-        HBox.setHgrow(portionTextField, Priority.ALWAYS);
-        setFoodPortionEventHandler(portionTextField);
+        button.setOnMouseClicked(event -> {removeFood(food.getFoodName()); updateNutrients();});
 
+        hbox.setSpacing(5);
         hbox.getChildren().add(label);
         hbox.getChildren().add(portionTextField);
         hbox.getChildren().add(button);
+
         foodVBox.getChildren().add(hbox);
     }
 
     public void showNutrients(ArrayList<Food> foods) {
+        if (foods.isEmpty()) {
+            nutrientPane.setVisible(false);
+            return;
+        }
         nutrientPane.setVisible(true);
         ArrayList<Nutrient> nutrients = new ArrayList<>();
             for (Food food :foods) {

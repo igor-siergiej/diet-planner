@@ -17,10 +17,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.io.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main extends Application {
@@ -137,6 +134,12 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        ArrayList<Food> dataset = initialiseData();
+        long start, end;
+        start = new Date().getTime();
+        System.out.println(sortedFoodSearch(dataset,"Ham"));
+        end = new Date().getTime();
+        System.out.println(end-start);
         launch(args);
     }
 }
