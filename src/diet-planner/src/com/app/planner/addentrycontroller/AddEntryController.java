@@ -80,15 +80,11 @@ public class AddEntryController {
     @FXML
     private Button addEntryButton;
 
-    @FXML
-    private ScrollPane entryScrollPane;
-
-    @FXML
-    private ScrollPane searchScrollPane;
-
     public void setProfile(Profile profile) {
         this.profile = profile;
-        setSearchTextFieldEventHandler();
+        setTextFieldEventHandler();
+        setAddEntryButtonDisable();
+        populateMealTypeComboBox();
     }
 
     private FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) {
@@ -119,16 +115,21 @@ public class AddEntryController {
         profileScreenController.setProfile(this.profile);
     }
 
-    public void setSearchTextFieldEventHandler() {
+    public void setTextFieldEventHandler() {
         searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             searchVBox.getChildren().clear();
+            searchTextField.setText(InputValidation.stringValidation(newValue));
             populateSearchResult();
+        });
+
+        mealNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            mealNameTextField.setText(InputValidation.stringValidation(newValue));
         });
     }
 
     public void setFoodPortionEventHandler(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            textField.setText(InputValidation.ageValidation(newValue));
+            textField.setText(InputValidation.portionValidation(newValue));
             updateNutrients();
         });
     }

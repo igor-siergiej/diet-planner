@@ -49,6 +49,27 @@ public class InputValidation {
         }
         return age;
     }
+
+    static public String portionValidation(String age) {
+        if (!age.matches("\\d*")) {
+            return age.replaceAll("[^\\d]", "");
+        }
+        if (age.length() > 4) {
+            return age.substring(0,4);
+        }
+        return age;
+    }
+
+    static public String stringValidation(String string) {
+        string = string.replaceAll("\\s+", " ");
+        if (!string.matches("[a-zA-Z|\\s]")) {
+            return string.replaceAll("[^a-zA-Z|\\s]", "");
+        }
+        if (string.length() > 15) {
+            return string.substring(0,15);
+        }
+        return string;
+    }
 }
 
 
