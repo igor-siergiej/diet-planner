@@ -5,6 +5,7 @@ import com.app.planner.profilescreencontroller.ProfileScreenController;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -139,7 +140,7 @@ public class AddEntryController {
     }
 
     public void setAddEntryButtonDisable() {
-        addEntryButton.disableProperty().bind(mealNameTextField.textProperty().isEmpty().or((mealTypeComboBox.valueProperty().isNull())));
+        addEntryButton.disableProperty().bind(mealNameTextField.textProperty().isEmpty().or((mealTypeComboBox.valueProperty().isNull())).or(Bindings.isEmpty(foodVBox.getChildren())));
         //disabling the button until the form is filled out
 
     }
