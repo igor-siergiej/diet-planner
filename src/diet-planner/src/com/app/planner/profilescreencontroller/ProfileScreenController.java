@@ -31,6 +31,9 @@ public class ProfileScreenController {
     @FXML
     private Label pregnantLabel;
 
+    @FXML
+    private Label messageLabel;
+
     public void setProfile(Profile profile) {
         this.profile = profile;
         profileNameLabel.setText(profile.getProfileName());
@@ -72,7 +75,11 @@ public class ProfileScreenController {
     }
 
     public void saveProfileToDB() {
-        DatabaseConnection.saveProfileToDb(profile.getProfileName(),profile);
+        if (DatabaseConnection.saveProfileToDb(profile.getProfileName(),profile)) {
+            messageLabel.setText("Successfully saved to DB");
+        } else {
+            messageLabel.setText("Error in saving to DB");
+        }
     }
 
     private FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) {
