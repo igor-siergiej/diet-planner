@@ -42,6 +42,7 @@ public class ProfileScreenController {
     public void setProfile(Profile profile) {
         this.profile = profile;
         profileNameLabel.setText(profile.getProfileName());
+        loadLabels();
     }
 
     public void loadLabels() {
@@ -77,12 +78,16 @@ public class ProfileScreenController {
 
     public void saveProfileToFile() {
         profile.saveToFile(Main.chooseSaveFile(mainPane));
+        messageLabel.setId("successfullMessage");
+        messageLabel.setText("Successfully saved to file");
     }
 
     public void saveProfileToDB() {
         if (DatabaseConnection.saveProfileToDb(profile.getProfileName(),profile)) {
+            messageLabel.setId("successfullMessage");
             messageLabel.setText("Successfully saved to DB");
         } else {
+            messageLabel.setId("successfullMessage");
             messageLabel.setText("Error in saving to DB");
         }
     }
@@ -114,12 +119,6 @@ public class ProfileScreenController {
     public void goToAddEntryScreen(ActionEvent event) {
         AddEntryController addEntryController = goToScreenWithProfile(event,"addentrycontroller/addEntryScreen.fxml").getController();
         addEntryController.setProfile(profile);
-    }
-
-    public void goToProfileDetailsScreen(ActionEvent event) {
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/profileDetailsScreen.fxml").getController();
-        profileScreenController.setProfile(profile);
-        profileScreenController.loadLabels();
     }
 
     public void goToProfileScreen(ActionEvent event) {
