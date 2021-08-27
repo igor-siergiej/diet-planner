@@ -83,13 +83,12 @@ public class Main extends Application {
 
         Stage stage = (Stage)pane.getScene().getWindow();
 
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JSON Files", "*.JSON")
+        );
+
         File file = fileChooser.showSaveDialog(stage);
 
-        String filePath = file.getAbsolutePath();
-
-        if (!filePath.endsWith(".json")) {
-            file = new File(filePath + ".json");
-        }
         return file;
     }
 
