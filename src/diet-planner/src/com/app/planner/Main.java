@@ -11,10 +11,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javax.swing.*;
-import javax.swing.filechooser.FileSystemView;
+import javafx.stage.FileChooser;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -62,33 +62,35 @@ public class Main extends Application {
         return returnList;
     }
 
-    public static File chooseFile(String windowType) {  //used to pick file to save or load from
-        File selectedFile = null;
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-            jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            int returnValue;
-            if (windowType.equals("save")) {
-                returnValue = jfc.showSaveDialog(null);
-            } else {
-                returnValue = jfc.showOpenDialog(null);
-            }
+    public static File chooseLoadFile(Pane pane) {  //used to pick file to save or load from
 
-            if (returnValue == JFileChooser.APPROVE_OPTION) {
-                selectedFile = jfc.getSelectedFile();
-            } else if (returnValue == JFileChooser.CANCEL_OPTION){
-                System.out.println("FileChooser cancelled");
-            }
-        } catch (IllegalAccessException | ClassNotFoundException | InstantiationException | UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
+        FileChooser fileChooser = new FileChooser();
+
+        Stage stage = (Stage)pane.getScene().getWindow(); // getting the window of the pane
+
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JSON Files", "*.JSON")
+        );
+
+        File file = fileChooser.showOpenDialog(stage);//setting the window to be locked.
+
+        return file;
+    }
+
+    public static File chooseSaveFile(Pane pane) {
+
+        FileChooser fileChooser = new FileChooser();
+
+        Stage stage = (Stage)pane.getScene().getWindow();
+
+        File file = fileChooser.showSaveDialog(stage);
+
+        String filePath = file.getAbsolutePath();
+
+        if (!filePath.endsWith(".json")) {
+            file = new File(filePath + ".json");
         }
-        String filePath = selectedFile.getAbsolutePath();
-        if(!filePath.endsWith(".json")) {
-            selectedFile = new File(filePath + ".json");
-        }
-        return selectedFile;
+        return file;
     }
 
     public static ArrayList<Nutrient> combineNutrientList(ArrayList<Nutrient> sourceList) { //given a long list of duplicate list of nutrients it will join all of them into one by adding together all the nutrients if they match names
