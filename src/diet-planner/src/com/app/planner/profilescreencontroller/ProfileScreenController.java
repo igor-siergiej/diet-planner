@@ -11,10 +11,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+
 import java.io.IOException;
 
 public class ProfileScreenController {
     private Profile profile;
+
+    @FXML
+    private Pane mainPane;
 
     @FXML
     private Label profileNameLabel;
@@ -71,7 +76,7 @@ public class ProfileScreenController {
     }
 
     public void saveProfileToFile() {
-        //profile.saveToFile(Main.chooseLoadFile());
+        profile.saveToFile(Main.chooseSaveFile(mainPane));
     }
 
     public void saveProfileToDB() {
