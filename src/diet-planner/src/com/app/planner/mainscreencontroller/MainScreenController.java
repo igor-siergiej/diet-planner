@@ -18,6 +18,7 @@ import javafx.scene.layout.Pane;
 import jdk.internal.util.xml.impl.Input;
 
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -27,6 +28,9 @@ import java.util.Arrays;
 
 public class MainScreenController {
     Profile profile;
+
+    @FXML
+    private Pane mainPane;
 
     @FXML
     private TextField loginUsernameTextField;
@@ -223,8 +227,13 @@ public class MainScreenController {
 
     public void loadProfile(ActionEvent event) { // this is the method to call when load profile from file is pressed
         Profile profile = new Profile();
-        profile.loadFromFile(Main.chooseFile("load"));
-        goToProfileScreen(event, profile);
+        File file = Main.chooseLoadFile(mainPane);
+        if (!(file == null)) {
+            profile.loadFromFile(file);
+            goToProfileScreen(event, profile);
+        } else {
+
+        }
     }
 
     public void openHyperlink() {

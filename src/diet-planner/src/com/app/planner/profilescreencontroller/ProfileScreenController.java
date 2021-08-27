@@ -71,7 +71,7 @@ public class ProfileScreenController {
     }
 
     public void saveProfileToFile() {
-        profile.saveToFile(Main.chooseFile("save"));
+        //profile.saveToFile(Main.chooseLoadFile());
     }
 
     public void saveProfileToDB() {
