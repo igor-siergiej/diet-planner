@@ -52,12 +52,11 @@
     -fx-border-color: blue;
 }
 
-/*#vitaminVBox,#sugarVBox,#fatVBox,#macroVBox,#mineralVBox,#otherVBox{
-    -fx-border-color: #007bff;
-    -fx-border-width: 4px;
-}*/
-
 #notFound { -fx-accent: red; }
+
+#successfullMessage { -fx-text-fill: green}
+
+#unsuccessfullMessage { -fx-text-fill: red}
 
 #entryLabel {
     -fx-font-size: 15;
