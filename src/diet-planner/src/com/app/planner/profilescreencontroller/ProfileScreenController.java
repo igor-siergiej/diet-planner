@@ -83,12 +83,14 @@ public class ProfileScreenController {
     }
 
     public void saveProfileToDB() {
-        if (DatabaseConnection.saveProfileToDb(profile.getProfileName(),profile)) {
-            messageLabel.setId("successfullMessage");
-            messageLabel.setText("Successfully saved to DB");
-        } else {
-            messageLabel.setId("successfullMessage");
-            messageLabel.setText("Error in saving to DB");
+        if (profile.getUsername() != null) {
+            if (DatabaseConnection.saveProfileToDb(profile.getUsername(),profile)) {
+                messageLabel.setId("successfullMessage");
+                messageLabel.setText("Successfully saved to DB");
+            } else {
+                messageLabel.setId("successfullMessage");
+                messageLabel.setText("Error in saving to DB");
+            }
         }
     }
 

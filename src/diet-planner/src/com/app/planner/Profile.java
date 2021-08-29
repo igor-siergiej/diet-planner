@@ -7,6 +7,8 @@ import com.google.gson.stream.JsonReader;
 import java.io.*;
 
 public class Profile {
+    private String username;
+    private String password;
     private String profileName;
     private int age;
     private String sex;
@@ -14,7 +16,9 @@ public class Profile {
     private boolean breastFeeding;
     private Diary diary;
 
-    public Profile(String profileName, int age, String sex, boolean pregnant, boolean breastFeeding, Diary diary) {
+    public Profile(String username, String password,String profileName, int age, String sex, boolean pregnant, boolean breastFeeding, Diary diary) {
+        this.username = username;
+        this.password = password;
         this.profileName = profileName;
         this.age = age;
         this.sex = sex;
@@ -29,7 +33,9 @@ public class Profile {
     @Override
     public String toString() {
         return "Profile{" +
-                "profileName='" + profileName + '\'' +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", profileName='" + profileName + '\'' +
                 ", age=" + age +
                 ", sex='" + sex + '\'' +
                 ", pregnant=" + pregnant +
@@ -86,6 +92,22 @@ public class Profile {
         this.diary = diary;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void saveToFile(File file) {
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -96,7 +118,6 @@ public class Profile {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void loadFromFile(File file) {

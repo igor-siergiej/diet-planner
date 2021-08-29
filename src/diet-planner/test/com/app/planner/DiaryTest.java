@@ -66,10 +66,5 @@ public class DiaryTest {
         public void testEntriesReverseSort() {
             assertEquals(diary.getAllEntries().get(0).getTimeEaten(), LocalDateTime.parse("2021-06-01T06:30:00"), "Entries should be reversed");
         }
-
-
-
     }
-
-
 }
