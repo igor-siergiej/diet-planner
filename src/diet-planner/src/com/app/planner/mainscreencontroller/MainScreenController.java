@@ -103,8 +103,9 @@ public class MainScreenController {
         profileScreenController.setProfile(profile);
     }
 
-    public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
+    public void goToCreateProfileScreen(ActionEvent event, String username, String password) { // this method will open the profile screen window
         MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/createProfileScreen.fxml").getController();
+        mainScreenController.setProfile(username,password);
         mainScreenController.setAgeTextFieldEventHandler();
         mainScreenController.setCreateProfileButtonDisable();
     }
@@ -116,6 +117,11 @@ public class MainScreenController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setProfile(String username,String password) {
+        profile.setUsername(username);
+        profile.setPassword(password);
     }
 
     private FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) {
@@ -212,7 +218,7 @@ public class MainScreenController {
             }
         }
 
-        Profile profile = new Profile(profileName,age,sex,isPregnant,isBreastfeeding,new Diary());
+        Profile profile = new Profile(null,null,profileName,age,sex,isPregnant,isBreastfeeding,new Diary());
         goToProfileScreen(event,profile);
     }
 
@@ -276,7 +282,7 @@ public class MainScreenController {
             if (InputValidation.usernameValidation(username).equals("valid")) {
                 if (InputValidation.passwordValidation(password).equals("valid")) {
                     if (DatabaseConnection.register(username,password)) {
-                        goToCreateProfileScreen(event);
+                        goToCreateProfileScreen(event,username,password);
                     } else {
                         registerMessage.setText("Username Already exists");
                         return;

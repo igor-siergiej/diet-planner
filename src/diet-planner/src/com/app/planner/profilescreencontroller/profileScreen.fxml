@@ -103,8 +103,29 @@
             <Font size="25.0" />
          </font>
       </Button>
+      <Label layoutX="381.0" layoutY="307.0" text="Username =">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="381.0" layoutY="343.0" text="Password = ">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="usernameLabel" layoutX="512.0" layoutY="307.0" prefHeight="36.0" prefWidth="153.0">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="passwordLabel" layoutX="505.0" layoutY="344.0" prefHeight="36.0" prefWidth="153.0">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
    </children>
    <stylesheets>
+      <URL value="@../style.css" />
       <URL value="@../style.css" />
       <URL value="@../style.css" />
       <URL value="@../style.css" />
