@@ -39,6 +39,12 @@ public class ProfileScreenController {
     @FXML
     private Label messageLabel;
 
+    @FXML
+    private Label usernameLabel;
+
+    @FXML
+    private Label passwordLabel;
+
     public void setProfile(Profile profile) {
         this.profile = profile;
         profileNameLabel.setText(profile.getProfileName());
@@ -48,7 +54,13 @@ public class ProfileScreenController {
     public void loadLabels() {
         sexLabel.setText(profile.getSex());
         ageLabel.setText(String.valueOf(profile.getAge()));
-
+        if (profile.getUsername() == null) {
+            usernameLabel.setStyle("-fx-background-color: #000000;");
+            passwordLabel.setStyle("-fx-background-color: #000000;");
+        } else {
+            usernameLabel.setText(profile.getUsername());
+            passwordLabel.setText(profile.getPassword());
+        }
 
         if (profile.isBreastFeeding()) {
             breastfeedingLabel.setText("Yes");
@@ -91,6 +103,9 @@ public class ProfileScreenController {
                 messageLabel.setId("successfullMessage");
                 messageLabel.setText("Error in saving to DB");
             }
+        } else {
+            messageLabel.setId("successfullMessage");
+            messageLabel.setText("This profile does not have an account");
         }
     }
 
