@@ -103,9 +103,15 @@ public class MainScreenController {
         profileScreenController.setProfile(profile);
     }
 
-    public void goToCreateProfileScreen(ActionEvent event, String username, String password) { // this method will open the profile screen window
+    public void goToCreateProfileScreenWithLogin(ActionEvent event, String username, String password) { // this method will open the profile screen window
         MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/createProfileScreen.fxml").getController();
         mainScreenController.setProfile(username,password);
+        mainScreenController.setAgeTextFieldEventHandler();
+        mainScreenController.setCreateProfileButtonDisable();
+    }
+
+    public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
+        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/createProfileScreen.fxml").getController();
         mainScreenController.setAgeTextFieldEventHandler();
         mainScreenController.setCreateProfileButtonDisable();
     }
@@ -282,7 +288,7 @@ public class MainScreenController {
             if (InputValidation.usernameValidation(username).equals("valid")) {
                 if (InputValidation.passwordValidation(password).equals("valid")) {
                     if (DatabaseConnection.register(username,password)) {
-                        goToCreateProfileScreen(event,username,password);
+                        goToCreateProfileScreenWithLogin(event,username,password);
                     } else {
                         registerMessage.setText("Username Already exists");
                         return;
