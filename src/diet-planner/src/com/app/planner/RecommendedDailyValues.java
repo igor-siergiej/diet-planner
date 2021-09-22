@@ -1,11 +1,11 @@
 package com.app.planner;
 
-public class RDI {
+public class RecommendedDailyValues {
     private String nutrientName;
     private String unit;
     private float value;
 
-    public RDI() {
+    public RecommendedDailyValues() {
     }
 
     public String getNutrientName() {

@@ -13,18 +13,28 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import jdk.internal.util.xml.impl.Input;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Properties;
 
 public class MainScreenController {
     Profile profile;
@@ -80,40 +90,53 @@ public class MainScreenController {
     @FXML
     private Button createProfileButton;
 
+    @FXML
+    private TextField nameTextField;
+
+    @FXML
+    private TextField emailTextField;
+
+    @FXML
+    private TextArea messageTextField;
+
     public void goToConfigurationScreen(ActionEvent event) {
-        goToScreen(event,"configcontroller/configScreen.fxml");
+        goToScreen(event,"configcontroller/ConfigScreen.fxml");
     }
 
     public void goToRegistrationScreen(ActionEvent event) { // this method will open the profile screen window
-        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/registrationScreen.fxml").getController();
+        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/RegistrationScreen.fxml").getController();
         mainScreenController.setRegistrationButtonDisable();
     }
 
     public void goToLoginScreen(ActionEvent event) { // this method will open the profile screen window
-        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/loginScreen.fxml").getController();
+        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/LoginScreen.fxml").getController();
         mainScreenController.setLoginButtonDisable();
     }
 
     public void goToMainScreen(ActionEvent event) {
-        goToScreen(event, "mainscreencontroller/mainScreen.fxml");
+        goToScreen(event, "mainscreencontroller/MainScreen.fxml");
     }
 
     public void goToProfileScreen(ActionEvent event, Profile profile) { // this method will open the profile screen window
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/profileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.setProfile(profile);
     }
 
     public void goToCreateProfileScreenWithLogin(ActionEvent event, String username, String password) { // this method will open the profile screen window
-        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/createProfileScreen.fxml").getController();
+        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/CreateProfileScreen.fxml").getController();
         mainScreenController.setProfile(username,password);
         mainScreenController.setAgeTextFieldEventHandler();
         mainScreenController.setCreateProfileButtonDisable();
     }
 
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
-        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/createProfileScreen.fxml").getController();
+        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/CreateProfileScreen.fxml").getController();
         mainScreenController.setAgeTextFieldEventHandler();
         mainScreenController.setCreateProfileButtonDisable();
+    }
+
+    public void goToFeedbackScreen(ActionEvent event) { // this method will open the profile screen window
+        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/FeedbackScreen.fxml").getController();
     }
 
     private void goToScreen(ActionEvent event, String fxmlFilePath) {
@@ -157,6 +180,10 @@ public class MainScreenController {
 
     public void setRegistrationButtonDisable() {
         registerButton.disableProperty().bind(registrationUsernameTextField.textProperty().isEmpty().or(registrationPasswordField.textProperty().isEmpty()).or(registrationRetypePasswordField.textProperty().isEmpty()));
+    }
+
+    public void sendFeedback() {
+        DatabaseConnection.sendFeedback(nameTextField.getText(),emailTextField.getText(),messageTextField.getText());
     }
 
     public void createTestProfile(ActionEvent event) {

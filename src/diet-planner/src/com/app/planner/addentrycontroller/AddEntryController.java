@@ -11,17 +11,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -36,7 +33,7 @@ import static javafx.collections.FXCollections.observableArrayList;
 
 public class AddEntryController {
     private Profile profile;
-    private ArrayList<RDI> rdiArrayList;
+    private ArrayList<RecommendedDailyValues> rdiArrayList;
     private Entry entry;
 
     @FXML
@@ -102,7 +99,7 @@ public class AddEntryController {
     }
 
     public void goToProfileScreen(ActionEvent event) {
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/profileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.setProfile(this.profile);
     }
 
@@ -112,7 +109,7 @@ public class AddEntryController {
         entry = new Entry(meal, LocalDateTime.now(), (EntryType) mealTypeComboBox.getValue());
         profile.getDiary().addEntry(entry);
 
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/profileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.setProfile(this.profile);
     }
 
@@ -355,13 +352,13 @@ public class AddEntryController {
         }
     }
 
-    public ArrayList<RDI> loadRDI() {
-        ArrayList<RDI> rdiArrayList = new ArrayList<>();
+    public ArrayList<RecommendedDailyValues> loadRDI() {
+        ArrayList<RecommendedDailyValues> rdiArrayList = new ArrayList<>();
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             JsonReader reader = new JsonReader(new FileReader("./data/men19to50.json"));
-            RDI[] rdiFromJson = gson.fromJson(reader,RDI[].class);
-            List<RDI> rdiList = Arrays.asList(rdiFromJson);
+            RecommendedDailyValues[] rdiFromJson = gson.fromJson(reader, RecommendedDailyValues[].class);
+            List<RecommendedDailyValues> rdiList = Arrays.asList(rdiFromJson);
             rdiArrayList.addAll(rdiList);
 
         } catch (FileNotFoundException e) {
@@ -372,7 +369,7 @@ public class AddEntryController {
 
     public float searchRDIListValue(String nutrientName) {
         float returnValue = 0;
-        for (RDI rdi : rdiArrayList) {
+        for (RecommendedDailyValues rdi : rdiArrayList) {
             if (nutrientName.contains(rdi.getNutrientName())) {
                 returnValue = rdi.getValue();
             }
@@ -382,7 +379,7 @@ public class AddEntryController {
 
     public String searchRDIListUnit(String nutrientName) {
         String returnValue = "";
-        for (RDI rdi : rdiArrayList) {
+        for (RecommendedDailyValues rdi : rdiArrayList) {
             if (nutrientName.contains(rdi.getNutrientName())) {
                 returnValue = rdi.getUnit();
             }

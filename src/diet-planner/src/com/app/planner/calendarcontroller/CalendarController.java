@@ -65,12 +65,12 @@ public class CalendarController {
     }
 
     public void goToProfileScreen(ActionEvent event) {
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/profileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.setProfile(profile);
     }
 
     public void goToViewNutrientsScreen(ActionEvent event) { // this method will open the profile screen window
-        ViewNutrientsController viewNutrientsController = goToScreenWithProfile(event,"viewnutrientscontroller/viewNutrientsScreen.fxml").getController();
+        ViewNutrientsController viewNutrientsController = goToScreenWithProfile(event,"viewnutrientscontroller/ViewNutrientsScreen.fxml").getController();
         viewNutrientsController.setProfile(profile);
     }
 

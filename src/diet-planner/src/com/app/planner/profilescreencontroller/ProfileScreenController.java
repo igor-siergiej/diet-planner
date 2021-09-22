@@ -123,27 +123,27 @@ public class ProfileScreenController {
     }
 
     private void goToCalendarScreen(ActionEvent event, Profile profile) {
-        CalendarController calendarController = goToScreenWithProfile(event,"calendarcontroller/calendar.fxml").getController();
+        CalendarController calendarController = goToScreenWithProfile(event,"calendarcontroller/CalendarScreen.fxml").getController();
         calendarController.setProfile(profile);
         calendarController.load();
     }
 
     public void goToViewNutrientsScreen(ActionEvent event) {
-        ViewNutrientsController viewNutrientsController = goToScreenWithProfile(event,"viewnutrientscontroller/viewNutrientsScreen.fxml").getController();
+        ViewNutrientsController viewNutrientsController = goToScreenWithProfile(event,"viewnutrientscontroller/ViewNutrientsScreen.fxml").getController();
         viewNutrientsController.setProfile(profile);
     }
 
     public void goToAddEntryScreen(ActionEvent event) {
-        AddEntryController addEntryController = goToScreenWithProfile(event,"addentrycontroller/addEntryScreen.fxml").getController();
+        AddEntryController addEntryController = goToScreenWithProfile(event,"addentrycontroller/AddEntryScreen.fxml").getController();
         addEntryController.setProfile(profile);
     }
 
     public void goToProfileScreen(ActionEvent event) {
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/profileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.setProfile(profile);
     }
 
     public void goToMainScreen(ActionEvent event) {
-        goToScreen(event,"mainscreencontroller/mainScreen.fxml");
+        goToScreen(event,"mainscreencontroller/MainScreen.fxml");
     }
 }
