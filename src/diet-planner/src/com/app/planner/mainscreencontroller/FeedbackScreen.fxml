@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
+   <children>
+      <Label layoutX="412.0" layoutY="14.0" text="Send Feedback to us!">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="13.0" layoutY="109.0" prefHeight="30.0" prefWidth="156.0" text="Name: ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nameTextField" layoutX="172.0" layoutY="102.0" prefHeight="25.0" prefWidth="253.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="14.0" layoutY="210.0" prefHeight="44.0" prefWidth="156.0" text="Your Comments:" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="messageTextField" layoutX="172.0" layoutY="210.0" prefHeight="200.0" prefWidth="445.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextArea>
+      <Label alignment="CENTER" layoutX="13.0" layoutY="162.0" prefHeight="30.0" prefWidth="156.0" text="Email:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="emailTextField" layoutX="172.0" layoutY="155.0" prefHeight="25.0" prefWidth="253.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Button fx:id="sendFeedbackButton" defaultButton="true" layoutX="1011.0" layoutY="732.0" mnemonicParsing="false" onAction="#sendFeedback" prefHeight="54.0" prefWidth="175.0" text="Send Feedback!">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="backButton" defaultButton="true" layoutX="14.0" layoutY="732.0" mnemonicParsing="false" onAction="#goToMainScreen" prefHeight="54.0" prefWidth="126.0" text="Back">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
