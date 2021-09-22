@@ -69,7 +69,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="mainMenuButton" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="615.0" layoutY="139.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="263.0" text="Feedback">
+      <Button id="mainMenuButton" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="615.0" layoutY="139.0" mnemonicParsing="false" onAction="#goToFeedbackScreen" prefHeight="138.0" prefWidth="263.0" text="Feedback">
          <font>
             <Font size="25.0" />
          </font>
