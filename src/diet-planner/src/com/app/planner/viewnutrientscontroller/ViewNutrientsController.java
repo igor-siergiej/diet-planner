@@ -29,7 +29,7 @@ import java.util.List;
 
 public class ViewNutrientsController {
     private Profile profile;
-    private ArrayList<RDI> rdiArrayList;
+    private ArrayList<RecommendedDailyValues> rdiArrayList;
 
     @FXML
     private VBox sugarVBox;
@@ -87,7 +87,7 @@ public class ViewNutrientsController {
     }
 
     public void goToProfileScreen(ActionEvent event) {
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/profileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.setProfile(this.profile);
     }
 
@@ -244,13 +244,13 @@ public class ViewNutrientsController {
         }
     }
 
-    public ArrayList<RDI> loadRDI() {
-        ArrayList<RDI> rdiArrayList = new ArrayList<>();
+    public ArrayList<RecommendedDailyValues> loadRDI() {
+        ArrayList<RecommendedDailyValues> rdiArrayList = new ArrayList<>();
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             JsonReader reader = new JsonReader(new FileReader("./data/men19to50.json"));
-            RDI[] rdiFromJson = gson.fromJson(reader,RDI[].class);
-            List<RDI> rdiList = Arrays.asList(rdiFromJson);
+            RecommendedDailyValues[] rdiFromJson = gson.fromJson(reader, RecommendedDailyValues[].class);
+            List<RecommendedDailyValues> rdiList = Arrays.asList(rdiFromJson);
             rdiArrayList.addAll(rdiList);
 
         } catch (FileNotFoundException e) {
@@ -261,7 +261,7 @@ public class ViewNutrientsController {
 
     public float searchRDIListValue(String nutrientName) {
         float returnValue = 0;
-        for (RDI rdi : rdiArrayList) {
+        for (RecommendedDailyValues rdi : rdiArrayList) {
             if (nutrientName.contains(rdi.getNutrientName())) {
                 returnValue = rdi.getValue();
             }
@@ -271,7 +271,7 @@ public class ViewNutrientsController {
 
     public String searchRDIListUnit(String nutrientName) {
         String returnValue = "";
-        for (RDI rdi : rdiArrayList) {
+        for (RecommendedDailyValues rdi : rdiArrayList) {
             if (nutrientName.contains(rdi.getNutrientName())) {
                 returnValue = rdi.getUnit();
             }

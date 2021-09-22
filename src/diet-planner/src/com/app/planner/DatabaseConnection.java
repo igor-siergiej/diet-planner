@@ -4,7 +4,8 @@ import java.sql.*;
 
 public class DatabaseConnection {
 
-    private static final String SQL_INSERT = "INSERT INTO users (username,password,salt,profiledata) VALUES (?,?,?,?)";
+    private static final String SQL_INSERT_USERS = "INSERT INTO users (username,password,salt,profiledata) VALUES (?,?,?,?)";
+    private static final String SQL_INSERT_FEEDBACK = "INSERT INTO feedback (name,message,email) VALUES (?,?,?)";
     private static final String SQL_SELECT = "SELECT * FROM users WHERE username = ?";
     private static final String SQL_INSERT_SAVE = "UPDATE Users SET profiledata = ? WHERE username = ?";
 
@@ -17,7 +18,7 @@ public class DatabaseConnection {
         String securePassword = PasswordUtils.generateSecurePassword(password,salt);
         Connection connection = connect();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT); {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_USERS); {
                 preparedStatement.setString(1, username);
                 preparedStatement.setString(2, securePassword);
                 preparedStatement.setString(3, salt);
@@ -105,5 +106,23 @@ public class DatabaseConnection {
             throwables.printStackTrace();
             return null;
         }
+    }
+
+    public static boolean sendFeedback(String name, String email, String message) {
+        Connection connection = connect();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_FEEDBACK); {
+                preparedStatement.setString(1, name);
+                preparedStatement.setString(2, message);
+                preparedStatement.setString(3, email);
+            }
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

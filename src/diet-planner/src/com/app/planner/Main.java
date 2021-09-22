@@ -16,7 +16,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser;
 import java.io.*;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -25,7 +24,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("mainscreencontroller/mainScreen.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("mainscreencontroller/MainScreen.fxml"));
             Scene scene = new Scene(root);
             scene.getStylesheets().add("com/app/planner/style.css");
             stage.getIcons().add(new Image("com/app/planner/img/icon.png"));
