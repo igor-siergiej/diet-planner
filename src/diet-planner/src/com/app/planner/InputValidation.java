@@ -2,6 +2,8 @@ package com.app.planner;
 
 public class InputValidation {
 
+    // TODO All of the regex expressions should probably be here as instance variables which are labelled, easier to read
+
     public static String usernameValidation(String userName) {
         if (userName.length() > 20 || userName.length() < 4)
         {
@@ -62,13 +64,29 @@ public class InputValidation {
 
     static public String stringValidation(String string) {
         string = string.replaceAll("\\s+", " ");
-        if (!string.matches("[a-zA-Z|\\s]")) {
+        if (!string.matches("[a-zA-Z|\\s]")) { // is this a-Z or a space?
             return string.replaceAll("[^a-zA-Z|\\s]", "");
         }
         if (string.length() > 15) {
             return string.substring(0,15);
         }
         return string;
+    }
+
+    static public Boolean nameValidation(String name) {
+        if (name.matches("[a-zA-Z|\\s]")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    static public Boolean emailValidation(String email) {
+        if (email.matches("^(.+)@(.+)$")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

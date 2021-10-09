@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
    <children>
       <Label layoutX="436.0" layoutY="14.0" text="Create New Profile">
          <font>
             <Font size="40.0" />
          </font>
       </Label>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToMainScreen" text="Back">
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToMainScreen" prefHeight="64.0" prefWidth="128.0" text="Back">
          <font>
             <Font size="25.0" />
          </font></Button>
@@ -24,23 +24,23 @@
          <font>
             <Font size="25.0" />
          </font></Button>
-      <Label layoutX="41.0" layoutY="125.0" text="Enter Profile Name">
+      <Label layoutX="71.0" layoutY="111.0" text="Enter Profile Name">
          <font>
             <Font size="25.0" />
          </font></Label>
-      <TextField fx:id="profileNameTextField" layoutX="270.0" layoutY="121.0">
+      <TextField fx:id="profileNameTextField" layoutX="71.0" layoutY="147.0">
          <font>
             <Font size="20.0" />
          </font></TextField>
-      <Label layoutX="91.0" layoutY="195.0" text="Enter Age">
+      <Label layoutX="71.0" layoutY="235.0" text="Enter Age">
          <font>
             <Font size="25.0" />
          </font></Label>
-      <Label layoutX="94.0" layoutY="262.0" text="Enter Sex">
+      <Label layoutX="368.0" layoutY="111.0" text="Enter Sex">
          <font>
             <Font size="25.0" />
          </font></Label>
-      <ComboBox fx:id="sexComboBox" layoutX="270.0" layoutY="258.0" onAction="#loadFemalePane" prefHeight="0.0" prefWidth="248.0" style="-fx-font-size: 20;">
+      <ComboBox fx:id="sexComboBox" layoutX="368.0" layoutY="147.0" onAction="#loadFemalePane" prefHeight="0.0" prefWidth="248.0" style="-fx-font-size: 20;">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Male" />
@@ -80,7 +80,7 @@
          <font>
             <Font size="25.0" />
          </font></Button>
-      <TextField fx:id="ageTextField" layoutX="270.0" layoutY="191.0" prefHeight="44.0" prefWidth="78.0">
+      <TextField fx:id="ageTextField" layoutX="71.0" layoutY="271.0" prefHeight="44.0" prefWidth="248.0">
          <font>
             <Font size="20.0" />
          </font>

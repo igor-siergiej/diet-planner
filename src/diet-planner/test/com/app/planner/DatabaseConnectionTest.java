@@ -6,10 +6,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseConnectionTest {
 
-    String username = "test";
-    String password = "testpass!I1";
-    String encryptedPassword = "1E6fd8MHqGla85xFKylnXUseFTJEZmfbinKK1OEu8Q0=";
-    String salt = "f2MD9N5m5g4ymOUyOuzkiaDhpBRFAR";
+
+
+    String username = "testProfile";
+    String password = "testPassword!1";
+    String encryptedPassword = "1Yafd/ugsdJeq7MjOr9r1nAtl2buwzdnNErSoopCiT0=";
+    String salt = "fC8AY9I2ZnOozANZ5hyEdPbqqmLei0";
 
     @Test
     void register() {

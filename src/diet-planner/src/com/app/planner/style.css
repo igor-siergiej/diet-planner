@@ -52,6 +52,11 @@
     -fx-border-color: blue;
 }
 
+#labelPane {
+    -fx-border-width: 4px;
+    -fx-border-color: white;
+}
+
 #notFound { -fx-accent: red; }
 
 #successfullMessage { -fx-text-fill: green}

@@ -30,7 +30,6 @@ public class MealTest {
         List<Food> foodsList = Arrays.asList(foods);
         returnList.addAll(foodsList);
         meal.addFoods(returnList, new ArrayList<>(Arrays.asList(200,300,100))); //These are the testing portions
-        System.out.println(meal.toString());
     }
 
     @Test

@@ -8,119 +8,144 @@
 
 <Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.profilescreencontroller.ProfileScreenController">
    <children>
-      <Label contentDisplay="CENTER" layoutX="378.0" layoutY="14.0" text="Diet-Planner Logo" textAlignment="CENTER">
+      <Label contentDisplay="CENTER" layoutX="522.0" layoutY="14.0" text="Profile" textAlignment="CENTER">
          <font>
             <Font name="Arial" size="55.0" />
          </font></Label>
-      <Button layoutX="25.0" layoutY="122.0" mnemonicParsing="false" onAction="#goToCalendarButton" prefHeight="46.0" prefWidth="218.0" text="Go to Calendar">
+      <Button layoutX="14.0" layoutY="120.0" mnemonicParsing="false" onAction="#goToCalendarButton" prefHeight="46.0" prefWidth="218.0" text="Go to Calendar">
          <font>
             <Font size="25.0" />
          </font></Button>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToMainScreen" text="Back">
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToMainScreen" prefHeight="64.0" prefWidth="128.0" text="Back">
          <font>
             <Font size="25.0" />
          </font></Button>
-      <Label layoutX="363.0" layoutY="104.0" text="Profile Name =">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label fx:id="profileNameLabel" layoutX="530.0" layoutY="104.0" prefHeight="36.0" prefWidth="153.0">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Button layoutX="25.0" layoutY="182.0" mnemonicParsing="false" onAction="#goToViewNutrientsScreen" text="Go To View Nutrients">
+      <Button layoutX="14.0" layoutY="180.0" mnemonicParsing="false" onAction="#goToViewNutrientsScreen" text="Go To View Nutrients">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button layoutX="25.0" layoutY="362.0" mnemonicParsing="false" onAction="#saveProfileToFile" prefHeight="46.0" prefWidth="218.0" text="Save Profile">
+      <Button layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#saveProfileToFile" prefHeight="46.0" prefWidth="218.0" text="Save Profile">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button layoutX="25.0" layoutY="242.0" mnemonicParsing="false" onAction="#goToAddEntryScreen" prefHeight="46.0" prefWidth="218.0" text="Add Entry">
+      <Button layoutX="14.0" layoutY="240.0" mnemonicParsing="false" onAction="#goToAddEntryScreen" prefHeight="46.0" prefWidth="218.0" text="Add Entry">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button layoutX="25.0" layoutY="302.0" mnemonicParsing="false" onAction="#saveProfileToDB" prefHeight="46.0" prefWidth="218.0" text="Save profile to DB">
+      <Button layoutX="14.0" layoutY="300.0" mnemonicParsing="false" onAction="#saveProfileToDB" prefHeight="46.0" prefWidth="218.0" text="Save profile to DB">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Label fx:id="profileNameLabel1" layoutX="530.0" layoutY="104.0" prefHeight="36.0" prefWidth="153.0">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label layoutX="409.0" layoutY="145.0" text="Age = ">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label fx:id="ageLabel" layoutX="505.0" layoutY="150.0" prefHeight="36.0" prefWidth="153.0">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label layoutX="412.0" layoutY="187.0" text="Sex = ">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label fx:id="sexLabel" layoutX="491.0" layoutY="187.0" prefHeight="36.0" prefWidth="153.0">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label layoutX="355.0" layoutY="228.0" text="Breastfeeding = ">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label fx:id="breastfeedingLabel" layoutX="537.0" layoutY="228.0" prefHeight="36.0" prefWidth="153.0">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label layoutX="381.0" layoutY="270.0" text="Pregnant = ">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label fx:id="pregnantLabel" layoutX="512.0" layoutY="270.0" prefHeight="36.0" prefWidth="153.0">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
       <Line endX="75.0" endY="8.0" layoutX="183.0" layoutY="115.0" startX="75.0" startY="685.0" stroke="WHITE" strokeWidth="2.0" />
-      <Label fx:id="messageLabel" layoutX="339.0" layoutY="398.0" prefHeight="21.0" prefWidth="261.0" />
-      <Button layoutX="25.0" layoutY="416.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="218.0" text="Edit Profile">
+      <Button layoutX="14.0" layoutY="420.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="218.0" text="Edit Profile">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Label layoutX="381.0" layoutY="307.0" text="Username =">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label layoutX="381.0" layoutY="343.0" text="Password = ">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label fx:id="usernameLabel" layoutX="512.0" layoutY="307.0" prefHeight="36.0" prefWidth="153.0">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label fx:id="passwordLabel" layoutX="505.0" layoutY="344.0" prefHeight="36.0" prefWidth="153.0">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
+      <Pane id="labelPane" fx:id="labelPane" layoutX="286.0" layoutY="120.0" prefHeight="213.0" prefWidth="476.0">
+         <children>
+            <Label layoutX="14.0" layoutY="54.0" text="Profile Name =">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="passwordLabel" layoutX="154.0" layoutY="124.0" prefHeight="36.0" prefWidth="153.0">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="profileNameLabel" layoutX="186.0" layoutY="54.0" prefHeight="36.0" prefWidth="153.0">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="usernameLabel" layoutX="162.0" layoutY="89.0" prefHeight="36.0" prefWidth="153.0">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="88.0" prefHeight="36.0" prefWidth="167.0" text="Username =">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="124.0" prefHeight="36.0" prefWidth="167.0" text="Password = ">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Pane id="labelPane" prefHeight="46.0" prefWidth="476.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="5.0" prefHeight="36.0" prefWidth="201.0" text="Profile Data">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane id="labelPane" fx:id="labelPane1" layoutX="286.0" layoutY="360.0" prefHeight="225.0" prefWidth="476.0">
+         <children>
+            <Label fx:id="profileNameLabel1" layoutX="177.0" layoutY="65.0" prefHeight="36.0" prefWidth="153.0">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="59.0" prefHeight="36.0" prefWidth="107.0" text="Age = " textAlignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="ageLabel" layoutX="168.0" layoutY="59.0" prefHeight="36.0" prefWidth="153.0">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="95.0" prefHeight="36.0" prefWidth="182.0" text="Sex = ">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="132.0" text="Breastfeeding = ">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="breastfeedingLabel" layoutX="202.0" layoutY="132.0" prefHeight="36.0" prefWidth="153.0">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="46.0" layoutY="178.0" text="Pregnant = ">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Pane id="labelPane" prefHeight="46.0" prefWidth="476.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="5.0" prefHeight="36.0" prefWidth="246.0" text="Personal Information">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label fx:id="pregnantLabel" layoutX="168.0" layoutY="178.0" prefHeight="36.0" prefWidth="153.0">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="sexLabel" layoutX="168.0" layoutY="95.0" prefHeight="36.0" prefWidth="153.0">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </Pane>
