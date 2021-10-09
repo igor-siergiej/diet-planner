@@ -196,7 +196,6 @@ public class ViewNutrientsController {
         } else {
             searchedEntries = profile.getDiary().getEntriesWeek(date);
         }
-        System.out.println(searchedEntries);
         populateEntries(searchedEntries);
     }
 
@@ -218,10 +217,12 @@ public class ViewNutrientsController {
                     } else {
                         float percent = list.get(counter).getNutrientValue()/searchRDIListValue(list.get(counter).getNutrientName());
                         progressBar.setProgress(percent);
-                        if (percent >= 1) {
+                        if (percent >= 1 && percent < 3) { //between 100% and 300% green
                             progressBar.setStyle("-fx-accent: green;");
+                        } else if (percent >= 3) {
+                            progressBar.setStyle("-fx-accent: red"); // if over 300% = not good so red
                         } else {
-                            progressBar.setStyle("-fx-accent: #007bff;");
+                            progressBar.setStyle("-fx-accent: #007bff;"); // more than 0 but less than 100% is blue
                         }
                     }
                 } else if (childNode.getId().equals("percentLabel")) {

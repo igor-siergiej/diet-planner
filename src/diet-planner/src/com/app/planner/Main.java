@@ -134,12 +134,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        ArrayList<Food> dataset = initialiseData();
-        long start, end;
-        start = new Date().getTime();
-        System.out.println(sortedFoodSearch(dataset,"Ham"));
-        end = new Date().getTime();
-        System.out.println(end-start);
         launch(args);
     }
 }

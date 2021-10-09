@@ -14,32 +14,32 @@
             <Font size="40.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="13.0" layoutY="109.0" prefHeight="30.0" prefWidth="156.0" text="Name: ">
+      <Label layoutX="43.0" layoutY="72.0" prefHeight="30.0" prefWidth="156.0" text="Name: ">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="nameTextField" layoutX="172.0" layoutY="102.0" prefHeight="25.0" prefWidth="253.0">
+      <TextField fx:id="nameTextField" layoutX="43.0" layoutY="106.0" prefHeight="25.0" prefWidth="253.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <Label alignment="CENTER" layoutX="14.0" layoutY="210.0" prefHeight="44.0" prefWidth="156.0" text="Your Comments:" wrapText="true">
+      <Label alignment="CENTER" layoutX="412.0" layoutY="65.0" prefHeight="44.0" prefWidth="156.0" text="Your Comments:" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextArea fx:id="messageTextField" layoutX="172.0" layoutY="210.0" prefHeight="200.0" prefWidth="445.0">
+      <TextArea fx:id="messageTextField" layoutX="412.0" layoutY="106.0" prefHeight="200.0" prefWidth="445.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextArea>
-      <Label alignment="CENTER" layoutX="13.0" layoutY="162.0" prefHeight="30.0" prefWidth="156.0" text="Email:">
+      <Label layoutX="43.0" layoutY="182.0" prefHeight="30.0" prefWidth="156.0" text="Email:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="emailTextField" layoutX="172.0" layoutY="155.0" prefHeight="25.0" prefWidth="253.0">
+      <TextField fx:id="emailTextField" layoutX="43.0" layoutY="212.0" prefHeight="25.0" prefWidth="253.0">
          <font>
             <Font size="20.0" />
          </font>
@@ -49,7 +49,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="backButton" defaultButton="true" layoutX="14.0" layoutY="732.0" mnemonicParsing="false" onAction="#goToMainScreen" prefHeight="54.0" prefWidth="126.0" text="Back">
+      <Button fx:id="backButton" defaultButton="true" layoutX="14.0" layoutY="722.0" mnemonicParsing="false" onAction="#goToMainScreen" prefHeight="64.0" prefWidth="128.0" text="Back">
          <font>
             <Font size="20.0" />
          </font>

@@ -55,8 +55,8 @@ public class ProfileScreenController {
         sexLabel.setText(profile.getSex());
         ageLabel.setText(String.valueOf(profile.getAge()));
         if (profile.getUsername() == null) {
-            usernameLabel.setStyle("-fx-background-color: #000000;");
-            passwordLabel.setStyle("-fx-background-color: #000000;");
+            usernameLabel.setText("-");
+            passwordLabel.setText("-");
         } else {
             usernameLabel.setText(profile.getUsername());
             passwordLabel.setText(profile.getPassword());
