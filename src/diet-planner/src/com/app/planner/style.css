@@ -23,6 +23,7 @@
 
 .label {
     -fx-text-fill: #ffffff;
+
 }
 
 .root {
@@ -50,6 +51,16 @@
 #selectedDay {
     -fx-border-width: 4px;
     -fx-border-color: blue;
+}
+
+#titleLabel{
+    -fx-text-fill: #0056B3;
+    -fx-font-weight: bold;
+}
+
+#titleLabel .text {
+    -fx-stroke-width: 0.5;
+    -fx-stroke: white;
 }
 
 #labelPane {
