@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.calendarcontroller.CalendarController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.calendarcontroller.CalendarController">
    <children>
       <GridPane fx:id="calendar" alignment="CENTER" layoutY="92.0" onMouseClicked="#mouseEntered" prefHeight="708.0" prefWidth="1200.0">
         <columnConstraints>
@@ -134,7 +134,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </GridPane>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToProfileScreen" text="Back">
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToProfileScreen" prefHeight="50.0" prefWidth="100.0" text="Back">
          <font>
             <Font size="20.0" />
          </font>

@@ -4,18 +4,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.291" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.configcontroller.ConfigScreenController">
-    <center>
-        <VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="150.0" BorderPane.alignment="CENTER">
-            <children>
-                <Button fx:id="goToOptionsButton" alignment="CENTER" mnemonicParsing="false" onAction="#goToMainScreen" text="Back" textAlignment="CENTER" />
-            </children></VBox>
-    </center>
-    <top>
-        <Label text="Options" textAlignment="CENTER" BorderPane.alignment="CENTER">
-            <font>
-                <Font size="60.0" />
-            </font>
-        </Label>
-    </top>
-</BorderPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.configcontroller.ConfigScreenController">
+   <children>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToMainScreen" prefHeight="50.0" prefWidth="100.0" text="Back">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Label id="titleLabel" contentDisplay="CENTER" layoutX="524.0" layoutY="33.0" text="Options" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="40.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
