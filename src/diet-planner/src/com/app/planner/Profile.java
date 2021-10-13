@@ -15,8 +15,9 @@ public class Profile {
     private boolean pregnant;
     private boolean breastFeeding;
     private Diary diary;
+    private Option options;
 
-    public Profile(String username, String password,String profileName, int age, String sex, boolean pregnant, boolean breastFeeding, Diary diary) {
+    public Profile(String username, String password, String profileName, int age, String sex, boolean pregnant, boolean breastFeeding, Diary diary, Option options) {
         this.username = username;
         this.password = password;
         this.profileName = profileName;
@@ -25,6 +26,7 @@ public class Profile {
         this.pregnant = pregnant;
         this.breastFeeding = breastFeeding;
         this.diary = diary;
+        this.options = options;
     }
 
     public Profile() {
@@ -41,6 +43,7 @@ public class Profile {
                 ", pregnant=" + pregnant +
                 ", breastFeeding=" + breastFeeding +
                 ", diary=" + diary +
+                ", options=" + options +
                 '}';
     }
 
@@ -106,6 +109,14 @@ public class Profile {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Option getOptions() {
+        return options;
+    }
+
+    public void setOptions(Option options) {
+        this.options = options;
     }
 
     public void saveToFile(File file) {

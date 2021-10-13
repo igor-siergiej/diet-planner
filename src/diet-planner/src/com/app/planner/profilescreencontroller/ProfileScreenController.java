@@ -5,6 +5,7 @@ import com.app.planner.Main;
 import com.app.planner.Profile;
 import com.app.planner.addentrycontroller.AddEntryController;
 import com.app.planner.calendarcontroller.CalendarController;
+import com.app.planner.optionscontroller.OptionsScreenController;
 import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -120,6 +121,11 @@ public class ProfileScreenController {
         }
         Main.setWindow(event, root);
         return loader;
+    }
+
+    public void goToOptionsScreen(ActionEvent event) {
+        OptionsScreenController optionsScreenController = goToScreenWithProfile(event,"optionscontroller/OptionsScreen.fxml").getController();
+        optionsScreenController.setProfile(profile);
     }
 
     private void goToCalendarScreen(ActionEvent event, Profile profile) {

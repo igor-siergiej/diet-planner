@@ -81,14 +81,14 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="mainMenuButton" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="615.0" layoutY="304.0" mnemonicParsing="false" onAction="#goToConfigurationScreen" prefHeight="138.0" prefWidth="263.0" text="Options">
+      <Button id="mainMenuButton" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="615.0" layoutY="304.0" mnemonicParsing="false" onAction="#goToAboutUsScreen" prefHeight="138.0" prefWidth="263.0" text="About Us">
          <font>
             <Font size="25.0" />
          </font>
          <graphic>
             <ImageView fitHeight="75.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/option.png" />
+                  <Image url="@../img/aboutUs.png" />
                </image>
             </ImageView>
          </graphic>
