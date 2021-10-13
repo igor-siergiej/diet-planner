@@ -1,6 +1,6 @@
 package com.app.planner;
 
-public enum EntryType { // will be used to sort entries based on entry type
+public enum EntryType { // TODO later sort entries based on this type
     BREAKFAST,
     DINNER,
     LUNCH,

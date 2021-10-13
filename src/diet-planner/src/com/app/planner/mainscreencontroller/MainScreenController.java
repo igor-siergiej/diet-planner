@@ -99,8 +99,8 @@ public class MainScreenController {
     @FXML
     private TextArea messageTextField;
 
-    public void goToConfigurationScreen(ActionEvent event) {
-        goToScreen(event,"configcontroller/ConfigScreen.fxml");
+    public void goToAboutUsScreen(ActionEvent event) {
+        goToScreen(event,"mainscreencontroller/AboutUsScreen.fxml");
     }
 
     public void goToRegistrationScreen(ActionEvent event) { // this method will open the profile screen window
@@ -251,7 +251,7 @@ public class MainScreenController {
             }
         }
 
-        Profile profile = new Profile(null,null,profileName,age,sex,isPregnant,isBreastfeeding,new Diary());
+        Profile profile = new Profile(null,null,profileName,age,sex,isPregnant,isBreastfeeding,new Diary(),new Option());
         goToProfileScreen(event,profile);
     }
 
