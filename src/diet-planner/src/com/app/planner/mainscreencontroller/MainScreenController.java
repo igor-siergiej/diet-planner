@@ -187,12 +187,6 @@ public class MainScreenController {
     }
 
     public void createTestProfile(ActionEvent event) {
-        Profile profile = new Profile();
-        profile.setProfileName("testProfile");
-        profile.setSex("male");
-        profile.setPregnant(false);
-        profile.setBreastFeeding(false);
-        profile.setAge(20);
         Diary diary = new Diary();
 
         Meal meal = new Meal();
@@ -224,7 +218,7 @@ public class MainScreenController {
         diary.addEntry(entry2);
         diary.addEntry(entry3);
 
-        profile.setDiary(diary);
+        Profile profile = new Profile("","","testProfile",20,"female",false,false,diary,new Option());
 
         goToProfileScreen(event,profile);
     }
@@ -271,7 +265,7 @@ public class MainScreenController {
             profile.loadFromFile(file);
             goToProfileScreen(event, profile);
         } else {
-
+            System.out.println("Choosing File closed!");
         }
     }
 
@@ -334,6 +328,7 @@ public class MainScreenController {
         }
     }
 
+    //TODO eventually remove
     public void testLogin(ActionEvent event) {
         DatabaseConnection.login("test","testpass!I1");
         goToProfileScreen(event,DatabaseConnection.getProfileFromDb("test"));

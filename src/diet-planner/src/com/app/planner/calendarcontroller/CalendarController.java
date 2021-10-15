@@ -42,15 +42,6 @@ public class CalendarController {
         this.profile = profile;
     }
 
-    private void goToScreen(ActionEvent event, String fxmlFilePath) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/" + fxmlFilePath));
-            Main.setWindow(event, root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) {
         Parent root = null;
         FXMLLoader loader = null;

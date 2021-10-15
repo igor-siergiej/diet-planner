@@ -1,4 +1,4 @@
-package com.app.planner.profilescreencontroller;
+package com.app.planner.viewprofilecontroller;
 
 import com.app.planner.DatabaseConnection;
 import com.app.planner.Main;
@@ -17,7 +17,7 @@ import javafx.scene.layout.Pane;
 import java.io.File;
 import java.io.IOException;
 
-public class ProfileScreenController {
+public class ViewProfileController {
     private Profile profile;
 
     @FXML
@@ -152,7 +152,7 @@ public class ProfileScreenController {
     }
 
     public void goToProfileScreen(ActionEvent event) {
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
+        ViewProfileController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.setProfile(profile);
     }
 

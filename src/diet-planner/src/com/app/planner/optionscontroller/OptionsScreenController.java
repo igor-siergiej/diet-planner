@@ -29,9 +29,10 @@ public class OptionsScreenController {
 
     public void setTheme() {
         profile.getOptions().setCSSFile(ThemeType.valueOf((String) themeComboBox.getValue()));
+        // TODO load the .fxml with the different css file, if it's the same don't reload??
     }
 
-    private FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) { //TODO try to optimise this again
+    private FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) {
         Parent root = null;
         FXMLLoader loader = null;
         try {
@@ -42,14 +43,5 @@ public class OptionsScreenController {
         }
         Main.setWindow(event, root);
         return loader;
-    }
-
-    private void goToScreen(ActionEvent event, String fxmlFilePath) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/" + fxmlFilePath));
-            Main.setWindow(event, root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
