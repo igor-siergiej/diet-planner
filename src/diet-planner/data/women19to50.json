@@ -2,12 +2,12 @@
   {
     "nutrientName":"Vitamin A",
     "unit":"mcg",
-    "value":900
+    "value":690
   },
   {
     "nutrientName":"Vitamin B1",
     "unit":"mg",
-    "value":1.2
+    "value":1.1
   },
   {
     "nutrientName":"Vitamin B12",
@@ -17,12 +17,12 @@
   {
     "nutrientName":"Vitamin B2",
     "unit":"mg",
-    "value":1.3
+    "value":1.1
   },
   {
     "nutrientName":"Vitamin B3",
     "unit":"mg",
-    "value":16
+    "value":14
   },
   {
     "nutrientName":"Vitamin B5",
@@ -47,7 +47,7 @@
   {
     "nutrientName":"Vitamin C",
     "unit":"mg",
-    "value":90
+    "value":75
   },
   {
     "nutrientName":"Vitamin D",
@@ -62,7 +62,7 @@
   {
     "nutrientName":"Vitamin K",
     "unit":"mcg",
-    "value":120
+    "value":90
   },
   {
     "nutrientName":"Calcium",
@@ -87,17 +87,17 @@
   {
     "nutrientName":"Iron",
     "unit":"mg",
-    "value":8
+    "value":18
   },
   {
     "nutrientName":"Magnesium",
     "unit":"mg",
-    "value":410
+    "value":320
   },
   {
     "nutrientName":"Manganese",
     "unit":"mg",
-    "value":2.3
+    "value":1.8
   },
   {
     "nutrientName":"Phosphorus",
@@ -107,7 +107,7 @@
   {
     "nutrientName":"Potassium",
     "unit":"mg",
-    "value":4700
+    "value":2000
   },
   {
     "nutrientName":"Selenium",
@@ -122,17 +122,17 @@
   {
     "nutrientName":"Zinc",
     "unit":"mg",
-    "value":11
+    "value":8
   },
   {
     "nutrientName":"Protein",
     "unit":"g",
-    "value":52
+    "value":46
   },
   {
     "nutrientName":"Tryptophan",
     "unit":"mg",
-    "value":250
+    "value":190
   },
   {
     "nutrientName":"Cholesterol",
@@ -147,42 +147,42 @@
   {
     "nutrientName":"Energy (kJ)",
     "unit":"kJ",
-    "value":10868
+    "value":8786
   },
   {
     "nutrientName":"Energy (kcal)",
     "unit":"kcal",
-    "value":2600
+    "value":2100
   },
   {
     "nutrientName":"Mono FA",
-    "unit":"g",
-    "value":20
+    "unit":"",
+    "value":16
   },
   {
     "nutrientName":"Poly FA",
-    "unit":"g",
-    "value":20
+    "unit":"",
+    "value":16
   },
   {
     "nutrientName":"Omega 3",
-    "unit":"g",
-    "value":1.6
+    "unit":"",
+    "value":1.28
   },
   {
     "nutrientName":"Omega 6",
-    "unit":"g",
-    "value":6.4
+    "unit":"",
+    "value":5.12
   },
   {
-    "nutrientName":"Saturated Fat ",
+    "nutrientName":"Saturated Fat",
     "unit":"g",
-    "value":22
+    "value":18
   },
   {
     "nutrientName":"Fat",
     "unit":"g",
-    "value":65
+    "value":55
   },
   {
     "nutrientName":"Carbohydrates",
@@ -192,12 +192,12 @@
   {
     "nutrientName":"AOAC Fibre",
     "unit":"g",
-    "value":38
+    "value":25
   },
   {
     "nutrientName":"Water",
     "unit":"g",
-    "value":3700
+    "value":2700
   },
   {
     "nutrientName":"Carotene",
@@ -207,7 +207,7 @@
   {
     "nutrientName":"Total Nitrogen",
     "unit":"g",
-    "value":25
+    "value":23
   },
   {
     "nutrientName":"Starch",
@@ -222,7 +222,7 @@
   {
     "nutrientName":"NSP Fibre",
     "unit":"g",
-    "value":25
+    "value":20
   },
   {
     "nutrientName":"Fructose",

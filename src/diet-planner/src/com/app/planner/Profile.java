@@ -5,6 +5,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Profile {
     private String username;
@@ -16,6 +19,7 @@ public class Profile {
     private boolean breastFeeding;
     private Diary diary;
     private Option options;
+    private DailyIntake dailyIntake;
 
     public Profile(String username, String password, String profileName, int age, String sex, boolean pregnant, boolean breastFeeding, Diary diary, Option options) {
         this.username = username;
@@ -27,6 +31,10 @@ public class Profile {
         this.breastFeeding = breastFeeding;
         this.diary = diary;
         this.options = options;
+
+        dailyIntake = new DailyIntake();
+        dailyIntake.setMaximumDoses();
+        dailyIntake.setTargetNutrients(age,sex,pregnant,breastFeeding);
     }
 
     public Profile() {
@@ -44,6 +52,7 @@ public class Profile {
                 ", breastFeeding=" + breastFeeding +
                 ", diary=" + diary +
                 ", options=" + options +
+                ", dailyIntake=" + dailyIntake +
                 '}';
     }
 
@@ -117,6 +126,14 @@ public class Profile {
 
     public void setOptions(Option options) {
         this.options = options;
+    }
+
+    public DailyIntake getDailyIntake() {
+        return dailyIntake;
+    }
+
+    public void setDailyIntake(DailyIntake dailyIntake) {
+        this.dailyIntake = dailyIntake;
     }
 
     public void saveToFile(File file) {

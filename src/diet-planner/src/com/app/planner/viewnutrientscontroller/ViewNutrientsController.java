@@ -2,9 +2,6 @@ package com.app.planner.viewnutrientscontroller;
 
 import com.app.planner.*;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,18 +15,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 public class ViewNutrientsController {
     private Profile profile;
-    private ArrayList<RecommendedDailyValues> rdiArrayList;
 
     @FXML
     private VBox sugarVBox;
@@ -167,7 +160,6 @@ public class ViewNutrientsController {
                 macroList.add(nutrient);
             }
         }
-        rdiArrayList = loadRDI();
 
         populateVBox(sugarList,sugarVBox);
         populateVBox(fatList,fatVBox);
@@ -245,24 +237,9 @@ public class ViewNutrientsController {
         }
     }
 
-    public ArrayList<RecommendedDailyValues> loadRDI() {
-        ArrayList<RecommendedDailyValues> rdiArrayList = new ArrayList<>();
-        try {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            JsonReader reader = new JsonReader(new FileReader("./data/men19to50.json"));
-            RecommendedDailyValues[] rdiFromJson = gson.fromJson(reader, RecommendedDailyValues[].class);
-            List<RecommendedDailyValues> rdiList = Arrays.asList(rdiFromJson);
-            rdiArrayList.addAll(rdiList);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return rdiArrayList;
-    }
-
     public float searchRDIListValue(String nutrientName) {
         float returnValue = 0;
-        for (RecommendedDailyValues rdi : rdiArrayList) {
+        for (TargetNutrients rdi : profile.getDailyIntake().getTargetNutrients()) {
             if (nutrientName.contains(rdi.getNutrientName())) {
                 returnValue = rdi.getValue();
             }
@@ -272,7 +249,7 @@ public class ViewNutrientsController {
 
     public String searchRDIListUnit(String nutrientName) {
         String returnValue = "";
-        for (RecommendedDailyValues rdi : rdiArrayList) {
+        for (TargetNutrients rdi : profile.getDailyIntake().getTargetNutrients()) {
             if (nutrientName.contains(rdi.getNutrientName())) {
                 returnValue = rdi.getUnit();
             }

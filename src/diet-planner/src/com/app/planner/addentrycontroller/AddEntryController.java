@@ -33,8 +33,9 @@ import static javafx.collections.FXCollections.observableArrayList;
 
 public class AddEntryController {
     private Profile profile;
-    private ArrayList<RecommendedDailyValues> rdiArrayList;
+    private ArrayList<TargetNutrients> rdiArrayList;
     private Entry entry;
+    private ArrayList<Food> dataset = Main.initialiseData();
 
     @FXML
     private VBox sugarVBox;
@@ -143,7 +144,6 @@ public class AddEntryController {
     }
 
     public void populateSearchResult() {
-        ArrayList<Food> dataset = Main.initialiseData();
         ArrayList<Food> searchedFoods = Main.sortedFoodSearch(dataset,searchTextField.getText());
         for (Food food : searchedFoods) {
             Button button = new Button();
@@ -352,13 +352,13 @@ public class AddEntryController {
         }
     }
 
-    public ArrayList<RecommendedDailyValues> loadRDI() {
-        ArrayList<RecommendedDailyValues> rdiArrayList = new ArrayList<>();
+    public ArrayList<TargetNutrients> loadRDI() {
+        ArrayList<TargetNutrients> rdiArrayList = new ArrayList<>();
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             JsonReader reader = new JsonReader(new FileReader("./data/men19to50.json"));
-            RecommendedDailyValues[] rdiFromJson = gson.fromJson(reader, RecommendedDailyValues[].class);
-            List<RecommendedDailyValues> rdiList = Arrays.asList(rdiFromJson);
+            TargetNutrients[] rdiFromJson = gson.fromJson(reader, TargetNutrients[].class);
+            List<TargetNutrients> rdiList = Arrays.asList(rdiFromJson);
             rdiArrayList.addAll(rdiList);
 
         } catch (FileNotFoundException e) {
@@ -369,7 +369,7 @@ public class AddEntryController {
 
     public float searchRDIListValue(String nutrientName) {
         float returnValue = 0;
-        for (RecommendedDailyValues rdi : rdiArrayList) {
+        for (TargetNutrients rdi : rdiArrayList) {
             if (nutrientName.contains(rdi.getNutrientName())) {
                 returnValue = rdi.getValue();
             }
@@ -379,7 +379,7 @@ public class AddEntryController {
 
     public String searchRDIListUnit(String nutrientName) {
         String returnValue = "";
-        for (RecommendedDailyValues rdi : rdiArrayList) {
+        for (TargetNutrients rdi : rdiArrayList) {
             if (nutrientName.contains(rdi.getNutrientName())) {
                 returnValue = rdi.getUnit();
             }

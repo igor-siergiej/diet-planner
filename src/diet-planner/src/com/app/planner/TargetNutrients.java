@@ -1,11 +1,21 @@
 package com.app.planner;
 
-public class RecommendedDailyValues {
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class TargetNutrients {
     private String nutrientName;
     private String unit;
     private float value;
 
-    public RecommendedDailyValues() {
+    public TargetNutrients() {
     }
 
     public String getNutrientName() {
