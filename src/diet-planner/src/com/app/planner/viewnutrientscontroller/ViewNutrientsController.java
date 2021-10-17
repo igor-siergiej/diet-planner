@@ -203,28 +203,34 @@ public class ViewNutrientsController {
                     ProgressBar progressBar = (ProgressBar) childNode;
                     if (list.get(counter).getNutrientValue() == 0) {
                         progressBar.setProgress(0);
-                    } else  if (searchRDIListValue(list.get(counter).getNutrientName()) == 0) {
+                    } else  if (searchTargetNutrientsList(list.get(counter).getNutrientName(), profile.getDailyIntake().getTargetNutrients()) == 0) {
                         progressBar.setProgress(1);
                         progressBar.setId("notFound");
                     } else {
-                        float percent = list.get(counter).getNutrientValue()/searchRDIListValue(list.get(counter).getNutrientName());
-                        progressBar.setProgress(percent);
-                        if (percent >= 1 && percent < 3) { //between 100% and 300% green
+                        float percentValueToTarget = list.get(counter).getNutrientValue()/searchTargetNutrientsList(list.get(counter).getNutrientName(), profile.getDailyIntake().getTargetNutrients());
+                        float maximumDose = searchTargetNutrientsList(list.get(counter).getNutrientName(),profile.getDailyIntake().getMaximumDoses());
+                        if (maximumDose == 0) { //0 =
+                            maximumDose = searchTargetNutrientsList(list.get(counter).getNutrientName(), profile.getDailyIntake().getTargetNutrients());
+                        }
+                        boolean isOverMaximumDose = list.get(counter).getNutrientValue() > maximumDose;
+                        progressBar.setProgress(percentValueToTarget);
+
+                        if (percentValueToTarget >= 1 && isOverMaximumDose == false) { //targetDose hit but not over maximum dose
                             progressBar.setStyle("-fx-accent: green;");
-                        } else if (percent >= 3) {
-                            progressBar.setStyle("-fx-accent: red"); // if over 300% = not good so red
+                        } else if (isOverMaximumDose == true ) {
+                            progressBar.setStyle("-fx-accent: red"); // if over maximum does
                         } else {
-                            progressBar.setStyle("-fx-accent: #007bff;"); // more than 0 but less than 100% is blue
+                            progressBar.setStyle("-fx-accent: #007bff;"); // not 100% but not over maximum dose
                         }
                     }
                 } else if (childNode.getId().equals("percentLabel")) {
                     Label label = (Label) childNode;
                     if (list.get(counter).getNutrientValue() == 0) {
-                        label.setText("N/A");
-                    } else  if (searchRDIListValue(list.get(counter).getNutrientName()) == 0) {
+                        label.setText("0.0%");
+                    } else  if (searchTargetNutrientsList(list.get(counter).getNutrientName(), profile.getDailyIntake().getTargetNutrients()) == 0) {
                         label.setText("Not Found");
                     } else {
-                        String percent = String.format("%.1f", list.get(counter).getNutrientValue()/searchRDIListValue(list.get(counter).getNutrientName()) * 100);
+                        String percent = String.format("%.1f", list.get(counter).getNutrientValue()/searchTargetNutrientsList(list.get(counter).getNutrientName(), profile.getDailyIntake().getTargetNutrients()) * 100);
                         label.setText(percent + "%");
                     }
                 } else if (childNode.getId().equals("valueLabel")) {
@@ -237,11 +243,12 @@ public class ViewNutrientsController {
         }
     }
 
-    public float searchRDIListValue(String nutrientName) {
-        float returnValue = 0;
-        for (TargetNutrients rdi : profile.getDailyIntake().getTargetNutrients()) {
-            if (nutrientName.contains(rdi.getNutrientName())) {
-                returnValue = rdi.getValue();
+    // 0 = should be the targetdose, 99999999 = not found therefore no maximum dose, anything else actual value
+    public float searchTargetNutrientsList(String nutrientName, ArrayList<TargetNutrients> arrayList) {
+        float returnValue = 99999999;
+        for (TargetNutrients targetNutrients : arrayList) {
+            if (nutrientName.contains(targetNutrients.getNutrientName())) {
+                returnValue = targetNutrients.getValue();
             }
         }
         return returnValue;
