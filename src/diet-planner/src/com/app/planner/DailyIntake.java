@@ -13,9 +13,16 @@ import java.util.List;
 public class DailyIntake {
     private ArrayList<TargetNutrients> targetNutrients;
     private ArrayList<TargetNutrients> maximumDoses;
-    private final String men19to50FilePath = "./data/men19to50.json";
-    private final String women19to50FilePath = "./data/women19to50.json";
-    private final String maximumDosesFilePath = "./data/maximumDoses.json";
+    private final String filePath = "./data/";
+    private final String men19to50FilePath = filePath + "men19to50.json";
+    private final String women19to50FilePath = filePath + "women19to50.json";
+    private final String maximumDosesFilePath = filePath + "maximumDoses.json";
+    private final String men14to18FilePath = filePath + "men14to18.json";
+    private final String men50plusFilePath = filePath + "men50plus.json";
+    private final String women14to18FilePath = filePath + "women14to18.json";
+    private final String women50plusFilePath = filePath + "women50plus.json";
+    private final String pregnantFilePath = filePath + "pregnant.json";
+    private final String breastfeedingFilePath = filePath + "breastfeeding.json";
 
     public DailyIntake() {
     }
@@ -42,11 +49,34 @@ public class DailyIntake {
         }
         return rdiArrayList;
     }
-    public void setTargetNutrients(int age, String sex, boolean pregnant, boolean breastFeeding) { // TODO expand this for the rest of profile data
+
+    public void setTargetNutrients(int age, String sex, boolean pregnant, boolean breastFeeding) {
         if (sex.equals("male")) {
-            targetNutrients = loadTargetNutrientsFromFile(men19to50FilePath);
+            if (age >= 14 && age <= 18) {
+                targetNutrients = loadTargetNutrientsFromFile(men14to18FilePath);
+            } else if (age >= 19 && age <= 50) {
+                targetNutrients = loadTargetNutrientsFromFile(men19to50FilePath);
+            } else if (age >= 51){
+                targetNutrients = loadTargetNutrientsFromFile(men50plusFilePath);
+            } else {
+                targetNutrients = null;
+            }
         } else {
-            targetNutrients = loadTargetNutrientsFromFile(women19to50FilePath);
+            if (pregnant) {
+                targetNutrients = loadTargetNutrientsFromFile(pregnantFilePath);
+            } else if (breastFeeding) {
+                targetNutrients = loadTargetNutrientsFromFile(breastfeedingFilePath);
+            } else {
+                if (age >= 14 && age <= 18) {
+                    targetNutrients = loadTargetNutrientsFromFile(women14to18FilePath);
+                } else if (age >= 19 && age <= 50) {
+                    targetNutrients = loadTargetNutrientsFromFile(women19to50FilePath);
+                } else if (age >= 51) {
+                    targetNutrients = loadTargetNutrientsFromFile(women50plusFilePath);
+                } else {
+                    targetNutrients = null;
+                }
+            }
         }
     }
 

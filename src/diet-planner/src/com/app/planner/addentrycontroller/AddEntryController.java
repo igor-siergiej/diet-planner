@@ -79,7 +79,7 @@ public class AddEntryController {
     @FXML
     private Button addEntryButton;
 
-    public void setProfile(Profile profile) {
+    public void initialize(Profile profile) {
         this.profile = profile;
         setTextFieldEventHandler();
         setAddEntryButtonDisable();
@@ -101,7 +101,7 @@ public class AddEntryController {
 
     public void goToProfileScreen(ActionEvent event) {
         ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
-        profileScreenController.setProfile(this.profile);
+        profileScreenController.initialize(profile);
     }
 
     public void addEntry(ActionEvent event) {
@@ -111,7 +111,7 @@ public class AddEntryController {
         profile.getDiary().addEntry(entry);
 
         ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
-        profileScreenController.setProfile(this.profile);
+        profileScreenController.initialize(profile);
     }
 
     public void setTextFieldEventHandler() {

@@ -37,7 +37,7 @@ public class CalendarController {
         populateCalendar(yearMonth);
     }
 
-    public void setProfile(Profile profile) {
+    public void initialize(Profile profile) {
         calendar.setId("calendar");
         this.profile = profile;
     }
@@ -57,12 +57,12 @@ public class CalendarController {
 
     public void goToProfileScreen(ActionEvent event) {
         ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
-        profileScreenController.setProfile(profile);
+        profileScreenController.initialize(profile);
     }
 
     public void goToViewNutrientsScreen(ActionEvent event) { // this method will open the profile screen window
         ViewNutrientsController viewNutrientsController = goToScreenWithProfile(event,"viewnutrientscontroller/ViewNutrientsScreen.fxml").getController();
-        viewNutrientsController.setProfile(profile);
+        viewNutrientsController.initialize(profile);
     }
 
     public void populateCalendar(YearMonth yearMonth1) {
