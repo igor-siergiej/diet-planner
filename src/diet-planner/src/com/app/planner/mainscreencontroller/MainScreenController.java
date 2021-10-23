@@ -104,12 +104,12 @@ public class MainScreenController {
     }
 
     public void goToRegistrationScreen(ActionEvent event) { // this method will open the profile screen window
-        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/RegistrationScreen.fxml").getController();
+        MainScreenController mainScreenController = goToScreen(event,"mainscreencontroller/RegistrationScreen.fxml").getController();
         mainScreenController.setRegistrationButtonDisable();
     }
 
     public void goToLoginScreen(ActionEvent event) { // this method will open the profile screen window
-        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/LoginScreen.fxml").getController();
+        MainScreenController mainScreenController = goToScreen(event,"mainscreencontroller/LoginScreen.fxml").getController();
         mainScreenController.setLoginButtonDisable();
     }
 
@@ -118,42 +118,33 @@ public class MainScreenController {
     }
 
     public void goToProfileScreen(ActionEvent event, Profile profile) { // this method will open the profile screen window
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
-        profileScreenController.setProfile(profile);
+        ProfileScreenController profileScreenController = goToScreen(event,"profilescreencontroller/ProfileScreen.fxml").getController();
+        profileScreenController.initialize(profile);
     }
 
     public void goToCreateProfileScreenWithLogin(ActionEvent event, String username, String password) { // this method will open the profile screen window
-        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/CreateProfileScreen.fxml").getController();
-        mainScreenController.setProfile(username,password);
+        MainScreenController mainScreenController = goToScreen(event,"mainscreencontroller/CreateProfileScreen.fxml").getController();
+        mainScreenController.initialize(username,password);
         mainScreenController.setAgeTextFieldEventHandler();
         mainScreenController.setCreateProfileButtonDisable();
     }
 
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
-        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/CreateProfileScreen.fxml").getController();
+        MainScreenController mainScreenController = goToScreen(event,"mainscreencontroller/CreateProfileScreen.fxml").getController();
         mainScreenController.setAgeTextFieldEventHandler();
         mainScreenController.setCreateProfileButtonDisable();
     }
 
     public void goToFeedbackScreen(ActionEvent event) { // this method will open the profile screen window
-        MainScreenController mainScreenController = goToScreenWithProfile(event,"mainscreencontroller/FeedbackScreen.fxml").getController();
+        goToScreen(event,"mainscreencontroller/FeedbackScreen.fxml").getController();
     }
 
-    private void goToScreen(ActionEvent event, String fxmlFilePath) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/" + fxmlFilePath));
-            Main.setWindow(event, root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void setProfile(String username,String password) {
+    private void initialize(String username,String password) {
         profile.setUsername(username);
         profile.setPassword(password);
     }
 
-    private FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) {
+    private FXMLLoader goToScreen(ActionEvent event, String fxmlFilePath) {
         Parent root = null;
         FXMLLoader loader = null;
         try {
@@ -218,8 +209,7 @@ public class MainScreenController {
         diary.addEntry(entry2);
         diary.addEntry(entry3);
 
-        Profile profile = new Profile("","","testProfile",20,"female",false,false,diary,new Option());
-
+        Profile profile = new Profile("","","testProfile",14,"female",true,false,diary,new Option());
         goToProfileScreen(event,profile);
     }
 

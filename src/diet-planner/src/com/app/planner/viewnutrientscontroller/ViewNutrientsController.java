@@ -57,7 +57,7 @@ public class ViewNutrientsController {
     @FXML
     private ComboBox comboBox;
 
-    public void setProfile(Profile profile) {
+    public void initialize(Profile profile) {
         profile.setAge(20);
         profile.setBreastFeeding(false);
         profile.setPregnant(false);
@@ -81,7 +81,7 @@ public class ViewNutrientsController {
 
     public void goToProfileScreen(ActionEvent event) {
         ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
-        profileScreenController.setProfile(this.profile);
+        profileScreenController.initialize(profile);
     }
 
     //2 versions of this method, 1 for individual entries and another for a week or an entire day of entries
@@ -236,7 +236,7 @@ public class ViewNutrientsController {
                 } else if (childNode.getId().equals("valueLabel")) {
                     Label label = (Label) childNode;
                     String value = String.format("%.1f", list.get(counter).getNutrientValue());
-                    label.setText(value + searchRDIListUnit(list.get(counter).getNutrientName()));
+                    label.setText(value + getTargetNutrientsUnits(list.get(counter).getNutrientName()));
                 }
             }
             counter++;
@@ -244,7 +244,7 @@ public class ViewNutrientsController {
     }
 
     // 0 = should be the targetdose, 99999999 = not found therefore no maximum dose, anything else actual value
-    public float searchTargetNutrientsList(String nutrientName, ArrayList<TargetNutrients> arrayList) {
+     public static float searchTargetNutrientsList(String nutrientName, ArrayList<TargetNutrients> arrayList) {
         float returnValue = 99999999;
         for (TargetNutrients targetNutrients : arrayList) {
             if (nutrientName.contains(targetNutrients.getNutrientName())) {
@@ -254,7 +254,7 @@ public class ViewNutrientsController {
         return returnValue;
     }
 
-    public String searchRDIListUnit(String nutrientName) {
+    public String getTargetNutrientsUnits(String nutrientName) {
         String returnValue = "";
         for (TargetNutrients rdi : profile.getDailyIntake().getTargetNutrients()) {
             if (nutrientName.contains(rdi.getNutrientName())) {

@@ -121,7 +121,7 @@
   },
   {
     "nutrientName":"Water",
-    "unit":"liter",
+    "unit":"g",
     "value":"0"
   }
 ]

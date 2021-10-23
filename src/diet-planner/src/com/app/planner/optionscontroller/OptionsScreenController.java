@@ -20,10 +20,10 @@ public class OptionsScreenController {
 
     public void goToProfileScreen(ActionEvent event) { // TODO this settings screen has to be accessed after a profile is created/loaded because option object depends on profile object
         ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
-        profileScreenController.setProfile(this.profile);
+        profileScreenController.initialize(profile);
     }
 
-    public void setProfile(Profile profile) {
+    public void initialize(Profile profile) {
         this.profile = profile;
     }
 

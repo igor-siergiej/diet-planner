@@ -38,6 +38,25 @@
     -fx-font-size: 20px;
 }
 
+.table-view {
+    -fx-font-size: 20px;
+    -fx-background-color: #1a1a1a;
+}
+
+.table-view .column-header {
+    -fx-background-color: #0056B3;
+}
+
+.table-view .table-column {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: #1a1a1a;
+}
+
 #calendarPane {
     -fx-border-width: 2px;
     -fx-border-color: #0056B3;

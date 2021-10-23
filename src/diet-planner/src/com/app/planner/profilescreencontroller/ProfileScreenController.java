@@ -1,21 +1,35 @@
 package com.app.planner.profilescreencontroller;
 
 import com.app.planner.DatabaseConnection;
+import com.app.planner.Macro;
 import com.app.planner.Main;
 import com.app.planner.Profile;
 import com.app.planner.addentrycontroller.AddEntryController;
 import com.app.planner.calendarcontroller.CalendarController;
+import com.app.planner.editgoalscontroller.EditGoalsController;
+import com.app.planner.editprofilecontroller.EditProfileController;
 import com.app.planner.optionscontroller.OptionsScreenController;
 import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
+import com.app.planner.viewprofilecontroller.ViewProfileController;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 import java.io.File;
 import java.io.IOException;
+
+import static javafx.collections.FXCollections.observableArrayList;
 
 public class ProfileScreenController {
     private Profile profile;
@@ -24,70 +38,66 @@ public class ProfileScreenController {
     private Pane mainPane;
 
     @FXML
-    private Label profileNameLabel;
-
-    @FXML
-    private Label ageLabel;
-
-    @FXML
-    private Label sexLabel;
-
-    @FXML
-    private Label breastfeedingLabel;
-
-    @FXML
-    private Label pregnantLabel;
-
-    @FXML
     private Label messageLabel;
 
     @FXML
-    private Label usernameLabel;
+    private PieChart caloriePieChart;
 
     @FXML
-    private Label passwordLabel;
+    private TableView calorieTable;
 
-    public void setProfile(Profile profile) {
+    @FXML
+    private TableColumn carbohydratesColumn;
+
+    @FXML
+    private TableColumn fatColumn;
+
+    @FXML
+    private TableColumn proteinColumn;
+
+    @FXML
+    private ProgressBar calorieProgressBar;
+
+    @FXML
+    private Label progressBarLabel;
+
+    public void initialize(Profile profile) {
         this.profile = profile;
-        profileNameLabel.setText(profile.getProfileName());
-        loadLabels();
-    }
 
-    public void loadLabels() {
-        sexLabel.setText(profile.getSex());
-        ageLabel.setText(String.valueOf(profile.getAge()));
-        if (profile.getUsername() == null) {
-            usernameLabel.setText("-");
-            passwordLabel.setText("-");
-        } else {
-            usernameLabel.setText(profile.getUsername());
-            passwordLabel.setText(profile.getPassword());
-        }
+        ObservableList<PieChart.Data> pieChartData =
+                observableArrayList( //name = visual, (need to calculate percentage manually, value = just value, percentage will be calculated automatically
+                        new PieChart.Data("Fat", 20), // String.format("%.1f", value / total * 100) + "%"
+                        new PieChart.Data("Carbohydrates" ,40),
+                        new PieChart.Data("Protein",50));
+        caloriePieChart.setData(pieChartData);
 
-        if (profile.isBreastFeeding()) {
-            breastfeedingLabel.setText("Yes");
-        } else {
-            breastfeedingLabel.setText("No");
-        }
+        calorieProgressBar.setProgress(0.5); // here should be the total calories for the current day
+        progressBarLabel.setText(String.valueOf(0.5));
 
-        if (profile.isPregnant()) {
-            pregnantLabel.setText("Yes");
-        } else {
-            pregnantLabel.setText("No");
-        }
-    }
+        calorieTable.getColumns().addListener(new ListChangeListener() { // prevents the columns from being swapped, NOTE cannot prevent columns from being dragged
+            public boolean suspended;
 
-    public void goToCalendarButton(ActionEvent event) {
-        goToCalendarScreen(event, profile);
-    }
+            @Override
+            public void onChanged(Change change) {
+                change.next();
+                if (change.wasReplaced() && !suspended) {
+                    this.suspended = true;
+                    calorieTable.getColumns().setAll(carbohydratesColumn,fatColumn,proteinColumn);
+                    this.suspended = false;
+                }
+            }
+        });
 
-    private void goToScreen(ActionEvent event, String fxmlFilePath) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/app/planner/" + fxmlFilePath));
-            Main.setWindow(event, root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        carbohydratesColumn.setCellValueFactory(new PropertyValueFactory<>("carbohydrates"));
+        fatColumn.setCellValueFactory(new PropertyValueFactory<>("fat"));
+        proteinColumn.setCellValueFactory(new PropertyValueFactory<>("protein"));
+
+        ObservableList<Macro> observableList = FXCollections.observableArrayList(
+                new Macro(ViewNutrientsController.searchTargetNutrientsList("Carbohydrates", profile.getDailyIntake().getTargetNutrients()), // this will get the target marcos from DailyIntake Object
+                        ViewNutrientsController.searchTargetNutrientsList("Fat", profile.getDailyIntake().getTargetNutrients()),
+                        ViewNutrientsController.searchTargetNutrientsList("Protein", profile.getDailyIntake().getTargetNutrients()))
+        );
+        calorieTable.setItems(observableList);
     }
 
     public void saveProfileToFile() {
@@ -132,31 +142,46 @@ public class ProfileScreenController {
 
     public void goToOptionsScreen(ActionEvent event) {
         OptionsScreenController optionsScreenController = goToScreenWithProfile(event,"optionscontroller/OptionsScreen.fxml").getController();
-        optionsScreenController.setProfile(profile);
+        optionsScreenController.initialize(profile);
     }
 
-    private void goToCalendarScreen(ActionEvent event, Profile profile) {
+    public void goToCalendarScreen(ActionEvent event) {
         CalendarController calendarController = goToScreenWithProfile(event,"calendarcontroller/CalendarScreen.fxml").getController();
-        calendarController.setProfile(profile);
+        calendarController.initialize(profile);
         calendarController.load();
+    }
+
+    public void goToEditGoalsScreen(ActionEvent event) {
+        EditGoalsController editGoalsController = goToScreenWithProfile(event,"editgoalscontroller/EditGoalsScreen.fxml").getController();
+        editGoalsController.initialize(profile);
+    }
+
+    public void goToEditProfileScreen(ActionEvent event) {
+        EditProfileController editProfileController = goToScreenWithProfile(event,"editprofilecontroller/EditProfileScreen.fxml").getController();
+        editProfileController.initialize(profile);
+    }
+
+    public void goToViewProfileScreen(ActionEvent event) {
+        ViewProfileController viewProfileController = goToScreenWithProfile(event,"viewprofilecontroller/ViewProfileScreen.fxml").getController();
+        viewProfileController.initialize(profile);
     }
 
     public void goToViewNutrientsScreen(ActionEvent event) {
         ViewNutrientsController viewNutrientsController = goToScreenWithProfile(event,"viewnutrientscontroller/ViewNutrientsScreen.fxml").getController();
-        viewNutrientsController.setProfile(profile);
+        viewNutrientsController.initialize(profile);
     }
 
     public void goToAddEntryScreen(ActionEvent event) {
         AddEntryController addEntryController = goToScreenWithProfile(event,"addentrycontroller/AddEntryScreen.fxml").getController();
-        addEntryController.setProfile(profile);
+        addEntryController.initialize(profile);
     }
 
     public void goToProfileScreen(ActionEvent event) {
         ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
-        profileScreenController.setProfile(profile);
+        profileScreenController.initialize(profile);
     }
 
     public void goToMainScreen(ActionEvent event) {
-        goToScreen(event,"mainscreencontroller/MainScreen.fxml");
+        goToScreenWithProfile(event,"mainscreencontroller/MainScreen.fxml");
     }
 }
