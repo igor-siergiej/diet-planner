@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -171,6 +172,23 @@ public class Profile {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String returnString = gson.toJson(this);
         return returnString;
+    }
+
+    public float getNutrientValueForCurrentDay(String nutrientName) {
+        float value = 0;
+        ArrayList<Nutrient> nutrients = new ArrayList<>();
+        for (Entry entry : getDiary().getEntriesDay(LocalDate.now())) {
+            for (Food food :entry.getMeal().getFoods()) {
+                nutrients.addAll(food.getNutrients());
+            }
+        }
+        ArrayList<Nutrient> combinedList = Main.combineNutrientList(nutrients);
+        for (Nutrient nutrient : combinedList) {
+            if (nutrient.getNutrientName().equals(nutrientName)) {
+                value = nutrient.getNutrientValue();
+            }
+        }
+        return value;
     }
 }
 

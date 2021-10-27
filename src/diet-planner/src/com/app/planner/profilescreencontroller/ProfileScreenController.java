@@ -1,9 +1,6 @@
 package com.app.planner.profilescreencontroller;
 
-import com.app.planner.DatabaseConnection;
-import com.app.planner.Macro;
-import com.app.planner.Main;
-import com.app.planner.Profile;
+import com.app.planner.*;
 import com.app.planner.addentrycontroller.AddEntryController;
 import com.app.planner.calendarcontroller.CalendarController;
 import com.app.planner.editgoalscontroller.EditGoalsController;
@@ -19,15 +16,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
@@ -61,6 +59,21 @@ public class ProfileScreenController {
     @FXML
     private Label progressBarLabel;
 
+    @FXML
+    private TableView currentCalorieTable;
+
+    @FXML
+    private TableColumn currentCarbohydratesColumn;
+
+    @FXML
+    private TableColumn currentFatColumn;
+
+    @FXML
+    private TableColumn currentProteinColumn;
+
+    @FXML
+    private VBox entriesVBox;
+
     public void initialize(Profile profile) {
         this.profile = profile;
 
@@ -72,30 +85,22 @@ public class ProfileScreenController {
 
         ObservableList<PieChart.Data> pieChartData =
                 observableArrayList( //name = visual, (need to calculate percentage manually, value = just value, percentage will be calculated automatically
-                        new PieChart.Data("Fat" + String.format("%.1f", fat/total * 100) + "%", fat),
-                        new PieChart.Data("Carbohydrates" + String.format("%.1f", carbs/total * 100) + "%",carbs),
-                        new PieChart.Data("Protein" + String.format("%.1f", protein/total * 100) + "%",protein));
+                        new PieChart.Data("Fat " + String.format("%.1f", fat/total * 100) + "%", fat),
+                        new PieChart.Data("Carbohydrates " + String.format("%.1f", carbs/total * 100) + "%",carbs),
+                        new PieChart.Data("Protein " + String.format("%.1f", protein/total * 100) + "%",protein));
 
 
         caloriePieChart.setData(pieChartData);
         caloriePieChart.setLegendVisible(false);
 
-        calorieProgressBar.setProgress(0.5); // here should be the total calories for the current day
-        progressBarLabel.setText(String.valueOf(0.5));
+        float calories = profile.getNutrientValueForCurrentDay("Energy (kcal)");
 
-        calorieTable.getColumns().addListener(new ListChangeListener() { // prevents the columns from being swapped, NOTE cannot prevent columns from being dragged
-            public boolean suspended;
+        float percentOfCalories =  calories / ViewNutrientsController.searchTargetNutrientsList("Energy (kcal)", profile.getDailyIntake().getTargetNutrients());
+        calorieProgressBar.setProgress(percentOfCalories);
+        progressBarLabel.setText(String.format("%.2f", percentOfCalories) + "%");
 
-            @Override
-            public void onChanged(Change change) {
-                change.next();
-                if (change.wasReplaced() && !suspended) {
-                    this.suspended = true;
-                    calorieTable.getColumns().setAll(carbohydratesColumn,fatColumn,proteinColumn);
-                    this.suspended = false;
-                }
-            }
-        });
+        preventColumnMoving(calorieTable,carbohydratesColumn,fatColumn,proteinColumn);
+        preventColumnMoving(currentCalorieTable,currentCarbohydratesColumn,currentFatColumn,currentProteinColumn);
 
         carbohydratesColumn.setCellValueFactory(new PropertyValueFactory<>("carbohydrates"));
         fatColumn.setCellValueFactory(new PropertyValueFactory<>("fat"));
@@ -107,6 +112,43 @@ public class ProfileScreenController {
                         ViewNutrientsController.searchTargetNutrientsList("Protein", profile.getDailyIntake().getTargetNutrients()))
         );
         calorieTable.setItems(observableList);
+
+        currentCarbohydratesColumn.setCellValueFactory(new PropertyValueFactory<>("carbohydrates"));
+        currentFatColumn.setCellValueFactory(new PropertyValueFactory<>("fat"));
+        currentProteinColumn.setCellValueFactory(new PropertyValueFactory<>("protein"));
+
+        ObservableList<Macro> currentObservableList;
+        currentObservableList = FXCollections.observableArrayList(
+                new Macro(profile.getNutrientValueForCurrentDay("Carbohydrates"),
+                        profile.getNutrientValueForCurrentDay("Fat"),
+                        profile.getNutrientValueForCurrentDay("Protein"))
+        );
+
+        currentCalorieTable.setItems(currentObservableList);
+
+        for (Entry entry: profile.getDiary().getEntriesDay(LocalDate.now())) {
+            HBox hbox = new HBox();
+            hbox.getChildren().add(new Label(entry.getMeal().getMealName()));
+            hbox.getChildren().add(new Label(entry.getTimeEaten().toString()));
+            hbox.getChildren().add(new Label(entry.getEntryType().toString()));
+            entriesVBox.getChildren().add(hbox);
+        }
+    }
+
+    public void preventColumnMoving(TableView table, TableColumn carbColumn, TableColumn fatColumn, TableColumn proteinColumn) {
+        table.getColumns().addListener(new ListChangeListener() { // prevents the columns from being swapped, NOTE cannot prevent columns from being dragged
+            public boolean suspended;
+
+            @Override
+            public void onChanged(Change change) {
+                change.next();
+                if (change.wasReplaced() && !suspended) {
+                    this.suspended = true;
+                    table.getColumns().setAll(carbColumn,fatColumn,proteinColumn);
+                    this.suspended = false;
+                }
+            }
+        });
     }
 
     public void saveProfileToFile() {
