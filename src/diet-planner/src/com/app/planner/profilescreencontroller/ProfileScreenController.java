@@ -64,12 +64,21 @@ public class ProfileScreenController {
     public void initialize(Profile profile) {
         this.profile = profile;
 
+        Float carbs = ViewNutrientsController.searchTargetNutrientsList("Carbohydrates", profile.getDailyIntake().getTargetNutrients());
+        Float fat = ViewNutrientsController.searchTargetNutrientsList("Fat", profile.getDailyIntake().getTargetNutrients());
+        Float protein = ViewNutrientsController.searchTargetNutrientsList("Protein", profile.getDailyIntake().getTargetNutrients());
+
+        Float total = carbs + fat + protein;
+
         ObservableList<PieChart.Data> pieChartData =
                 observableArrayList( //name = visual, (need to calculate percentage manually, value = just value, percentage will be calculated automatically
-                        new PieChart.Data("Fat", 20), // String.format("%.1f", value / total * 100) + "%"
-                        new PieChart.Data("Carbohydrates" ,40),
-                        new PieChart.Data("Protein",50));
+                        new PieChart.Data("Fat" + String.format("%.1f", fat/total * 100) + "%", fat),
+                        new PieChart.Data("Carbohydrates" + String.format("%.1f", carbs/total * 100) + "%",carbs),
+                        new PieChart.Data("Protein" + String.format("%.1f", protein/total * 100) + "%",protein));
+
+
         caloriePieChart.setData(pieChartData);
+        caloriePieChart.setLegendVisible(false);
 
         calorieProgressBar.setProgress(0.5); // here should be the total calories for the current day
         progressBarLabel.setText(String.valueOf(0.5));
