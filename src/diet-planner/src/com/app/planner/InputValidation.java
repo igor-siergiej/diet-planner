@@ -88,6 +88,16 @@ public class InputValidation {
             return false;
         }
     }
+
+    static public String weightValidation( String string) {
+        if (!string.matches("\\d*")) {
+            return string.replaceAll("[^\\d]", "");
+        }
+        if (string.length() > 3) {
+            return string.substring(0,2);
+        }
+        return string;
+    }
 }
 
 

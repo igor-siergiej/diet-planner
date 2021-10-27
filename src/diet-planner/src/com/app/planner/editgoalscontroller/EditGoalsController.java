@@ -1,10 +1,8 @@
 package com.app.planner.editgoalscontroller;
 
-import com.app.planner.DatabaseConnection;
-import com.app.planner.InputValidation;
-import com.app.planner.Main;
-import com.app.planner.Profile;
+import com.app.planner.*;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
+import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +16,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class EditGoalsController {
     private Profile profile;
@@ -45,7 +44,12 @@ public class EditGoalsController {
 
     public void initialize(Profile profile) {
         this.profile = profile;
+        ArrayList<TargetNutrients> targetNutrientsList = profile.getDailyIntake().getTargetNutrients();
+        proteinTextField.setText(String.valueOf(ViewNutrientsController.searchTargetNutrientsList("Protein",targetNutrientsList)));
+        carbsTextField.setText(String.valueOf(ViewNutrientsController.searchTargetNutrientsList("Carbohydrates",targetNutrientsList)));
+        fatTextField.setText(String.valueOf(ViewNutrientsController.searchTargetNutrientsList("Fat",targetNutrientsList)));
         setListeners();
+        calculateCalories();
     }
 
     public void saveProfileToFile() {
@@ -93,14 +97,34 @@ public class EditGoalsController {
         profileScreenController.initialize(profile);
     }
 
+    public void setMacros(ActionEvent event) {
+        ArrayList<TargetNutrients> targetNutrientsList = profile.getDailyIntake().getTargetNutrients();
+
+        getTargetNutrient("Protein",targetNutrientsList).setValue(Float.parseFloat(proteinTextField.getText()));
+        getTargetNutrient("Carbohydrates",targetNutrientsList).setValue(Float.parseFloat(carbsTextField.getText()));
+        getTargetNutrient("Fat",targetNutrientsList).setValue(Float.parseFloat(fatTextField.getText()));
+
+        goToProfileScreen(event);
+    }
+
+    public TargetNutrients getTargetNutrient(String nutrientName,ArrayList<TargetNutrients> targetNutrientsArrayList) {
+        TargetNutrients targetNutrients = null;
+        for (TargetNutrients nutrients : targetNutrientsArrayList) {
+            if (nutrientName.equals(nutrients.getNutrientName())) {
+                targetNutrients = nutrients;
+            }
+        }
+        return targetNutrients;
+    }
+
     private void calculateCalories() {
         if (proteinTextField.getText().equals("") || fatTextField.getText().equals("") || proteinTextField.getText().equals("")) {
             return;
-        }
+        } //possibly unneeded if the textFields default to 0 -- JAVAFX BUG?????????
 
-        float protein = Integer.parseInt(proteinTextField.getText());
-        float fat = Integer.parseInt(fatTextField.getText());
-        float carbs = Integer.parseInt(carbsTextField.getText());
+        float protein = Float.parseFloat(proteinTextField.getText());
+        float fat = Float.parseFloat(fatTextField.getText());
+        float carbs = Float.parseFloat(carbsTextField.getText());
 
         float total = protein + fat + carbs;
 

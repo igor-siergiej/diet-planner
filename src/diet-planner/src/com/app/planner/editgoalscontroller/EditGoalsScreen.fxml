@@ -61,7 +61,7 @@
          </font>
       </Label>
       <PieChart fx:id="macroPieChart" layoutX="613.0" layoutY="324.0" prefHeight="452.0" prefWidth="565.0" />
-      <Button layoutX="15.0" layoutY="112.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="218.0" text="Edit Goals">
+      <Button layoutX="15.0" layoutY="112.0" mnemonicParsing="false" onAction="#setMacros" prefHeight="46.0" prefWidth="218.0" text="Set Goals">
          <font>
             <Font size="25.0" />
          </font>
