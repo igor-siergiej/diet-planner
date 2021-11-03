@@ -15,10 +15,11 @@ public class DatabaseConnection {
         Diary diary = new Diary();
         profile.setDiary(diary);
         String salt = PasswordUtils.getSalt(30);
-        String securePassword = PasswordUtils.generateSecurePassword(password,salt);
+        String securePassword = PasswordUtils.generateSecurePassword(password, salt);
         Connection connection = connect();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_USERS); {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_USERS);
+            {
                 preparedStatement.setString(1, username);
                 preparedStatement.setString(2, securePassword);
                 preparedStatement.setString(3, salt);
@@ -39,7 +40,8 @@ public class DatabaseConnection {
         String securePassword = "";
         String salt = "";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT); {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT);
+            {
                 preparedStatement.setString(1, username);
             }
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -53,14 +55,15 @@ public class DatabaseConnection {
             throwables.printStackTrace();
             return false;
         }
-        return PasswordUtils.verifyUserPassword(password,securePassword,salt);
+        return PasswordUtils.verifyUserPassword(password, securePassword, salt);
     }
 
     public static Profile getProfileFromDb(String username) { // call when you are loading profile data from db
         Connection connection = connect();
         String profileData = "";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT); {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT);
+            {
                 preparedStatement.setString(1, username);
             }
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -79,10 +82,11 @@ public class DatabaseConnection {
         return profile;
     }
 
-    public static boolean saveProfileToDb(String username,Profile profile) { // call when you are saving profile data to db
+    public static boolean saveProfileToDb(String username, Profile profile) { // call when you are saving profile data to db
         Connection connection = connect();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_SAVE); {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_SAVE);
+            {
                 preparedStatement.setString(1, profile.saveToString());
                 preparedStatement.setString(2, username);
             }
@@ -92,7 +96,8 @@ public class DatabaseConnection {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
-        } return true;
+        }
+        return true;
     }
 
     private static Connection connect() {
@@ -111,7 +116,8 @@ public class DatabaseConnection {
     public static boolean sendFeedback(String name, String email, String message) {
         Connection connection = connect();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_FEEDBACK); {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_FEEDBACK);
+            {
                 preparedStatement.setString(1, name);
                 preparedStatement.setString(2, message);
                 preparedStatement.setString(3, email);

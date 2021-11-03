@@ -45,9 +45,9 @@ public class EditGoalsController {
     public void initialize(Profile profile) {
         this.profile = profile;
         ArrayList<TargetNutrients> targetNutrientsList = profile.getDailyIntake().getTargetNutrients();
-        proteinTextField.setText(String.valueOf(ViewNutrientsController.searchTargetNutrientsList("Protein",targetNutrientsList)));
-        carbsTextField.setText(String.valueOf(ViewNutrientsController.searchTargetNutrientsList("Carbohydrates",targetNutrientsList)));
-        fatTextField.setText(String.valueOf(ViewNutrientsController.searchTargetNutrientsList("Fat",targetNutrientsList)));
+        proteinTextField.setText(String.valueOf(ViewNutrientsController.searchTargetNutrientsList("Protein", targetNutrientsList)));
+        carbsTextField.setText(String.valueOf(ViewNutrientsController.searchTargetNutrientsList("Carbohydrates", targetNutrientsList)));
+        fatTextField.setText(String.valueOf(ViewNutrientsController.searchTargetNutrientsList("Fat", targetNutrientsList)));
         setListeners();
         calculateCalories();
     }
@@ -66,7 +66,7 @@ public class EditGoalsController {
 
     public void saveProfileToDB() {
         if (profile.getUsername() != null) {
-            if (DatabaseConnection.saveProfileToDb(profile.getUsername(),profile)) {
+            if (DatabaseConnection.saveProfileToDb(profile.getUsername(), profile)) {
                 messageLabel.setId("successfullMessage");
                 messageLabel.setText("Successfully saved to DB");
             } else {
@@ -93,21 +93,21 @@ public class EditGoalsController {
     }
 
     public void goToProfileScreen(ActionEvent event) {
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event, "profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.initialize(profile);
     }
 
     public void setMacros(ActionEvent event) {
         ArrayList<TargetNutrients> targetNutrientsList = profile.getDailyIntake().getTargetNutrients();
 
-        getTargetNutrient("Protein",targetNutrientsList).setValue(Float.parseFloat(proteinTextField.getText()));
-        getTargetNutrient("Carbohydrates",targetNutrientsList).setValue(Float.parseFloat(carbsTextField.getText()));
-        getTargetNutrient("Fat",targetNutrientsList).setValue(Float.parseFloat(fatTextField.getText()));
+        getTargetNutrient("Protein", targetNutrientsList).setValue(Float.parseFloat(proteinTextField.getText()));
+        getTargetNutrient("Carbohydrates", targetNutrientsList).setValue(Float.parseFloat(carbsTextField.getText()));
+        getTargetNutrient("Fat", targetNutrientsList).setValue(Float.parseFloat(fatTextField.getText()));
 
         goToProfileScreen(event);
     }
 
-    public TargetNutrients getTargetNutrient(String nutrientName,ArrayList<TargetNutrients> targetNutrientsArrayList) {
+    public TargetNutrients getTargetNutrient(String nutrientName, ArrayList<TargetNutrients> targetNutrientsArrayList) {
         TargetNutrients targetNutrients = null;
         for (TargetNutrients nutrients : targetNutrientsArrayList) {
             if (nutrientName.equals(nutrients.getNutrientName())) {

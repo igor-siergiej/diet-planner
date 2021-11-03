@@ -14,7 +14,7 @@ public class FoodComparator implements Comparator<Food> {
 
     @Override
     public int compare(Food o1, Food o2) {
-        return Double.compare(similarity(compareString,o1.getFoodName()),similarity(compareString,o2.getFoodName()));
+        return Double.compare(similarity(compareString, o1.getFoodName()), similarity(compareString, o2.getFoodName()));
     }
 
     public static double similarity(String s1, String s2) {
@@ -24,7 +24,9 @@ public class FoodComparator implements Comparator<Food> {
             shorter = s1;
         }
         int longerLength = longer.length();
-        if (longerLength == 0) { return 1.0;} // both strings are zero length
+        if (longerLength == 0) {
+            return 1.0;
+        } // both strings are zero length
         return (longerLength - editDistance(longer, shorter)) / (double) longerLength;
 
     }

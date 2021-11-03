@@ -27,9 +27,9 @@ public class Diary {
 
     public ArrayList<Entry> getEntriesWeek(LocalDate localDate) {
         ArrayList<Entry> returnList = new ArrayList<>();
-        LocalDate[] days = new LocalDate[] {localDate, localDate.plusDays(1), localDate.plusDays(2), localDate.plusDays(3), localDate.plusDays(4), localDate.plusDays(5), localDate.plusDays(6)};
+        LocalDate[] days = new LocalDate[]{localDate, localDate.plusDays(1), localDate.plusDays(2), localDate.plusDays(3), localDate.plusDays(4), localDate.plusDays(5), localDate.plusDays(6)};
         for (Entry entry : entries) {
-            for (LocalDate day: days) {
+            for (LocalDate day : days) {
                 if (entry.getTimeEaten().getDayOfYear() == day.getDayOfYear()) {
                     returnList.add(entry);
                 }

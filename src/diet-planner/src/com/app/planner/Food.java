@@ -2,7 +2,7 @@ package com.app.planner;
 
 import java.util.ArrayList;
 
-public class Food{
+public class Food {
     private String foodName;
     private ArrayList<Nutrient> nutrients;
 

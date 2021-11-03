@@ -35,7 +35,7 @@ public class Profile {
 
         dailyIntake = new DailyIntake();
         dailyIntake.setMaximumDoses();
-        dailyIntake.setTargetNutrients(age,sex,pregnant,breastFeeding);
+        dailyIntake.setTargetNutrients(age, sex, pregnant, breastFeeding);
     }
 
     public Profile() {
@@ -141,7 +141,7 @@ public class Profile {
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             Writer writer = new FileWriter(file);
-            gson.toJson(this,writer);
+            gson.toJson(this, writer);
             writer.flush();
             writer.close();
         } catch (IOException e) {
@@ -153,7 +153,7 @@ public class Profile {
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             JsonReader reader = new JsonReader(new FileReader(file));
-            Profile profile = gson.fromJson(reader,Profile.class);
+            Profile profile = gson.fromJson(reader, Profile.class);
             this.setDiary(profile.getDiary());
             this.setProfileName(profile.getProfileName());
         } catch (FileNotFoundException e) {
@@ -163,7 +163,7 @@ public class Profile {
 
     public void loadFromString(String loadString) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Profile profile = gson.fromJson(loadString,Profile.class);
+        Profile profile = gson.fromJson(loadString, Profile.class);
         this.setProfileName(profile.getProfileName());
         this.setDiary(profile.getDiary());
     }
@@ -178,7 +178,7 @@ public class Profile {
         float value = 0;
         ArrayList<Nutrient> nutrients = new ArrayList<>();
         for (Entry entry : getDiary().getEntriesDay(LocalDate.now())) {
-            for (Food food :entry.getMeal().getFoods()) {
+            for (Food food : entry.getMeal().getFoods()) {
                 nutrients.addAll(food.getNutrients());
             }
         }

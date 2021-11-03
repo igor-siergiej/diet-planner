@@ -56,24 +56,24 @@ public class CalendarController {
     }
 
     public void goToProfileScreen(ActionEvent event) {
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event, "profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.initialize(profile);
     }
 
     public void goToViewNutrientsScreen(ActionEvent event) { // this method will open the profile screen window
-        ViewNutrientsController viewNutrientsController = goToScreenWithProfile(event,"viewnutrientscontroller/ViewNutrientsScreen.fxml").getController();
+        ViewNutrientsController viewNutrientsController = goToScreenWithProfile(event, "viewnutrientscontroller/ViewNutrientsScreen.fxml").getController();
         viewNutrientsController.initialize(profile);
     }
 
     public void populateCalendar(YearMonth yearMonth1) {
         //clear the Id's on all nodes of the calendar
-        for (Node node: calendar.getChildren()) {
+        for (Node node : calendar.getChildren()) {
             node.setId("");
         }
 
         // Get the date we want to start with on the calendar
         LocalDate calendarDate = LocalDate.of(yearMonth1.getYear(), yearMonth1.getMonthValue(), 1);
-        while (!calendarDate.getDayOfWeek().toString().equals("MONDAY") ) {
+        while (!calendarDate.getDayOfWeek().toString().equals("MONDAY")) {
             calendarDate = calendarDate.minusDays(1);
         }
 
@@ -88,7 +88,7 @@ public class CalendarController {
         }
         calendar.getChildren().removeAll(removalCandidates);
 
-        for (int i = 1; i <6;i++) {
+        for (int i = 1; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
                 Label label = new Label();
                 label.setText(String.valueOf(calendarDate.getDayOfMonth()));
@@ -96,9 +96,9 @@ public class CalendarController {
                 label.setFont(Font.font(20));
                 label.setId("whiteLabel");
                 if (calendarDate.equals(LocalDate.now())) {
-                    getNodeFromGridPane(j,i,calendar).setId("currentDay"); //i and j swapped because GridPane.getChildren() gets the list in reverse order I think
+                    getNodeFromGridPane(j, i, calendar).setId("currentDay"); //i and j swapped because GridPane.getChildren() gets the list in reverse order I think
                 }
-                calendar.add(label,j,i);
+                calendar.add(label, j, i);
                 ArrayList<Entry> entriesToday = getEntriesToday(profile.getDiary().getAllEntries(), calendarDate);
                 VBox vBox = new VBox();
                 vBox.setAlignment(Pos.CENTER);
@@ -110,7 +110,7 @@ public class CalendarController {
                     entryLabel.setTranslateX(15);
                     vBox.getChildren().add(entryLabel);
                 }
-                calendar.add(vBox,j,i);
+                calendar.add(vBox, j, i);
                 calendarDate = calendarDate.plusDays(1);
             }
         }
@@ -138,7 +138,7 @@ public class CalendarController {
     }
 
     public void mouseEntered(MouseEvent e) {
-        for (Node node: calendar.getChildren()) {
+        for (Node node : calendar.getChildren()) {
             if (node.getId() != null && node.getId().equals("selectedDay")) {
                 node.setId("");
                 if (node instanceof Pane) {
@@ -146,7 +146,7 @@ public class CalendarController {
                 }
             }
         }
-        Node source = (Node)e.getTarget();
+        Node source = (Node) e.getTarget();
         while (!(source instanceof Pane)) { //get the parent pane of the source clicked
             source = source.getParent();
         }
@@ -156,13 +156,13 @@ public class CalendarController {
             colIndex = 0;
         }
 
-        Node node = getNodeFromGridPane(colIndex,rowIndex,calendar);
+        Node node = getNodeFromGridPane(colIndex, rowIndex, calendar);
         if (!(node.getId().equals("currentDay"))) {
             node.setId("selectedDay");
         }
     }
 
-    private Node getNodeFromGridPane(int col, int row,GridPane gridPane) {
+    private Node getNodeFromGridPane(int col, int row, GridPane gridPane) {
         Integer gridCol;
         Integer gridRow;
         for (Node node : gridPane.getChildren()) {

@@ -2,7 +2,7 @@ package com.app.planner;
 
 import java.text.DecimalFormat;
 
-public class Nutrient implements Comparable{
+public class Nutrient implements Comparable {
     private String nutrientName;
     private float nutrientValue;
 
