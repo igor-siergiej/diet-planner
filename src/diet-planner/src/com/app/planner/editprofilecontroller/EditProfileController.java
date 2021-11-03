@@ -41,7 +41,7 @@ public class EditProfileController {
 
     public void saveProfileToDB() {
         if (profile.getUsername() != null) {
-            if (DatabaseConnection.saveProfileToDb(profile.getUsername(),profile)) {
+            if (DatabaseConnection.saveProfileToDb(profile.getUsername(), profile)) {
                 messageLabel.setId("successfullMessage");
                 messageLabel.setText("Successfully saved to DB");
             } else {
@@ -68,7 +68,7 @@ public class EditProfileController {
     }
 
     public void goToProfileScreen(ActionEvent event) {
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event, "profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.initialize(profile);
     }
 }

@@ -100,7 +100,7 @@ public class AddEntryController {
     }
 
     public void goToProfileScreen(ActionEvent event) {
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event, "profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.initialize(profile);
     }
 
@@ -110,7 +110,7 @@ public class AddEntryController {
         entry = new Entry(meal, LocalDateTime.now(), (EntryType) mealTypeComboBox.getValue());
         profile.getDiary().addEntry(entry);
 
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event, "profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.initialize(profile);
     }
 
@@ -144,13 +144,15 @@ public class AddEntryController {
     }
 
     public void populateSearchResult() {
-        ArrayList<Food> searchedFoods = Main.sortedFoodSearch(dataset,searchTextField.getText());
+        ArrayList<Food> searchedFoods = Main.sortedFoodSearch(dataset, searchTextField.getText());
         for (Food food : searchedFoods) {
             Button button = new Button();
             button.setWrapText(true);
             button.setText(food.getFoodName());
             button.setMinHeight(80);
-            button.setOnMouseClicked( event -> {addToFoodVBox(food);});
+            button.setOnMouseClicked(event -> {
+                addToFoodVBox(food);
+            });
             searchVBox.getChildren().add(button);
         }
     }
@@ -162,7 +164,7 @@ public class AddEntryController {
     public Meal getMeal() {
         ArrayList<Food> dataset = Main.initialiseData();
         Meal meal = new Meal();
-        for (Node node: foodVBox.getChildren()) {
+        for (Node node : foodVBox.getChildren()) {
             if (node instanceof HBox) {
                 String labelText = "";
                 Integer portion = 0;
@@ -170,7 +172,7 @@ public class AddEntryController {
                     if (node1 instanceof Label) {
                         Label label = (Label) node1;
                         labelText = label.getText();
-                    } else if (node1 instanceof TextField){
+                    } else if (node1 instanceof TextField) {
                         TextField textField = (TextField) node1;
                         if (textField.getText().equals("")) {
                             textField.setText("0");
@@ -178,7 +180,7 @@ public class AddEntryController {
                         portion = Integer.valueOf(textField.getText());
                     }
                 }
-                meal.addFood(Main.exactFoodSearch(dataset,labelText),portion);
+                meal.addFood(Main.exactFoodSearch(dataset, labelText), portion);
             }
         }
         return meal;
@@ -220,7 +222,8 @@ public class AddEntryController {
         button.setText("X");
         button.setAlignment(Pos.CENTER_RIGHT);
         button.setOnMouseClicked(event -> {
-            removeFood(food.getFoodName()); updateNutrients();
+            removeFood(food.getFoodName());
+            updateNutrients();
         });
 
         hbox.setSpacing(5);
@@ -238,45 +241,45 @@ public class AddEntryController {
         }
         nutrientPane.setVisible(true);
         ArrayList<Nutrient> nutrients = new ArrayList<>();
-            for (Food food :foods) {
-                nutrients.addAll(food.getNutrients());
-            }
+        for (Food food : foods) {
+            nutrients.addAll(food.getNutrients());
+        }
 
         ArrayList<Nutrient> combinedList = Main.combineNutrientList(nutrients);
         Collections.sort(combinedList);
         Collections.reverse(combinedList);
 
         ArrayList<String> vitaminNameList = new ArrayList<>();
-        String[] vitaminNameStrings = {"Vitamin A","Carotene","Vitamin D" ,"Vitamin E","Vitamin K","Vitamin B1","Vitamin B2","Vitamin B3","Tryptophan","Vitamin B6","Vitamin B12","Vitamin B9","Vitamin B5","Vitamin B7","Vitamin C"};
+        String[] vitaminNameStrings = {"Vitamin A", "Carotene", "Vitamin D", "Vitamin E", "Vitamin K", "Vitamin B1", "Vitamin B2", "Vitamin B3", "Tryptophan", "Vitamin B6", "Vitamin B12", "Vitamin B9", "Vitamin B5", "Vitamin B7", "Vitamin C"};
         vitaminNameList.addAll(Arrays.asList(vitaminNameStrings));
         ArrayList<Nutrient> vitaminList = new ArrayList<>();
 
         ArrayList<String> mineralNameList = new ArrayList<>();
-        String[] mineralNameStrings = {"Sodium","Potassium","Calcium","Magnesium","Phosphorus","Iron","Copper","Zinc","Chloride","Manganese","Selenium","Iodine"};
+        String[] mineralNameStrings = {"Sodium", "Potassium", "Calcium", "Magnesium", "Phosphorus", "Iron", "Copper", "Zinc", "Chloride", "Manganese", "Selenium", "Iodine"};
         mineralNameList.addAll(Arrays.asList(mineralNameStrings));
         ArrayList<Nutrient> mineralList = new ArrayList<>();
 
         ArrayList<String> sugarNameList = new ArrayList<>();
-        String[] sugarNameStrings = {"Total Sugar","Glucose","Galactose","Fructose","Sucrose","Maltose","Lactose"};
+        String[] sugarNameStrings = {"Total Sugar", "Glucose", "Galactose", "Fructose", "Sucrose", "Maltose", "Lactose"};
         sugarNameList.addAll(Arrays.asList(sugarNameStrings));
         ArrayList<Nutrient> sugarList = new ArrayList<>();
 
         ArrayList<String> fatNameList = new ArrayList<>();
-        String[] fatNameStrings = {"Trans FA","Saturated Fat","Omega 6","Omega 3","Mono FA","Poly FA","Cholesterol"};
+        String[] fatNameStrings = {"Trans FA", "Saturated Fat", "Omega 6", "Omega 3", "Mono FA", "Poly FA", "Cholesterol"};
         fatNameList.addAll(Arrays.asList(fatNameStrings));
         ArrayList<Nutrient> fatList = new ArrayList<>();
 
         ArrayList<String> macroNameList = new ArrayList<>();
-        String[] macroNameStrings = {"Protein","Fat","Carbohydrates"};
+        String[] macroNameStrings = {"Protein", "Fat", "Carbohydrates"};
         macroNameList.addAll(Arrays.asList(macroNameStrings));
         ArrayList<Nutrient> macroList = new ArrayList<>();
 
         ArrayList<String> otherNameList = new ArrayList<>();
-        String[] otherNameStrings = {"Water","Total Nitrogen","Energy (kcal)","Energy (kJ)","Starch","NSP Fibre","AOAC Fibre"};
+        String[] otherNameStrings = {"Water", "Total Nitrogen", "Energy (kcal)", "Energy (kJ)", "Starch", "NSP Fibre", "AOAC Fibre"};
         otherNameList.addAll(Arrays.asList(otherNameStrings));
         ArrayList<Nutrient> otherList = new ArrayList<>();
 
-        for (Nutrient nutrient: combinedList) {
+        for (Nutrient nutrient : combinedList) {
             if (vitaminNameList.contains(nutrient.getNutrientName())) {
                 vitaminList.add(nutrient);
             } else if (mineralNameList.contains(nutrient.getNutrientName())) {
@@ -293,12 +296,12 @@ public class AddEntryController {
         }
         rdiArrayList = loadRDI();
 
-        populateVBox(sugarList,sugarVBox);
-        populateVBox(fatList,fatVBox);
-        populateVBox(vitaminList,vitaminVBox);
-        populateVBox(mineralList,mineralVBox);
-        populateVBox(otherList,otherVBox);
-        populateVBox(macroList,macroVBox);
+        populateVBox(sugarList, sugarVBox);
+        populateVBox(fatList, fatVBox);
+        populateVBox(vitaminList, vitaminVBox);
+        populateVBox(mineralList, mineralVBox);
+        populateVBox(otherList, otherVBox);
+        populateVBox(macroList, macroVBox);
 
         float total = macroList.get(1).getNutrientValue() + macroList.get(2).getNutrientValue() + macroList.get(0).getNutrientValue();
 
@@ -312,9 +315,9 @@ public class AddEntryController {
 
     public void populateVBox(ArrayList<Nutrient> list, VBox vbox) {
         int counter = 0;
-        for (Node node: vbox.getChildren()) {
+        for (Node node : vbox.getChildren()) {
             HBox hbox = (HBox) node;
-            for (Node childNode: hbox.getChildren()) {
+            for (Node childNode : hbox.getChildren()) {
                 if (childNode.getId().equals("nameLabel")) {
                     Label label = (Label) childNode;
                     label.setText(list.get(counter).getNutrientName());
@@ -322,11 +325,11 @@ public class AddEntryController {
                     ProgressBar progressBar = (ProgressBar) childNode;
                     if (list.get(counter).getNutrientValue() == 0) {
                         progressBar.setProgress(0);
-                    } else  if (searchRDIListValue(list.get(counter).getNutrientName()) == 0) {
+                    } else if (searchRDIListValue(list.get(counter).getNutrientName()) == 0) {
                         progressBar.setProgress(1);
                         progressBar.setId("notFound");
                     } else {
-                        float percent = list.get(counter).getNutrientValue()/searchRDIListValue(list.get(counter).getNutrientName());
+                        float percent = list.get(counter).getNutrientValue() / searchRDIListValue(list.get(counter).getNutrientName());
                         progressBar.setProgress(percent);
                         if (percent >= 1) {
                             progressBar.setStyle("-fx-accent: green;");
@@ -338,10 +341,10 @@ public class AddEntryController {
                     Label label = (Label) childNode;
                     if (list.get(counter).getNutrientValue() == 0) {
                         label.setText("N/A");
-                    } else  if (searchRDIListValue(list.get(counter).getNutrientName()) == 0) {
+                    } else if (searchRDIListValue(list.get(counter).getNutrientName()) == 0) {
                         label.setText("Not Found");
                     } else {
-                        String percent = String.format("%.1f", list.get(counter).getNutrientValue()/searchRDIListValue(list.get(counter).getNutrientName()) * 100);
+                        String percent = String.format("%.1f", list.get(counter).getNutrientValue() / searchRDIListValue(list.get(counter).getNutrientName()) * 100);
                         label.setText(percent + "%");
                     }
                 } else if (childNode.getId().equals("valueLabel")) {

@@ -56,7 +56,7 @@ public class DailyIntake {
                 targetNutrients = loadTargetNutrientsFromFile(men14to18FilePath);
             } else if (age >= 19 && age <= 50) {
                 targetNutrients = loadTargetNutrientsFromFile(men19to50FilePath);
-            } else if (age >= 51){
+            } else if (age >= 51) {
                 targetNutrients = loadTargetNutrientsFromFile(men50plusFilePath);
             } else {
                 targetNutrients = null;

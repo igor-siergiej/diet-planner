@@ -19,7 +19,7 @@ public class OptionsScreenController {
     private ComboBox themeComboBox;
 
     public void goToProfileScreen(ActionEvent event) { // TODO this settings screen has to be accessed after a profile is created/loaded because option object depends on profile object
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event, "profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.initialize(profile);
     }
 

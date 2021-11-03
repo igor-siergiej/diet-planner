@@ -20,12 +20,10 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
@@ -91,9 +89,9 @@ public class ProfileScreenController {
 
         ObservableList<PieChart.Data> pieChartData =
                 observableArrayList( //name = visual, (need to calculate percentage manually, value = just value, percentage will be calculated automatically
-                        new PieChart.Data("Fat " + String.format("%.1f", fat/total * 100) + "%", fat),
-                        new PieChart.Data("Carbohydrates " + String.format("%.1f", carbs/total * 100) + "%",carbs),
-                        new PieChart.Data("Protein " + String.format("%.1f", protein/total * 100) + "%",protein));
+                        new PieChart.Data("Fat " + String.format("%.1f", fat / total * 100) + "%", fat),
+                        new PieChart.Data("Carbohydrates " + String.format("%.1f", carbs / total * 100) + "%", carbs),
+                        new PieChart.Data("Protein " + String.format("%.1f", protein / total * 100) + "%", protein));
 
 
         caloriePieChart.setData(pieChartData);
@@ -105,13 +103,14 @@ public class ProfileScreenController {
         calorieGoalLabel.setText(String.valueOf(calorieGoal));
         currentCalorieLabel.setText(String.valueOf(calories));
 
-        float percentOfCalories =  calories / calorieGoal;
+        float percentOfCalories = calories / calorieGoal;
         calorieProgressBar.setProgress(percentOfCalories);
         progressBarLabel.setText(String.format("%.2f", percentOfCalories) + "%");
 
-        preventColumnMoving(calorieTable,carbohydratesColumn,fatColumn,proteinColumn);
-        preventColumnMoving(currentCalorieTable,currentCarbohydratesColumn,currentFatColumn,currentProteinColumn);
+        preventColumnMoving(calorieTable, carbohydratesColumn, fatColumn, proteinColumn);
+        preventColumnMoving(currentCalorieTable, currentCarbohydratesColumn, currentFatColumn, currentProteinColumn);
 
+        // Setting up the calorieTable
         carbohydratesColumn.setCellValueFactory(new PropertyValueFactory<>("carbohydrates"));
         fatColumn.setCellValueFactory(new PropertyValueFactory<>("fat"));
         proteinColumn.setCellValueFactory(new PropertyValueFactory<>("protein"));
@@ -123,6 +122,7 @@ public class ProfileScreenController {
         );
         calorieTable.setItems(observableList);
 
+        // Setting up the currentCalorieTable
         currentCarbohydratesColumn.setCellValueFactory(new PropertyValueFactory<>("carbohydrates"));
         currentFatColumn.setCellValueFactory(new PropertyValueFactory<>("fat"));
         currentProteinColumn.setCellValueFactory(new PropertyValueFactory<>("protein"));
@@ -136,21 +136,19 @@ public class ProfileScreenController {
 
         currentCalorieTable.setItems(currentObservableList);
 
-        for (Entry entry: profile.getDiary().getEntriesDay(LocalDate.now())) {
+        for (Entry entry : profile.getDiary().getEntriesDay(LocalDate.now())) { //this will populate entriesVBox with all the entries for current day displaying details
+            Label label = new Label(entry.getMeal().getMealName() + " " + entry.getEntryType().toString());
+            Label label1 = new Label(entry.getNutrientValueForEntry("Energy (kcal)") + " Kcal");
+
             HBox hbox = new HBox();
-            Label label = new Label(entry.getMeal().getMealName() + " "  + entry.getNutrientValueForEntry("Energy (kcal)") + " Kcal");
+            hbox.setMinHeight(70);
             hbox.setId("fakeButton");
-            Label label1 = new Label(entry.getEntryType().toString());
             hbox.setAlignment(Pos.CENTER);
-            /*hbox.setMinHeight(70);
-            hbox.setMinWidth(300);*/
-            label1.setAlignment(Pos.CENTER_RIGHT);
-            hbox.getChildren().add(label);
+
             Region region = new Region();
             HBox.setHgrow(region, Priority.ALWAYS);
-            hbox.getChildren().add(region);
-            hbox.getChildren().add(label1);
 
+            hbox.getChildren().addAll(label, region, label1);
             entriesVBox.getChildren().add(hbox);
         }
     }
@@ -164,7 +162,7 @@ public class ProfileScreenController {
                 change.next();
                 if (change.wasReplaced() && !suspended) {
                     this.suspended = true;
-                    table.getColumns().setAll(carbColumn,fatColumn,proteinColumn);
+                    table.getColumns().setAll(carbColumn, fatColumn, proteinColumn);
                     this.suspended = false;
                 }
             }
@@ -185,7 +183,7 @@ public class ProfileScreenController {
 
     public void saveProfileToDB() {
         if (profile.getUsername() != null) {
-            if (DatabaseConnection.saveProfileToDb(profile.getUsername(),profile)) {
+            if (DatabaseConnection.saveProfileToDb(profile.getUsername(), profile)) {
                 messageLabel.setId("successfullMessage");
                 messageLabel.setText("Successfully saved to DB");
             } else {
@@ -212,47 +210,47 @@ public class ProfileScreenController {
     }
 
     public void goToOptionsScreen(ActionEvent event) {
-        OptionsScreenController optionsScreenController = goToScreenWithProfile(event,"optionscontroller/OptionsScreen.fxml").getController();
+        OptionsScreenController optionsScreenController = goToScreenWithProfile(event, "optionscontroller/OptionsScreen.fxml").getController();
         optionsScreenController.initialize(profile);
     }
 
     public void goToCalendarScreen(ActionEvent event) {
-        CalendarController calendarController = goToScreenWithProfile(event,"calendarcontroller/CalendarScreen.fxml").getController();
+        CalendarController calendarController = goToScreenWithProfile(event, "calendarcontroller/CalendarScreen.fxml").getController();
         calendarController.initialize(profile);
         calendarController.load();
     }
 
     public void goToEditGoalsScreen(ActionEvent event) {
-        EditGoalsController editGoalsController = goToScreenWithProfile(event,"editgoalscontroller/EditGoalsScreen.fxml").getController();
+        EditGoalsController editGoalsController = goToScreenWithProfile(event, "editgoalscontroller/EditGoalsScreen.fxml").getController();
         editGoalsController.initialize(profile);
     }
 
     public void goToEditProfileScreen(ActionEvent event) {
-        EditProfileController editProfileController = goToScreenWithProfile(event,"editprofilecontroller/EditProfileScreen.fxml").getController();
+        EditProfileController editProfileController = goToScreenWithProfile(event, "editprofilecontroller/EditProfileScreen.fxml").getController();
         editProfileController.initialize(profile);
     }
 
     public void goToViewProfileScreen(ActionEvent event) {
-        ViewProfileController viewProfileController = goToScreenWithProfile(event,"viewprofilecontroller/ViewProfileScreen.fxml").getController();
+        ViewProfileController viewProfileController = goToScreenWithProfile(event, "viewprofilecontroller/ViewProfileScreen.fxml").getController();
         viewProfileController.initialize(profile);
     }
 
     public void goToViewNutrientsScreen(ActionEvent event) {
-        ViewNutrientsController viewNutrientsController = goToScreenWithProfile(event,"viewnutrientscontroller/ViewNutrientsScreen.fxml").getController();
+        ViewNutrientsController viewNutrientsController = goToScreenWithProfile(event, "viewnutrientscontroller/ViewNutrientsScreen.fxml").getController();
         viewNutrientsController.initialize(profile);
     }
 
     public void goToAddEntryScreen(ActionEvent event) {
-        AddEntryController addEntryController = goToScreenWithProfile(event,"addentrycontroller/AddEntryScreen.fxml").getController();
+        AddEntryController addEntryController = goToScreenWithProfile(event, "addentrycontroller/AddEntryScreen.fxml").getController();
         addEntryController.initialize(profile);
     }
 
     public void goToProfileScreen(ActionEvent event) {
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event, "profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.initialize(profile);
     }
 
     public void goToMainScreen(ActionEvent event) {
-        goToScreenWithProfile(event,"mainscreencontroller/MainScreen.fxml");
+        goToScreenWithProfile(event, "mainscreencontroller/MainScreen.fxml");
     }
 }

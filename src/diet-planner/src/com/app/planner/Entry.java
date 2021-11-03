@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Entry implements Comparable{
+public class Entry implements Comparable {
     private Meal meal;
     private LocalDateTime timeEaten;
     private EntryType entryType;
@@ -50,14 +50,14 @@ public class Entry implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        Entry entry = (Entry)o;
+        Entry entry = (Entry) o;
         return entry.getTimeEaten().compareTo(this.getTimeEaten());
     }
 
     public float getNutrientValueForEntry(String nutrientName) {
         float value = 0;
         ArrayList<Nutrient> nutrients = new ArrayList<>();
-        for (Food food :this.getMeal().getFoods()) {
+        for (Food food : this.getMeal().getFoods()) {
             nutrients.addAll(food.getNutrients());
         }
         ArrayList<Nutrient> combinedList = Main.combineNutrientList(nutrients);

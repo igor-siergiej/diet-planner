@@ -113,16 +113,16 @@ public class MainScreenController {
     private Text usernameText;
 
     public void goToAboutUsScreen(ActionEvent event) {
-        goToScreen(event,"mainscreencontroller/AboutUsScreen.fxml");
+        goToScreen(event, "mainscreencontroller/AboutUsScreen.fxml");
     }
 
     public void goToRegistrationScreen(ActionEvent event) { // this method will open the profile screen window
-        MainScreenController mainScreenController = goToScreen(event,"mainscreencontroller/RegistrationScreen.fxml").getController();
+        MainScreenController mainScreenController = goToScreen(event, "mainscreencontroller/RegistrationScreen.fxml").getController();
         mainScreenController.setRegistrationButtonDisable();
     }
 
     public void goToLoginScreen(ActionEvent event) { // this method will open the profile screen window
-        MainScreenController mainScreenController = goToScreen(event,"mainscreencontroller/LoginScreen.fxml").getController();
+        MainScreenController mainScreenController = goToScreen(event, "mainscreencontroller/LoginScreen.fxml").getController();
         mainScreenController.setLoginButtonDisable();
     }
 
@@ -131,28 +131,28 @@ public class MainScreenController {
     }
 
     public void goToProfileScreen(ActionEvent event, Profile profile) { // this method will open the profile screen window
-        ProfileScreenController profileScreenController = goToScreen(event,"profilescreencontroller/ProfileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreen(event, "profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.initialize(profile);
     }
 
     public void goToCreateProfileScreenWithLogin(ActionEvent event, String username, String password) { // this method will open the profile screen window
-        MainScreenController mainScreenController = goToScreen(event,"mainscreencontroller/CreateProfileScreen.fxml").getController();
-        mainScreenController.initialize(username,password);
+        MainScreenController mainScreenController = goToScreen(event, "mainscreencontroller/CreateProfileScreen.fxml").getController();
+        mainScreenController.initialize(username, password);
         mainScreenController.setAgeTextFieldEventHandler();
         mainScreenController.setCreateProfileButtonDisable();
     }
 
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
-        MainScreenController mainScreenController = goToScreen(event,"mainscreencontroller/CreateProfileScreen.fxml").getController();
+        MainScreenController mainScreenController = goToScreen(event, "mainscreencontroller/CreateProfileScreen.fxml").getController();
         mainScreenController.setAgeTextFieldEventHandler();
         mainScreenController.setCreateProfileButtonDisable();
     }
 
     public void goToFeedbackScreen(ActionEvent event) { // this method will open the profile screen window
-        goToScreen(event,"mainscreencontroller/FeedbackScreen.fxml").getController();
+        goToScreen(event, "mainscreencontroller/FeedbackScreen.fxml").getController();
     }
 
-    private void initialize(String username,String password) {
+    private void initialize(String username, String password) {
         profile.setUsername(username);
         profile.setPassword(password);
     }
@@ -187,7 +187,7 @@ public class MainScreenController {
     }
 
     public void sendFeedback() {
-        DatabaseConnection.sendFeedback(nameTextField.getText(),emailTextField.getText(),messageTextField.getText());
+        DatabaseConnection.sendFeedback(nameTextField.getText(), emailTextField.getText(), messageTextField.getText());
     }
 
     public void createTestProfile(ActionEvent event) {
@@ -202,28 +202,28 @@ public class MainScreenController {
         ArrayList<Food> data = Main.initialiseData();
 
         ArrayList<Food> foods = new ArrayList<>();
-        foods.add(Main.sortedFoodSearch(data,"chicken").get(0));
-        foods.add(Main.sortedFoodSearch(data,"liver").get(0));
-        foods.add(Main.sortedFoodSearch(data,"eggs").get(0));
-        meal.addFoods(foods,new ArrayList<>(Arrays.asList(100,100,100)));
+        foods.add(Main.sortedFoodSearch(data, "chicken").get(0));
+        foods.add(Main.sortedFoodSearch(data, "liver").get(0));
+        foods.add(Main.sortedFoodSearch(data, "eggs").get(0));
+        meal.addFoods(foods, new ArrayList<>(Arrays.asList(100, 100, 100)));
 
         ArrayList<Food> foods1 = new ArrayList<>();
-        foods1.add(Main.sortedFoodSearch(data,"chicken").get(0));
-        foods1.add(Main.sortedFoodSearch(data,"liver").get(0));
-        meal1.addFoods(foods1,new ArrayList<>(Arrays.asList(100,100)));
+        foods1.add(Main.sortedFoodSearch(data, "chicken").get(0));
+        foods1.add(Main.sortedFoodSearch(data, "liver").get(0));
+        meal1.addFoods(foods1, new ArrayList<>(Arrays.asList(100, 100)));
 
-        Entry entry = new Entry(meal, LocalDateTime.now(),EntryType.DINNER);
-        Entry entry1 = new Entry(meal1, LocalDateTime.now().minusDays(1),EntryType.DINNER);
-        Entry entry2 = new Entry(meal1, LocalDateTime.now().minusDays(2),EntryType.DINNER);
-        Entry entry3 = new Entry(meal1, LocalDateTime.now().minusDays(3),EntryType.DINNER);
+        Entry entry = new Entry(meal, LocalDateTime.now(), EntryType.DINNER);
+        Entry entry1 = new Entry(meal1, LocalDateTime.now().minusDays(1), EntryType.DINNER);
+        Entry entry2 = new Entry(meal1, LocalDateTime.now().minusDays(2), EntryType.DINNER);
+        Entry entry3 = new Entry(meal1, LocalDateTime.now().minusDays(3), EntryType.DINNER);
 
         diary.addEntry(entry);
         diary.addEntry(entry1);
         diary.addEntry(entry2);
         diary.addEntry(entry3);
 
-        Profile profile = new Profile("","","testProfile",14,"female",true,false,diary,new Option());
-        goToProfileScreen(event,profile);
+        Profile profile = new Profile("", "", "testProfile", 14, "female", true, false, diary, new Option());
+        goToProfileScreen(event, profile);
     }
 
     public void setAgeTextFieldEventHandler() {
@@ -248,8 +248,8 @@ public class MainScreenController {
             }
         }
 
-        Profile profile = new Profile(null,null,profileName,age,sex,isPregnant,isBreastfeeding,new Diary(),new Option());
-        goToProfileScreen(event,profile);
+        Profile profile = new Profile(null, null, profileName, age, sex, isPregnant, isBreastfeeding, new Diary(), new Option());
+        goToProfileScreen(event, profile);
     }
 
     public void showUsernameHoverPane() {
@@ -307,8 +307,8 @@ public class MainScreenController {
         String password = loginPasswordField.getText();
         if (InputValidation.usernameValidation(username).equals("valid")) {
             if (InputValidation.passwordValidation(password).equals("valid")) {
-                if (DatabaseConnection.login(username,password)) {
-                    goToProfileScreen(event,DatabaseConnection.getProfileFromDb(username));
+                if (DatabaseConnection.login(username, password)) {
+                    goToProfileScreen(event, DatabaseConnection.getProfileFromDb(username));
                 } else {
                     loginMessage.setText("Account does not exist");
                     return;
@@ -330,8 +330,8 @@ public class MainScreenController {
         if (password.equals(retypePassword)) {
             if (InputValidation.usernameValidation(username).equals("valid")) {
                 if (InputValidation.passwordValidation(password).equals("valid")) {
-                    if (DatabaseConnection.register(username,password)) {
-                        goToCreateProfileScreenWithLogin(event,username,password);
+                    if (DatabaseConnection.register(username, password)) {
+                        goToCreateProfileScreenWithLogin(event, username, password);
                     } else {
                         registerMessage.setText("Username Already exists");
                         return;
@@ -352,7 +352,7 @@ public class MainScreenController {
 
     //TODO eventually remove
     public void testLogin(ActionEvent event) {
-        DatabaseConnection.login("test","testpass!I1");
-        goToProfileScreen(event,DatabaseConnection.getProfileFromDb("test"));
+        DatabaseConnection.login("test", "testpass!I1");
+        goToProfileScreen(event, DatabaseConnection.getProfileFromDb("test"));
     }
 }

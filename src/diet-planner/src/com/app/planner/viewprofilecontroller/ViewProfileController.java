@@ -93,7 +93,7 @@ public class ViewProfileController {
 
     public void saveProfileToDB() {
         if (profile.getUsername() != null) {
-            if (DatabaseConnection.saveProfileToDb(profile.getUsername(),profile)) {
+            if (DatabaseConnection.saveProfileToDb(profile.getUsername(), profile)) {
                 messageLabel.setId("successfullMessage");
                 messageLabel.setText("Successfully saved to DB");
             } else {

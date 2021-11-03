@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser;
+
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -31,7 +32,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.show();
             Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-            stage.setX((primScreenBounds.getWidth() - stage.getWidth()) /2);
+            stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
             stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
         } catch (IOException e) {
             e.printStackTrace();
@@ -41,11 +42,11 @@ public class Main extends Application {
     public static void setWindow(ActionEvent event, Parent root) {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/com/app/planner/style.css");
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        window.setX((primScreenBounds.getWidth() - window.getWidth()) /2);
+        window.setX((primScreenBounds.getWidth() - window.getWidth()) / 2);
         window.setY((primScreenBounds.getHeight() - window.getHeight()) / 2);
     }
 
@@ -55,7 +56,7 @@ public class Main extends Application {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         InputStream in = Main.class.getResourceAsStream("/data.json");
         JsonReader reader = new JsonReader(new InputStreamReader(in));
-        Food[] foods = gson.fromJson(reader,Food[].class);
+        Food[] foods = gson.fromJson(reader, Food[].class);
         List<Food> foodsList = Arrays.asList(foods);
         returnList.addAll(foodsList);
         return returnList;
@@ -65,7 +66,7 @@ public class Main extends Application {
 
         FileChooser fileChooser = new FileChooser();
 
-        Stage stage = (Stage)pane.getScene().getWindow(); // getting the window of the pane
+        Stage stage = (Stage) pane.getScene().getWindow(); // getting the window of the pane
 
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JSON Files", "*.JSON")
@@ -80,7 +81,7 @@ public class Main extends Application {
 
         FileChooser fileChooser = new FileChooser();
 
-        Stage stage = (Stage)pane.getScene().getWindow();
+        Stage stage = (Stage) pane.getScene().getWindow();
 
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JSON Files", "*.JSON")
@@ -103,7 +104,7 @@ public class Main extends Application {
     }
 
     public static ArrayList<Food> sortedFoodSearch(ArrayList<Food> foodsList, String searchWord) { // will list the results of serach from dataset in order of closest to the string searchWord
-        ArrayList<Food> resultList = foodSearch(foodsList,searchWord);
+        ArrayList<Food> resultList = foodSearch(foodsList, searchWord);
         resultList.sort(new FoodComparator(searchWord));
         Collections.reverse(resultList);
         return resultList;
@@ -111,7 +112,7 @@ public class Main extends Application {
 
     public static Food exactFoodSearch(ArrayList<Food> searchList, String searchFood) {
         Food returnFood = null;
-        for (Food food: searchList) {
+        for (Food food : searchList) {
             if (food.getFoodName().equals(searchFood)) {
                 returnFood = food;
             }
@@ -119,12 +120,12 @@ public class Main extends Application {
         return returnFood;
     }
 
-    public static ArrayList<Food> foodSearch(ArrayList<Food> searchList,String searchFood) {
+    public static ArrayList<Food> foodSearch(ArrayList<Food> searchList, String searchFood) {
         searchFood = searchFood.toLowerCase();
         List<String> searchFoodList = Arrays.asList(searchFood.split(" "));
         ArrayList<Food> returnList = new ArrayList<>();
 
-        for (Food food: searchList) {
+        for (Food food : searchList) {
             List<String> foodNameList = Arrays.asList(food.getFoodName().toLowerCase().split(", "));
             if (foodNameList.containsAll(searchFoodList)) {
                 returnList.add(food);

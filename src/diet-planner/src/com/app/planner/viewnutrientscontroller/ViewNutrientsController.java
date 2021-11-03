@@ -84,7 +84,6 @@ public class ViewNutrientsController {
         profileScreenController.initialize(profile);
     }
 
-    //2 versions of this method, 1 for individual entries and another for a week or an entire day of entries
     public void populateEntries(ArrayList<Entry> entries) {
         entryVBox.getChildren().clear();
         for (Entry entry: entries) {
@@ -209,7 +208,7 @@ public class ViewNutrientsController {
                     } else {
                         float percentValueToTarget = list.get(counter).getNutrientValue()/searchTargetNutrientsList(list.get(counter).getNutrientName(), profile.getDailyIntake().getTargetNutrients());
                         float maximumDose = searchTargetNutrientsList(list.get(counter).getNutrientName(),profile.getDailyIntake().getMaximumDoses());
-                        if (maximumDose == 0) { //0 =
+                        if (maximumDose == 0) { //0 means that the target dose is maximum dose
                             maximumDose = searchTargetNutrientsList(list.get(counter).getNutrientName(), profile.getDailyIntake().getTargetNutrients());
                         }
                         boolean isOverMaximumDose = list.get(counter).getNutrientValue() > maximumDose;
