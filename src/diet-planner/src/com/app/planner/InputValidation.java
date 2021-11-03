@@ -18,26 +18,29 @@ public class InputValidation {
         {
             return "Password should be less than 15 and more than 8 characters in length.";
         }
+
         String upperCaseChars = "(.*[A-Z].*)";
         if (!password.matches(upperCaseChars ))
         {
-
-            return "Password should contain atleast one upper case alphabet";
+            return "Password should contain at least one upper case alphabet";
         }
+
         String lowerCaseChars = "(.*[a-z].*)";
         if (!password.matches(lowerCaseChars ))
         {
-            return "Password should contain atleast one lower case alphabet";
+            return "Password should contain at least one lower case alphabet";
         }
+
         String numbers = "(.*[0-9].*)";
         if (!password.matches(numbers ))
         {
-            return "Password should contain atleast one number.";
+            return "Password should contain at least one number.";
         }
+
         String specialChars = "(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)";
         if (!password.matches(specialChars ))
         {
-            return "Password should contain atleast one special character";
+            return "Password should contain at least one special character";
         }
         return "valid";
     }

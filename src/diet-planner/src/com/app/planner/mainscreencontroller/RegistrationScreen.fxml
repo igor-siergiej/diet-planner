@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="480.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
    <children>
@@ -50,7 +51,17 @@
          <font>
             <Font size="20.0" />
          </font></Label>
-      <Button layoutX="379.0" layoutY="139.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="0.0" text="?" />
-      <Button layoutX="379.0" layoutY="213.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="0.0" text="?" />
+      <Button fx:id="usernameHoverButton" layoutX="379.0" layoutY="139.0" mnemonicParsing="false" onMouseEntered="#showUsernameHoverPane" onMouseExited="#hideUsernameHoverPane" prefHeight="1.0" prefWidth="0.0" text="?" />
+      <Button layoutX="379.0" layoutY="213.0" mnemonicParsing="false" onMouseEntered="#showPasswordHoverPane" onMouseExited="#hidePasswordHoverPane" prefHeight="1.0" prefWidth="0.0" text="?" />
+      <Pane id="hoverPane" fx:id="usernameHoverPane" layoutX="176.0" layoutY="140.0" prefHeight="115.0" prefWidth="200.0" visible="false">
+         <children>
+            <Text fx:id="usernameText" fill="WHITE" layoutX="18.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="164.00000095367432" />
+         </children>
+      </Pane>
+      <Pane id="hoverPane" fx:id="passwordHoverPane" layoutX="176.0" layoutY="214.0" prefHeight="251.0" prefWidth="200.0" visible="false">
+         <children>
+            <Text fx:id="passwordText" fill="WHITE" layoutX="18.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="164.00000095367432" />
+         </children>
+      </Pane>
    </children>
 </Pane>

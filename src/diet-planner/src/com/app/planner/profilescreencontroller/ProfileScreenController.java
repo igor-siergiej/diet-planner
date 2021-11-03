@@ -14,13 +14,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 
 import java.io.File;
 import java.io.IOException;
@@ -74,6 +74,12 @@ public class ProfileScreenController {
     @FXML
     private VBox entriesVBox;
 
+    @FXML
+    private Label calorieGoalLabel;
+
+    @FXML
+    private Label currentCalorieLabel;
+
     public void initialize(Profile profile) {
         this.profile = profile;
 
@@ -94,8 +100,12 @@ public class ProfileScreenController {
         caloriePieChart.setLegendVisible(false);
 
         float calories = profile.getNutrientValueForCurrentDay("Energy (kcal)");
+        float calorieGoal = ViewNutrientsController.searchTargetNutrientsList("Energy (kcal)", profile.getDailyIntake().getTargetNutrients());
 
-        float percentOfCalories =  calories / ViewNutrientsController.searchTargetNutrientsList("Energy (kcal)", profile.getDailyIntake().getTargetNutrients());
+        calorieGoalLabel.setText(String.valueOf(calorieGoal));
+        currentCalorieLabel.setText(String.valueOf(calories));
+
+        float percentOfCalories =  calories / calorieGoal;
         calorieProgressBar.setProgress(percentOfCalories);
         progressBarLabel.setText(String.format("%.2f", percentOfCalories) + "%");
 
@@ -128,9 +138,19 @@ public class ProfileScreenController {
 
         for (Entry entry: profile.getDiary().getEntriesDay(LocalDate.now())) {
             HBox hbox = new HBox();
-            hbox.getChildren().add(new Label(entry.getMeal().getMealName()));
-            hbox.getChildren().add(new Label(entry.getTimeEaten().toString()));
-            hbox.getChildren().add(new Label(entry.getEntryType().toString()));
+            Label label = new Label(entry.getMeal().getMealName() + " "  + entry.getNutrientValueForEntry("Energy (kcal)") + " Kcal");
+            hbox.setId("fakeButton");
+            Label label1 = new Label(entry.getEntryType().toString());
+            hbox.setAlignment(Pos.CENTER);
+            /*hbox.setMinHeight(70);
+            hbox.setMinWidth(300);*/
+            label1.setAlignment(Pos.CENTER_RIGHT);
+            hbox.getChildren().add(label);
+            Region region = new Region();
+            HBox.setHgrow(region, Priority.ALWAYS);
+            hbox.getChildren().add(region);
+            hbox.getChildren().add(label1);
+
             entriesVBox.getChildren().add(hbox);
         }
     }

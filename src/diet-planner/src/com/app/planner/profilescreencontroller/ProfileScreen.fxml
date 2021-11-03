@@ -74,7 +74,7 @@
       </Label>
       <PieChart fx:id="caloriePieChart" layoutX="250.0" layoutY="56.0" prefHeight="461.0" prefWidth="479.0" />
       <ProgressBar fx:id="calorieProgressBar" layoutX="742.0" layoutY="165.0" prefHeight="30.0" prefWidth="255.0" progress="0.0" />
-      <TableView fx:id="calorieTable" layoutX="273.0" layoutY="481.0" prefHeight="90.0" prefWidth="339.0">
+      <TableView fx:id="calorieTable" layoutX="273.0" layoutY="427.0" prefHeight="90.0" prefWidth="339.0">
         <columns>
           <TableColumn fx:id="carbohydratesColumn" editable="false" prefWidth="160.0" sortable="false" text="Carbohydrates" />
           <TableColumn fx:id="fatColumn" editable="false" prefWidth="70.0" sortable="false" text="Fat" />
@@ -89,14 +89,17 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="progressBarLabel" layoutX="851.0" layoutY="172.0" prefHeight="17.0" prefWidth="37.0" style="-fx-text-fill: black;" textAlignment="CENTER" />
-      <Label layoutX="273.0" layoutY="451.0" prefHeight="30.0" prefWidth="135.0" text="Current Goals">
+      <Label fx:id="progressBarLabel" layoutX="836.0" layoutY="165.0" prefHeight="30.0" prefWidth="68.0" style="-fx-text-fill: black;" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label layoutX="273.0" layoutY="400.0" prefHeight="30.0" prefWidth="135.0" text="Current Goals">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <VBox fx:id="entriesVBox" layoutX="742.0" layoutY="300.0" prefHeight="479.0" prefWidth="398.0" />
-      <TableView fx:id="currentCalorieTable" layoutX="273.0" layoutY="586.0" prefHeight="90.0" prefWidth="339.0">
+      <TableView fx:id="currentCalorieTable" layoutX="273.0" layoutY="532.0" prefHeight="90.0" prefWidth="339.0">
          <columns>
             <TableColumn fx:id="currentCarbohydratesColumn" editable="false" prefWidth="160.0" sortable="false" text="Carbohydrates" />
             <TableColumn fx:id="currentFatColumn" editable="false" prefWidth="70.0" sortable="false" text="Fat" />
@@ -106,7 +109,17 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="273.0" layoutY="556.0" prefHeight="30.0" prefWidth="135.0" text="Macro so far">
+      <Label layoutX="273.0" layoutY="502.0" prefHeight="30.0" prefWidth="135.0" text="Macro so far">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="currentCalorieLabel" layoutX="705.0" layoutY="197.0" prefHeight="30.0" prefWidth="75.0" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="calorieGoalLabel" layoutX="960.0" layoutY="197.0" prefHeight="30.0" prefWidth="75.0" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
