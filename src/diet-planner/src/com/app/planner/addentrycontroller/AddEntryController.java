@@ -219,7 +219,9 @@ public class AddEntryController {
         Button button = new Button();
         button.setText("X");
         button.setAlignment(Pos.CENTER_RIGHT);
-        button.setOnMouseClicked(event -> {removeFood(food.getFoodName()); updateNutrients();});
+        button.setOnMouseClicked(event -> {
+            removeFood(food.getFoodName()); updateNutrients();
+        });
 
         hbox.setSpacing(5);
         hbox.getChildren().add(label);
