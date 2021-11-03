@@ -77,19 +77,12 @@ public class InputValidation {
     }
 
     static public Boolean nameValidation(String name) {
-        if (name.matches("[a-zA-Z|\\s]")) {
-            return true;
-        } else {
-            return false;
-        }
+        return !name.matches("[a-zA-Z|\\s]");
     }
 
     static public Boolean emailValidation(String email) {
-        if (email.matches("^(.+)@(.+)$")) {
-            return true;
-        } else {
-            return false;
-        }
+        return !email.matches("^(.+)@(.+)$");
+
     }
 
     static public String weightValidation( String string) {
