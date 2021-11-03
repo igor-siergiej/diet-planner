@@ -11,10 +11,18 @@
     -fx-background-color: #0056B3;
     -fx-text-fill: white;
     -fx-background-radius: 15px;
-    -fx-font-size: 15px;
+    -fx-font-size: 20px;
     -fx-border-color: white;
     -fx-border-radius: 15px;
     -fx-padding: 10;
+}
+
+#hoverPane{
+    -fx-background-color: #1a1a1a;
+    -fx-background-radius: 15px;
+    -fx-font-size: 15px;
+    -fx-border-color: white;
+    -fx-border-radius: 15px;
 }
 
 .button:hover {

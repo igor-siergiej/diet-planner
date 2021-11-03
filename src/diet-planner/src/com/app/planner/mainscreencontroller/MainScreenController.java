@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import jdk.internal.util.xml.impl.Input;
 
 import javax.mail.Message;
@@ -98,6 +99,18 @@ public class MainScreenController {
 
     @FXML
     private TextArea messageTextField;
+
+    @FXML
+    private Pane usernameHoverPane;
+
+    @FXML
+    private Pane passwordHoverPane;
+
+    @FXML
+    private Text passwordText;
+
+    @FXML
+    private Text usernameText;
 
     public void goToAboutUsScreen(ActionEvent event) {
         goToScreen(event,"mainscreencontroller/AboutUsScreen.fxml");
@@ -237,6 +250,25 @@ public class MainScreenController {
 
         Profile profile = new Profile(null,null,profileName,age,sex,isPregnant,isBreastfeeding,new Diary(),new Option());
         goToProfileScreen(event,profile);
+    }
+
+    public void showUsernameHoverPane() {
+        usernameText.setText("Username should: \n• be between 4 and 20 characters in length");
+        usernameHoverPane.setVisible(true);
+    }
+
+    public void hideUsernameHoverPane() {
+        usernameHoverPane.setVisible(false);
+    }
+
+    public void showPasswordHoverPane() {
+        passwordText.setText("Password should: \n• be between 15 and 8 characters \n• contain at least one upper case letter" +
+                "\n• contain at least one lower case letter \n• contain at least one number \n• contain at least one special character ");
+        passwordHoverPane.setVisible(true);
+    }
+
+    public void hidePasswordHoverPane() {
+        passwordHoverPane.setVisible(false);
     }
 
     public void loadFemalePane() {

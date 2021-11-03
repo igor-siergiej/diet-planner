@@ -15,11 +15,11 @@ class DatabaseConnectionTest {
 
     @Test
     void register() {
-        assertEquals(false,DatabaseConnection.register(username,password),"Should not be able to register an account with a username that already exists");
+        assertFalse(DatabaseConnection.register(username, password), "Should not be able to register an account with a username that already exists");
     }
 
     @Test
     void login() {
-        assertEquals(true,DatabaseConnection.login(username,password),"Should be able to login using correct creditentials");
+        assertTrue(DatabaseConnection.login(username, password), "Should be able to login using correct creditentials");
     }
 }

@@ -1,6 +1,8 @@
 package com.app.planner;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Entry implements Comparable{
     private Meal meal;
@@ -50,5 +52,20 @@ public class Entry implements Comparable{
     public int compareTo(Object o) {
         Entry entry = (Entry)o;
         return entry.getTimeEaten().compareTo(this.getTimeEaten());
+    }
+
+    public float getNutrientValueForEntry(String nutrientName) {
+        float value = 0;
+        ArrayList<Nutrient> nutrients = new ArrayList<>();
+        for (Food food :this.getMeal().getFoods()) {
+            nutrients.addAll(food.getNutrients());
+        }
+        ArrayList<Nutrient> combinedList = Main.combineNutrientList(nutrients);
+        for (Nutrient nutrient : combinedList) {
+            if (nutrient.getNutrientName().equals(nutrientName)) {
+                value = nutrient.getNutrientValue();
+            }
+        }
+        return value;
     }
 }
