@@ -52,12 +52,6 @@ public class ProfileScreenController {
     private TableColumn proteinColumn;
 
     @FXML
-    private ProgressBar calorieProgressBar;
-
-    @FXML
-    private Label progressBarLabel;
-
-    @FXML
     private TableView currentCalorieTable;
 
     @FXML
@@ -73,25 +67,67 @@ public class ProfileScreenController {
     private VBox entriesVBox;
 
     @FXML
+    private ProgressBar calorieProgressBar;
+
+    @FXML
+    private ProgressBar carbsProgressBar;
+
+    @FXML
+    private ProgressBar fatProgressBar;
+
+    @FXML
+    private ProgressBar proteinProgressBar;
+
+    @FXML
     private Label calorieGoalLabel;
 
     @FXML
     private Label currentCalorieLabel;
 
-    public void initialize(Profile profile) {
+    @FXML
+    private Label calorieProgressBarLabel;
+
+    @FXML
+    private Label carbsGoalLabel;
+
+    @FXML
+    private Label currentCarbsLabel;
+
+    @FXML
+    private Label carbsProgressBarLabel;
+
+    @FXML
+    private Label fatGoalLabel;
+
+    @FXML
+    private Label currentFatLabel;
+
+    @FXML
+    private Label fatProgressBarLabel;
+
+    @FXML
+    private Label proteinGoalLabel;
+
+    @FXML
+    private Label currentProteinLabel;
+
+    @FXML
+    private Label proteinProgressBarLabel;
+
+    public void initialize(Profile profile) { // cut this into several methods so it's easier to read.
         this.profile = profile;
 
-        Float carbs = ViewNutrientsController.searchTargetNutrientsList("Carbohydrates", profile.getDailyIntake().getTargetNutrients());
-        Float fat = ViewNutrientsController.searchTargetNutrientsList("Fat", profile.getDailyIntake().getTargetNutrients());
-        Float protein = ViewNutrientsController.searchTargetNutrientsList("Protein", profile.getDailyIntake().getTargetNutrients());
+        Float carbsGoal = ViewNutrientsController.searchTargetNutrientsList("Carbohydrates", profile.getDailyIntake().getTargetNutrients());
+        Float fatGoal = ViewNutrientsController.searchTargetNutrientsList("Fat", profile.getDailyIntake().getTargetNutrients());
+        Float proteinGoal = ViewNutrientsController.searchTargetNutrientsList("Protein", profile.getDailyIntake().getTargetNutrients());
 
-        Float total = carbs + fat + protein;
+        Float total = carbsGoal + fatGoal + proteinGoal;
 
         ObservableList<PieChart.Data> pieChartData =
                 observableArrayList( //name = visual, (need to calculate percentage manually, value = just value, percentage will be calculated automatically
-                        new PieChart.Data("Fat " + String.format("%.1f", fat / total * 100) + "%", fat),
-                        new PieChart.Data("Carbohydrates " + String.format("%.1f", carbs / total * 100) + "%", carbs),
-                        new PieChart.Data("Protein " + String.format("%.1f", protein / total * 100) + "%", protein));
+                        new PieChart.Data("Fat " + String.format("%.1f", fatGoal / total * 100) + "%", fatGoal),
+                        new PieChart.Data("Carbohydrates " + String.format("%.1f", carbsGoal / total * 100) + "%", carbsGoal),
+                        new PieChart.Data("Protein " + String.format("%.1f", proteinGoal / total * 100) + "%", proteinGoal));
 
 
         caloriePieChart.setData(pieChartData);
@@ -105,10 +141,40 @@ public class ProfileScreenController {
 
         float percentOfCalories = calories / calorieGoal;
         calorieProgressBar.setProgress(percentOfCalories);
-        progressBarLabel.setText(String.format("%.2f", percentOfCalories) + "%");
+        calorieProgressBarLabel.setText(String.format("%.2f", percentOfCalories * 100) + "%");
 
-        preventColumnMoving(calorieTable, carbohydratesColumn, fatColumn, proteinColumn);
-        preventColumnMoving(currentCalorieTable, currentCarbohydratesColumn, currentFatColumn, currentProteinColumn);
+        float carbs = profile.getNutrientValueForCurrentDay("Carbohydrates");
+        float fat = profile.getNutrientValueForCurrentDay("Fat");
+        float protein = profile.getNutrientValueForCurrentDay("Protein");
+
+        carbsGoalLabel.setText(String.valueOf(carbsGoal));
+        fatGoalLabel.setText(String.valueOf(fatGoal));
+        proteinGoalLabel.setText(String.valueOf(proteinGoal));
+
+        float percentOfCarbs = carbs / carbsGoal;
+        carbsProgressBar.setProgress(percentOfCarbs);
+        carbsProgressBarLabel.setText(String.format("%.2f", percentOfCarbs * 100) + "%");
+
+        Float percentOfFat = fat / fatGoal;
+        fatProgressBar.setProgress(percentOfFat);
+        fatProgressBarLabel.setText(String.format("%.2f", percentOfFat * 100) + "%");
+
+        float percentOfProtein = protein / proteinGoal;
+        proteinProgressBar.setProgress(percentOfProtein);
+        proteinProgressBarLabel.setText(String.format("%.2f", percentOfProtein * 100) + "%");
+
+        currentCarbsLabel.setText(String.valueOf(carbs));
+        currentFatLabel.setText(String.valueOf(fat));
+        currentProteinLabel.setText(String.valueOf(protein));
+
+
+        carbohydratesColumn.getStyleClass().add("carbs");
+        fatColumn.getStyleClass().add("fat");
+        proteinColumn.getStyleClass().add("protein");
+
+        currentCarbohydratesColumn.getStyleClass().add("carbs");
+        currentFatColumn.getStyleClass().add("fat");
+        currentProteinColumn.getStyleClass().add("protein");
 
         // Setting up the calorieTable
         carbohydratesColumn.setCellValueFactory(new PropertyValueFactory<>("carbohydrates"));
@@ -121,6 +187,8 @@ public class ProfileScreenController {
                         ViewNutrientsController.searchTargetNutrientsList("Protein", profile.getDailyIntake().getTargetNutrients()))
         );
         calorieTable.setItems(observableList);
+
+        preventColumnMoving(calorieTable, carbohydratesColumn, fatColumn, proteinColumn);
 
         // Setting up the currentCalorieTable
         currentCarbohydratesColumn.setCellValueFactory(new PropertyValueFactory<>("carbohydrates"));
@@ -135,6 +203,8 @@ public class ProfileScreenController {
         );
 
         currentCalorieTable.setItems(currentObservableList);
+
+        preventColumnMoving(currentCalorieTable, currentCarbohydratesColumn, currentFatColumn, currentProteinColumn);
 
         for (Entry entry : profile.getDiary().getEntriesDay(LocalDate.now())) { //this will populate entriesVBox with all the entries for current day displaying details
             Label label = new Label(entry.getMeal().getMealName() + " " + entry.getEntryType().toString());

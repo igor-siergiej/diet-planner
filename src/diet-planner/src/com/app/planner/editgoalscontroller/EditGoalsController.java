@@ -130,9 +130,9 @@ public class EditGoalsController {
 
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
-                        new PieChart.Data("Protein " + String.format("%.1f", protein / total * 100) + "%", protein),
                         new PieChart.Data("Fat " + String.format("%.1f", fat / total * 100) + "%", fat),
-                        new PieChart.Data("Carbohydrates " + String.format("%.1f", carbs / total * 100) + "%", carbs));
+                        new PieChart.Data("Carbohydrates " + String.format("%.1f", carbs / total * 100) + "%", carbs),
+                        new PieChart.Data("Protein " + String.format("%.1f", protein / total * 100) + "%", protein));
 
         macroPieChart.setData(pieChartData);
         macroPieChart.setLegendVisible(false);
