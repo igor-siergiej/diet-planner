@@ -67,14 +67,14 @@
             <Font size="25.0" />
          </font>
       </Button>
-      <Label layoutX="742.0" layoutY="120.0" prefHeight="30.0" prefWidth="188.0" text="Calorie Progress">
+      <Label layoutX="742.0" layoutY="112.0" prefHeight="30.0" prefWidth="188.0" text="Calorie Progress">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <PieChart fx:id="caloriePieChart" layoutX="250.0" layoutY="56.0" prefHeight="461.0" prefWidth="479.0" />
-      <ProgressBar fx:id="calorieProgressBar" layoutX="742.0" layoutY="165.0" prefHeight="30.0" prefWidth="255.0" progress="0.0" />
-      <TableView fx:id="calorieTable" layoutX="273.0" layoutY="427.0" prefHeight="90.0" prefWidth="339.0">
+      <PieChart fx:id="caloriePieChart" layoutX="252.0" layoutY="-35.0" prefHeight="461.0" prefWidth="479.0" />
+      <ProgressBar fx:id="calorieProgressBar" layoutX="743.0" layoutY="143.0" prefHeight="30.0" prefWidth="255.0" progress="0.0" />
+      <TableView fx:id="calorieTable" layoutX="273.0" layoutY="330.0" prefHeight="90.0" prefWidth="339.0">
         <columns>
           <TableColumn fx:id="carbohydratesColumn" editable="false" prefWidth="160.0" sortable="false" text="Carbohydrates" />
           <TableColumn fx:id="fatColumn" editable="false" prefWidth="70.0" sortable="false" text="Fat" />
@@ -84,22 +84,22 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="742.0" layoutY="263.0" text="Today's Meals">
+      <Label layoutX="742.0" layoutY="211.0" text="Today's Meals">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="progressBarLabel" layoutX="836.0" layoutY="165.0" prefHeight="30.0" prefWidth="68.0" style="-fx-text-fill: black;" textAlignment="CENTER">
+      <Label fx:id="calorieProgressBarLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="826.0" layoutY="143.0" prefHeight="30.0" prefWidth="90.0" style="-fx-text-fill: black;" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font></Label>
-      <Label layoutX="273.0" layoutY="400.0" prefHeight="30.0" prefWidth="135.0" text="Current Goals">
+      <Label layoutX="273.0" layoutY="300.0" prefHeight="30.0" prefWidth="135.0" text="Current Goals">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <VBox fx:id="entriesVBox" layoutX="742.0" layoutY="300.0" prefHeight="479.0" prefWidth="398.0" />
-      <TableView fx:id="currentCalorieTable" layoutX="273.0" layoutY="532.0" prefHeight="90.0" prefWidth="339.0">
+      <VBox fx:id="entriesVBox" layoutX="742.0" layoutY="241.0" prefHeight="542.0" prefWidth="398.0" />
+      <TableView fx:id="currentCalorieTable" layoutX="273.0" layoutY="435.0" prefHeight="90.0" prefWidth="339.0">
          <columns>
             <TableColumn fx:id="currentCarbohydratesColumn" editable="false" prefWidth="160.0" sortable="false" text="Carbohydrates" />
             <TableColumn fx:id="currentFatColumn" editable="false" prefWidth="70.0" sortable="false" text="Fat" />
@@ -109,7 +109,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="273.0" layoutY="502.0" prefHeight="30.0" prefWidth="135.0" text="Macro so far">
+      <Label layoutX="273.0" layoutY="405.0" prefHeight="30.0" prefWidth="135.0" text="Macro so far">
          <font>
             <Font size="20.0" />
          </font>
@@ -119,7 +119,95 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="calorieGoalLabel" layoutX="960.0" layoutY="197.0" prefHeight="30.0" prefWidth="75.0" textAlignment="CENTER">
+      <Label fx:id="calorieGoalLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="961.0" layoutY="173.0" prefHeight="30.0" prefWidth="75.0" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ProgressBar fx:id="carbsProgressBar" layoutX="300.0" layoutY="540.0" prefHeight="30.0" prefWidth="255.0" progress="0.0" />
+      <Label fx:id="carbsProgressBarLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="384.0" layoutY="540.0" prefHeight="30.0" prefWidth="90.0" style="-fx-text-fill: black;" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="299.0" layoutY="511.0" prefHeight="30.0" prefWidth="218.0" text="Carbohydrates Progress">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ProgressBar fx:id="fatProgressBar" layoutX="300.0" layoutY="631.0" prefHeight="30.0" prefWidth="255.0" progress="0.0" />
+      <Label fx:id="fatProgressBarLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="384.0" layoutY="631.0" prefHeight="30.0" prefWidth="90.0" style="-fx-text-fill: black;" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ProgressBar fx:id="proteinProgressBar" layoutX="301.0" layoutY="721.0" prefHeight="30.0" prefWidth="255.0" progress="0.0" />
+      <Label fx:id="proteinProgressBarLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="384.0" layoutY="721.0" prefHeight="30.0" prefWidth="90.0" style="-fx-text-fill: black;" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="299.0" layoutY="600.0" prefHeight="30.0" prefWidth="218.0" text="Fat Progress">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="299.0" layoutY="691.0" prefHeight="30.0" prefWidth="218.0" text="Protein Progress">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="currentCalorieLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="834.0" layoutY="173.0" prefHeight="30.0" prefWidth="75.0" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="currentCarbsLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="390.0" layoutY="571.0" prefHeight="30.0" prefWidth="75.0" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="carbsGoalLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" layoutY="571.0" prefHeight="30.0" prefWidth="75.0" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="currentFatLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="390.0" layoutY="661.0" prefHeight="30.0" prefWidth="75.0" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="fatGoalLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" layoutY="661.0" prefHeight="30.0" prefWidth="75.0" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="proteinGoalLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" layoutY="753.0" prefHeight="30.0" prefWidth="75.0" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="currentProteinLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="390.0" layoutY="753.0" prefHeight="30.0" prefWidth="75.0" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="706.0" layoutY="173.0" prefHeight="30.0" prefWidth="75.0" text="0" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="571.0" prefHeight="30.0" prefWidth="75.0" text="0" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="661.0" prefHeight="30.0" prefWidth="75.0" text="0" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="753.0" prefHeight="30.0" prefWidth="75.0" text="0" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
