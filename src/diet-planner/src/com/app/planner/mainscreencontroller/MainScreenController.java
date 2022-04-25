@@ -1,11 +1,7 @@
 package com.app.planner.mainscreencontroller;
 
 import com.app.planner.*;
-import com.app.planner.profilescreencontroller.ProfileScreenController;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+//import com.app.planner.profilescreencontroller.ProfileScreenController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,25 +13,16 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import jdk.internal.util.xml.impl.Input;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.Authenticator;
-import java.net.PasswordAuthentication;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Properties;
+
 
 public class MainScreenController {
     Profile profile;
@@ -130,10 +117,10 @@ public class MainScreenController {
         goToScreen(event, "mainscreencontroller/MainScreen.fxml");
     }
 
-    public void goToProfileScreen(ActionEvent event, Profile profile) { // this method will open the profile screen window
+    /*public void goToProfileScreen(ActionEvent event, Profile profile) { // this method will open the profile screen window
         ProfileScreenController profileScreenController = goToScreen(event, "profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.initialize(profile);
-    }
+    }*/
 
     public void goToCreateProfileScreenWithLogin(ActionEvent event, String username, String password) { // this method will open the profile screen window
         MainScreenController mainScreenController = goToScreen(event, "mainscreencontroller/CreateProfileScreen.fxml").getController();
@@ -223,7 +210,7 @@ public class MainScreenController {
         diary.addEntry(entry3);
 
         Profile profile = new Profile("", "", "testProfile", 14, "female", true, false, diary, new Option());
-        goToProfileScreen(event, profile);
+        //goToProfileScreen(event, profile);
     }
 
     public void setAgeTextFieldEventHandler() {
@@ -249,7 +236,7 @@ public class MainScreenController {
         }
 
         Profile profile = new Profile(null, null, profileName, age, sex, isPregnant, isBreastfeeding, new Diary(), new Option());
-        goToProfileScreen(event, profile);
+        //goToProfileScreen(event, profile);
     }
 
     public void showUsernameHoverPane() {
@@ -285,7 +272,7 @@ public class MainScreenController {
         File file = Main.chooseLoadFile(mainPane);
         if (!(file == null)) {
             profile.loadFromFile(file);
-            goToProfileScreen(event, profile);
+            //goToProfileScreen(event, profile);
         } else {
             System.out.println("Choosing File closed!");
         }
@@ -308,7 +295,7 @@ public class MainScreenController {
         if (InputValidation.usernameValidation(username).equals("valid")) {
             if (InputValidation.passwordValidation(password).equals("valid")) {
                 if (DatabaseConnection.login(username, password)) {
-                    goToProfileScreen(event, DatabaseConnection.getProfileFromDb(username));
+                    //goToProfileScreen(event, DatabaseConnection.getProfileFromDb(username));
                 } else {
                     loginMessage.setText("Account does not exist");
                     return;
@@ -353,6 +340,6 @@ public class MainScreenController {
     //TODO eventually remove
     public void testLogin(ActionEvent event) {
         DatabaseConnection.login("test", "testpass!I1");
-        goToProfileScreen(event, DatabaseConnection.getProfileFromDb("test"));
+        //goToProfileScreen(event, DatabaseConnection.getProfileFromDb("test"));
     }
 }
