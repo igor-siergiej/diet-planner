@@ -1,0 +1,251 @@
+.button {
+    -fx-background-color: #0056B3;
+    -fx-text-fill: white;
+    -fx-background-radius: 15px;
+    -fx-font-size: 20px;
+    -fx-border-color: white;
+    -fx-border-radius: 15px;
+}
+
+#fakeButton {
+    -fx-background-color: #0056B3;
+    -fx-text-fill: white;
+    -fx-background-radius: 15px;
+    -fx-font-size: 20px;
+    -fx-border-color: white;
+    -fx-border-radius: 15px;
+    -fx-padding: 10;
+}
+
+#hoverPane {
+    -fx-background-color: #1a1a1a;
+    -fx-background-radius: 15px;
+    -fx-font-size: 15px;
+    -fx-border-color: white;
+    -fx-border-radius: 15px;
+}
+
+.button:hover {
+    -fx-background-color: #004599;
+}
+
+.label {
+    -fx-text-fill: #ffffff;
+
+}
+
+.root {
+    -fx-background-color: #1a1a1a;
+}
+
+.spinner {
+    -fx-font-size: 20px;
+}
+
+.combo-box {
+    -fx-font-size: 20px;
+}
+
+.table-view {
+    -fx-font-size: 20px;
+    -fx-background-color: #1a1a1a;
+}
+
+.table-view .column-header.protein {
+    -fx-background-color: #33d463;
+}
+
+.table-view .column-header.carbs {
+    -fx-background-color: #4b33d4;
+}
+
+.table-view .column-header.fat {
+    -fx-background-color: #33a4d4;
+}
+
+.table-view .table-column {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: #1a1a1a;
+}
+
+#calendarPane {
+    -fx-border-width: 2px;
+    -fx-border-color: #0056B3;
+}
+
+#currentDay {
+    -fx-border-width: 4px;
+    -fx-border-color: green;
+}
+
+#selectedDay {
+    -fx-border-width: 4px;
+    -fx-border-color: blue;
+}
+
+#titleLabel {
+    -fx-text-fill: #0056B3;
+    -fx-font-weight: bold;
+}
+
+#titleLabel .text {
+    -fx-stroke-width: 0.5;
+    -fx-stroke: white;
+}
+
+#labelPane {
+    -fx-border-width: 4px;
+    -fx-border-color: white;
+}
+
+#notFound {
+    -fx-accent: red;
+}
+
+#successfullMessage {
+    -fx-text-fill: green
+}
+
+#unsuccessfullMessage {
+    -fx-text-fill: red
+}
+
+#entryLabel {
+    -fx-font-size: 15;
+    -fx-text-fill: black;
+    -fx-border-width: 0 0 0 2;
+    -fx-border-color: blue;
+    -fx-background-color: #0056B3;
+    -fx-padding: 10 5;
+    -fx-background-radius: 5;
+}
+
+.hyperlink {
+    -fx-border-color: transparent;
+    -fx-padding: 4 0;
+}
+
+.chart-pie-label-line {
+    -fx-stroke: white;
+    -fx-fill: white;
+}
+
+.nutrients-label {
+    -fx-underline: true;
+}
+
+#menuButton {
+    -fx-background-color: #0056B3;
+    -fx-text-fill: white;
+    -fx-background-radius: 15px;
+}
+
+.chart-pie-label { /*this is what you need for labels*/
+    -fx-fill: white;
+    -fx-font-size: 1em;
+}
+
+#mainMenuButton {
+    -fx-font-size: 25;
+}
+
+.chart-pie {
+    -fx-border-color: derive(-fx-pie-color, -40%);
+    -fx-border-width: 3px;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+#resultsPane {
+    -fx-background-color: #1a1a1a;
+}
+
+#nameLabel {
+    -fx-text-fill: #ffffff;
+}
+
+#percentLabel {
+    -fx-text-fill: #ffffff;
+}
+
+#valueLabel {
+    -fx-text-fill: #ffffff;
+}
+
+#datePicker .label {
+    -fx-text-fill: black;
+}
+
+#message {
+    -fx-text-fill: red;
+}
+
+.data0.chart-pie {
+    -fx-pie-color: #33a4d4;
+}
+
+.data1.chart-pie {
+    -fx-pie-color: #4b33d4;
+}
+
+.data2.chart-pie {
+    -fx-pie-color: #33d463;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-radius: 2.0em;
+}
+
+
+.scroll-bar:horizontal .increment-button,
+.scroll-bar:horizontal .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 0.0 0.0 10.0;
+
+}
+
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 0.0 10.0 0.0 0.0;
+
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0.15em 0.0;
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0.0 0.15em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: derive(black, 90.0%);
+    -fx-background-insets: 2.0, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+}
+
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: derive(#4D4C4F, 10.0%);
+    -fx-background-insets: 2.0, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+}

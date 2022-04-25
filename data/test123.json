@@ -1,0 +1,2065 @@
+{
+  "profileName": "testProfile",
+  "age": 20,
+  "sex": "male",
+  "pregnant": false,
+  "breastFeeding": false,
+  "diary": {
+    "entries": [
+      {
+        "meal": {
+          "mealName": "breakfast1",
+          "foods": [
+            {
+              "foodName": "Chicken, skin, raw",
+              "nutrients": [
+                {
+                  "nutrientName": "Water",
+                  "nutrientValue": 42.7
+                },
+                {
+                  "nutrientName": "Total Nitrogen",
+                  "nutrientValue": 1.55
+                },
+                {
+                  "nutrientName": "Protein",
+                  "nutrientValue": 9.7
+                },
+                {
+                  "nutrientName": "Fat",
+                  "nutrientValue": 48.3
+                },
+                {
+                  "nutrientName": "Carbohydrates",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Energy (kcal)",
+                  "nutrientValue": 473.99997
+                },
+                {
+                  "nutrientName": "Energy (kJ)",
+                  "nutrientValue": 1953.0001
+                },
+                {
+                  "nutrientName": "Starch",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Total Sugar",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Glucose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Galactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Fructose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Sucrose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Maltose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Lactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "NSP Fibre",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "AOAC Fibre",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Saturated Fat",
+                  "nutrientValue": 13.6
+                },
+                {
+                  "nutrientName": "Omega 6",
+                  "nutrientValue": 6.7100005
+                },
+                {
+                  "nutrientName": "Omega 3",
+                  "nutrientValue": 1.35
+                },
+                {
+                  "nutrientName": "Mono FA",
+                  "nutrientValue": 23.6
+                },
+                {
+                  "nutrientName": "Poly FA",
+                  "nutrientValue": 8.1
+                },
+                {
+                  "nutrientName": "Trans FA",
+                  "nutrientValue": 0.67
+                },
+                {
+                  "nutrientName": "Cholesterol",
+                  "nutrientValue": 135.0
+                },
+                {
+                  "nutrientName": "Sodium",
+                  "nutrientValue": 50.0
+                },
+                {
+                  "nutrientName": "Potassium",
+                  "nutrientValue": 130.0
+                },
+                {
+                  "nutrientName": "Calcium",
+                  "nutrientValue": 8.0
+                },
+                {
+                  "nutrientName": "Magnesium",
+                  "nutrientValue": 9.0
+                },
+                {
+                  "nutrientName": "Phosphorus",
+                  "nutrientValue": 91.0
+                },
+                {
+                  "nutrientName": "Iron",
+                  "nutrientValue": 0.6
+                },
+                {
+                  "nutrientName": "Copper",
+                  "nutrientValue": 0.1
+                },
+                {
+                  "nutrientName": "Zinc",
+                  "nutrientValue": 0.7
+                },
+                {
+                  "nutrientName": "Chloride",
+                  "nutrientValue": 57.0
+                },
+                {
+                  "nutrientName": "Manganese",
+                  "nutrientValue": 0.01
+                },
+                {
+                  "nutrientName": "Selenium",
+                  "nutrientValue": 9.0
+                },
+                {
+                  "nutrientName": "Iodine",
+                  "nutrientValue": 16.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 64.0
+                },
+                {
+                  "nutrientName": "Carotene",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 64.0
+                },
+                {
+                  "nutrientName": "Vitamin D",
+                  "nutrientValue": 1.9
+                },
+                {
+                  "nutrientName": "Vitamin E",
+                  "nutrientValue": 0.15
+                },
+                {
+                  "nutrientName": "Vitamin K",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin B1",
+                  "nutrientValue": 0.04
+                },
+                {
+                  "nutrientName": "Vitamin B2",
+                  "nutrientValue": 0.44
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 2.7
+                },
+                {
+                  "nutrientName": "Tryptophan",
+                  "nutrientValue": 0.9
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 3.6
+                },
+                {
+                  "nutrientName": "Vitamin B6",
+                  "nutrientValue": 0.08
+                },
+                {
+                  "nutrientName": "Vitamin B12",
+                  "nutrientValue": 1.0
+                },
+                {
+                  "nutrientName": "Vitamin B9",
+                  "nutrientValue": 4.0
+                },
+                {
+                  "nutrientName": "Vitamin B5",
+                  "nutrientValue": 0.64
+                },
+                {
+                  "nutrientName": "Vitamin B7",
+                  "nutrientValue": 2.0
+                },
+                {
+                  "nutrientName": "Vitamin C",
+                  "nutrientValue": 0.0
+                }
+              ]
+            },
+            {
+              "foodName": "Pate, liver",
+              "nutrients": [
+                {
+                  "nutrientName": "Water",
+                  "nutrientValue": 47.6
+                },
+                {
+                  "nutrientName": "Total Nitrogen",
+                  "nutrientValue": 2.02
+                },
+                {
+                  "nutrientName": "Protein",
+                  "nutrientValue": 12.6
+                },
+                {
+                  "nutrientName": "Fat",
+                  "nutrientValue": 32.7
+                },
+                {
+                  "nutrientName": "Carbohydrates",
+                  "nutrientValue": 1.2
+                },
+                {
+                  "nutrientName": "Energy (kcal)",
+                  "nutrientValue": 349.0
+                },
+                {
+                  "nutrientName": "Energy (kJ)",
+                  "nutrientValue": 1443.0
+                },
+                {
+                  "nutrientName": "Starch",
+                  "nutrientValue": 0.8
+                },
+                {
+                  "nutrientName": "Total Sugar",
+                  "nutrientValue": 0.4
+                },
+                {
+                  "nutrientName": "Glucose",
+                  "nutrientValue": 0.4
+                },
+                {
+                  "nutrientName": "Galactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Fructose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Sucrose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Maltose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Lactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "NSP Fibre",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "AOAC Fibre",
+                  "nutrientValue": 0.6
+                },
+                {
+                  "nutrientName": "Saturated Fat",
+                  "nutrientValue": 9.5
+                },
+                {
+                  "nutrientName": "Omega 6",
+                  "nutrientValue": 2.7
+                },
+                {
+                  "nutrientName": "Omega 3",
+                  "nutrientValue": 0.24
+                },
+                {
+                  "nutrientName": "Mono FA",
+                  "nutrientValue": 11.8
+                },
+                {
+                  "nutrientName": "Poly FA",
+                  "nutrientValue": 3.0
+                },
+                {
+                  "nutrientName": "Trans FA",
+                  "nutrientValue": 0.02
+                },
+                {
+                  "nutrientName": "Cholesterol",
+                  "nutrientValue": 170.0
+                },
+                {
+                  "nutrientName": "Sodium",
+                  "nutrientValue": 750.0
+                },
+                {
+                  "nutrientName": "Potassium",
+                  "nutrientValue": 150.0
+                },
+                {
+                  "nutrientName": "Calcium",
+                  "nutrientValue": 16.0
+                },
+                {
+                  "nutrientName": "Magnesium",
+                  "nutrientValue": 11.0
+                },
+                {
+                  "nutrientName": "Phosphorus",
+                  "nutrientValue": 450.0
+                },
+                {
+                  "nutrientName": "Iron",
+                  "nutrientValue": 5.9
+                },
+                {
+                  "nutrientName": "Copper",
+                  "nutrientValue": 0.46
+                },
+                {
+                  "nutrientName": "Zinc",
+                  "nutrientValue": 2.8
+                },
+                {
+                  "nutrientName": "Chloride",
+                  "nutrientValue": 880.0
+                },
+                {
+                  "nutrientName": "Manganese",
+                  "nutrientValue": 0.16
+                },
+                {
+                  "nutrientName": "Selenium",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Iodine",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 7300.0
+                },
+                {
+                  "nutrientName": "Carotene",
+                  "nutrientValue": 130.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 7322.0
+                },
+                {
+                  "nutrientName": "Vitamin D",
+                  "nutrientValue": 1.2
+                },
+                {
+                  "nutrientName": "Vitamin E",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin K",
+                  "nutrientValue": 0.95
+                },
+                {
+                  "nutrientName": "Vitamin B1",
+                  "nutrientValue": 0.1
+                },
+                {
+                  "nutrientName": "Vitamin B2",
+                  "nutrientValue": 1.17
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 1.9
+                },
+                {
+                  "nutrientName": "Tryptophan",
+                  "nutrientValue": 2.8
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 4.7
+                },
+                {
+                  "nutrientName": "Vitamin B6",
+                  "nutrientValue": 0.25
+                },
+                {
+                  "nutrientName": "Vitamin B12",
+                  "nutrientValue": 8.0
+                },
+                {
+                  "nutrientName": "Vitamin B9",
+                  "nutrientValue": 99.0
+                },
+                {
+                  "nutrientName": "Vitamin B5",
+                  "nutrientValue": 2.1
+                },
+                {
+                  "nutrientName": "Vitamin B7",
+                  "nutrientValue": 14.0
+                },
+                {
+                  "nutrientName": "Vitamin C",
+                  "nutrientValue": 0.0
+                }
+              ]
+            },
+            {
+              "foodName": "Eggs, duck, whole, raw",
+              "nutrients": [
+                {
+                  "nutrientName": "Water",
+                  "nutrientValue": 70.6
+                },
+                {
+                  "nutrientName": "Total Nitrogen",
+                  "nutrientValue": 2.29
+                },
+                {
+                  "nutrientName": "Protein",
+                  "nutrientValue": 14.300001
+                },
+                {
+                  "nutrientName": "Fat",
+                  "nutrientValue": 11.8
+                },
+                {
+                  "nutrientName": "Carbohydrates",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Energy (kcal)",
+                  "nutrientValue": 163.0
+                },
+                {
+                  "nutrientName": "Energy (kJ)",
+                  "nutrientValue": 680.0
+                },
+                {
+                  "nutrientName": "Starch",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Total Sugar",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Glucose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Galactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Fructose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Sucrose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Maltose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Lactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "NSP Fibre",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "AOAC Fibre",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Saturated Fat",
+                  "nutrientValue": 2.9
+                },
+                {
+                  "nutrientName": "Omega 6",
+                  "nutrientValue": 1.81
+                },
+                {
+                  "nutrientName": "Omega 3",
+                  "nutrientValue": 0.2
+                },
+                {
+                  "nutrientName": "Mono FA",
+                  "nutrientValue": 4.9
+                },
+                {
+                  "nutrientName": "Poly FA",
+                  "nutrientValue": 2.0
+                },
+                {
+                  "nutrientName": "Trans FA",
+                  "nutrientValue": 0.1
+                },
+                {
+                  "nutrientName": "Cholesterol",
+                  "nutrientValue": 680.0
+                },
+                {
+                  "nutrientName": "Sodium",
+                  "nutrientValue": 120.00001
+                },
+                {
+                  "nutrientName": "Potassium",
+                  "nutrientValue": 190.0
+                },
+                {
+                  "nutrientName": "Calcium",
+                  "nutrientValue": 63.0
+                },
+                {
+                  "nutrientName": "Magnesium",
+                  "nutrientValue": 16.0
+                },
+                {
+                  "nutrientName": "Phosphorus",
+                  "nutrientValue": 200.0
+                },
+                {
+                  "nutrientName": "Iron",
+                  "nutrientValue": 2.9
+                },
+                {
+                  "nutrientName": "Copper",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Zinc",
+                  "nutrientValue": 1.4
+                },
+                {
+                  "nutrientName": "Chloride",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Manganese",
+                  "nutrientValue": 0.1
+                },
+                {
+                  "nutrientName": "Selenium",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Iodine",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 540.0
+                },
+                {
+                  "nutrientName": "Carotene",
+                  "nutrientValue": 120.00001
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 560.0
+                },
+                {
+                  "nutrientName": "Vitamin D",
+                  "nutrientValue": 5.0
+                },
+                {
+                  "nutrientName": "Vitamin E",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin K",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin B1",
+                  "nutrientValue": 0.16
+                },
+                {
+                  "nutrientName": "Vitamin B2",
+                  "nutrientValue": 0.47
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 0.2
+                },
+                {
+                  "nutrientName": "Tryptophan",
+                  "nutrientValue": 4.2
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 4.4
+                },
+                {
+                  "nutrientName": "Vitamin B6",
+                  "nutrientValue": 0.25
+                },
+                {
+                  "nutrientName": "Vitamin B12",
+                  "nutrientValue": 5.4
+                },
+                {
+                  "nutrientName": "Vitamin B9",
+                  "nutrientValue": 80.0
+                },
+                {
+                  "nutrientName": "Vitamin B5",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin B7",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin C",
+                  "nutrientValue": 0.0
+                }
+              ]
+            }
+          ],
+          "portions": [
+            100,
+            100,
+            100
+          ]
+        },
+        "timeEaten": {
+          "date": {
+            "year": 2021,
+            "month": 7,
+            "day": 29
+          },
+          "time": {
+            "hour": 9,
+            "minute": 57,
+            "second": 27,
+            "nano": 907000000
+          }
+        },
+        "entryType": "DINNER"
+      },
+      {
+        "meal": {
+          "mealName": "breakfast2",
+          "foods": [
+            {
+              "foodName": "Chicken, skin, raw",
+              "nutrients": [
+                {
+                  "nutrientName": "Water",
+                  "nutrientValue": 42.7
+                },
+                {
+                  "nutrientName": "Total Nitrogen",
+                  "nutrientValue": 1.55
+                },
+                {
+                  "nutrientName": "Protein",
+                  "nutrientValue": 9.7
+                },
+                {
+                  "nutrientName": "Fat",
+                  "nutrientValue": 48.3
+                },
+                {
+                  "nutrientName": "Carbohydrates",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Energy (kcal)",
+                  "nutrientValue": 473.99997
+                },
+                {
+                  "nutrientName": "Energy (kJ)",
+                  "nutrientValue": 1953.0001
+                },
+                {
+                  "nutrientName": "Starch",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Total Sugar",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Glucose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Galactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Fructose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Sucrose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Maltose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Lactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "NSP Fibre",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "AOAC Fibre",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Saturated Fat",
+                  "nutrientValue": 13.6
+                },
+                {
+                  "nutrientName": "Omega 6",
+                  "nutrientValue": 6.7100005
+                },
+                {
+                  "nutrientName": "Omega 3",
+                  "nutrientValue": 1.35
+                },
+                {
+                  "nutrientName": "Mono FA",
+                  "nutrientValue": 23.6
+                },
+                {
+                  "nutrientName": "Poly FA",
+                  "nutrientValue": 8.1
+                },
+                {
+                  "nutrientName": "Trans FA",
+                  "nutrientValue": 0.67
+                },
+                {
+                  "nutrientName": "Cholesterol",
+                  "nutrientValue": 135.0
+                },
+                {
+                  "nutrientName": "Sodium",
+                  "nutrientValue": 50.0
+                },
+                {
+                  "nutrientName": "Potassium",
+                  "nutrientValue": 130.0
+                },
+                {
+                  "nutrientName": "Calcium",
+                  "nutrientValue": 8.0
+                },
+                {
+                  "nutrientName": "Magnesium",
+                  "nutrientValue": 9.0
+                },
+                {
+                  "nutrientName": "Phosphorus",
+                  "nutrientValue": 91.0
+                },
+                {
+                  "nutrientName": "Iron",
+                  "nutrientValue": 0.6
+                },
+                {
+                  "nutrientName": "Copper",
+                  "nutrientValue": 0.1
+                },
+                {
+                  "nutrientName": "Zinc",
+                  "nutrientValue": 0.7
+                },
+                {
+                  "nutrientName": "Chloride",
+                  "nutrientValue": 57.0
+                },
+                {
+                  "nutrientName": "Manganese",
+                  "nutrientValue": 0.01
+                },
+                {
+                  "nutrientName": "Selenium",
+                  "nutrientValue": 9.0
+                },
+                {
+                  "nutrientName": "Iodine",
+                  "nutrientValue": 16.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 64.0
+                },
+                {
+                  "nutrientName": "Carotene",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 64.0
+                },
+                {
+                  "nutrientName": "Vitamin D",
+                  "nutrientValue": 1.9
+                },
+                {
+                  "nutrientName": "Vitamin E",
+                  "nutrientValue": 0.15
+                },
+                {
+                  "nutrientName": "Vitamin K",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin B1",
+                  "nutrientValue": 0.04
+                },
+                {
+                  "nutrientName": "Vitamin B2",
+                  "nutrientValue": 0.44
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 2.7
+                },
+                {
+                  "nutrientName": "Tryptophan",
+                  "nutrientValue": 0.9
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 3.6
+                },
+                {
+                  "nutrientName": "Vitamin B6",
+                  "nutrientValue": 0.08
+                },
+                {
+                  "nutrientName": "Vitamin B12",
+                  "nutrientValue": 1.0
+                },
+                {
+                  "nutrientName": "Vitamin B9",
+                  "nutrientValue": 4.0
+                },
+                {
+                  "nutrientName": "Vitamin B5",
+                  "nutrientValue": 0.64
+                },
+                {
+                  "nutrientName": "Vitamin B7",
+                  "nutrientValue": 2.0
+                },
+                {
+                  "nutrientName": "Vitamin C",
+                  "nutrientValue": 0.0
+                }
+              ]
+            },
+            {
+              "foodName": "Pate, liver",
+              "nutrients": [
+                {
+                  "nutrientName": "Water",
+                  "nutrientValue": 47.6
+                },
+                {
+                  "nutrientName": "Total Nitrogen",
+                  "nutrientValue": 2.02
+                },
+                {
+                  "nutrientName": "Protein",
+                  "nutrientValue": 12.6
+                },
+                {
+                  "nutrientName": "Fat",
+                  "nutrientValue": 32.7
+                },
+                {
+                  "nutrientName": "Carbohydrates",
+                  "nutrientValue": 1.2
+                },
+                {
+                  "nutrientName": "Energy (kcal)",
+                  "nutrientValue": 349.0
+                },
+                {
+                  "nutrientName": "Energy (kJ)",
+                  "nutrientValue": 1443.0
+                },
+                {
+                  "nutrientName": "Starch",
+                  "nutrientValue": 0.8
+                },
+                {
+                  "nutrientName": "Total Sugar",
+                  "nutrientValue": 0.4
+                },
+                {
+                  "nutrientName": "Glucose",
+                  "nutrientValue": 0.4
+                },
+                {
+                  "nutrientName": "Galactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Fructose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Sucrose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Maltose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Lactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "NSP Fibre",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "AOAC Fibre",
+                  "nutrientValue": 0.6
+                },
+                {
+                  "nutrientName": "Saturated Fat",
+                  "nutrientValue": 9.5
+                },
+                {
+                  "nutrientName": "Omega 6",
+                  "nutrientValue": 2.7
+                },
+                {
+                  "nutrientName": "Omega 3",
+                  "nutrientValue": 0.24
+                },
+                {
+                  "nutrientName": "Mono FA",
+                  "nutrientValue": 11.8
+                },
+                {
+                  "nutrientName": "Poly FA",
+                  "nutrientValue": 3.0
+                },
+                {
+                  "nutrientName": "Trans FA",
+                  "nutrientValue": 0.02
+                },
+                {
+                  "nutrientName": "Cholesterol",
+                  "nutrientValue": 170.0
+                },
+                {
+                  "nutrientName": "Sodium",
+                  "nutrientValue": 750.0
+                },
+                {
+                  "nutrientName": "Potassium",
+                  "nutrientValue": 150.0
+                },
+                {
+                  "nutrientName": "Calcium",
+                  "nutrientValue": 16.0
+                },
+                {
+                  "nutrientName": "Magnesium",
+                  "nutrientValue": 11.0
+                },
+                {
+                  "nutrientName": "Phosphorus",
+                  "nutrientValue": 450.0
+                },
+                {
+                  "nutrientName": "Iron",
+                  "nutrientValue": 5.9
+                },
+                {
+                  "nutrientName": "Copper",
+                  "nutrientValue": 0.46
+                },
+                {
+                  "nutrientName": "Zinc",
+                  "nutrientValue": 2.8
+                },
+                {
+                  "nutrientName": "Chloride",
+                  "nutrientValue": 880.0
+                },
+                {
+                  "nutrientName": "Manganese",
+                  "nutrientValue": 0.16
+                },
+                {
+                  "nutrientName": "Selenium",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Iodine",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 7300.0
+                },
+                {
+                  "nutrientName": "Carotene",
+                  "nutrientValue": 130.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 7322.0
+                },
+                {
+                  "nutrientName": "Vitamin D",
+                  "nutrientValue": 1.2
+                },
+                {
+                  "nutrientName": "Vitamin E",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin K",
+                  "nutrientValue": 0.95
+                },
+                {
+                  "nutrientName": "Vitamin B1",
+                  "nutrientValue": 0.1
+                },
+                {
+                  "nutrientName": "Vitamin B2",
+                  "nutrientValue": 1.17
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 1.9
+                },
+                {
+                  "nutrientName": "Tryptophan",
+                  "nutrientValue": 2.8
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 4.7
+                },
+                {
+                  "nutrientName": "Vitamin B6",
+                  "nutrientValue": 0.25
+                },
+                {
+                  "nutrientName": "Vitamin B12",
+                  "nutrientValue": 8.0
+                },
+                {
+                  "nutrientName": "Vitamin B9",
+                  "nutrientValue": 99.0
+                },
+                {
+                  "nutrientName": "Vitamin B5",
+                  "nutrientValue": 2.1
+                },
+                {
+                  "nutrientName": "Vitamin B7",
+                  "nutrientValue": 14.0
+                },
+                {
+                  "nutrientName": "Vitamin C",
+                  "nutrientValue": 0.0
+                }
+              ]
+            }
+          ],
+          "portions": [
+            100,
+            100
+          ]
+        },
+        "timeEaten": {
+          "date": {
+            "year": 2021,
+            "month": 7,
+            "day": 28
+          },
+          "time": {
+            "hour": 9,
+            "minute": 57,
+            "second": 27,
+            "nano": 910000000
+          }
+        },
+        "entryType": "DINNER"
+      },
+      {
+        "meal": {
+          "mealName": "breakfast2",
+          "foods": [
+            {
+              "foodName": "Chicken, skin, raw",
+              "nutrients": [
+                {
+                  "nutrientName": "Water",
+                  "nutrientValue": 42.7
+                },
+                {
+                  "nutrientName": "Total Nitrogen",
+                  "nutrientValue": 1.55
+                },
+                {
+                  "nutrientName": "Protein",
+                  "nutrientValue": 9.7
+                },
+                {
+                  "nutrientName": "Fat",
+                  "nutrientValue": 48.3
+                },
+                {
+                  "nutrientName": "Carbohydrates",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Energy (kcal)",
+                  "nutrientValue": 473.99997
+                },
+                {
+                  "nutrientName": "Energy (kJ)",
+                  "nutrientValue": 1953.0001
+                },
+                {
+                  "nutrientName": "Starch",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Total Sugar",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Glucose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Galactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Fructose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Sucrose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Maltose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Lactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "NSP Fibre",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "AOAC Fibre",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Saturated Fat",
+                  "nutrientValue": 13.6
+                },
+                {
+                  "nutrientName": "Omega 6",
+                  "nutrientValue": 6.7100005
+                },
+                {
+                  "nutrientName": "Omega 3",
+                  "nutrientValue": 1.35
+                },
+                {
+                  "nutrientName": "Mono FA",
+                  "nutrientValue": 23.6
+                },
+                {
+                  "nutrientName": "Poly FA",
+                  "nutrientValue": 8.1
+                },
+                {
+                  "nutrientName": "Trans FA",
+                  "nutrientValue": 0.67
+                },
+                {
+                  "nutrientName": "Cholesterol",
+                  "nutrientValue": 135.0
+                },
+                {
+                  "nutrientName": "Sodium",
+                  "nutrientValue": 50.0
+                },
+                {
+                  "nutrientName": "Potassium",
+                  "nutrientValue": 130.0
+                },
+                {
+                  "nutrientName": "Calcium",
+                  "nutrientValue": 8.0
+                },
+                {
+                  "nutrientName": "Magnesium",
+                  "nutrientValue": 9.0
+                },
+                {
+                  "nutrientName": "Phosphorus",
+                  "nutrientValue": 91.0
+                },
+                {
+                  "nutrientName": "Iron",
+                  "nutrientValue": 0.6
+                },
+                {
+                  "nutrientName": "Copper",
+                  "nutrientValue": 0.1
+                },
+                {
+                  "nutrientName": "Zinc",
+                  "nutrientValue": 0.7
+                },
+                {
+                  "nutrientName": "Chloride",
+                  "nutrientValue": 57.0
+                },
+                {
+                  "nutrientName": "Manganese",
+                  "nutrientValue": 0.01
+                },
+                {
+                  "nutrientName": "Selenium",
+                  "nutrientValue": 9.0
+                },
+                {
+                  "nutrientName": "Iodine",
+                  "nutrientValue": 16.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 64.0
+                },
+                {
+                  "nutrientName": "Carotene",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 64.0
+                },
+                {
+                  "nutrientName": "Vitamin D",
+                  "nutrientValue": 1.9
+                },
+                {
+                  "nutrientName": "Vitamin E",
+                  "nutrientValue": 0.15
+                },
+                {
+                  "nutrientName": "Vitamin K",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin B1",
+                  "nutrientValue": 0.04
+                },
+                {
+                  "nutrientName": "Vitamin B2",
+                  "nutrientValue": 0.44
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 2.7
+                },
+                {
+                  "nutrientName": "Tryptophan",
+                  "nutrientValue": 0.9
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 3.6
+                },
+                {
+                  "nutrientName": "Vitamin B6",
+                  "nutrientValue": 0.08
+                },
+                {
+                  "nutrientName": "Vitamin B12",
+                  "nutrientValue": 1.0
+                },
+                {
+                  "nutrientName": "Vitamin B9",
+                  "nutrientValue": 4.0
+                },
+                {
+                  "nutrientName": "Vitamin B5",
+                  "nutrientValue": 0.64
+                },
+                {
+                  "nutrientName": "Vitamin B7",
+                  "nutrientValue": 2.0
+                },
+                {
+                  "nutrientName": "Vitamin C",
+                  "nutrientValue": 0.0
+                }
+              ]
+            },
+            {
+              "foodName": "Pate, liver",
+              "nutrients": [
+                {
+                  "nutrientName": "Water",
+                  "nutrientValue": 47.6
+                },
+                {
+                  "nutrientName": "Total Nitrogen",
+                  "nutrientValue": 2.02
+                },
+                {
+                  "nutrientName": "Protein",
+                  "nutrientValue": 12.6
+                },
+                {
+                  "nutrientName": "Fat",
+                  "nutrientValue": 32.7
+                },
+                {
+                  "nutrientName": "Carbohydrates",
+                  "nutrientValue": 1.2
+                },
+                {
+                  "nutrientName": "Energy (kcal)",
+                  "nutrientValue": 349.0
+                },
+                {
+                  "nutrientName": "Energy (kJ)",
+                  "nutrientValue": 1443.0
+                },
+                {
+                  "nutrientName": "Starch",
+                  "nutrientValue": 0.8
+                },
+                {
+                  "nutrientName": "Total Sugar",
+                  "nutrientValue": 0.4
+                },
+                {
+                  "nutrientName": "Glucose",
+                  "nutrientValue": 0.4
+                },
+                {
+                  "nutrientName": "Galactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Fructose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Sucrose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Maltose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Lactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "NSP Fibre",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "AOAC Fibre",
+                  "nutrientValue": 0.6
+                },
+                {
+                  "nutrientName": "Saturated Fat",
+                  "nutrientValue": 9.5
+                },
+                {
+                  "nutrientName": "Omega 6",
+                  "nutrientValue": 2.7
+                },
+                {
+                  "nutrientName": "Omega 3",
+                  "nutrientValue": 0.24
+                },
+                {
+                  "nutrientName": "Mono FA",
+                  "nutrientValue": 11.8
+                },
+                {
+                  "nutrientName": "Poly FA",
+                  "nutrientValue": 3.0
+                },
+                {
+                  "nutrientName": "Trans FA",
+                  "nutrientValue": 0.02
+                },
+                {
+                  "nutrientName": "Cholesterol",
+                  "nutrientValue": 170.0
+                },
+                {
+                  "nutrientName": "Sodium",
+                  "nutrientValue": 750.0
+                },
+                {
+                  "nutrientName": "Potassium",
+                  "nutrientValue": 150.0
+                },
+                {
+                  "nutrientName": "Calcium",
+                  "nutrientValue": 16.0
+                },
+                {
+                  "nutrientName": "Magnesium",
+                  "nutrientValue": 11.0
+                },
+                {
+                  "nutrientName": "Phosphorus",
+                  "nutrientValue": 450.0
+                },
+                {
+                  "nutrientName": "Iron",
+                  "nutrientValue": 5.9
+                },
+                {
+                  "nutrientName": "Copper",
+                  "nutrientValue": 0.46
+                },
+                {
+                  "nutrientName": "Zinc",
+                  "nutrientValue": 2.8
+                },
+                {
+                  "nutrientName": "Chloride",
+                  "nutrientValue": 880.0
+                },
+                {
+                  "nutrientName": "Manganese",
+                  "nutrientValue": 0.16
+                },
+                {
+                  "nutrientName": "Selenium",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Iodine",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 7300.0
+                },
+                {
+                  "nutrientName": "Carotene",
+                  "nutrientValue": 130.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 7322.0
+                },
+                {
+                  "nutrientName": "Vitamin D",
+                  "nutrientValue": 1.2
+                },
+                {
+                  "nutrientName": "Vitamin E",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin K",
+                  "nutrientValue": 0.95
+                },
+                {
+                  "nutrientName": "Vitamin B1",
+                  "nutrientValue": 0.1
+                },
+                {
+                  "nutrientName": "Vitamin B2",
+                  "nutrientValue": 1.17
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 1.9
+                },
+                {
+                  "nutrientName": "Tryptophan",
+                  "nutrientValue": 2.8
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 4.7
+                },
+                {
+                  "nutrientName": "Vitamin B6",
+                  "nutrientValue": 0.25
+                },
+                {
+                  "nutrientName": "Vitamin B12",
+                  "nutrientValue": 8.0
+                },
+                {
+                  "nutrientName": "Vitamin B9",
+                  "nutrientValue": 99.0
+                },
+                {
+                  "nutrientName": "Vitamin B5",
+                  "nutrientValue": 2.1
+                },
+                {
+                  "nutrientName": "Vitamin B7",
+                  "nutrientValue": 14.0
+                },
+                {
+                  "nutrientName": "Vitamin C",
+                  "nutrientValue": 0.0
+                }
+              ]
+            }
+          ],
+          "portions": [
+            100,
+            100
+          ]
+        },
+        "timeEaten": {
+          "date": {
+            "year": 2021,
+            "month": 7,
+            "day": 27
+          },
+          "time": {
+            "hour": 9,
+            "minute": 57,
+            "second": 27,
+            "nano": 910000000
+          }
+        },
+        "entryType": "DINNER"
+      },
+      {
+        "meal": {
+          "mealName": "breakfast2",
+          "foods": [
+            {
+              "foodName": "Chicken, skin, raw",
+              "nutrients": [
+                {
+                  "nutrientName": "Water",
+                  "nutrientValue": 42.7
+                },
+                {
+                  "nutrientName": "Total Nitrogen",
+                  "nutrientValue": 1.55
+                },
+                {
+                  "nutrientName": "Protein",
+                  "nutrientValue": 9.7
+                },
+                {
+                  "nutrientName": "Fat",
+                  "nutrientValue": 48.3
+                },
+                {
+                  "nutrientName": "Carbohydrates",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Energy (kcal)",
+                  "nutrientValue": 473.99997
+                },
+                {
+                  "nutrientName": "Energy (kJ)",
+                  "nutrientValue": 1953.0001
+                },
+                {
+                  "nutrientName": "Starch",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Total Sugar",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Glucose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Galactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Fructose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Sucrose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Maltose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Lactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "NSP Fibre",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "AOAC Fibre",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Saturated Fat",
+                  "nutrientValue": 13.6
+                },
+                {
+                  "nutrientName": "Omega 6",
+                  "nutrientValue": 6.7100005
+                },
+                {
+                  "nutrientName": "Omega 3",
+                  "nutrientValue": 1.35
+                },
+                {
+                  "nutrientName": "Mono FA",
+                  "nutrientValue": 23.6
+                },
+                {
+                  "nutrientName": "Poly FA",
+                  "nutrientValue": 8.1
+                },
+                {
+                  "nutrientName": "Trans FA",
+                  "nutrientValue": 0.67
+                },
+                {
+                  "nutrientName": "Cholesterol",
+                  "nutrientValue": 135.0
+                },
+                {
+                  "nutrientName": "Sodium",
+                  "nutrientValue": 50.0
+                },
+                {
+                  "nutrientName": "Potassium",
+                  "nutrientValue": 130.0
+                },
+                {
+                  "nutrientName": "Calcium",
+                  "nutrientValue": 8.0
+                },
+                {
+                  "nutrientName": "Magnesium",
+                  "nutrientValue": 9.0
+                },
+                {
+                  "nutrientName": "Phosphorus",
+                  "nutrientValue": 91.0
+                },
+                {
+                  "nutrientName": "Iron",
+                  "nutrientValue": 0.6
+                },
+                {
+                  "nutrientName": "Copper",
+                  "nutrientValue": 0.1
+                },
+                {
+                  "nutrientName": "Zinc",
+                  "nutrientValue": 0.7
+                },
+                {
+                  "nutrientName": "Chloride",
+                  "nutrientValue": 57.0
+                },
+                {
+                  "nutrientName": "Manganese",
+                  "nutrientValue": 0.01
+                },
+                {
+                  "nutrientName": "Selenium",
+                  "nutrientValue": 9.0
+                },
+                {
+                  "nutrientName": "Iodine",
+                  "nutrientValue": 16.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 64.0
+                },
+                {
+                  "nutrientName": "Carotene",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 64.0
+                },
+                {
+                  "nutrientName": "Vitamin D",
+                  "nutrientValue": 1.9
+                },
+                {
+                  "nutrientName": "Vitamin E",
+                  "nutrientValue": 0.15
+                },
+                {
+                  "nutrientName": "Vitamin K",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin B1",
+                  "nutrientValue": 0.04
+                },
+                {
+                  "nutrientName": "Vitamin B2",
+                  "nutrientValue": 0.44
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 2.7
+                },
+                {
+                  "nutrientName": "Tryptophan",
+                  "nutrientValue": 0.9
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 3.6
+                },
+                {
+                  "nutrientName": "Vitamin B6",
+                  "nutrientValue": 0.08
+                },
+                {
+                  "nutrientName": "Vitamin B12",
+                  "nutrientValue": 1.0
+                },
+                {
+                  "nutrientName": "Vitamin B9",
+                  "nutrientValue": 4.0
+                },
+                {
+                  "nutrientName": "Vitamin B5",
+                  "nutrientValue": 0.64
+                },
+                {
+                  "nutrientName": "Vitamin B7",
+                  "nutrientValue": 2.0
+                },
+                {
+                  "nutrientName": "Vitamin C",
+                  "nutrientValue": 0.0
+                }
+              ]
+            },
+            {
+              "foodName": "Pate, liver",
+              "nutrients": [
+                {
+                  "nutrientName": "Water",
+                  "nutrientValue": 47.6
+                },
+                {
+                  "nutrientName": "Total Nitrogen",
+                  "nutrientValue": 2.02
+                },
+                {
+                  "nutrientName": "Protein",
+                  "nutrientValue": 12.6
+                },
+                {
+                  "nutrientName": "Fat",
+                  "nutrientValue": 32.7
+                },
+                {
+                  "nutrientName": "Carbohydrates",
+                  "nutrientValue": 1.2
+                },
+                {
+                  "nutrientName": "Energy (kcal)",
+                  "nutrientValue": 349.0
+                },
+                {
+                  "nutrientName": "Energy (kJ)",
+                  "nutrientValue": 1443.0
+                },
+                {
+                  "nutrientName": "Starch",
+                  "nutrientValue": 0.8
+                },
+                {
+                  "nutrientName": "Total Sugar",
+                  "nutrientValue": 0.4
+                },
+                {
+                  "nutrientName": "Glucose",
+                  "nutrientValue": 0.4
+                },
+                {
+                  "nutrientName": "Galactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Fructose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Sucrose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Maltose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Lactose",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "NSP Fibre",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "AOAC Fibre",
+                  "nutrientValue": 0.6
+                },
+                {
+                  "nutrientName": "Saturated Fat",
+                  "nutrientValue": 9.5
+                },
+                {
+                  "nutrientName": "Omega 6",
+                  "nutrientValue": 2.7
+                },
+                {
+                  "nutrientName": "Omega 3",
+                  "nutrientValue": 0.24
+                },
+                {
+                  "nutrientName": "Mono FA",
+                  "nutrientValue": 11.8
+                },
+                {
+                  "nutrientName": "Poly FA",
+                  "nutrientValue": 3.0
+                },
+                {
+                  "nutrientName": "Trans FA",
+                  "nutrientValue": 0.02
+                },
+                {
+                  "nutrientName": "Cholesterol",
+                  "nutrientValue": 170.0
+                },
+                {
+                  "nutrientName": "Sodium",
+                  "nutrientValue": 750.0
+                },
+                {
+                  "nutrientName": "Potassium",
+                  "nutrientValue": 150.0
+                },
+                {
+                  "nutrientName": "Calcium",
+                  "nutrientValue": 16.0
+                },
+                {
+                  "nutrientName": "Magnesium",
+                  "nutrientValue": 11.0
+                },
+                {
+                  "nutrientName": "Phosphorus",
+                  "nutrientValue": 450.0
+                },
+                {
+                  "nutrientName": "Iron",
+                  "nutrientValue": 5.9
+                },
+                {
+                  "nutrientName": "Copper",
+                  "nutrientValue": 0.46
+                },
+                {
+                  "nutrientName": "Zinc",
+                  "nutrientValue": 2.8
+                },
+                {
+                  "nutrientName": "Chloride",
+                  "nutrientValue": 880.0
+                },
+                {
+                  "nutrientName": "Manganese",
+                  "nutrientValue": 0.16
+                },
+                {
+                  "nutrientName": "Selenium",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Iodine",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 7300.0
+                },
+                {
+                  "nutrientName": "Carotene",
+                  "nutrientValue": 130.0
+                },
+                {
+                  "nutrientName": "Vitamin A",
+                  "nutrientValue": 7322.0
+                },
+                {
+                  "nutrientName": "Vitamin D",
+                  "nutrientValue": 1.2
+                },
+                {
+                  "nutrientName": "Vitamin E",
+                  "nutrientValue": 0.0
+                },
+                {
+                  "nutrientName": "Vitamin K",
+                  "nutrientValue": 0.95
+                },
+                {
+                  "nutrientName": "Vitamin B1",
+                  "nutrientValue": 0.1
+                },
+                {
+                  "nutrientName": "Vitamin B2",
+                  "nutrientValue": 1.17
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 1.9
+                },
+                {
+                  "nutrientName": "Tryptophan",
+                  "nutrientValue": 2.8
+                },
+                {
+                  "nutrientName": "Vitamin B3",
+                  "nutrientValue": 4.7
+                },
+                {
+                  "nutrientName": "Vitamin B6",
+                  "nutrientValue": 0.25
+                },
+                {
+                  "nutrientName": "Vitamin B12",
+                  "nutrientValue": 8.0
+                },
+                {
+                  "nutrientName": "Vitamin B9",
+                  "nutrientValue": 99.0
+                },
+                {
+                  "nutrientName": "Vitamin B5",
+                  "nutrientValue": 2.1
+                },
+                {
+                  "nutrientName": "Vitamin B7",
+                  "nutrientValue": 14.0
+                },
+                {
+                  "nutrientName": "Vitamin C",
+                  "nutrientValue": 0.0
+                }
+              ]
+            }
+          ],
+          "portions": [
+            100,
+            100
+          ]
+        },
+        "timeEaten": {
+          "date": {
+            "year": 2021,
+            "month": 7,
+            "day": 26
+          },
+          "time": {
+            "hour": 9,
+            "minute": 57,
+            "second": 27,
+            "nano": 910000000
+          }
+        },
+        "entryType": "DINNER"
+      }
+    ]
+  }
+}
