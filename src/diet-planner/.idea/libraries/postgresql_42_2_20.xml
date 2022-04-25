@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="postgresql-42.2.20">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../../gson-2.8.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../Java Library/postgresql-42.2.20.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
