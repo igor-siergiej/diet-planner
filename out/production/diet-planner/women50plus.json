@@ -1,0 +1,257 @@
+[
+  {
+    "nutrientName":"Vitamin A",
+    "unit":"mcg",
+    "value":690
+  },
+  {
+    "nutrientName":"Vitamin B1",
+    "unit":"mg",
+    "value":1.1
+  },
+  {
+    "nutrientName":"Vitamin B12",
+    "unit":"mcg",
+    "value":2.4
+  },
+  {
+    "nutrientName":"Vitamin B2",
+    "unit":"mg",
+    "value":1.1
+  },
+  {
+    "nutrientName":"Vitamin B3",
+    "unit":"mg",
+    "value":14
+  },
+  {
+    "nutrientName":"Vitamin B5",
+    "unit":"mg",
+    "value":5
+  },
+  {
+    "nutrientName":"Vitamin B6",
+    "unit":"mg",
+    "value":1.5
+  },
+  {
+    "nutrientName":"Vitamin B7",
+    "unit":"mcg",
+    "value":30
+  },
+  {
+    "nutrientName":"Vitamin B9",
+    "unit":"mcg",
+    "value":400
+  },
+  {
+    "nutrientName":"Vitamin C",
+    "unit":"mg",
+    "value":75
+  },
+  {
+    "nutrientName":"Vitamin D",
+    "unit":"mcg",
+    "value":20
+  },
+  {
+    "nutrientName":"Vitamin E",
+    "unit":"mg",
+    "value":15
+  },
+  {
+    "nutrientName":"Vitamin K",
+    "unit":"mcg",
+    "value":90
+  },
+  {
+    "nutrientName":"Calcium",
+    "unit":"mg",
+    "value":1200
+  },
+  {
+    "nutrientName":"Chloride",
+    "unit":"mg",
+    "value":2000
+  },
+  {
+    "nutrientName":"Copper",
+    "unit":"mg",
+    "value":0.9
+  },
+  {
+    "nutrientName":"Iodine",
+    "unit":"mcg",
+    "value":150
+  },
+  {
+    "nutrientName":"Iron",
+    "unit":"mg",
+    "value":8
+  },
+  {
+    "nutrientName":"Magnesium",
+    "unit":"mg",
+    "value":320
+  },
+  {
+    "nutrientName":"Manganese",
+    "unit":"mg",
+    "value":1.8
+  },
+  {
+    "nutrientName":"Phosphorus",
+    "unit":"mg",
+    "value":700
+  },
+  {
+    "nutrientName":"Potassium",
+    "unit":"mg",
+    "value":4700
+  },
+  {
+    "nutrientName":"Selenium",
+    "unit":"mcg",
+    "value":55
+  },
+  {
+    "nutrientName":"Sodium",
+    "unit":"mg",
+    "value":1300
+  },
+  {
+    "nutrientName":"Zinc",
+    "unit":"mg",
+    "value":8
+  },
+  {
+    "nutrientName":"Protein",
+    "unit":"g",
+    "value":46
+  },
+  {
+    "nutrientName":"Tryptophan",
+    "unit":"mg",
+    "value":192.5
+  },
+  {
+    "nutrientName":"Cholesterol",
+    "unit":"mg",
+    "value":300
+  },
+  {
+    "nutrientName":"Sugar",
+    "unit":"g",
+    "value":43
+  },
+  {
+    "nutrientName":"Energy (kJ)",
+    "unit":"kJ",
+    "value":7949
+  },
+  {
+    "nutrientName":"Energy (kcal)",
+    "unit":"kcal",
+    "value":1900
+  },
+  {
+    "nutrientName":"Mono FA",
+    "unit":"g",
+    "value":16
+  },
+  {
+    "nutrientName":"Poly FA",
+    "unit":"g",
+    "value":16
+  },
+  {
+    "nutrientName":"Omega 3",
+    "unit":"g",
+    "value":1.28
+  },
+  {
+    "nutrientName":"Omega 6",
+    "unit":"g",
+    "value":5.12
+  },
+  {
+    "nutrientName":"Saturated Fat",
+    "unit":"g",
+    "value":18
+  },
+  {
+    "nutrientName":"Fat",
+    "unit":"g",
+    "value":50
+  },
+  {
+    "nutrientName":"Carbohydrates",
+    "unit":"g",
+    "value":130
+  },
+  {
+    "nutrientName":"AOAC Fibre",
+    "unit":"g",
+    "value":21
+  },
+  {
+    "nutrientName":"Water",
+    "unit":"g",
+    "value":2700
+  },
+  {
+    "nutrientName":"Carotene",
+    "unit":"mcg",
+    "value":10000
+  },
+  {
+    "nutrientName":"Total Nitrogen",
+    "unit":"g",
+    "value":23
+  },
+  {
+    "nutrientName":"Starch",
+    "unit":"g",
+    "value":100
+  },
+  {
+    "nutrientName":"Trans FA",
+    "unit":"g",
+    "value":2
+  },
+  {
+    "nutrientName":"NSP Fibre",
+    "unit":"g",
+    "value":20
+  },
+  {
+    "nutrientName":"Fructose",
+    "unit":"g",
+    "value":50
+  },
+  {
+    "nutrientName":"Glucose",
+    "unit":"g",
+    "value":30
+  },
+  {
+    "nutrientName":"Galactose",
+    "unit":"g",
+    "value":5
+  },
+  {
+    "nutrientName":"Lactose",
+    "unit":"g",
+    "value":25
+  },
+  {
+    "nutrientName":"Maltose",
+    "unit":"g",
+    "value":5
+  },
+  {
+    "nutrientName":"Sucrose",
+    "unit":"g",
+    "value":5
+  }
+]

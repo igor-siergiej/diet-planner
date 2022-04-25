@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="480.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.mainscreencontroller.MainScreenController">
+   <children>
+      <TextField fx:id="loginUsernameTextField" layoutX="122.0" layoutY="151.0" onAction="#logIn">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
+      <PasswordField fx:id="loginPasswordField" layoutX="122.0" layoutY="233.0">
+         <font>
+            <Font size="20.0" />
+         </font></PasswordField>
+      <Button fx:id="loginButton" defaultButton="true" layoutX="181.0" layoutY="293.0" mnemonicParsing="false" onAction="#logIn" prefHeight="54.0" prefWidth="118.0" text="Log In">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button layoutX="178.0" layoutY="506.0" mnemonicParsing="false" onAction="#goToRegistrationScreen" prefHeight="44.0" prefWidth="125.0" text="Register">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button cancelButton="true" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToMainScreen" prefHeight="50.0" prefWidth="100.0" stylesheets="@../style.css" text="Back">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
+      <Label id="titleLabel" alignment="CENTER" layoutX="187.0" layoutY="63.0" prefHeight="58.0" prefWidth="118.0" text="Log In">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="201.0" layoutY="203.0" prefHeight="30.0" prefWidth="91.0" text="Password">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label alignment="CENTER" layoutX="201.0" layoutY="121.0" prefHeight="30.0" prefWidth="91.0" text="Username">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label alignment="CENTER" layoutX="188.0" layoutY="453.0" prefHeight="30.0" prefWidth="118.0" text="No account?">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label id="message" fx:id="loginMessage" alignment="CENTER" layoutX="67.0" layoutY="357.0" prefHeight="78.0" prefWidth="360.0" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="loginButton1" defaultButton="true" layoutX="14.0" layoutY="576.0" mnemonicParsing="false" onAction="#testLogin" prefHeight="54.0" prefWidth="158.0" text="Admin Login">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
