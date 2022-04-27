@@ -25,7 +25,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("mainscreencontroller/MainScreen.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("startscreencontroller/StartScreen.fxml"));
             Scene scene = new Scene(root);
             scene.getStylesheets().add("com/app/planner/style.css");
             stage.getIcons().add(new Image("com/app/planner/img/icon.png"));
