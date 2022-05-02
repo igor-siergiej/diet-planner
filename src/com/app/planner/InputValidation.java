@@ -39,6 +39,35 @@ public class InputValidation {
         return "valid";
     }
 
+    public static float getPasswordStrength(String password) {
+        float passwordStrengthValue = 0;
+
+        if (password.length() < 15 && password.length() > 7) {
+            passwordStrengthValue += 0.2;
+        }
+        String upperCaseChars = "(.*[A-Z].*)";
+
+        if (password.matches(upperCaseChars)) {
+            passwordStrengthValue += 0.2;
+        }
+
+        String lowerCaseChars = "(.*[a-z].*)";
+        if (password.matches(lowerCaseChars)) {
+            passwordStrengthValue += 0.2;
+        }
+
+        String numbers = "(.*[0-9].*)";
+        if (password.matches(numbers)) {
+            passwordStrengthValue += 0.2;
+        }
+
+        String specialChars = "(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)";
+        if (password.matches(specialChars)) {
+            passwordStrengthValue += 0.2;
+        }
+        return passwordStrengthValue;
+    }
+
     static public String ageValidation(String age) {
         if (!age.matches("\\d*")) {
             return age.replaceAll("[^\\d]", "");

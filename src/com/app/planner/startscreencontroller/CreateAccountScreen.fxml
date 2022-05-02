@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.startscreencontroller.StartScreenController">
+   <children>
+      <Pane prefHeight="800.0" prefWidth="500.0">
+         <children>
+            <ImageView fitHeight="113.0" fitWidth="353.0" layoutX="85.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/logo.png" />
+               </image>
+            </ImageView>
+            <Button id="signInButton" defaultButton="true" layoutX="85.0" layoutY="543.0" mnemonicParsing="false" onAction="#register" prefHeight="55.0" prefWidth="331.0" text="Sign up">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Button>
+            <TextField fx:id="registrationUsernameTextField" layoutX="84.0" layoutY="251.0" prefHeight="48.0" prefWidth="331.0" promptText="Username" />
+            <PasswordField fx:id="registrationPasswordField" layoutX="85.0" layoutY="328.0" onKeyTyped="#passwordStrengthHandler" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
+            <PasswordField fx:id="registrationRetypePasswordField" layoutX="85.0" layoutY="471.0" prefHeight="48.0" prefWidth="331.0" promptText="Re-type Password" />
+            <Button cancelButton="true" layoutX="14.0" layoutY="28.0" mnemonicParsing="false" onAction="#goToStartScreen" prefHeight="50.0" prefWidth="50.0">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/backArrowBlueRounded.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button id="greyButton" layoutX="434.0" layoutY="375.0" mnemonicParsing="false" onMouseEntered="#showRegisterPrompt" onMouseExited="#hideRegisterPrompt" prefHeight="50.0" prefWidth="50.0">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/questionMark.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Label id="titleLabel" layoutX="61.0" layoutY="161.0" text="Create new account." />
+            <ProgressBar fx:id="passwordStrengthProgressBar" layoutX="88.0" layoutY="392.0" prefHeight="18.0" prefWidth="323.0" progress="0.0" />
+            <Label id="smallLabel" fx:id="registerPasswordMessage" layoutX="50.0" layoutY="426.0" prefHeight="29.0" prefWidth="401.0" />
+            <TextArea id="registrationPrompt" fx:id="registerPrompt" editable="false" layoutX="208.0" layoutY="376.0" prefHeight="167.0" prefWidth="229.0" text="Username should contain &#10;between 4 and 20 characters.&#10;&#10;Password needs to contain:&#10;•between 8 and 15 characters &#10;•contain at least one upper case letter &#10;•contain at least one lower case letter &#10;•contain at least one number &#10;•contain at least one special character." visible="false" />
+            <Label id="smallLabel" fx:id="registerUsernameMessage" layoutX="39.0" layoutY="299.0" prefHeight="29.0" prefWidth="445.0" />
+         </children>
+      </Pane>
+      <Pane layoutX="500.0" prefHeight="800.0" prefWidth="780.0" style="-fx-background-color: grey;">
+         <children>
+            <ImageView fitHeight="800.0" fitWidth="780.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/backgroundPattern.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</Pane>

@@ -21,26 +21,28 @@
             </ImageView>
             <Label id="titleLabel" layoutX="176.0" layoutY="180.0" text="Sign in." />
             <Label id="greyLabel" layoutX="240.0" layoutY="411.0" text="or" />
-            <Button id="signInButton" layoutX="85.0" layoutY="585.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="331.0" text="Sign in">
+            <Button id="signInButton" fx:id="loginButton" defaultButton="true" layoutX="85.0" layoutY="636.0" mnemonicParsing="false" onAction="#logIn" prefHeight="55.0" prefWidth="331.0" text="Sign in">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Button>
-            <Button id="greyButton" layoutX="84.0" layoutY="291.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="331.0" text="Load from file">
+            <Button id="greyButton" layoutX="84.0" layoutY="291.0" mnemonicParsing="false" onAction="#loadProfile" prefHeight="48.0" prefWidth="331.0" text="Load from file">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Button>
-            <Button id="greyButton" layoutX="85.0" layoutY="352.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="331.0" text="Create offline profile">
+            <Button id="greyButton" layoutX="85.0" layoutY="352.0" mnemonicParsing="false" onAction="#goToCreateProfileScreen" prefHeight="48.0" prefWidth="331.0" text="Create offline profile">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Button>
-            <TextField layoutX="85.0" layoutY="451.0" prefHeight="48.0" prefWidth="331.0" promptText="Username" />
-            <Label id="greyLabel" layoutX="68.0" layoutY="656.0" text="Don't have an account?" />
-            <Hyperlink layoutX="174.0" layoutY="683.0" text="Forgot Password?" />
-            <Hyperlink layoutX="274.0" layoutY="651.0" text="Create Account" />
-            <PasswordField layoutX="84.0" layoutY="513.0" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
+            <TextField fx:id="loginUsernameTextField" layoutX="85.0" layoutY="451.0" prefHeight="48.0" prefWidth="331.0" promptText="Username" />
+            <Label id="greyLabel" layoutX="60.0" layoutY="696.0" text="Don't have an account?" />
+            <Hyperlink layoutX="174.0" layoutY="723.0" text="Forgot Password?" />
+            <Hyperlink layoutX="273.0" layoutY="691.0" onAction="#goToCreateAccountScreen" text="Create Account" />
+            <PasswordField fx:id="loginPasswordField" layoutX="84.0" layoutY="538.0" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
+            <Label fx:id="passwordMessage" layoutX="96.0" layoutY="593.0" prefHeight="27.0" prefWidth="264.0" />
+            <Label fx:id="usernameMessage" layoutX="96.0" layoutY="505.0" prefHeight="27.0" prefWidth="242.0" />
          </children>
       </Pane>
       <Pane layoutX="500.0" prefHeight="800.0" prefWidth="780.0" style="-fx-background-color: grey;">
