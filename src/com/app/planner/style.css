@@ -8,6 +8,9 @@
     -fx-border-radius: 15px;
     -fx-font-weight: bold;
     -fx-text-fill: grey;
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #4b4b4b;
+    -fx-border-width: 2px;
 }
 
 #greyButton {
@@ -33,6 +36,7 @@
     -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
     -fx-font-size: 18px;
+    -fx-border-color: transparent;
 }
 
 #titleLabel {
@@ -60,6 +64,57 @@
     -fx-font-weight: bold;
     -fx-text-fill: #ffffff;
     -fx-prompt-text-fill: grey;
+}
+
+.text-area {
+    -fx-border-color: #4b4b4b;
+    -fx-border-width: 2px;
+    -fx-font-size: 12px;
+    -fx-text-fill: grey;
+    -fx-background-color: #1a1a1a;
+}
+
+.text-area .content {
+    -fx-background-color: #1a1a1a;
+}
+
+#text-field-error {
+    -fx-border-color: red;
+}
+
+#text-field-warning {
+    -fx-border-color: yellow;
+}
+
+#errorLabel {
+    -fx-text-fill: red;
+    -fx-font-size: 12px;
+}
+
+#warningLabel {
+    -fx-text-fill: yellow;
+    -fx-font-size: 12px;
+}
+
+.progress-bar {
+    -fx-control-inner-background: #101010;
+    -fx-text-box-border: #4b4b4b;
+}
+
+#passwordStrengthProgressBarStrong {
+    -fx-accent: green;
+}
+
+#passwordStrengthProgressBarWeak {
+    -fx-accent: red;
+}
+
+#passwordStrengthProgressBarOk {
+    -fx-accent: yellow;
+}
+
+#menuBar {
+    -fx-background-color: #007bffff;
 }
 
 #fakeButton {
@@ -164,11 +219,6 @@
     -fx-background-color: #0056B3;
     -fx-padding: 10 5;
     -fx-background-radius: 5;
-}
-
-.hyperlink {
-    -fx-border-color: transparent;
-    -fx-padding: 4 0;
 }
 
 .chart-pie-label-line {

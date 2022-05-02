@@ -23,11 +23,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
 public class StartScreenController {
 
     @FXML
     public void initialize() {
+
+        //Calendar poke code
         /*DatePicker datePicker = new DatePicker(LocalDate.now());
         DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
         Node popupContent = datePickerSkin.getPopupContent();
@@ -36,6 +37,7 @@ public class StartScreenController {
             System.out.println("New Value: " + newValue);
         });*/
     }
+
     Profile profile;
 
     @FXML
@@ -48,10 +50,10 @@ public class StartScreenController {
     private PasswordField loginPasswordField;
 
     @FXML
-    private Button loginButton;
+    private ProgressBar passwordStrengthProgressBar;
 
     @FXML
-    private Button registerButton;
+    private Button loginButton;
 
     @FXML
     private TextField registrationUsernameTextField;
@@ -63,7 +65,10 @@ public class StartScreenController {
     private PasswordField registrationRetypePasswordField;
 
     @FXML
-    private Label registerMessage;
+    private Label registerUsernameMessage;
+
+    @FXML
+    private Label registerPasswordMessage;
 
     @FXML
     private Label loginMessage;
@@ -99,73 +104,39 @@ public class StartScreenController {
     private TextArea messageTextField;
 
     @FXML
-    private Pane usernameHoverPane;
+    private TextArea registerPrompt;
 
     @FXML
-    private Pane passwordHoverPane;
+    private Label usernameMessage;
 
     @FXML
-    private Text passwordText;
-
-    @FXML
-    private Text usernameText;
-
-    public void goToAboutUsScreen(ActionEvent event) {
-        goToScreen(event, "mainscreencontroller/AboutUsScreen.fxml");
-    }
-
-    public void goToRegistrationScreen(ActionEvent event) { // this method will open the profile screen window
-        StartScreenController startScreenController = goToScreen(event, "mainscreencontroller/RegistrationScreen.fxml").getController();
-        startScreenController.setRegistrationButtonDisable();
-    }
-
-    public void goToLoginScreen(ActionEvent event) { // this method will open the profile screen window
-        StartScreenController startScreenController = goToScreen(event, "mainscreencontroller/LoginScreen.fxml").getController();
-        startScreenController.setLoginButtonDisable();
-    }
-
-    public void goToMainScreen(ActionEvent event) {
-        goToScreen(event, "mainscreencontroller/StartScreen.fxml");
-    }
-
-    /*public void goToProfileScreen(ActionEvent event, Profile profile) { // this method will open the profile screen window
-        ProfileScreenController profileScreenController = goToScreen(event, "profilescreencontroller/ProfileScreen.fxml").getController();
-        profileScreenController.initialize(profile);
-    }*/
+    private Label passwordMessage;
 
     public void goToCreateProfileScreenWithLogin(ActionEvent event, String username, String password) { // this method will open the profile screen window
-        StartScreenController startScreenController = goToScreen(event, "mainscreencontroller/CreateProfileScreen.fxml").getController();
+        StartScreenController startScreenController = Main.goToScreen(event, "mainscreencontroller/CreateProfileScreen.fxml").getController();
         startScreenController.initialize(username, password);
         startScreenController.setAgeTextFieldEventHandler();
         startScreenController.setCreateProfileButtonDisable();
     }
 
+    public void goToCreateAccountScreen(ActionEvent event) {
+        Main.goToScreen(event, "startscreencontroller/CreateAccountScreen.fxml");
+    }
+
+    public void goToStartScreen(ActionEvent event) {
+        Main.goToScreen(event, "startscreencontroller/StartScreen.fxml");
+    }
+
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
-        StartScreenController startScreenController = goToScreen(event, "mainscreencontroller/CreateProfileScreen.fxml").getController();
+        StartScreenController startScreenController = Main.goToScreen(event, "mainscreencontroller/CreateProfileScreen.fxml").getController();
         startScreenController.setAgeTextFieldEventHandler();
         startScreenController.setCreateProfileButtonDisable();
     }
 
-    public void goToFeedbackScreen(ActionEvent event) { // this method will open the profile screen window
-        goToScreen(event, "mainscreencontroller/FeedbackScreen.fxml").getController();
-    }
-
+    //is this needed?
     private void initialize(String username, String password) {
         profile.setUsername(username);
         profile.setPassword(password);
-    }
-
-    private FXMLLoader goToScreen(ActionEvent event, String fxmlFilePath) {
-        Parent root = null;
-        FXMLLoader loader = null;
-        try {
-            loader = new FXMLLoader(getClass().getResource("/com/app/planner/" + fxmlFilePath));
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Main.setWindow(event, root);
-        return loader;
     }
 
     public void setCreateProfileButtonDisable() {
@@ -176,18 +147,17 @@ public class StartScreenController {
         pregnantComboBox.getSelectionModel().select(1);
     }
 
-    public void setLoginButtonDisable() {
-        loginButton.disableProperty().bind(loginUsernameTextField.textProperty().isEmpty().or(loginPasswordField.textProperty().isEmpty()));
-    }
-
-    public void setRegistrationButtonDisable() {
+    // same as above
+    /*public void setRegistrationButtonDisable() {
         registerButton.disableProperty().bind(registrationUsernameTextField.textProperty().isEmpty().or(registrationPasswordField.textProperty().isEmpty()).or(registrationRetypePasswordField.textProperty().isEmpty()));
-    }
+    }*/
 
-    public void sendFeedback() {
+    //needs to be in a different class because of ui overhaul
+    /*public void sendFeedback() {
         DatabaseConnection.sendFeedback(nameTextField.getText(), emailTextField.getText(), messageTextField.getText());
     }
-
+*/
+    //TODO is this needed?
     public void createTestProfile(ActionEvent event) {
         Diary diary = new Diary();
 
@@ -224,12 +194,14 @@ public class StartScreenController {
         //goToProfileScreen(event, profile);
     }
 
+    // will be moved to different controller class
     public void setAgeTextFieldEventHandler() {
         ageTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             ageTextField.setText(InputValidation.ageValidation(newValue));
         });
     }
 
+    // will be moved to different controller class
     public void createNewProfile(ActionEvent event) {
         String sex = (String) sexComboBox.getValue();
         int age = Integer.parseInt(ageTextField.getText());
@@ -250,23 +222,24 @@ public class StartScreenController {
         //goToProfileScreen(event, profile);
     }
 
-    public void showUsernameHoverPane() {
-        usernameText.setText("Username should: \n• be between 4 and 20 characters in length");
-        usernameHoverPane.setVisible(true);
+    public void showRegisterPrompt() {
+        registerPrompt.setVisible(true);
     }
 
-    public void hideUsernameHoverPane() {
-        usernameHoverPane.setVisible(false);
+    public void hideRegisterPrompt() {
+        registerPrompt.setVisible(false);
     }
 
-    public void showPasswordHoverPane() {
-        passwordText.setText("Password should: \n• be between 15 and 8 characters \n• contain at least one upper case letter" +
-                "\n• contain at least one lower case letter \n• contain at least one number \n• contain at least one special character ");
-        passwordHoverPane.setVisible(true);
-    }
-
-    public void hidePasswordHoverPane() {
-        passwordHoverPane.setVisible(false);
+    public void passwordStrengthHandler() {
+        float passwordStrength = InputValidation.getPasswordStrength(registrationPasswordField.getText());
+        if (passwordStrength < 0.6) {
+            passwordStrengthProgressBar.setId("passwordStrengthProgressBarWeak");
+        } else if (passwordStrength < 1) {
+            passwordStrengthProgressBar.setId("passwordStrengthProgressBarOk");
+        } else {
+            passwordStrengthProgressBar.setId("passwordStrengthProgressBarStrong");
+        }
+        passwordStrengthProgressBar.setProgress(passwordStrength);
     }
 
     public void loadFemalePane() {
@@ -289,34 +262,34 @@ public class StartScreenController {
         }
     }
 
-    public void openHyperlink() {
-        Desktop desktop = Desktop.getDesktop();
-        try {
-            desktop.browse(new URI("https://icons8.com/"));
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void logIn(ActionEvent event) {
         String username = loginUsernameTextField.getText();
         String password = loginPasswordField.getText();
+        // clear styling
+        usernameMessage.setText("");
+        passwordMessage.setText("");
+        loginUsernameTextField.setId("");
+        loginPasswordField.setId("");
         if (InputValidation.usernameValidation(username).equals("valid")) {
             if (InputValidation.passwordValidation(password).equals("valid")) {
                 if (DatabaseConnection.login(username, password)) {
                     //goToProfileScreen(event, DatabaseConnection.getProfileFromDb(username));
                 } else {
-                    loginMessage.setText("Account does not exist");
+                    usernameMessage.setText("Account does not exist");
+                    usernameMessage.setId("warningLabel");
+                    loginUsernameTextField.setId("text-field-warning");
                     return;
                 }
             } else {
-                loginMessage.setText("Invalid Password");
+                passwordMessage.setText("Invalid Password");
+                passwordMessage.setId("errorLabel");
+                loginPasswordField.setId("text-field-error");
                 return;
             }
         } else {
-            loginMessage.setText("Invalid Username");
+            usernameMessage.setText("Invalid Username");
+            usernameMessage.setId("errorLabel");
+            loginUsernameTextField.setId("text-field-error");
             return;
         }
     }
@@ -325,25 +298,39 @@ public class StartScreenController {
         String username = registrationUsernameTextField.getText();
         String password = registrationPasswordField.getText();
         String retypePassword = registrationRetypePasswordField.getText();
-        if (password.equals(retypePassword)) {
-            if (InputValidation.usernameValidation(username).equals("valid")) {
-                if (InputValidation.passwordValidation(password).equals("valid")) {
+        registerUsernameMessage.setText("");
+        registerPasswordMessage.setText("");
+        registrationUsernameTextField.setId("");
+        registrationPasswordField.setId("");
+        registrationRetypePasswordField.setId("");
+
+        if (InputValidation.usernameValidation(username).equals("valid")) {
+            if (InputValidation.passwordValidation(password).equals("valid")) {
+                if (password.equals(retypePassword)) {
                     if (DatabaseConnection.register(username, password)) {
                         goToCreateProfileScreenWithLogin(event, username, password);
                     } else {
-                        registerMessage.setText("Username Already exists");
+                        registerUsernameMessage.setText("Username Already exists");
+                        registerUsernameMessage.setId("warningLabel");
+                        registrationUsernameTextField.setId("text-field-warning");
                         return;
                     }
                 } else {
-                    registerMessage.setText(InputValidation.passwordValidation(password));
+                    registerPasswordMessage.setText("Passwords Not matching");
+                    registerPasswordMessage.setId("errorLabel");
+                    registrationRetypePasswordField.setId("text-field-error");
                     return;
                 }
             } else {
-                registerMessage.setText("Invalid Username");
+                registerPasswordMessage.setText(InputValidation.passwordValidation(password));
+                registerPasswordMessage.setId("errorLabel");
+                registrationPasswordField.setId("text-field-error");
                 return;
             }
         } else {
-            registerMessage.setText("Passwords Not matching");
+            registerUsernameMessage.setText(InputValidation.usernameValidation(username));
+            registerUsernameMessage.setId("errorLabel");
+            registrationUsernameTextField.setId("text-field-error");
             return;
         }
     }

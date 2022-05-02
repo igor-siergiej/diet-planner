@@ -29,6 +29,7 @@ public class Main extends Application {
             Scene scene = new Scene(root);
             scene.getStylesheets().add("com/app/planner/style.css");
             stage.getIcons().add(new Image("com/app/planner/img/icon.png"));
+            stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
             Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -39,7 +40,20 @@ public class Main extends Application {
         }
     }
 
-    public static void setWindow(ActionEvent event, Parent root) {
+    public static FXMLLoader goToScreen(ActionEvent event, String fxmlFilePath) {
+        Parent root = null;
+        FXMLLoader loader = null;
+        try {
+            loader = new FXMLLoader(Main.class.getResource("/com/app/planner/" + fxmlFilePath));
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setWindow(event, root);
+        return loader;
+    }
+
+    private static void setWindow(ActionEvent event, Parent root) {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/com/app/planner/style.css");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -63,32 +77,25 @@ public class Main extends Application {
     }
 
     public static File chooseLoadFile(Pane pane) {  //used to pick file to save or load from
-
         FileChooser fileChooser = new FileChooser();
-
         Stage stage = (Stage) pane.getScene().getWindow(); // getting the window of the pane
-
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JSON Files", "*.JSON")
         );
 
         File file = fileChooser.showOpenDialog(stage);//setting the window to be locked.
-
         return file;
     }
 
     public static File chooseSaveFile(Pane pane) {
 
         FileChooser fileChooser = new FileChooser();
-
         Stage stage = (Stage) pane.getScene().getWindow();
-
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JSON Files", "*.JSON")
         );
 
         File file = fileChooser.showSaveDialog(stage);
-
         return file;
     }
 
