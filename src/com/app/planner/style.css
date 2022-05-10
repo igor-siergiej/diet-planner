@@ -29,7 +29,7 @@
 }
 
 #signInButton:hover {
-    -fx-background-color: linear-gradient(to top right, rgba(0, 108, 255, 0.5), rgba(111, 34, 132, 0.5));
+    -fx-background-color: linear-gradient(to top right, rgb(0, 72, 187), rgb(84, 27, 101));
 }
 
 .label, .hyperlink{
@@ -115,6 +115,19 @@
 
 #menuBar {
     -fx-background-color: #007bffff;
+}
+
+#menuBarItem {
+    -fx-background-color: #007bffff;
+    -fx-background-radius: 0;
+}
+
+#menuBarItem:selected {
+    -fx-background-color: #002a67;
+}
+
+#subMenuBar {
+    -fx-background-color: #002a67;
 }
 
 #fakeButton {

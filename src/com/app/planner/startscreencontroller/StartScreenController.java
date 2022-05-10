@@ -1,30 +1,21 @@
 package com.app.planner.startscreencontroller;
 
 import com.app.planner.*;
-//import com.app.planner.profilescreencontroller.ProfileScreenController;
+import com.app.planner.profilescreencontroller.ProfileScreenController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-
-import java.awt.*;
 import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class StartScreenController {
-
+public class StartScreenController extends BaseScreenController {
     @FXML
     public void initialize() {
 
@@ -113,24 +104,20 @@ public class StartScreenController {
     private Label passwordMessage;
 
     public void goToCreateProfileScreenWithLogin(ActionEvent event, String username, String password) { // this method will open the profile screen window
-        StartScreenController startScreenController = Main.goToScreen(event, "mainscreencontroller/CreateProfileScreen.fxml").getController();
+        StartScreenController startScreenController = goToScreen(event, "mainscreencontroller/CreateProfileScreen.fxml").getController();
         startScreenController.initialize(username, password);
         startScreenController.setAgeTextFieldEventHandler();
         startScreenController.setCreateProfileButtonDisable();
     }
 
-    public void goToCreateAccountScreen(ActionEvent event) {
-        Main.goToScreen(event, "startscreencontroller/CreateAccountScreen.fxml");
-    }
-
-    public void goToStartScreen(ActionEvent event) {
-        Main.goToScreen(event, "startscreencontroller/StartScreen.fxml");
-    }
-
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
-        StartScreenController startScreenController = Main.goToScreen(event, "mainscreencontroller/CreateProfileScreen.fxml").getController();
+        StartScreenController startScreenController = goToScreen(event, "mainscreencontroller/CreateProfileScreen.fxml").getController();
         startScreenController.setAgeTextFieldEventHandler();
         startScreenController.setCreateProfileButtonDisable();
+    }
+
+    public void goToProfileScreen(ActionEvent event, Profile profile) { // this method will open the profile screen window
+        goToScreen(event, "profilescreencontroller/ProfileScreen.fxml").getController();
     }
 
     //is this needed?
@@ -157,7 +144,7 @@ public class StartScreenController {
         DatabaseConnection.sendFeedback(nameTextField.getText(), emailTextField.getText(), messageTextField.getText());
     }
 */
-    //TODO is this needed?
+    //TODO move this to test class in the future
     public void createTestProfile(ActionEvent event) {
         Diary diary = new Diary();
 
@@ -191,7 +178,7 @@ public class StartScreenController {
         diary.addEntry(entry3);
 
         Profile profile = new Profile("", "", "testProfile", 14, "female", true, false, diary, new Option());
-        //goToProfileScreen(event, profile);
+        goToProfileScreen(event, profile);
     }
 
     // will be moved to different controller class
@@ -337,7 +324,7 @@ public class StartScreenController {
 
     //TODO eventually remove
     public void testLogin(ActionEvent event) {
-        DatabaseConnection.login("test", "testpass!I1");
-        //goToProfileScreen(event, DatabaseConnection.getProfileFromDb("test"));
+        DatabaseConnection.login("testProfile", "testpass!I1");
+        goToScreen(event, "ProfileScreen.fxml");
     }
 }

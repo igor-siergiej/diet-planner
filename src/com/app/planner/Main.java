@@ -40,29 +40,9 @@ public class Main extends Application {
         }
     }
 
-    public static FXMLLoader goToScreen(ActionEvent event, String fxmlFilePath) {
-        Parent root = null;
-        FXMLLoader loader = null;
-        try {
-            loader = new FXMLLoader(Main.class.getResource("/com/app/planner/" + fxmlFilePath));
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        setWindow(event, root);
-        return loader;
-    }
 
-    private static void setWindow(ActionEvent event, Parent root) {
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/com/app/planner/style.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        window.setX((primScreenBounds.getWidth() - window.getWidth()) / 2);
-        window.setY((primScreenBounds.getHeight() - window.getHeight()) / 2);
-    }
+
+
 
     public static ArrayList<Food> initialiseData() { //this will load the json file with the dataset to an arraylist
         ArrayList<Food> returnList = new ArrayList<>();
