@@ -22,6 +22,8 @@ public class Profile {
     private Option options;
     private DailyIntake dailyIntake;
 
+    // stack for undo and redo
+
     public Profile(String username, String password, String profileName, int age, String sex, boolean pregnant, boolean breastFeeding, Diary diary, Option options) {
         this.username = username;
         this.password = password;

@@ -6,7 +6,7 @@ public class DatabaseConnection {
 
     private static final String SQL_INSERT_USERS = "INSERT INTO users (username,password,salt,profiledata) VALUES (?,?,?,?)";
     private static final String SQL_INSERT_FEEDBACK = "INSERT INTO feedback (name,message,email) VALUES (?,?,?)";
-    private static final String SQL_SELECT = "SELECT * FROM users WHERE username = ?";
+    private static final String LOGIN = "SELECT password,salt FROM users WHERE username = ?";
     private static final String SQL_INSERT_SAVE = "UPDATE Users SET profiledata = ? WHERE username = ?";
 
     public static boolean register(String username, String password) { // call when you are creating a new login to db
@@ -40,12 +40,12 @@ public class DatabaseConnection {
         String securePassword = "";
         String salt = "";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT);
+            PreparedStatement preparedStatement = connection.prepareStatement(LOGIN);
             {
-                preparedStatement.setString(1, username);
+                preparedStatement.setString(1, username); //sets the username we are finding the password for
             }
-            ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
+            ResultSet resultSet = preparedStatement.executeQuery(); //get the resultSet from the query
+            resultSet.next(); //resultSet starts at before the first row so have to call this
             securePassword = resultSet.getString("password");
             salt = resultSet.getString("salt");
             resultSet.close();
@@ -62,7 +62,7 @@ public class DatabaseConnection {
         Connection connection = connect();
         String profileData = "";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT);
+            PreparedStatement preparedStatement = connection.prepareStatement(LOGIN);
             {
                 preparedStatement.setString(1, username);
             }
