@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.viewnutrientscontroller.ViewNutrientsController">
+   <children>
+      <ScrollPane id="resultsPane" layoutX="14.0" layoutY="320.0" prefHeight="476.0" prefWidth="451.0">
+         <content>
+            <VBox id="resultsPane" fx:id="entryVBox" prefHeight="469.0" prefWidth="428.0" />
+         </content>
+      </ScrollPane>
+      <DatePicker id="datePicker" fx:id="datePicker" layoutX="14.0" layoutY="185.0" style="-fx-font-size: 25;" />
+      <Button layoutX="357.0" layoutY="255.0" mnemonicParsing="false" onAction="#searchEntries" text="Search">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
+      <Button layoutX="14.0" layoutY="255.0" mnemonicParsing="false" onAction="#populateAllEntries" text="Get All Entries">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
+      <Pane fx:id="nutrientPane" layoutX="466.0" prefHeight="800.0" prefWidth="691.0" visible="false">
+         <children>
+            <Label layoutX="14.0" layoutY="619.0" styleClass="nutrients-label" text="Sugars">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <PieChart fx:id="macroPieChart" layoutX="309.0" layoutY="-18.0" legendVisible="false" prefHeight="284.0" prefWidth="416.0" />
+            <Label layoutX="15.0" layoutY="453.0" styleClass="nutrients-label" text="Other Nutrients">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="193.0" styleClass="nutrients-label" text="Minerals">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="354.0" layoutY="217.0" styleClass="nutrients-label" text="Macro Nutrients">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="354.0" layoutY="305.0" styleClass="nutrients-label" text="Vitamins">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="357.0" layoutY="619.0" styleClass="nutrients-label" text="Fats">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <VBox fx:id="macroVBox" layoutX="357.0" layoutY="247.0" prefHeight="58.0" prefWidth="320.0">
+               <children>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="86.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="86.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="otherVBox" layoutX="15.0" layoutY="483.0" prefHeight="136.0" prefWidth="320.0">
+               <children>
+                  <HBox layoutX="10.0" layoutY="86.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="86.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefHeight="17.0" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="29.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="48.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="67.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="86.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="mineralVBox" layoutX="15.0" layoutY="226.0" prefHeight="227.0" prefWidth="320.0">
+               <children>
+                  <HBox prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefHeight="17.0" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="86.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="86.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefHeight="17.0" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="29.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="48.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="67.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="86.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="vitaminVBox" layoutX="357.0" layoutY="335.0" prefHeight="284.0" prefWidth="320.0">
+               <children>
+                  <HBox prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefHeight="17.0" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="86.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="86.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefHeight="17.0" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefHeight="17.0" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefHeight="17.0" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefHeight="17.0" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefHeight="17.0" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefHeight="17.0" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefHeight="17.0" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefHeight="17.0" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="fatVBox" layoutX="357.0" layoutY="650.0" prefHeight="136.0" prefWidth="320.0">
+               <children>
+                  <HBox prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefHeight="17.0" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="86.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="86.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="sugarVBox" layoutX="15.0" layoutY="650.0" prefHeight="136.0" prefWidth="320.0">
+               <children>
+                  <HBox prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefHeight="17.0" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="86.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="86.0" prefHeight="19.0" prefWidth="348.0" spacing="5.0">
+                     <children>
+                        <Label id="nameLabel" prefHeight="17.0" prefWidth="80.0" text="Label" />
+                        <Label id="valueLabel" prefWidth="60.0" text="Label" />
+                        <ProgressBar id="progressBar" prefHeight="18.0" prefWidth="117.0" progress="0.0" />
+                        <Label id="percentLabel" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children></Pane>
+      <ComboBox fx:id="comboBox" layoutX="14.0" layoutY="119.0" prefHeight="54.0" prefWidth="293.0" promptText="Select search type" style="-fx-font-size: 25;">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
+            <String fx:id="getDay" fx:value="Get Day" />
+            <String fx:id="getWeek" fx:value="Get Week" />
+         </FXCollections>
+      </items>
+   </ComboBox>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToProfileScreen" prefHeight="50.0" prefWidth="100.0" text="Back">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
+   </children>
+</Pane>

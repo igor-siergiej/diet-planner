@@ -117,7 +117,8 @@ public class StartScreenController extends BaseScreenController {
     }
 
     public void goToProfileScreen(ActionEvent event, Profile profile) { // this method will open the profile screen window
-        goToScreen(event, "profilescreencontroller/ProfileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreen(event, "profilescreencontroller/ProfileScreen.fxml").getController();
+        //profileScreenController.initialise(profile);
     }
 
     //is this needed?

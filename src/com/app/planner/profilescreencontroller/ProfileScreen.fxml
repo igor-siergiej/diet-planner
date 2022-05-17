@@ -26,9 +26,6 @@
                   <Insets bottom="10.0" />
                </padding></Separator>
             <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0">
-               <toggleGroup>
-                  <ToggleGroup fx:id="menuBarToggleGroup1" />
-               </toggleGroup>
                <graphic>
                   <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -36,63 +33,51 @@
                      </image>
                   </ImageView>
                </graphic>
-            </ToggleButton>
-            <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0">
                <toggleGroup>
-                  <ToggleGroup fx:id="menuBarToggleGroup11" />
+                  <ToggleGroup fx:id="menuBarToggleGroup" />
                </toggleGroup>
+            </ToggleButton>
+            <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0" toggleGroup="$menuBarToggleGroup">
                <graphic>
                   <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../img/profileIconWhite.png" />
+                        <Image url="@../img/profileIconWhite.png" />
                      </image>
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0">
-               <toggleGroup>
-                  <ToggleGroup fx:id="menuBarToggleGroup12" />
-               </toggleGroup>
+            <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0" toggleGroup="$menuBarToggleGroup">
                <graphic>
                   <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../img/addIcon.png" />
+                        <Image url="@../img/addIcon.png" />
                      </image>
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0">
-               <toggleGroup>
-                  <ToggleGroup fx:id="menuBarToggleGroup121" />
-               </toggleGroup>
+            <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0" toggleGroup="$menuBarToggleGroup">
                <graphic>
                   <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../img/calendar.png" />
+                        <Image url="@../img/calendar.png" />
                      </image>
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton id="menuBarItem" layoutX="10.0" layoutY="262.0" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0">
-               <toggleGroup>
-                  <ToggleGroup fx:id="menuBarToggleGroup1211" />
-               </toggleGroup>
+            <ToggleButton id="menuBarItem" layoutX="10.0" layoutY="262.0" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0" toggleGroup="$menuBarToggleGroup">
                <graphic>
                   <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../img/saveIcon.png" />
+                        <Image url="@../img/saveDB.png" />
                      </image>
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0">
-               <toggleGroup>
-                  <ToggleGroup fx:id="menuBarToggleGroup12111" />
-               </toggleGroup>
+            <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0" toggleGroup="$menuBarToggleGroup">
                <graphic>
                   <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../img/saveToDb.png" />
+                        <Image url="@../img/saveFile.png" />
                      </image>
                   </ImageView>
                </graphic>
