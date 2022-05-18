@@ -4,10 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -42,8 +40,7 @@ public class Main extends Application {
 
 
 
-
-
+    // TODO move these methods to a separate class
     public static ArrayList<Food> initialiseData() { //this will load the json file with the dataset to an arraylist
         ArrayList<Food> returnList = new ArrayList<>();
         // reads the entire array in the file
