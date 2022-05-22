@@ -118,7 +118,7 @@ public class StartScreenController extends BaseScreenController {
 
     public void goToProfileScreen(ActionEvent event, Profile profile) { // this method will open the profile screen window
         ProfileScreenController profileScreenController = goToScreen(event, "profilescreencontroller/ProfileScreen.fxml").getController();
-        //profileScreenController.initialise(profile);
+        profileScreenController.initialise(profile);
     }
 
     //is this needed?
@@ -174,6 +174,11 @@ public class StartScreenController extends BaseScreenController {
         Entry entry3 = new Entry(meal1, LocalDateTime.now().minusDays(3), EntryType.DINNER);
 
         diary.addEntry(entry);
+        diary.addEntry(entry);
+        diary.addEntry(entry);
+        diary.addEntry(entry);
+        diary.addEntry(entry);
+
         diary.addEntry(entry1);
         diary.addEntry(entry2);
         diary.addEntry(entry3);

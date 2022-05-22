@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -234,12 +235,13 @@ public class ViewNutrientsController extends BaseScreenController{
     // 0 = should be the targetdose, 99999999 = not found therefore no maximum dose, anything else actual value
      public static float searchTargetNutrientsList(String nutrientName, ArrayList<TargetNutrients> arrayList) {
         float returnValue = 99999999;
+        DecimalFormat df = new DecimalFormat("0.0");
         for (TargetNutrients targetNutrients : arrayList) {
             if (nutrientName.contains(targetNutrients.getNutrientName())) {
                 returnValue = targetNutrients.getValue();
             }
         }
-        return returnValue;
+        return Float.parseFloat(df.format(returnValue));
     }
 
     public String getTargetNutrientsUnits(String nutrientName) {
