@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 
 import java.io.*;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -178,6 +179,7 @@ public class Profile {
 
     public float getNutrientValueForCurrentDay(String nutrientName) {
         float value = 0;
+        DecimalFormat df = new DecimalFormat("0.0");
         ArrayList<Nutrient> nutrients = new ArrayList<>();
         for (Entry entry : getDiary().getEntriesDay(LocalDate.now())) {
             for (Food food : entry.getMeal().getFoods()) {
@@ -190,7 +192,7 @@ public class Profile {
                 value = nutrient.getNutrientValue();
             }
         }
-        return value;
+        return Float.parseFloat(df.format(value));
     }
 }
 

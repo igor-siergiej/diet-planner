@@ -97,8 +97,11 @@
 }
 
 .progress-bar {
-    -fx-control-inner-background: #101010;
-    -fx-text-box-border: #4b4b4b;
+    -fx-control-inner-background: #4b4b4b;
+}
+
+.progress-bar > .bar, .progress-bar > .track {
+    -fx-background-insets: 0;
 }
 
 #passwordStrengthProgressBarStrong {

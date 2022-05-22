@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -8,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.profilescreencontroller.ProfileScreenController">
    <children>
@@ -25,7 +29,7 @@
                <padding>
                   <Insets bottom="10.0" />
                </padding></Separator>
-            <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0">
+            <ToggleButton id="menuBarItem" fx:id="homeButton" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0">
                <graphic>
                   <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -100,6 +104,63 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
+         </children>
+      </VBox>
+      <VBox fx:id="entriesVBox" alignment="TOP_CENTER" layoutX="838.0" layoutY="460.0" prefHeight="326.0" prefWidth="428.0">
+         <children>
+            <Label text="Today's Meals">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children></VBox>
+      <PieChart fx:id="caloriePieChart" layoutX="80.0" layoutY="-82.0" prefHeight="461.0" prefWidth="479.0" />
+      <VBox alignment="TOP_CENTER" layoutX="93.0" layoutY="489.0" prefHeight="297.0" prefWidth="311.0">
+         <children>
+            <Label prefHeight="30.0" prefWidth="212.0" text="Carbohydrates Progress">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ProgressBar fx:id="carbsProgressBar" prefHeight="10.0" prefWidth="255.0" progress="0.0" />
+            <Label fx:id="carbsLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="207.0" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="112.0" text="Fat Progress">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ProgressBar fx:id="fatProgressBar" prefHeight="10.0" prefWidth="255.0" progress="0.0" />
+            <Label fx:id="fatLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="163.0" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="148.0" text="Protein Progress">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ProgressBar fx:id="proteinProgressBar" prefHeight="10.0" prefWidth="255.0" progress="0.0" />
+            <Label fx:id="proteinLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="187.0" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" prefWidth="146.0" text="Calorie Progress">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ProgressBar fx:id="calorieProgressBar" prefHeight="10.0" prefWidth="255.0" progress="0.0" />
+            <Label fx:id="calorieLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="166.0" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
    </children>
