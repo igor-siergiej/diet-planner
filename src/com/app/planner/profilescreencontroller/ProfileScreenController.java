@@ -1,8 +1,10 @@
 package com.app.planner.profilescreencontroller;
 
 import com.app.planner.*;
+import com.app.planner.startscreencontroller.StartScreenController;
 import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
@@ -12,6 +14,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -58,7 +61,8 @@ public class ProfileScreenController extends BaseScreenController {
     private ToggleButton homeButton;
 
     public void initialise(@NotNull Profile profile) {
-        homeButton.setSelected(true);
+
+        homeButton.setSelected(true); // since we are in profileScreen set the toggleButton to be selected
         this.profile = profile;
 
         // get goals of current profile profile
@@ -73,15 +77,14 @@ public class ProfileScreenController extends BaseScreenController {
         float fat = profile.getNutrientValueForCurrentDay("Fat");
         float protein = profile.getNutrientValueForCurrentDay("Protein");
 
-        float total = carbsGoal + fatGoal + proteinGoal;
+        float total = carbs + fat + protein;
 
         // set piechart values
-        // TODO should this be goal values or actual values for the day
         ObservableList<PieChart.Data> pieChartData =
                 observableArrayList( // s = visual name, v = value where percentage will be calculated automatically
-                        new PieChart.Data("Fat " + String.format("%.1f", fatGoal / total * 100) + "%", fat),
-                        new PieChart.Data("Carbohydrates " + String.format("%.1f", carbsGoal / total * 100) + "%", carbs),
-                        new PieChart.Data("Protein " + String.format("%.1f", proteinGoal / total * 100) + "%", protein));
+                        new PieChart.Data("Fat " + String.format("%.1f", fat / total * 100) + "%", fat),
+                        new PieChart.Data("Carbohydrates " + String.format("%.1f", carbs / total * 100) + "%", carbs),
+                        new PieChart.Data("Protein " + String.format("%.1f", protein / total * 100) + "%", protein));
 
         caloriePieChart.setData(pieChartData);
         caloriePieChart.setLegendVisible(false);
@@ -104,7 +107,7 @@ public class ProfileScreenController extends BaseScreenController {
         float percentOfProtein = protein / proteinGoal;
         proteinProgressBar.setProgress(percentOfProtein);
 
-        //this will populate entriesVBox with only 4 of the entries for current day displaying details
+        // this will populate entriesVBox with only 4 of the entries for current day displaying details
         ArrayList<Entry> entries = profile.getDiary().getEntriesDay(LocalDate.now());
         for (int i = 0; i < 4; i++) {
             Label entryName = new Label(entries.get(i).getMeal().getMealName() + " " + entries.get(i).getEntryType().toString());
@@ -123,30 +126,36 @@ public class ProfileScreenController extends BaseScreenController {
         }
     }
 
-   /* public void saveProfileToFile() {
+    public void logOut(ActionEvent event) { // this method will open the profile screen window
+        goToScreen(event, "startscreencontroller/StartScreen.fxml");
+    }
+
+    public void saveProfileToFile() {
         File file = Main.chooseSaveFile(mainPane);
         if (!(file == null)) {
             profile.saveToFile(file);
-            messageLabel.setId("successfullMessage");
-            messageLabel.setText("Successfully saved to file");
+            // instead of messageLabel this should be a type of alert/pop up
+            // messageLabel.setId("successfullMessage");
+            // messageLabel.setText("Successfully saved to file");
         } else {
-            messageLabel.setId("unsuccessfullMessage");
-            messageLabel.setText("Failed to save to file");
+            // messageLabel.setId("unsuccessfullMessage");
+            // messageLabel.setText("Failed to save to file");
         }
-    }*/
+    }
 
-   /* public void saveProfileToDB() {
+    public void saveProfileToDB() {
         if (profile.getUsername() != null) {
             if (DatabaseConnection.saveProfileToDb(profile.getUsername(), profile)) {
-                messageLabel.setId("successfullMessage");
-                messageLabel.setText("Successfully saved to DB");
+                // instead of messageLabel this should be a type of alert/pop up
+                // messageLabel.setId("successfullMessage");
+                // messageLabel.setText("Successfully saved to DB");
             } else {
-                messageLabel.setId("successfullMessage");
-                messageLabel.setText("Error in saving to DB");
+                // messageLabel.setId("successfullMessage");
+                // messageLabel.setText("Error in saving to DB");
             }
         } else {
-            messageLabel.setId("successfullMessage");
-            messageLabel.setText("This profile does not have an account");
+            // messageLabel.setId("successfullMessage");
+            // messageLabel.setText("This profile does not have an account");
         }
-    }*/
+    }
 }
