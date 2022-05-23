@@ -10,8 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.*;
+import org.jetbrains.annotations.NotNull;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -20,8 +20,6 @@ import static javafx.collections.FXCollections.observableArrayList;
 public class ProfileScreenController extends BaseScreenController {
 
     private Profile profile;
-
-
 
     @FXML
     private Pane mainPane;
@@ -59,7 +57,7 @@ public class ProfileScreenController extends BaseScreenController {
     @FXML
     private ToggleButton homeButton;
 
-    public void initialise(Profile profile) {
+    public void initialise(@NotNull Profile profile) {
         homeButton.setSelected(true);
         this.profile = profile;
 
@@ -80,7 +78,7 @@ public class ProfileScreenController extends BaseScreenController {
         // set piechart values
         // TODO should this be goal values or actual values for the day
         ObservableList<PieChart.Data> pieChartData =
-                observableArrayList( //name = visual, (need to calculate percentage manually, value = just value, percentage will be calculated automatically
+                observableArrayList( // s = visual name, v = value where percentage will be calculated automatically
                         new PieChart.Data("Fat " + String.format("%.1f", fatGoal / total * 100) + "%", fat),
                         new PieChart.Data("Carbohydrates " + String.format("%.1f", carbsGoal / total * 100) + "%", carbs),
                         new PieChart.Data("Protein " + String.format("%.1f", proteinGoal / total * 100) + "%", protein));

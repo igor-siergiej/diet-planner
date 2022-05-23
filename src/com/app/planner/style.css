@@ -123,6 +123,11 @@
 #menuBarItem {
     -fx-background-color: #007bffff;
     -fx-background-radius: 0;
+    -fx-border-width: 0;
+}
+
+#menuBarItem:hover {
+    -fx-background-color: #003d86;
 }
 
 #menuBarItem:selected {
