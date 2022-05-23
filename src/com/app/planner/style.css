@@ -156,10 +156,6 @@
     -fx-border-radius: 15px;
 }
 
-.button:hover {
-    -fx-background-color: #004599;
-}
-
 .spinner {
     -fx-font-size: 20px;
 }
@@ -193,21 +189,6 @@
 
 .table-view .table-row-cell {
     -fx-background-color: #1a1a1a;
-}
-
-#calendarPane {
-    -fx-border-width: 2px;
-    -fx-border-color: #0056B3;
-}
-
-#currentDay {
-    -fx-border-width: 4px;
-    -fx-border-color: green;
-}
-
-#selectedDay {
-    -fx-border-width: 4px;
-    -fx-border-color: blue;
 }
 
 #titleLabel .text {

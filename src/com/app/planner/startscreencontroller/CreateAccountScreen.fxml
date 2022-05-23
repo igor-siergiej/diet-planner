@@ -28,7 +28,7 @@
             <TextField fx:id="registrationUsernameTextField" layoutX="84.0" layoutY="251.0" prefHeight="48.0" prefWidth="331.0" promptText="Username" />
             <PasswordField fx:id="registrationPasswordField" layoutX="85.0" layoutY="328.0" onKeyTyped="#passwordStrengthHandler" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
             <PasswordField fx:id="registrationRetypePasswordField" layoutX="85.0" layoutY="471.0" prefHeight="48.0" prefWidth="331.0" promptText="Re-type Password" />
-            <Button cancelButton="true" layoutX="14.0" layoutY="28.0" mnemonicParsing="false" onAction="#goToStartScreen" prefHeight="50.0" prefWidth="50.0">
+            <Button id="greyButton" cancelButton="true" layoutX="14.0" layoutY="28.0" mnemonicParsing="false" onAction="#goToStartScreen" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
