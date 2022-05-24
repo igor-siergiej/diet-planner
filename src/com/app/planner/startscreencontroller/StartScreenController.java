@@ -1,6 +1,7 @@
 package com.app.planner.startscreencontroller;
 
 import com.app.planner.*;
+import com.app.planner.createprofilecontroller.CreateProfileController;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -104,21 +105,14 @@ public class StartScreenController extends BaseScreenController {
     private Label passwordMessage;
 
     public void goToCreateProfileScreenWithLogin(ActionEvent event, String username, String password) { // this method will open the profile screen window
-        StartScreenController startScreenController = goToScreen(event, "mainscreencontroller/CreateProfileScreen.fxml").getController();
-        startScreenController.initialize(username, password);
-        startScreenController.setAgeTextFieldEventHandler();
-        startScreenController.setCreateProfileButtonDisable();
+        CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
+        createProfileController.initialise(username, password);
     }
 
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
         StartScreenController startScreenController = goToScreen(event, "mainscreencontroller/CreateProfileScreen.fxml").getController();
         startScreenController.setAgeTextFieldEventHandler();
         startScreenController.setCreateProfileButtonDisable();
-    }
-
-    public void goToProfileScreen(ActionEvent event, Profile profile) { // this method will open the profile screen window
-        ProfileScreenController profileScreenController = goToScreen(event, "profilescreencontroller/ProfileScreen.fxml").getController();
-        profileScreenController.initialise(profile);
     }
 
     //is this needed?
@@ -300,7 +294,7 @@ public class StartScreenController extends BaseScreenController {
         if (InputValidation.usernameValidation(username).equals("valid")) {
             if (InputValidation.passwordValidation(password).equals("valid")) {
                 if (password.equals(retypePassword)) {
-                    if (DatabaseConnection.register(username, password)) {
+                    if (DatabaseConnection.register(username, password)) { // this will register if validation is ok?
                         goToCreateProfileScreenWithLogin(event, username, password);
                     } else {
                         registerUsernameMessage.setText("Username Already exists");
@@ -326,6 +320,11 @@ public class StartScreenController extends BaseScreenController {
             registrationUsernameTextField.setId("text-field-error");
             return;
         }
+    }
+
+    // TODO this method should be used for testing to bypass having to register a new account for each test.
+    public void testRegister(ActionEvent event) {
+        goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml");
     }
 
     //TODO eventually remove

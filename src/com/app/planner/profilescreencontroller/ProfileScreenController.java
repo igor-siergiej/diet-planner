@@ -1,7 +1,6 @@
 package com.app.planner.profilescreencontroller;
 
 import com.app.planner.*;
-import com.app.planner.startscreencontroller.StartScreenController;
 import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +20,8 @@ import java.util.ArrayList;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class ProfileScreenController extends BaseScreenController {
+
+    static final int MAX_NUM_ENTRIES = 4;
 
     private Profile profile;
 
@@ -92,7 +93,7 @@ public class ProfileScreenController extends BaseScreenController {
         carbsLabel.setText(carbs + "/" + carbsGoal);
         fatLabel.setText(fat + "/" + fatGoal);
         proteinLabel.setText(protein + "/" + proteinGoal);
-        calorieLabel.setText(calories + "/" +calorieGoal);
+        calorieLabel.setText(calories + "/" + calorieGoal);
 
         // set progressbar progress
         float percentOfCalories = calories / calorieGoal;
@@ -109,7 +110,7 @@ public class ProfileScreenController extends BaseScreenController {
 
         // this will populate entriesVBox with only 4 of the entries for current day displaying details
         ArrayList<Entry> entries = profile.getDiary().getEntriesDay(LocalDate.now());
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < MAX_NUM_ENTRIES; i++) {
             Label entryName = new Label(entries.get(i).getMeal().getMealName() + " " + entries.get(i).getEntryType().toString());
             Label calorie = new Label(entries.get(i).getNutrientValueForEntry("Energy (kcal)") + " Kcal");
 
