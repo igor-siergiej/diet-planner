@@ -1,5 +1,6 @@
 package com.app.planner;
 
+import com.app.planner.profilescreencontroller.ProfileScreenController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -44,6 +45,11 @@ public class BaseScreenController {
         }
         setWindow(event, root);
         return loader;
+    }
+
+    public void goToProfileScreen(ActionEvent event, Profile profile) { // this method will open the profile screen window
+        ProfileScreenController profileScreenController = goToScreen(event, "profilescreencontroller/ProfileScreen.fxml").getController();
+        profileScreenController.initialise(profile);
     }
 
     public void setWindow(ActionEvent event, Parent root) {

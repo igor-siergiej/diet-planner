@@ -62,6 +62,11 @@
                   <Image url="@../img/backgroundPattern.png" />
                </image>
             </ImageView>
+            <Button id="signInButton" defaultButton="true" layoutX="104.0" layoutY="666.0" mnemonicParsing="false" onAction="#testRegister" prefHeight="55.0" prefWidth="331.0" text="Admin Register">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </children>

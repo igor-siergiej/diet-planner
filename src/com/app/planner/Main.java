@@ -14,6 +14,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser;
 
+import javax.mail.MessagingException;
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws MessagingException {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("startscreencontroller/StartScreen.fxml"));
             Scene scene = new Scene(root);
