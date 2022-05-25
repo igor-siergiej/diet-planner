@@ -2,7 +2,6 @@ package com.app.planner.startscreencontroller;
 
 import com.app.planner.*;
 import com.app.planner.createprofilecontroller.CreateProfileController;
-import com.app.planner.profilescreencontroller.ProfileScreenController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
