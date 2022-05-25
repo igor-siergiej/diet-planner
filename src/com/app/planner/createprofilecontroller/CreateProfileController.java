@@ -8,7 +8,9 @@ public class CreateProfileController extends BaseScreenController {
     Profile profile;
 
     public void initialiseCredentials(String email, String password) {
-        profile.setEmail(email);
-        profile.setPassword(password);
+        this.profile = new Profile();
+        this.profile.setEmail(email);
+        this.profile.setPassword(password);
+
     }
 }
