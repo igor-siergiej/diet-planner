@@ -1,5 +1,8 @@
 package com.app.planner;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 public class InputValidation {
 
     // TODO All of the regex expressions should probably be here as instance variables which are labelled, easier to read
@@ -104,9 +107,17 @@ public class InputValidation {
     }
 
     static public Boolean emailValidation(String email) {
-        return !email.matches("^(.+)@(.+)$");
-
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
     }
+
+
 
     static public String weightValidation(String string) {
         if (!string.matches("\\d*")) {

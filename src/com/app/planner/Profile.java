@@ -12,9 +12,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Profile {
-    private String username;
+    private String email;
     private String password;
     private String profileName;
+    private int height;
+    private int weight;
     private int age;
     private String sex;
     private boolean pregnant;
@@ -25,10 +27,13 @@ public class Profile {
 
     // stack for undo and redo
 
-    public Profile(String username, String password, String profileName, int age, String sex, boolean pregnant, boolean breastFeeding, Diary diary, Option options) {
-        this.username = username;
+
+    public Profile(String email,String password, String profileName, int height, int weight, int age, String sex, boolean pregnant, boolean breastFeeding, Diary diary, Option options) {
         this.password = password;
+        this.email = email;
         this.profileName = profileName;
+        this.height = height;
+        this.weight = weight;
         this.age = age;
         this.sex = sex;
         this.pregnant = pregnant;
@@ -47,9 +52,11 @@ public class Profile {
     @Override
     public String toString() {
         return "Profile{" +
-                "username='" + username + '\'' +
+                "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", profileName='" + profileName + '\'' +
+                ", height=" + height +
+                ", weight=" + weight +
                 ", age=" + age +
                 ", sex='" + sex + '\'' +
                 ", pregnant=" + pregnant +
@@ -58,6 +65,30 @@ public class Profile {
                 ", options=" + options +
                 ", dailyIntake=" + dailyIntake +
                 '}';
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
     public int getAge() {
@@ -106,14 +137,6 @@ public class Profile {
 
     public void setDiary(Diary diary) {
         this.diary = diary;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {

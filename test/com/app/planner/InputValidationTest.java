@@ -41,5 +41,13 @@ public class InputValidationTest {
         assertEquals("valid",InputValidation.passwordValidation("!Javajava2021"),"Password should contain atleast one number.");
     }
 
-    //TODO AGE VALIDATION TESTS
+    @Test
+    public void emailTest() { //should use assertFalse and assertTrue
+        assertEquals(true, InputValidation.emailValidation("test@gmail.com"),"Correct email format");
+        assertEquals(false,InputValidation.emailValidation(""), "Empty string should be an invalid email");
+        assertEquals(false, InputValidation.emailValidation("test[gmail.com"), "should be invalid email format");
+        assertEquals(false, InputValidation.emailValidation("test@gmal.com."), "trailing dots should be invalid");
+    }
+
+    //TODO MORE VALIDATION TESTS
 }

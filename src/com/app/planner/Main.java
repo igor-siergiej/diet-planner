@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) throws MessagingException {
+    public void start(Stage stage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("startscreencontroller/StartScreen.fxml"));
             Scene scene = new Scene(root);

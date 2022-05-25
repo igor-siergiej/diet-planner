@@ -4,23 +4,24 @@ import java.sql.*;
 
 public class DatabaseConnection {
 
-    private static final String SQL_INSERT_USERS = "INSERT INTO users (username,password,salt,profiledata) VALUES (?,?,?,?)";
+    private static final String SQL_INSERT_USERS = "INSERT INTO users (email,password,salt,profiledata) VALUES (?,?,?,?)";
     private static final String SQL_INSERT_FEEDBACK = "INSERT INTO feedback (name,message,email) VALUES (?,?,?)";
-    private static final String LOGIN = "SELECT password,salt FROM users WHERE username = ?";
-    private static final String SQL_INSERT_SAVE = "UPDATE Users SET profiledata = ? WHERE username = ?";
+    private static final String LOGIN = "SELECT password,salt FROM users WHERE email = ?";
+    private static final String SQL_INSERT_SAVE = "UPDATE Users SET profiledata = ? WHERE email = ?";
 
-    public static boolean register(String username, String password) { // call when you are creating a new login to db
+    public static boolean register(String email, String password) { // call when you are creating a new login to db
         Profile profile = new Profile();
-        profile.setProfileName(username);
+        profile.setEmail(email);
+        profile.setPassword(password);
         Diary diary = new Diary();
-        profile.setDiary(diary);
+        profile.setDiary(diary); // should we encrypt locally stored passwords?
         String salt = PasswordUtils.getSalt(30);
         String securePassword = PasswordUtils.generateSecurePassword(password, salt);
         Connection connection = connect();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_USERS);
             {
-                preparedStatement.setString(1, username);
+                preparedStatement.setString(1, email);
                 preparedStatement.setString(2, securePassword);
                 preparedStatement.setString(3, salt);
                 preparedStatement.setString(4, profile.saveToString());
@@ -35,17 +36,19 @@ public class DatabaseConnection {
         return true;
     }
 
-    public static boolean login(String username, String password) { // call when you are trying to verify login from db
+    public static boolean login(String email, String password) { // call when you are trying to verify login from db
         Connection connection = connect();
         String securePassword = "";
         String salt = "";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(LOGIN);
             {
-                preparedStatement.setString(1, username); //sets the username we are finding the password for
+                preparedStatement.setString(1, email); //sets the username we are finding the password for
             }
             ResultSet resultSet = preparedStatement.executeQuery(); //get the resultSet from the query
-            resultSet.next(); //resultSet starts at before the first row so have to call this
+            if (resultSet.next() == false) {
+                return false; // this means no account with this email is found
+            }
             securePassword = resultSet.getString("password");
             salt = resultSet.getString("salt");
             resultSet.close();
@@ -58,13 +61,13 @@ public class DatabaseConnection {
         return PasswordUtils.verifyUserPassword(password, securePassword, salt);
     }
 
-    public static Profile getProfileFromDb(String username) { // call when you are loading profile data from db
+    public static Profile getProfileFromDb(String email) { // call when you are loading profile data from db
         Connection connection = connect();
         String profileData = "";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(LOGIN);
             {
-                preparedStatement.setString(1, username);
+                preparedStatement.setString(1, email);
             }
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
@@ -82,13 +85,13 @@ public class DatabaseConnection {
         return profile;
     }
 
-    public static boolean saveProfileToDb(String username, Profile profile) { // call when you are saving profile data to db
+    public static boolean saveProfileToDb(String email, Profile profile) { // call when you are saving profile data to db
         Connection connection = connect();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_SAVE);
             {
                 preparedStatement.setString(1, profile.saveToString());
-                preparedStatement.setString(2, username);
+                preparedStatement.setString(2, email);
             }
             preparedStatement.executeUpdate();
             preparedStatement.close();

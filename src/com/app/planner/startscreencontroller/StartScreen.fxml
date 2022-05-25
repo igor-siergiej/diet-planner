@@ -1,45 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.startscreencontroller.StartScreenController">
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.startscreencontroller.StartScreenController">
    <children>
-      <Pane prefHeight="800.0" prefWidth="500.0">
+      <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="800.0" prefWidth="500.0">
          <children>
-            <ImageView fitHeight="113.0" fitWidth="353.0" layoutX="74.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="113.0" fitWidth="353.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/logo.png" />
                </image>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
             </ImageView>
-            <Label id="titleLabel" layoutX="176.0" layoutY="180.0" text="Sign in." />
-            <Label id="greyLabel" layoutX="240.0" layoutY="411.0" text="or" />
-            <Button id="signInButton" fx:id="loginButton" defaultButton="true" layoutX="85.0" layoutY="636.0" mnemonicParsing="false" onAction="#logIn" prefHeight="55.0" prefWidth="331.0" text="Sign in">
+            <Label id="titleLabel" text="Sign in.">
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Button id="greyButton" mnemonicParsing="false" onAction="#loadProfile" prefHeight="48.0" prefWidth="331.0" text="Load from file">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button id="greyButton" mnemonicParsing="false" onAction="#goToCreateProfileScreen" prefHeight="48.0" prefWidth="331.0" text="Create offline profile">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Button>
-            <Button id="greyButton" layoutX="84.0" layoutY="291.0" mnemonicParsing="false" onAction="#loadProfile" prefHeight="48.0" prefWidth="331.0" text="Load from file">
+            <Label id="greyLabel" text="or">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="loginEmailTextField" prefHeight="48.0" prefWidth="331.0" promptText="Email" />
+            <Label fx:id="loginEmailMessage" prefHeight="27.0" prefWidth="242.0" />
+            <PasswordField fx:id="loginPasswordField" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
+            <Label fx:id="loginPasswordMessage" prefHeight="27.0" prefWidth="264.0" />
+            <Button id="signInButton" fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onAction="#logIn" prefHeight="55.0" prefWidth="331.0" text="Sign in">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
             </Button>
-            <Button id="greyButton" layoutX="85.0" layoutY="352.0" mnemonicParsing="false" onAction="#goToCreateProfileScreen" prefHeight="48.0" prefWidth="331.0" text="Create offline profile">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Button>
-            <TextField fx:id="loginUsernameTextField" layoutX="85.0" layoutY="451.0" prefHeight="48.0" prefWidth="331.0" promptText="Username" />
-            <Label id="greyLabel" layoutX="60.0" layoutY="696.0" text="Don't have an account?" />
-            <Hyperlink layoutX="174.0" layoutY="723.0" text="Forgot Password?" />
-            <Hyperlink layoutX="273.0" layoutY="691.0" onAction="#goToCreateAccountScreen" text="Create Account" />
-            <PasswordField fx:id="loginPasswordField" layoutX="84.0" layoutY="538.0" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
-            <Label fx:id="passwordMessage" layoutX="96.0" layoutY="593.0" prefHeight="27.0" prefWidth="264.0" />
-            <Label fx:id="usernameMessage" layoutX="96.0" layoutY="505.0" prefHeight="27.0" prefWidth="242.0" />
+            <HBox prefHeight="35.0" prefWidth="351.0">
+               <children>
+                  <Label id="greyLabel" alignment="CENTER" prefHeight="40.0" prefWidth="200.0" text="Don't have an account?" />
+                  <Hyperlink alignment="CENTER" onAction="#goToCreateAccountScreen" text="Create Account">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Hyperlink>
+               </children>
+            </HBox>
+            <Hyperlink alignment="CENTER" prefHeight="35.0" prefWidth="200.0" text="Forgot Password?" />
          </children>
-      </Pane>
+      </VBox>
       <Pane layoutX="500.0" prefHeight="800.0" prefWidth="780.0" style="-fx-background-color: grey;">
          <children>
             <ImageView fitHeight="800.0" fitWidth="780.0" pickOnBounds="true" preserveRatio="true">
@@ -47,7 +80,7 @@
                   <Image url="@../img/backgroundPattern.png" />
                </image>
             </ImageView>
-            <Button id="signInButton" fx:id="loginButton1" defaultButton="true" layoutX="123.0" layoutY="721.0" mnemonicParsing="false" onAction="#createTestProfile" prefHeight="55.0" prefWidth="331.0" text="Admin Login">
+            <Button id="signInButton" fx:id="loginButton1" layoutX="123.0" layoutY="721.0" mnemonicParsing="false" onAction="#createTestProfile" prefHeight="55.0" prefWidth="331.0" text="Admin Login">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
