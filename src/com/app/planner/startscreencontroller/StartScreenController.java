@@ -36,7 +36,7 @@ public class StartScreenController extends BaseScreenController {
     private Pane mainPane;
 
     @FXML
-    private TextField loginUsernameTextField;
+    private TextField loginEmailTextField;
 
     @FXML
     private PasswordField loginPasswordField;
@@ -48,19 +48,19 @@ public class StartScreenController extends BaseScreenController {
     private Button loginButton;
 
     @FXML
-    private TextField registrationUsernameTextField;
+    private TextField registerEmailTextField;
 
     @FXML
-    private PasswordField registrationPasswordField;
+    private PasswordField registerPasswordField;
 
     @FXML
-    private PasswordField registrationRetypePasswordField;
+    private PasswordField registerRetypePasswordField;
 
     @FXML
-    private Label registerUsernameMessage;
+    private Label registerEmailMessage;
 
     @FXML
-    private Label registerPasswordMessage;
+    private Label registerRetypePasswordMessage;
 
     @FXML
     private Label loginMessage;
@@ -99,25 +99,28 @@ public class StartScreenController extends BaseScreenController {
     private TextArea registerPrompt;
 
     @FXML
-    private Label usernameMessage;
+    private Label loginEmailMessage;
 
     @FXML
-    private Label passwordMessage;
+    private RadioButton maxCharRadioButton;
 
-    public void goToCreateProfileScreenWithLogin(ActionEvent event, String username, String password) { // this method will open the profile screen window
+    @FXML
+    private Label loginPasswordMessage;
+
+    public void goToCreateProfileScreenWithLogin(ActionEvent event, String email, String password) { // this method will open the profile screen window
         CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
-        createProfileController.initialise(username, password);
+        createProfileController.initialiseCredentials(email, password);
     }
 
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
-        StartScreenController startScreenController = goToScreen(event, "mainscreencontroller/CreateProfileScreen.fxml").getController();
-        startScreenController.setAgeTextFieldEventHandler();
-        startScreenController.setCreateProfileButtonDisable();
+        goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml");
+        //startScreenController.setAgeTextFieldEventHandler();
+        //startScreenController.setCreateProfileButtonDisable();
     }
 
     //is this needed?
-    private void initialize(String username, String password) {
-        profile.setUsername(username);
+    private void initialize(String email, String password) {
+        profile.setEmail(email);
         profile.setPassword(password);
     }
 
@@ -177,7 +180,7 @@ public class StartScreenController extends BaseScreenController {
         diary.addEntry(entry2);
         diary.addEntry(entry3);
 
-        Profile profile = new Profile("", "", "testProfile", 14, "female", true, false, diary, new Option());
+        Profile profile = new Profile("","", "testProfile",0,0, 14, "female", true, false, diary, new Option());
         goToProfileScreen(event, profile);
     }
 
@@ -205,7 +208,7 @@ public class StartScreenController extends BaseScreenController {
             }
         }
 
-        Profile profile = new Profile(null, null, profileName, age, sex, isPregnant, isBreastfeeding, new Diary(), new Option());
+        Profile profile = new Profile(null, null, profileName,0,0 ,age, sex, isPregnant, isBreastfeeding, new Diary(), new Option());
         //goToProfileScreen(event, profile);
     }
 
@@ -218,7 +221,7 @@ public class StartScreenController extends BaseScreenController {
     }
 
     public void passwordStrengthHandler() {
-        float passwordStrength = InputValidation.getPasswordStrength(registrationPasswordField.getText());
+        float passwordStrength = InputValidation.getPasswordStrength(registerPasswordField.getText());
         if (passwordStrength < 0.6) {
             passwordStrengthProgressBar.setId("passwordStrengthProgressBarWeak");
         } else if (passwordStrength < 1) {
@@ -249,75 +252,74 @@ public class StartScreenController extends BaseScreenController {
         }
     }
 
-    public void logIn(ActionEvent event) {
-        String username = loginUsernameTextField.getText();
+    public void logIn() {
+        String email = loginEmailTextField.getText();
         String password = loginPasswordField.getText();
         // clear styling
-        usernameMessage.setText("");
-        passwordMessage.setText("");
-        loginUsernameTextField.setId("");
+        loginEmailMessage.setText("");
+        loginPasswordMessage.setText("");
+        loginEmailTextField.setId("");
         loginPasswordField.setId("");
-        if (InputValidation.usernameValidation(username).equals("valid")) {
+        if (InputValidation.emailValidation(email).equals(true)) {
             if (InputValidation.passwordValidation(password).equals("valid")) {
-                if (DatabaseConnection.login(username, password)) {
+                if (DatabaseConnection.login(email, password)) {
                     //goToProfileScreen(event, DatabaseConnection.getProfileFromDb(username));
                 } else {
-                    usernameMessage.setText("Account does not exist");
-                    usernameMessage.setId("warningLabel");
-                    loginUsernameTextField.setId("text-field-warning");
+                    loginEmailMessage.setText("Account does not exist");
+                    loginEmailMessage.setId("warningLabel");
+                    loginEmailTextField.setId("text-field-warning");
                     return;
                 }
             } else {
-                passwordMessage.setText("Invalid Password");
-                passwordMessage.setId("errorLabel");
+                loginPasswordMessage.setText("Invalid Password");
+                loginPasswordMessage.setId("errorLabel");
                 loginPasswordField.setId("text-field-error");
                 return;
             }
         } else {
-            usernameMessage.setText("Invalid Username");
-            usernameMessage.setId("errorLabel");
-            loginUsernameTextField.setId("text-field-error");
+            loginEmailMessage.setText("Invalid email format");
+            loginEmailMessage.setId("errorLabel");
+            loginEmailTextField.setId("text-field-error");
             return;
         }
     }
 
     public void register(ActionEvent event) {
-        String username = registrationUsernameTextField.getText();
-        String password = registrationPasswordField.getText();
-        String retypePassword = registrationRetypePasswordField.getText();
-        registerUsernameMessage.setText("");
-        registerPasswordMessage.setText("");
-        registrationUsernameTextField.setId("");
-        registrationPasswordField.setId("");
-        registrationRetypePasswordField.setId("");
+        maxCharRadioButton.setSelected(true);
+        String email = registerEmailTextField.getText();
+        String password = registerPasswordField.getText();
+        String retypePassword = registerRetypePasswordField.getText();
+        registerEmailMessage.setText("");
+        registerEmailTextField.setId("");
+        registerPasswordField.setId("");
+        registerRetypePasswordField.setId("");
 
-        if (InputValidation.usernameValidation(username).equals("valid")) {
+        if (InputValidation.emailValidation(email).equals(true)) {
             if (InputValidation.passwordValidation(password).equals("valid")) {
                 if (password.equals(retypePassword)) {
-                    if (DatabaseConnection.register(username, password)) { // this will register if validation is ok?
-                        goToCreateProfileScreenWithLogin(event, username, password);
+                    if (DatabaseConnection.register(email, password)) { // this will register if validation is ok?
+                        goToCreateProfileScreenWithLogin(event, email, password);
                     } else {
-                        registerUsernameMessage.setText("Username Already exists");
-                        registerUsernameMessage.setId("warningLabel");
-                        registrationUsernameTextField.setId("text-field-warning");
+                        registerEmailMessage.setText("An account with this email already exists");
+                        registerEmailMessage.setId("warningLabel");
+                        registerEmailTextField.setId("text-field-warning");
                         return;
                     }
                 } else {
-                    registerPasswordMessage.setText("Passwords Not matching");
-                    registerPasswordMessage.setId("errorLabel");
-                    registrationRetypePasswordField.setId("text-field-error");
+                    registerRetypePasswordMessage.setText("Passwords Not matching");
+                    registerRetypePasswordField.setId("errorLabel");
+                    registerRetypePasswordField.setId("text-field-error");
                     return;
                 }
             } else {
-                registerPasswordMessage.setText(InputValidation.passwordValidation(password));
-                registerPasswordMessage.setId("errorLabel");
-                registrationPasswordField.setId("text-field-error");
+                // change style id of radio buttons in grid pane
+                registerPasswordField.setId("text-field-error");
                 return;
             }
         } else {
-            registerUsernameMessage.setText(InputValidation.usernameValidation(username));
-            registerUsernameMessage.setId("errorLabel");
-            registrationUsernameTextField.setId("text-field-error");
+            registerEmailMessage.setText("Invalid Email format");
+            registerEmailMessage.setId("errorLabel");
+            registerEmailTextField.setId("text-field-error");
             return;
         }
     }

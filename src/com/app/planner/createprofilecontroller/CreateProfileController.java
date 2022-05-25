@@ -1,12 +1,14 @@
 package com.app.planner.createprofilecontroller;
 
+import com.app.planner.BaseScreenController;
 import com.app.planner.Profile;
 
-public class CreateProfileController {
+public class CreateProfileController extends BaseScreenController {
 
     Profile profile;
 
-    public void initialise(String username, String password) {
-
+    public void initialiseCredentials(String email, String password) {
+        profile.setEmail(email);
+        profile.setPassword(password);
     }
 }

@@ -145,8 +145,9 @@ public class ProfileScreenController extends BaseScreenController {
     }
 
     public void saveProfileToDB() {
-        if (profile.getUsername() != null) {
-            if (DatabaseConnection.saveProfileToDb(profile.getUsername(), profile)) {
+        String email = profile.getEmail();
+        if (email != null) {
+            if (DatabaseConnection.saveProfileToDb(email, profile)) {
                 // instead of messageLabel this should be a type of alert/pop up
                 // messageLabel.setId("successfullMessage");
                 // messageLabel.setText("Successfully saved to DB");
