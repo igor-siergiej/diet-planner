@@ -48,28 +48,26 @@ public class InputValidation {
     public static float getPasswordStrength(String password) {
         float passwordStrengthValue = 0;
 
-        if (password.length() < PASSWORD_MAX_CHAR) {
-            passwordStrengthValue += 0.166;
-        }
-        if ( password.length() > PASSWORD_MIN_CHAR) {
-            passwordStrengthValue += 0.166;
+        if (password.length() < PASSWORD_MAX_CHAR && password.length() > PASSWORD_MIN_CHAR) {
+            passwordStrengthValue += 0.2;
         }
 
         if (password.matches(UPPER_CASE_REGEX)) {
-            passwordStrengthValue += 0.166;
+            passwordStrengthValue += 0.2;
         }
 
         if (password.matches(LOWER_CASE_REGEX)) {
-            passwordStrengthValue += 0.166;
+            passwordStrengthValue += 0.2;
         }
 
         if (password.matches(NUMBER_REGEX)) {
-            passwordStrengthValue += 0.166;
+            passwordStrengthValue += 0.2;
         }
 
         if (password.matches(SPECIAL_CHAR_REGEX)) {
-            passwordStrengthValue += 0.166;
+            passwordStrengthValue += 0.2;
         }
+
         return passwordStrengthValue;
     }
 
