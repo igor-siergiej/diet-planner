@@ -35,17 +35,17 @@
             </Label>
             <TextField fx:id="registerEmailTextField" prefHeight="48.0" prefWidth="331.0" promptText="Email">
                <VBox.margin>
-                  <Insets bottom="10.0" />
+                  <Insets />
                </VBox.margin>
             </TextField>
-            <Label id="smallLabel" fx:id="registerEmailMessage" prefHeight="29.0" prefWidth="323.0" />
+            <Label id="smallLabel" fx:id="registerEmailMessage" alignment="CENTER" prefHeight="29.0" prefWidth="323.0" />
             <PasswordField fx:id="registerPasswordField" onKeyTyped="#passwordStrengthHandler" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
             <ProgressBar fx:id="passwordStrengthProgressBar" prefHeight="18.0" prefWidth="323.0" progress="0.0">
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </ProgressBar>
-            <GridPane alignment="CENTER" prefHeight="69.0" prefWidth="346.0">
+            <GridPane alignment="CENTER" prefHeight="69.0" prefWidth="360.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -65,9 +65,9 @@
             </GridPane>
             <PasswordField fx:id="registerRetypePasswordField" prefHeight="48.0" prefWidth="331.0" promptText="Re-type Password">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets top="10.0" />
                </VBox.margin></PasswordField>
-            <Label id="smallLabel" fx:id="registerRetypePasswordMessage" prefHeight="29.0" prefWidth="401.0" />
+            <Label id="smallLabel" fx:id="registerRetypePasswordMessage" alignment="CENTER" prefHeight="29.0" prefWidth="304.0" />
             <Button id="signInButton" defaultButton="true" mnemonicParsing="false" onAction="#register" prefHeight="55.0" prefWidth="331.0" text="Sign up">
                <font>
                   <Font name="System Bold" size="25.0" />

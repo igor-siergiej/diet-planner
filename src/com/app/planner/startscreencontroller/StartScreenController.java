@@ -234,7 +234,7 @@ public class StartScreenController extends BaseScreenController {
     public void passwordStrengthHandler() {
         String password = registerPasswordField.getText();
         float passwordStrength = InputValidation.getPasswordStrength(password);
-        if (passwordStrength < 0.4) {
+        if (passwordStrength < 0.5) {
             passwordStrengthProgressBar.setId("passwordStrengthProgressBarWeak");
         } else if (passwordStrength < 0.9) {
             passwordStrengthProgressBar.setId("passwordStrengthProgressBarOk");
@@ -244,6 +244,7 @@ public class StartScreenController extends BaseScreenController {
         passwordStrengthProgressBar.setProgress(passwordStrength);
 
         if (InputValidation.isStringWithinCharLimit(password)) {
+            charLimitRadioButton.setId("");
             charLimitRadioButton.setSelected(true);
         } else {
             charLimitRadioButton.setSelected(false);
@@ -251,24 +252,28 @@ public class StartScreenController extends BaseScreenController {
 
         if (InputValidation.containsUpperCase(password)) {
             upperCaseRadioButton.setSelected(true);
+            upperCaseRadioButton.setId("");
         } else {
             upperCaseRadioButton.setSelected(false);
         }
 
         if (InputValidation.contrainsLowerCase(password)) {
             lowerCaseRadioButton.setSelected(true);
+            lowerCaseRadioButton.setId("");
         } else {
             lowerCaseRadioButton.setSelected(false);
         }
 
         if (InputValidation.containsNumber(password)) {
             numberRadioButton.setSelected(true);
+            numberRadioButton.setId("");
         } else {
             numberRadioButton.setSelected(false);
         }
 
         if (InputValidation.containsSpecialChar(password)) {
             specialCharRadioButton.setSelected(true);
+            specialCharRadioButton.setId("");
         } else {
             specialCharRadioButton.setSelected(false);
         }
@@ -348,12 +353,30 @@ public class StartScreenController extends BaseScreenController {
                     }
                 } else {
                     registerRetypePasswordMessage.setText("Passwords Not matching");
-                    registerRetypePasswordField.setId("errorLabel");
+                    registerRetypePasswordMessage.setId("errorLabel");
                     registerRetypePasswordField.setId("text-field-error");
                     return;
                 }
             } else {
-                // change style id of radio buttons in grid pane
+                if (!InputValidation.isStringWithinCharLimit(password)) {
+                    charLimitRadioButton.setId("errorRadioButton");
+                }
+                if (!InputValidation.containsUpperCase(password)) {
+                    upperCaseRadioButton.setId("errorRadioButton");
+                }
+
+                if (!InputValidation.contrainsLowerCase(password)) {
+                    lowerCaseRadioButton.setId("errorRadioButton");
+                }
+
+                if (!InputValidation.containsNumber(password)) {
+                    numberRadioButton.setId("errorRadioButton");
+                }
+
+                if (!InputValidation.containsSpecialChar(password)) {
+                    specialCharRadioButton.setId("errorRadioButton");
+                }
+
                 registerPasswordField.setId("text-field-error");
                 return;
             }

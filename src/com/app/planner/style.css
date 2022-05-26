@@ -78,6 +78,8 @@
     -fx-background-color: #1a1a1a;
 }
 
+/*  TODO find a way to decrease duplication of attributes across ids */
+
 #text-field-error {
     -fx-border-color: red;
 }
@@ -88,12 +90,12 @@
 
 #errorLabel {
     -fx-text-fill: red;
-    -fx-font-size: 12px;
+    -fx-font-size: 18px;
 }
 
 #warningLabel {
     -fx-text-fill: yellow;
-    -fx-font-size: 12px;
+    -fx-font-size: 18px;
 }
 
 .progress-bar {
@@ -192,16 +194,33 @@
 }
 
 .radio-button .radio {
-    -fx-border-width: 1px;
-    -fx-border-color: #000;
-    -fx-background-color: white;
-    -fx-background-image: null;
-    -fx-border-radius: 15px;
-    -fx-padding: 4px;
+    -fx-background-color: grey;
 }
 
-.radio-button:disabled {
-    -fx-text-fill: white;
+.radio-button:selected .dot{
+    -fx-background-color: green;
+    -fx-background-insets: 0;
+}
+
+.radio-button:disabled, .radio-button:disabled > * {
+    -fx-opacity: 1.0 ;
+    -fx-text-fill: grey;
+}
+
+.radio-button:selected .radio { /* this is the background of the button*/
+    -fx-background-color: green;
+}
+
+#errorRadioButton .dot{
+    -fx-background-color: red;
+}
+
+#errorRadioButton .radio{
+    -fx-background-color: red;
+}
+
+#errorRadioButton {
+    -fx-text-fill: red;
 }
 
 #titleLabel .text {
