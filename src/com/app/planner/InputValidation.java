@@ -2,41 +2,44 @@ package com.app.planner;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import java.util.ArrayList;
 
 public class InputValidation {
 
-    // TODO All of the regex expressions should probably be here as instance variables which are labelled, easier to read
+    private final static int PASSWORD_MIN_CHAR = 8;
+    private final static int PASSWORD_MAX_CHAR = 15;
+    private final static String UPPER_CASE_REGEX = "(.*[A-Z].*)";
+    private final static String LOWER_CASE_REGEX = "(.*[a-z].*)";
+    private final static String NUMBER_REGEX = "(.*[0-9].*)";
+    private final static String SPECIAL_CHAR_REGEX = "(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)";
+    private final static int USERNAME_MIN_CHAR = 4;
+    private final static int USERNAME_MAX_CHAR = 20;
 
     public static String usernameValidation(String userName) {
-        if (userName.length() > 20 || userName.length() < 4) {
+        if (userName.length() > USERNAME_MAX_CHAR || userName.length() < USERNAME_MIN_CHAR) {
             return "Username should be less than 20 and more than 4 characters in length.";
-
         }
         return "valid";
     }
 
     public static String passwordValidation(String password) {
-        if (password.length() > 15 || password.length() < 8) {
+        if (password.length() > PASSWORD_MAX_CHAR || password.length() < PASSWORD_MIN_CHAR) {
             return "Password should be less than 15 and more than 8 characters in length.";
         }
 
-        String upperCaseChars = "(.*[A-Z].*)";
-        if (!password.matches(upperCaseChars)) {
+        if (!password.matches(UPPER_CASE_REGEX)) {
             return "Password should contain at least one upper case alphabet";
         }
 
-        String lowerCaseChars = "(.*[a-z].*)";
-        if (!password.matches(lowerCaseChars)) {
+        if (!password.matches(LOWER_CASE_REGEX)) {
             return "Password should contain at least one lower case alphabet";
         }
 
-        String numbers = "(.*[0-9].*)";
-        if (!password.matches(numbers)) {
+        if (!password.matches(NUMBER_REGEX)) {
             return "Password should contain at least one number.";
         }
 
-        String specialChars = "(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)";
-        if (!password.matches(specialChars)) {
+        if (!password.matches(SPECIAL_CHAR_REGEX)) {
             return "Password should contain at least one special character";
         }
         return "valid";
@@ -45,30 +48,49 @@ public class InputValidation {
     public static float getPasswordStrength(String password) {
         float passwordStrengthValue = 0;
 
-        if (password.length() < 15 && password.length() > 7) {
-            passwordStrengthValue += 0.2;
+        if (password.length() < PASSWORD_MAX_CHAR) {
+            passwordStrengthValue += 0.166;
         }
-        String upperCaseChars = "(.*[A-Z].*)";
-
-        if (password.matches(upperCaseChars)) {
-            passwordStrengthValue += 0.2;
+        if ( password.length() > PASSWORD_MIN_CHAR) {
+            passwordStrengthValue += 0.166;
         }
 
-        String lowerCaseChars = "(.*[a-z].*)";
-        if (password.matches(lowerCaseChars)) {
-            passwordStrengthValue += 0.2;
+        if (password.matches(UPPER_CASE_REGEX)) {
+            passwordStrengthValue += 0.166;
         }
 
-        String numbers = "(.*[0-9].*)";
-        if (password.matches(numbers)) {
-            passwordStrengthValue += 0.2;
+        if (password.matches(LOWER_CASE_REGEX)) {
+            passwordStrengthValue += 0.166;
         }
 
-        String specialChars = "(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)";
-        if (password.matches(specialChars)) {
-            passwordStrengthValue += 0.2;
+        if (password.matches(NUMBER_REGEX)) {
+            passwordStrengthValue += 0.166;
+        }
+
+        if (password.matches(SPECIAL_CHAR_REGEX)) {
+            passwordStrengthValue += 0.166;
         }
         return passwordStrengthValue;
+    }
+
+    public static boolean isStringWithinCharLimit (String string) {
+        return (string.length() > 8 && string.length() < 16);
+    }
+
+    public static boolean containsUpperCase (String string) {
+        return (string.matches(UPPER_CASE_REGEX));
+    }
+
+    public static boolean contrainsLowerCase (String string) {
+        return (string.matches(LOWER_CASE_REGEX));
+    }
+
+    public static boolean containsNumber (String string){
+        return (string.matches(NUMBER_REGEX));
+    }
+
+    public static boolean containsSpecialChar (String string) {
+        return (string.matches(SPECIAL_CHAR_REGEX));
     }
 
     static public String ageValidation(String age) {

@@ -45,7 +45,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </ProgressBar>
-            <GridPane alignment="CENTER" prefHeight="69.0" prefWidth="332.0">
+            <GridPane alignment="CENTER" prefHeight="69.0" prefWidth="346.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -56,12 +56,11 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <RadioButton fx:id="maxCharRadioButton" disable="true" mnemonicParsing="false" text="8 characters minimum" />
-                  <RadioButton mnemonicParsing="false" text="One uppercase character" GridPane.columnIndex="1" />
-                  <RadioButton mnemonicParsing="false" text="15 characters maximum" GridPane.rowIndex="1" />
-                  <RadioButton mnemonicParsing="false" text="One lowercase charcter" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <RadioButton mnemonicParsing="false" text="One special character" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <RadioButton mnemonicParsing="false" text="One number" GridPane.rowIndex="2" />
+                  <RadioButton fx:id="charLimitRadioButton" disable="true" mnemonicParsing="false" text="Between 8 and 20 characters" />
+                  <RadioButton fx:id="upperCaseRadioButton" disable="true" mnemonicParsing="false" text="One uppercase character" GridPane.columnIndex="1" />
+                  <RadioButton fx:id="lowerCaseRadioButton" disable="true" mnemonicParsing="false" text="One lowercase charcter" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <RadioButton fx:id="specialCharRadioButton" disable="true" mnemonicParsing="false" text="One special character" GridPane.rowIndex="1" />
+                  <RadioButton fx:id="numberRadioButton" disable="true" mnemonicParsing="false" text="One number" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <PasswordField fx:id="registerRetypePasswordField" prefHeight="48.0" prefWidth="331.0" promptText="Re-type Password">
