@@ -101,10 +101,22 @@ public class StartScreenController extends BaseScreenController {
     private Label loginEmailMessage;
 
     @FXML
-    private RadioButton maxCharRadioButton;
+    private Label loginPasswordMessage;
 
     @FXML
-    private Label loginPasswordMessage;
+    private RadioButton charLimitRadioButton;
+
+    @FXML
+    private RadioButton upperCaseRadioButton;
+
+    @FXML
+    private RadioButton lowerCaseRadioButton;
+
+    @FXML
+    private RadioButton numberRadioButton;
+
+    @FXML
+    private RadioButton specialCharRadioButton;
 
     public void goToCreateProfileScreenWithLogin(ActionEvent event, String email, String password) { // this method will open the profile screen window
         CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
@@ -220,15 +232,46 @@ public class StartScreenController extends BaseScreenController {
     }
 
     public void passwordStrengthHandler() {
-        float passwordStrength = InputValidation.getPasswordStrength(registerPasswordField.getText());
-        if (passwordStrength < 0.6) {
+        String password = registerPasswordField.getText();
+        float passwordStrength = InputValidation.getPasswordStrength(password);
+        if (passwordStrength < 0.4) {
             passwordStrengthProgressBar.setId("passwordStrengthProgressBarWeak");
-        } else if (passwordStrength < 1) {
+        } else if (passwordStrength < 0.9) {
             passwordStrengthProgressBar.setId("passwordStrengthProgressBarOk");
         } else {
             passwordStrengthProgressBar.setId("passwordStrengthProgressBarStrong");
         }
         passwordStrengthProgressBar.setProgress(passwordStrength);
+
+        if (InputValidation.isStringWithinCharLimit(password)) {
+            charLimitRadioButton.setSelected(true);
+        } else {
+            charLimitRadioButton.setSelected(false);
+        }
+
+        if (InputValidation.containsUpperCase(password)) {
+            upperCaseRadioButton.setSelected(true);
+        } else {
+            upperCaseRadioButton.setSelected(false);
+        }
+
+        if (InputValidation.contrainsLowerCase(password)) {
+            lowerCaseRadioButton.setSelected(true);
+        } else {
+            lowerCaseRadioButton.setSelected(false);
+        }
+
+        if (InputValidation.containsNumber(password)) {
+            numberRadioButton.setSelected(true);
+        } else {
+            numberRadioButton.setSelected(false);
+        }
+
+        if (InputValidation.containsSpecialChar(password)) {
+            specialCharRadioButton.setSelected(true);
+        } else {
+            specialCharRadioButton.setSelected(false);
+        }
     }
 
     public void loadFemalePane() {
@@ -284,7 +327,6 @@ public class StartScreenController extends BaseScreenController {
     }
 
     public void register(ActionEvent event) {
-        maxCharRadioButton.setSelected(true);
         String email = registerEmailTextField.getText();
         String password = registerPasswordField.getText();
         String retypePassword = registerRetypePasswordField.getText();
