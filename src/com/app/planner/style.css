@@ -193,13 +193,12 @@
     -fx-background-color: #1a1a1a;
 }
 
-.radio-button .radio {
-    -fx-background-color: grey;
+.radio-button {
+    -fx-text-fill: grey;
 }
 
-.radio-button:selected .dot{
-    -fx-background-color: green;
-    -fx-background-insets: 0;
+.radio-button .radio {
+    -fx-background-color: grey;
 }
 
 .radio-button:disabled, .radio-button:disabled > * {
@@ -207,8 +206,34 @@
     -fx-text-fill: grey;
 }
 
-.radio-button:selected .radio { /* this is the background of the button*/
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #007bffff;
+}
+
+.check-box .box{
+    -fx-background-color: grey;
+}
+
+#greenRadioButton:selected .radio { /* this is the background of the button*/
     -fx-background-color: green;
+}
+
+#greenRadioButton:selected .dot{
+    -fx-background-color: green;
+    -fx-background-insets: 0;
+}
+
+#blueRadioButton:selected .radio { /* this is the background of the button*/
+    -fx-background-color: #007bffff;
+}
+
+#blueRadioButton:selected .dot{
+    -fx-background-color: #007bffff;
+    -fx-background-insets: 0;
 }
 
 #errorRadioButton .dot{
