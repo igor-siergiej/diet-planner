@@ -120,13 +120,12 @@ public class StartScreenController extends BaseScreenController {
 
     public void goToCreateProfileScreenWithLogin(ActionEvent event, String email, String password) { // this method will open the profile screen window
         CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
-        createProfileController.initialiseCredentials(email, password);
+        createProfileController.initialise(email, password);
     }
 
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
-        goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml");
-        //startScreenController.setAgeTextFieldEventHandler();
-        //startScreenController.setCreateProfileButtonDisable();
+        CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
+        createProfileController.initialise(null,null);
     }
 
     //is this needed?
@@ -299,7 +298,7 @@ public class StartScreenController extends BaseScreenController {
         }
     }
 
-    public void logIn() {
+    public void logIn(ActionEvent event) {
         String email = loginEmailTextField.getText();
         String password = loginPasswordField.getText();
         // clear styling
@@ -310,7 +309,7 @@ public class StartScreenController extends BaseScreenController {
         if (InputValidation.emailValidation(email).equals(true)) {
             if (InputValidation.passwordValidation(password).equals("valid")) {
                 if (DatabaseConnection.login(email, password)) {
-                    //goToProfileScreen(event, DatabaseConnection.getProfileFromDb(username));
+                    goToProfileScreen(event, DatabaseConnection.getProfileFromDb(email));
                 } else {
                     loginEmailMessage.setText("Account does not exist");
                     loginEmailMessage.setId("warningLabel");

@@ -2,7 +2,6 @@ package com.app.planner;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import java.util.ArrayList;
 
 public class InputValidation {
 
@@ -14,6 +13,10 @@ public class InputValidation {
     private final static String SPECIAL_CHAR_REGEX = "(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)";
     private final static int USERNAME_MIN_CHAR = 4;
     private final static int USERNAME_MAX_CHAR = 20;
+    private final static int MAX_AGE_DIGITS = 2;
+    private final static int MAX_WEIGHT_DIGITS = 3;
+    private final static int MAX_HEIGHT_DIGITS = 3;
+    private final static int MAX_PORTION_DIGITS = 4;
 
     public static String usernameValidation(String userName) {
         if (userName.length() > USERNAME_MAX_CHAR || userName.length() < USERNAME_MIN_CHAR) {
@@ -91,24 +94,32 @@ public class InputValidation {
         return (string.matches(SPECIAL_CHAR_REGEX));
     }
 
+    private static String integerValidation(String input , int numOfDigits) {
+        if (!input.matches("\\d*")) {
+            return input.replaceAll("[^\\d]", "");
+        }
+        if (input.equals("0") || input.equals("00") || input.equals("000") || input.equals("0000")) {
+            return "";
+        }
+        if (input.length() > numOfDigits) {
+            return input.substring(0, numOfDigits);
+        }
+        return input;
+    }
     static public String ageValidation(String age) {
-        if (!age.matches("\\d*")) {
-            return age.replaceAll("[^\\d]", "");
-        }
-        if (age.length() > 2) {
-            return age.substring(0, 2);
-        }
-        return age;
+        return integerValidation(age, MAX_AGE_DIGITS);
     }
 
-    static public String portionValidation(String age) {
-        if (!age.matches("\\d*")) {
-            return age.replaceAll("[^\\d]", "");
-        }
-        if (age.length() > 4) {
-            return age.substring(0, 4);
-        }
-        return age;
+    static public String heightValidation(String height) {
+        return integerValidation(height, MAX_HEIGHT_DIGITS);
+    }
+
+    static public String weightValidation(String weight) {
+        return integerValidation(weight, MAX_WEIGHT_DIGITS);
+    }
+
+    static public String portionValidation(String portion) {
+        return integerValidation(portion, MAX_PORTION_DIGITS);
     }
 
     static public String stringValidation(String string) {
@@ -135,18 +146,6 @@ public class InputValidation {
             result = false;
         }
         return result;
-    }
-
-
-
-    static public String weightValidation(String string) {
-        if (!string.matches("\\d*")) {
-            return string.replaceAll("[^\\d]", "");
-        }
-        if (string.length() > 3) {
-            return string.substring(0, 2);
-        }
-        return string;
     }
 }
 
