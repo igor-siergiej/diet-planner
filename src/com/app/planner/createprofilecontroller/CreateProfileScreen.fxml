@@ -48,13 +48,13 @@
                </rowConstraints>
                <children>
                   <Label id="greyLabel" text="Age" />
-                  <TextField prefHeight="48.0" prefWidth="128.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="ageTextField" prefHeight="48.0" prefWidth="128.0" GridPane.columnIndex="1" />
                </children>
                <VBox.margin>
                   <Insets bottom="20.0" top="10.0" />
                </VBox.margin>
             </GridPane>
-            <GridPane>
+            <GridPane prefHeight="30.0" prefWidth="214.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -63,14 +63,14 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label id="greyLabel" text="Height" />
-                  <TextField prefHeight="48.0" prefWidth="128.0" GridPane.columnIndex="1" />
+                  <Label id="greyLabel" text="Height (cm)" />
+                  <TextField fx:id="heightTextField" prefHeight="48.0" prefWidth="128.0" GridPane.columnIndex="1" />
                </children>
                <VBox.margin>
                   <Insets bottom="20.0" top="10.0" />
                </VBox.margin>
             </GridPane>
-            <GridPane>
+            <GridPane prefHeight="30.0" prefWidth="214.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -79,8 +79,8 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label id="greyLabel" text="Weight" />
-                  <TextField prefHeight="48.0" prefWidth="128.0" GridPane.columnIndex="1" />
+                  <Label id="greyLabel" prefHeight="29.0" prefWidth="128.0" text="Weight (kg)" />
+                  <TextField fx:id="weightTextField" prefHeight="48.0" prefWidth="128.0" GridPane.columnIndex="1" />
                </children>
                <VBox.margin>
                   <Insets top="10.0" />
@@ -97,7 +97,7 @@
               </rowConstraints>
                <children>
                   <Label id="greyLabel" text="Sex" />
-                  <RadioButton id="blueRadioButton" fx:id="maleRadioButton" mnemonicParsing="false" onAction="#handleFemaleCheckBoxes" text="Male" GridPane.columnIndex="1">
+                  <RadioButton id="blueRadioButton" mnemonicParsing="false" onAction="#handleFemaleCheckBoxes" text="Male" GridPane.columnIndex="1">
                      <toggleGroup>
                         <ToggleGroup fx:id="sexToggleGroup" />
                      </toggleGroup>
@@ -166,7 +166,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </GridPane>
-            <Button id="signInButton" defaultButton="true" mnemonicParsing="false" prefHeight="55.0" prefWidth="331.0" text="Sign up">
+            <Button id="signInButton" defaultButton="true" mnemonicParsing="false" onAction="#createNewProfile" prefHeight="55.0" prefWidth="331.0" text="Create Profile">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
