@@ -389,7 +389,8 @@ public class StartScreenController extends BaseScreenController {
 
     // TODO this method should be used for testing to bypass having to register a new account for each test.
     public void testRegister(ActionEvent event) {
-        goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml");
+        CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
+        createProfileController.initialise("test","test");
     }
 
     //TODO eventually remove
