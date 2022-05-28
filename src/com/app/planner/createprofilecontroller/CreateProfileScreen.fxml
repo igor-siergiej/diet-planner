@@ -33,7 +33,7 @@
                   <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="registerEmailTextField" prefHeight="48.0" prefWidth="331.0" promptText="Profile Name">
+            <TextField fx:id="profileNameTextField" prefHeight="48.0" prefWidth="331.0" promptText="Profile Name">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
@@ -97,7 +97,7 @@
               </rowConstraints>
                <children>
                   <Label id="greyLabel" text="Sex" />
-                  <RadioButton id="blueRadioButton" mnemonicParsing="false" onAction="#handleFemaleCheckBoxes" text="Male" GridPane.columnIndex="1">
+                  <RadioButton id="blueRadioButton" fx:id="maleRadioButton" mnemonicParsing="false" onAction="#handleFemaleCheckBoxes" text="Male" GridPane.columnIndex="1">
                      <toggleGroup>
                         <ToggleGroup fx:id="sexToggleGroup" />
                      </toggleGroup>

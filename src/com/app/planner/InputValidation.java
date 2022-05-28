@@ -18,9 +18,43 @@ public class InputValidation {
     private final static int MAX_HEIGHT_DIGITS = 3;
     private final static int MAX_PORTION_DIGITS = 4;
 
+    public static String ageValidation(String age) {
+        return integerValidation(age, MAX_AGE_DIGITS);
+    }
+
+    public static String heightValidation(String height) {
+        return integerValidation(height, MAX_HEIGHT_DIGITS);
+    }
+
+    public static String weightValidation(String weight) {
+        return integerValidation(weight, MAX_WEIGHT_DIGITS);
+    }
+
+    public static String portionValidation(String portion) {
+        return integerValidation(portion, MAX_PORTION_DIGITS);
+    }
+
+    public static boolean containsUpperCase (String string) {
+        return (string.matches(UPPER_CASE_REGEX));
+    }
+
+    public static boolean contrainsLowerCase (String string) {
+        return (string.matches(LOWER_CASE_REGEX));
+    }
+
+    public static boolean containsNumber (String string){
+        return (string.matches(NUMBER_REGEX));
+    }
+
+    public static boolean containsSpecialChar (String string) {
+        return (string.matches(SPECIAL_CHAR_REGEX));
+    }
+
     public static String usernameValidation(String userName) {
         if (userName.length() > USERNAME_MAX_CHAR || userName.length() < USERNAME_MIN_CHAR) {
             return "Username should be less than 20 and more than 4 characters in length.";
+        } if ((nameValidation(userName))) {
+            return "Username should not contain any special characters";
         }
         return "valid";
     }
@@ -46,6 +80,17 @@ public class InputValidation {
             return "Password should contain at least one special character";
         }
         return "valid";
+    }
+
+    static public Boolean emailValidation(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
     }
 
     public static float getPasswordStrength(String password) {
@@ -78,20 +123,20 @@ public class InputValidation {
         return (string.length() > 8 && string.length() < 16);
     }
 
-    public static boolean containsUpperCase (String string) {
-        return (string.matches(UPPER_CASE_REGEX));
+    // TODO check if this is really needed
+    public static String stringValidation(String string) {
+        string = string.replaceAll("\\s+", " ");
+        if (!string.matches("[a-zA-Z|\\s]")) { // is this a-Z or a space?
+            return string.replaceAll("[^a-zA-Z|\\s]", "");
+        }
+        if (string.length() > 15) {
+            return string.substring(0, 15);
+        }
+        return string;
     }
 
-    public static boolean contrainsLowerCase (String string) {
-        return (string.matches(LOWER_CASE_REGEX));
-    }
-
-    public static boolean containsNumber (String string){
-        return (string.matches(NUMBER_REGEX));
-    }
-
-    public static boolean containsSpecialChar (String string) {
-        return (string.matches(SPECIAL_CHAR_REGEX));
+    private static Boolean nameValidation(String name) {
+        return name.matches("[a-zA-Z|\\s]");
     }
 
     private static String integerValidation(String input , int numOfDigits) {
@@ -105,47 +150,6 @@ public class InputValidation {
             return input.substring(0, numOfDigits);
         }
         return input;
-    }
-    static public String ageValidation(String age) {
-        return integerValidation(age, MAX_AGE_DIGITS);
-    }
-
-    static public String heightValidation(String height) {
-        return integerValidation(height, MAX_HEIGHT_DIGITS);
-    }
-
-    static public String weightValidation(String weight) {
-        return integerValidation(weight, MAX_WEIGHT_DIGITS);
-    }
-
-    static public String portionValidation(String portion) {
-        return integerValidation(portion, MAX_PORTION_DIGITS);
-    }
-
-    static public String stringValidation(String string) {
-        string = string.replaceAll("\\s+", " ");
-        if (!string.matches("[a-zA-Z|\\s]")) { // is this a-Z or a space?
-            return string.replaceAll("[^a-zA-Z|\\s]", "");
-        }
-        if (string.length() > 15) {
-            return string.substring(0, 15);
-        }
-        return string;
-    }
-
-    static public Boolean nameValidation(String name) {
-        return !name.matches("[a-zA-Z|\\s]");
-    }
-
-    static public Boolean emailValidation(String email) {
-        boolean result = true;
-        try {
-            InternetAddress emailAddr = new InternetAddress(email);
-            emailAddr.validate();
-        } catch (AddressException ex) {
-            result = false;
-        }
-        return result;
     }
 }
 

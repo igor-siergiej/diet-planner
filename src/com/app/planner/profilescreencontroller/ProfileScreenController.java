@@ -61,10 +61,13 @@ public class ProfileScreenController extends BaseScreenController {
     @FXML
     private ToggleButton homeButton;
 
-    public void initialise(@NotNull Profile profile) {
+    @FXML
+    private Label profileLabel;
 
+    public void initialise(@NotNull Profile profile) {
         homeButton.setSelected(true); // since we are in profileScreen set the toggleButton to be selected
         this.profile = profile;
+        profileLabel.setText(profile.toString());
 
         // get goals of current profile profile
         float carbsGoal = ViewNutrientsController.searchTargetNutrientsList("Carbohydrates", profile.getDailyIntake().getTargetNutrients());

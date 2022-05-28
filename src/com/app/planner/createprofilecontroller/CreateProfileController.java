@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 
 
 public class CreateProfileController extends BaseScreenController {
@@ -24,6 +25,9 @@ public class CreateProfileController extends BaseScreenController {
     private RadioButton femaleRadioButton;
 
     @FXML
+    private RadioButton maleRadioButton;
+
+    @FXML
     private TextField ageTextField;
 
     @FXML
@@ -32,6 +36,15 @@ public class CreateProfileController extends BaseScreenController {
     @FXML
     private TextField weightTextField;
 
+    @FXML
+    private ToggleGroup activityToggleGroup;
+
+    @FXML
+    private ToggleGroup sexToggleGroup;
+
+    @FXML
+    private TextField profileNameTextField;
+
     public void initialise(String email, String password) {
         this.profile = new Profile();
         this.profile.setEmail(email);
@@ -39,6 +52,8 @@ public class CreateProfileController extends BaseScreenController {
         setAgeTextFieldEventHandler();
         setHeightTextFieldEventHandler();
         setWeightTextFieldEventHandler();
+        femaleRadioButton.setUserData("Female");
+        maleRadioButton.setUserData("Male");
     }
 
     public void setAgeTextFieldEventHandler() {
@@ -59,8 +74,8 @@ public class CreateProfileController extends BaseScreenController {
         });
     }
 
-
     public void handleFemaleCheckBoxes() {
+        System.out.println(sexToggleGroup.getSelectedToggle().getUserData());
         if (femaleRadioButton.isSelected()) {
             pregnantCheckBox.setDisable(false);
             breastfeedingCheckBox.setDisable(false);
@@ -72,9 +87,41 @@ public class CreateProfileController extends BaseScreenController {
         }
     }
 
-    public void createNewProfile(ActionEvent event) {
-        // get values from UI and add them to profile
+    public boolean isFormCompleted() {
+        boolean returnBoolean = false;
 
-        goToProfileScreen(event,this.profile);
+        boolean isActivityToggleGroupSelected = activityToggleGroup.getSelectedToggle() != null;
+        boolean isSexToggleGroupSelected = sexToggleGroup.getSelectedToggle() != null;
+        boolean isUsernameValid = InputValidation.usernameValidation(profileNameTextField.getText()) == "valid";
+        boolean isAgeValid = !ageTextField.getText().isEmpty();
+        boolean isHeightValid = !heightTextField.getText().isEmpty();
+        boolean isWeightValid = !weightTextField.getText().isEmpty();
+
+        if (isActivityToggleGroupSelected && isSexToggleGroupSelected && isUsernameValid &&
+            isAgeValid && isHeightValid && isWeightValid) {
+            returnBoolean = true;
+        }
+        return returnBoolean;
+    }
+
+    public void setErrorStyle() {
+        // TODO
+    }
+
+    public void createNewProfile(ActionEvent event) {
+        if (isFormCompleted()) {
+            profile.setProfileName(profileNameTextField.getText());
+            profile.setAge(Integer.parseInt(ageTextField.getText()));
+            profile.setHeight(Integer.parseInt(heightTextField.getText()));
+            profile.setWeight(Integer.parseInt(weightTextField.getText()));
+            // TODO if sex is female check for null and get pregnant and breastfeeding checkbox
+            profile.setSex((String) sexToggleGroup.getSelectedToggle().getUserData());
+            // TODO create activity level enum or something?
+
+            goToProfileScreen(event,this.profile);
+        } else {
+            //setErrorStyle()
+        }
+
     }
 }
