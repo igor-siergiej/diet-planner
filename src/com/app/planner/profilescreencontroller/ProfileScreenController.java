@@ -12,17 +12,14 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.*;
 import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class ProfileScreenController extends BaseScreenController {
 
     static final int MAX_NUM_ENTRIES = 4;
-
     private Profile profile;
 
     @FXML

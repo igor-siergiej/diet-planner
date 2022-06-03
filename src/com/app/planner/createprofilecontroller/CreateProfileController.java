@@ -9,11 +9,17 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.Pane;
+import org.controlsfx.control.Notifications;
+import org.controlsfx.validation.Validator;
 
 
 public class CreateProfileController extends BaseScreenController {
 
     Profile profile;
+
+    @FXML
+    private Pane mainPane;
 
     @FXML
     private CheckBox pregnantCheckBox;
@@ -101,6 +107,7 @@ public class CreateProfileController extends BaseScreenController {
             isAgeValid && isHeightValid && isWeightValid) {
             returnBoolean = true;
         }
+        // split this if into each part so a different notification can pop up
         return returnBoolean;
     }
 
@@ -120,7 +127,9 @@ public class CreateProfileController extends BaseScreenController {
 
             goToProfileScreen(event,this.profile);
         } else {
+
             //setErrorStyle()
+
         }
 
     }

@@ -218,6 +218,22 @@
     -fx-background-color: grey;
 }
 
+.notification-bar .pane {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-background-color: #1a1a1a;
+    -fx-padding: 5 5 5 5;
+    -fx-background-insets: 0, 1, 2;
+}
+
+.notification-bar .pane .title {
+    -fx-font-size: 20px;
+}
+
+.notification-bar .pane .label {
+    -fx-text-fill: white;
+}
+
 #greenRadioButton:selected .radio { /* this is the background of the button*/
     -fx-background-color: green;
 }

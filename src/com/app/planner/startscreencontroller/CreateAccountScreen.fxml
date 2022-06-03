@@ -35,10 +35,9 @@
             </Label>
             <TextField fx:id="registerEmailTextField" prefHeight="48.0" prefWidth="331.0" promptText="Email">
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="10.0" />
                </VBox.margin>
             </TextField>
-            <Label id="smallLabel" fx:id="registerEmailMessage" alignment="CENTER" prefHeight="29.0" prefWidth="323.0" />
             <PasswordField fx:id="registerPasswordField" onKeyTyped="#passwordStrengthHandler" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
             <ProgressBar fx:id="passwordStrengthProgressBar" prefHeight="18.0" prefWidth="323.0" progress="0.0">
                <VBox.margin>
@@ -56,18 +55,17 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <RadioButton fx:id="charLimitRadioButton" disable="true" mnemonicParsing="false" text="Between 8 and 20 characters" />
-                  <RadioButton fx:id="upperCaseRadioButton" disable="true" mnemonicParsing="false" text="One uppercase character" GridPane.columnIndex="1" />
-                  <RadioButton fx:id="lowerCaseRadioButton" disable="true" mnemonicParsing="false" text="One lowercase charcter" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <RadioButton fx:id="specialCharRadioButton" disable="true" mnemonicParsing="false" text="One special character" GridPane.rowIndex="1" />
-                  <RadioButton fx:id="numberRadioButton" disable="true" mnemonicParsing="false" text="One number" GridPane.rowIndex="2" />
+                  <RadioButton id="greenRadioButton" fx:id="charLimitRadioButton" disable="true" mnemonicParsing="false" text="Between 8 and 20 characters" />
+                  <RadioButton id="greenRadioButton" fx:id="upperCaseRadioButton" disable="true" mnemonicParsing="false" text="One uppercase character" GridPane.columnIndex="1" />
+                  <RadioButton id="greenRadioButton" fx:id="lowerCaseRadioButton" disable="true" mnemonicParsing="false" text="One lowercase charcter" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <RadioButton id="greenRadioButton" fx:id="specialCharRadioButton" disable="true" mnemonicParsing="false" text="One special character" GridPane.rowIndex="1" />
+                  <RadioButton id="greenRadioButton" fx:id="numberRadioButton" disable="true" mnemonicParsing="false" text="One number" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <PasswordField fx:id="registerRetypePasswordField" prefHeight="48.0" prefWidth="331.0" promptText="Re-type Password">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets bottom="20.0" top="10.0" />
                </VBox.margin></PasswordField>
-            <Label id="smallLabel" fx:id="registerRetypePasswordMessage" alignment="CENTER" prefHeight="29.0" prefWidth="304.0" />
             <Button id="signInButton" defaultButton="true" mnemonicParsing="false" onAction="#register" prefHeight="55.0" prefWidth="331.0" text="Sign up">
                <font>
                   <Font name="System Bold" size="25.0" />

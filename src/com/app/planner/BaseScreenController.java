@@ -7,10 +7,13 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.controlsfx.control.Notifications;
 
-import java.io.IOException;
+import java.io.*;
 
 public class BaseScreenController {
 
@@ -62,4 +65,19 @@ public class BaseScreenController {
         window.setX((primScreenBounds.getWidth() - window.getWidth()) / 2);
         window.setY((primScreenBounds.getHeight() - window.getHeight()) / 2);
     }
+
+    public void createErrorNotification(Node owner, String text) {
+        ImageView img = new ImageView(new Image("com/app/planner/img/error.png"));
+        img.setFitHeight(50);
+        img.setFitWidth(50);
+        Notifications.create()
+                .title("Something went wrong!")
+                .owner(owner)
+                .text(text)
+                .graphic(img)
+                .threshold(3, Notifications.create().title("Collapsed Notification"))
+                .show();
+    }
+
+    public void createWarningNotification() {}
 }

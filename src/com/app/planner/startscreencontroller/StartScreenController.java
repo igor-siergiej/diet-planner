@@ -44,9 +44,6 @@ public class StartScreenController extends BaseScreenController {
     private ProgressBar passwordStrengthProgressBar;
 
     @FXML
-    private Button loginButton;
-
-    @FXML
     private TextField registerEmailTextField;
 
     @FXML
@@ -96,12 +93,6 @@ public class StartScreenController extends BaseScreenController {
 
     @FXML
     private TextArea registerPrompt;
-
-    @FXML
-    private Label loginEmailMessage;
-
-    @FXML
-    private Label loginPasswordMessage;
 
     @FXML
     private RadioButton charLimitRadioButton;
@@ -243,7 +234,7 @@ public class StartScreenController extends BaseScreenController {
         passwordStrengthProgressBar.setProgress(passwordStrength);
 
         if (InputValidation.isStringWithinCharLimit(password)) {
-            charLimitRadioButton.setId("");
+            charLimitRadioButton.setId("greenRadioButton");
             charLimitRadioButton.setSelected(true);
         } else {
             charLimitRadioButton.setSelected(false);
@@ -251,28 +242,28 @@ public class StartScreenController extends BaseScreenController {
 
         if (InputValidation.containsUpperCase(password)) {
             upperCaseRadioButton.setSelected(true);
-            upperCaseRadioButton.setId("");
+            upperCaseRadioButton.setId("greenRadioButton");
         } else {
             upperCaseRadioButton.setSelected(false);
         }
 
         if (InputValidation.contrainsLowerCase(password)) {
             lowerCaseRadioButton.setSelected(true);
-            lowerCaseRadioButton.setId("");
+            lowerCaseRadioButton.setId("greenRadioButton");
         } else {
             lowerCaseRadioButton.setSelected(false);
         }
 
         if (InputValidation.containsNumber(password)) {
             numberRadioButton.setSelected(true);
-            numberRadioButton.setId("");
+            numberRadioButton.setId("greenRadioButton");
         } else {
             numberRadioButton.setSelected(false);
         }
 
         if (InputValidation.containsSpecialChar(password)) {
             specialCharRadioButton.setSelected(true);
-            specialCharRadioButton.setId("");
+            specialCharRadioButton.setId("greenRadioButton");
         } else {
             specialCharRadioButton.setSelected(false);
         }
@@ -302,8 +293,6 @@ public class StartScreenController extends BaseScreenController {
         String email = loginEmailTextField.getText();
         String password = loginPasswordField.getText();
         // clear styling
-        loginEmailMessage.setText("");
-        loginPasswordMessage.setText("");
         loginEmailTextField.setId("");
         loginPasswordField.setId("");
         if (InputValidation.emailValidation(email).equals(true)) {
@@ -311,20 +300,17 @@ public class StartScreenController extends BaseScreenController {
                 if (DatabaseConnection.login(email, password)) {
                     goToProfileScreen(event, DatabaseConnection.getProfileFromDb(email));
                 } else {
-                    loginEmailMessage.setText("Account does not exist");
-                    loginEmailMessage.setId("warningLabel");
-                    loginEmailTextField.setId("text-field-warning");
+                    createErrorNotification(mainPane, "Account does not exist");
+                    loginEmailTextField.setId("text-field-error");
                     return;
                 }
             } else {
-                loginPasswordMessage.setText("Invalid Password");
-                loginPasswordMessage.setId("errorLabel");
+                createErrorNotification(mainPane, InputValidation.passwordValidation(password));
                 loginPasswordField.setId("text-field-error");
                 return;
             }
         } else {
-            loginEmailMessage.setText("Invalid email format");
-            loginEmailMessage.setId("errorLabel");
+            createErrorNotification(mainPane, "Invalid email format");
             loginEmailTextField.setId("text-field-error");
             return;
         }
@@ -334,7 +320,7 @@ public class StartScreenController extends BaseScreenController {
         String email = registerEmailTextField.getText();
         String password = registerPasswordField.getText();
         String retypePassword = registerRetypePasswordField.getText();
-        registerEmailMessage.setText("");
+
         registerEmailTextField.setId("");
         registerPasswordField.setId("");
         registerRetypePasswordField.setId("");
@@ -345,43 +331,37 @@ public class StartScreenController extends BaseScreenController {
                     if (DatabaseConnection.register(email, password)) { // this will register if validation is ok?
                         goToCreateProfileScreenWithLogin(event, email, password);
                     } else {
-                        registerEmailMessage.setText("An account with this email already exists");
-                        registerEmailMessage.setId("warningLabel");
+                        createErrorNotification(mainPane, "An account with this email already exists");
                         registerEmailTextField.setId("text-field-warning");
                         return;
                     }
                 } else {
-                    registerRetypePasswordMessage.setText("Passwords Not matching");
-                    registerRetypePasswordMessage.setId("errorLabel");
+                    createErrorNotification(mainPane, "Passwords not Matching");
                     registerRetypePasswordField.setId("text-field-error");
                     return;
                 }
             } else {
+                createErrorNotification(mainPane,"Please create a stronger password");
                 if (!InputValidation.isStringWithinCharLimit(password)) {
                     charLimitRadioButton.setId("errorRadioButton");
                 }
                 if (!InputValidation.containsUpperCase(password)) {
                     upperCaseRadioButton.setId("errorRadioButton");
                 }
-
                 if (!InputValidation.contrainsLowerCase(password)) {
                     lowerCaseRadioButton.setId("errorRadioButton");
                 }
-
                 if (!InputValidation.containsNumber(password)) {
                     numberRadioButton.setId("errorRadioButton");
                 }
-
                 if (!InputValidation.containsSpecialChar(password)) {
                     specialCharRadioButton.setId("errorRadioButton");
                 }
-
                 registerPasswordField.setId("text-field-error");
                 return;
             }
         } else {
-            registerEmailMessage.setText("Invalid Email format");
-            registerEmailMessage.setId("errorLabel");
+            createErrorNotification(mainPane, "Invalid Email Format");
             registerEmailTextField.setId("text-field-error");
             return;
         }
