@@ -48,10 +48,14 @@
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="loginEmailTextField" prefHeight="48.0" prefWidth="331.0" promptText="Email" />
-            <Label fx:id="loginEmailMessage" alignment="CENTER" prefHeight="29.0" prefWidth="317.0" />
-            <PasswordField fx:id="loginPasswordField" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
-            <Label fx:id="loginPasswordMessage" alignment="CENTER" prefHeight="29.0" prefWidth="320.0" />
+            <TextField fx:id="loginEmailTextField" prefHeight="48.0" prefWidth="331.0" promptText="Email">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin></TextField>
+            <PasswordField fx:id="loginPasswordField" prefHeight="48.0" prefWidth="331.0" promptText="Password">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin></PasswordField>
             <Button id="signInButton" fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onAction="#logIn" prefHeight="55.0" prefWidth="331.0" text="Sign in">
                <font>
                   <Font name="System Bold" size="25.0" />
