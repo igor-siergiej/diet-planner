@@ -46,6 +46,13 @@ public class Profile {
         dailyIntake.setTargetNutrients(age, sex, pregnant, breastFeeding);
     }
 
+    public void initialiseProfile() {
+        diary = new Diary();
+        dailyIntake = new DailyIntake();
+        dailyIntake.setMaximumDoses();
+        dailyIntake.setTargetNutrients(age, sex, pregnant, breastFeeding);
+    }
+
     public Profile() {
     }
 
@@ -157,10 +164,6 @@ public class Profile {
 
     public DailyIntake getDailyIntake() {
         return dailyIntake;
-    }
-
-    public void setDailyIntake(DailyIntake dailyIntake) {
-        this.dailyIntake = dailyIntake;
     }
 
     public void saveToFile(File file) {

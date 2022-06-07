@@ -2,22 +2,33 @@ package com.app.planner.startscreencontroller;
 
 import com.app.planner.*;
 import com.app.planner.createprofilecontroller.CreateProfileController;
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+
 import java.io.File;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class StartScreenController extends BaseScreenController {
+
+    Profile profile;
+    Timer timer;
+    Stack<NonInterruptableTask> emailTasks;
+    NonInterruptableTask passwordTask;
+
     @FXML
     public void initialize() {
+        loginButton.disableProperty().bind(Bindings.isEmpty(loginEmailTextField.textProperty()).or(Bindings.isEmpty(loginPasswordField.textProperty())));
+        timer = new Timer();
+        emailTasks = new Stack<>();
+        passwordTask = createPasswordTask();
 
         //Calendar poke code
         /*DatePicker datePicker = new DatePicker(LocalDate.now());
@@ -28,8 +39,6 @@ public class StartScreenController extends BaseScreenController {
             System.out.println("New Value: " + newValue);
         });*/
     }
-
-    Profile profile;
 
     @FXML
     private Pane mainPane;
@@ -82,17 +91,15 @@ public class StartScreenController extends BaseScreenController {
     @FXML
     private Button createProfileButton;
 
-    @FXML
-    private TextField nameTextField;
 
     @FXML
-    private TextField emailTextField;
+    private Label loginEmailMessage;
 
     @FXML
-    private TextArea messageTextField;
+    private Label loginPasswordMessage;
 
     @FXML
-    private TextArea registerPrompt;
+    private Button loginButton;
 
     @FXML
     private RadioButton charLimitRadioButton;
@@ -116,10 +123,10 @@ public class StartScreenController extends BaseScreenController {
 
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
         CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
-        createProfileController.initialise(null,null);
+        createProfileController.initialise(null, null);
     }
 
-    //is this needed?
+    // is this needed?
     private void initialize(String email, String password) {
         profile.setEmail(email);
         profile.setPassword(password);
@@ -131,6 +138,104 @@ public class StartScreenController extends BaseScreenController {
 
         breastfeedingComboBox.getSelectionModel().select(1); //setting default value for comboBoxes
         pregnantComboBox.getSelectionModel().select(1);
+    }
+
+    public abstract class NonInterruptableTask extends TimerTask {
+
+        protected boolean isRunning = false;
+
+        public boolean isRunning() {
+            return isRunning;
+        }
+
+        protected abstract void doTaskWork();
+
+        @Override
+        public void run() {
+            isRunning = true;
+            doTaskWork();
+            isRunning = false;
+        }
+    }
+
+    public void handleLoginEmailTextfield() {
+        System.out.println(emailTasks);
+        if (emailTasks.size() > 0) {
+            emailTasks.pop();
+            loginEmailMessage.setText("");
+            loginEmailTextField.setId("");
+            timer.cancel();
+            timer.purge();
+            System.out.println("task cancelled");
+            timer = new Timer();
+            timer.schedule(createEmailTask(), 1000);
+        } else {
+            timer.schedule(createEmailTask(), 1000);
+            loginEmailMessage.setText("");
+            loginEmailTextField.setId("");
+        }
+    }
+
+    private NonInterruptableTask createEmailTask() {
+        NonInterruptableTask task = new NonInterruptableTask() {
+            @Override
+            protected void doTaskWork() {
+                Platform.runLater(() -> {
+                    String email = loginEmailTextField.getText().trim();
+                    if (InputValidation.emailValidation(email)) {
+                        loginEmailMessage.setId("correctLabel");
+                        loginEmailMessage.setText("Correct!");
+                        loginEmailTextField.setId("text-field-correct");
+                    } else {
+                        loginEmailMessage.setId("errorLabel");
+                        loginEmailMessage.setText("Invalid email format");
+                        loginEmailTextField.setId("text-field-error");
+                    }
+                    System.out.println("task done");
+                });
+            }
+        };
+        System.out.println("task created");
+        emailTasks.push(task);
+        return task;
+    }
+
+
+    public void handleLoginPasswordField() {
+        if (passwordTask.isRunning()) {
+            timer.cancel();
+            timer.purge();
+            timer = new Timer();
+            timer.schedule(createPasswordTask(), 1000);
+        } else {
+            timer.schedule(createPasswordTask(), 1000);
+            loginPasswordMessage.setText("");
+            loginPasswordField.setId("");
+        }
+    }
+
+
+
+    private NonInterruptableTask createPasswordTask() {
+        NonInterruptableTask task = new NonInterruptableTask() {
+            @Override
+            protected void doTaskWork() {
+                Platform.runLater(() -> {
+                    String password = loginPasswordField.getText().trim();
+                    if (InputValidation.passwordValidation(password) == "valid") {
+                        loginPasswordMessage.setId("correctLabel");
+                        loginPasswordMessage.setText("Correct!");
+                        loginPasswordField.setId("text-field-correct");
+                    } else {
+                        loginPasswordMessage.setId("errorLabel");
+                        loginPasswordMessage.setText(InputValidation.passwordValidation(password));
+                        loginPasswordField.setId("text-field-error");
+                    }
+                });
+            }
+        };
+        passwordTask = task;
+        return task;
     }
 
     // same as above
@@ -181,7 +286,7 @@ public class StartScreenController extends BaseScreenController {
         diary.addEntry(entry2);
         diary.addEntry(entry3);
 
-        Profile profile = new Profile("","", "testProfile",0,0, 14, "female", true, false, diary, new Option());
+        Profile profile = new Profile("", "", "testProfile", 0, 0, 14, "female", true, false, diary, new Option());
         goToProfileScreen(event, profile);
     }
 
@@ -209,16 +314,16 @@ public class StartScreenController extends BaseScreenController {
             }
         }
 
-        Profile profile = new Profile(null, null, profileName,0,0 ,age, sex, isPregnant, isBreastfeeding, new Diary(), new Option());
+        Profile profile = new Profile(null, null, profileName, 0, 0, age, sex, isPregnant, isBreastfeeding, new Diary(), new Option());
         //goToProfileScreen(event, profile);
     }
 
     public void showRegisterPrompt() {
-        registerPrompt.setVisible(true);
+        //registerPrompt.setVisible(true);
     }
 
     public void hideRegisterPrompt() {
-        registerPrompt.setVisible(false);
+        //registerPrompt.setVisible(false);
     }
 
     public void passwordStrengthHandler() {
@@ -283,7 +388,7 @@ public class StartScreenController extends BaseScreenController {
         File file = Main.chooseLoadFile(mainPane);
         if (!(file == null)) {
             profile.loadFromFile(file);
-            //goToProfileScreen(event, profile);
+            goToProfileScreen(event, profile);
         } else {
             System.out.println("Choosing File closed!");
         }
@@ -292,26 +397,21 @@ public class StartScreenController extends BaseScreenController {
     public void logIn(ActionEvent event) {
         String email = loginEmailTextField.getText();
         String password = loginPasswordField.getText();
-        // clear styling
-        loginEmailTextField.setId("");
-        loginPasswordField.setId("");
+
         if (InputValidation.emailValidation(email).equals(true)) {
             if (InputValidation.passwordValidation(password).equals("valid")) {
                 if (DatabaseConnection.login(email, password)) {
                     goToProfileScreen(event, DatabaseConnection.getProfileFromDb(email));
                 } else {
                     createErrorNotification(mainPane, "Account does not exist");
-                    loginEmailTextField.setId("text-field-error");
                     return;
                 }
             } else {
                 createErrorNotification(mainPane, InputValidation.passwordValidation(password));
-                loginPasswordField.setId("text-field-error");
                 return;
             }
         } else {
             createErrorNotification(mainPane, "Invalid email format");
-            loginEmailTextField.setId("text-field-error");
             return;
         }
     }
@@ -341,7 +441,7 @@ public class StartScreenController extends BaseScreenController {
                     return;
                 }
             } else {
-                createErrorNotification(mainPane,"Please create a stronger password");
+                createErrorNotification(mainPane, "Please create a stronger password");
                 if (!InputValidation.isStringWithinCharLimit(password)) {
                     charLimitRadioButton.setId("errorRadioButton");
                 }
@@ -369,8 +469,10 @@ public class StartScreenController extends BaseScreenController {
 
     // TODO this method should be used for testing to bypass having to register a new account for each test.
     public void testRegister(ActionEvent event) {
+        System.out.println("java version: " + System.getProperty("java.version"));
+        System.out.println("javafx.version: " + System.getProperty("javafx.version"));
         CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
-        createProfileController.initialise("test","test");
+        createProfileController.initialise("test", "test");
     }
 
     //TODO eventually remove
