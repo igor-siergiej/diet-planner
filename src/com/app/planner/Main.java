@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -13,8 +15,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser;
+import javafx.stage.WindowEvent;
 
-import javax.mail.MessagingException;
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,6 +26,13 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent t) {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            });
             Parent root = FXMLLoader.load(getClass().getResource("startscreencontroller/StartScreen.fxml"));
             Scene scene = new Scene(root);
             scene.getStylesheets().add("com/app/planner/style.css");
@@ -38,6 +47,8 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
+
 
 
     // TODO move these methods to a separate class

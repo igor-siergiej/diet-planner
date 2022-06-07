@@ -109,21 +109,25 @@ public class ProfileScreenController extends BaseScreenController {
         proteinProgressBar.setProgress(percentOfProtein);
 
         // this will populate entriesVBox with only 4 of the entries for current day displaying details
-        ArrayList<Entry> entries = profile.getDiary().getEntriesDay(LocalDate.now());
-        for (int i = 0; i < MAX_NUM_ENTRIES; i++) {
-            Label entryName = new Label(entries.get(i).getMeal().getMealName() + " " + entries.get(i).getEntryType().toString());
-            Label calorie = new Label(entries.get(i).getNutrientValueForEntry("Energy (kcal)") + " Kcal");
+        if (!profile.getDiary().getEntriesDay(LocalDate.now()).isEmpty()) {
+            ArrayList<Entry> entries = profile.getDiary().getEntriesDay(LocalDate.now());
+            for (int i = 0; i < MAX_NUM_ENTRIES; i++) {
+                Label entryName = new Label(entries.get(i).getMeal().getMealName() + " " + entries.get(i).getEntryType().toString());
+                Label calorie = new Label(entries.get(i).getNutrientValueForEntry("Energy (kcal)") + " Kcal");
 
-            HBox hbox = new HBox();
-            hbox.setMinHeight(70);
-            hbox.setId("fakeButton"); // set better CSS to this
-            hbox.setAlignment(Pos.CENTER);
+                HBox hbox = new HBox();
+                hbox.setMinHeight(70);
+                hbox.setId("fakeButton"); // set better CSS to this
+                hbox.setAlignment(Pos.CENTER);
 
-            Region region = new Region();
-            HBox.setHgrow(region, Priority.ALWAYS);
+                Region region = new Region();
+                HBox.setHgrow(region, Priority.ALWAYS);
 
-            hbox.getChildren().addAll(entryName, region, calorie);
-            entriesVBox.getChildren().add(hbox);
+                hbox.getChildren().addAll(entryName, region, calorie);
+                entriesVBox.getChildren().add(hbox);
+            }
+        } else {
+            return;
         }
     }
 

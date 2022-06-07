@@ -180,6 +180,11 @@
                   <Image url="@../img/backgroundPattern.png" />
                </image>
             </ImageView>
+            <Button id="signInButton" layoutX="114.0" layoutY="676.0" mnemonicParsing="false" onAction="#testProfile" prefHeight="55.0" prefWidth="331.0" text="Test profile">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Button id="greyButton" cancelButton="true" layoutX="5.0" layoutY="10.0" mnemonicParsing="false" onAction="#goToStartScreen" prefHeight="50.0" prefWidth="50.0">

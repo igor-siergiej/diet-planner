@@ -88,6 +88,10 @@
     -fx-border-color: yellow;
 }
 
+#text-field-correct {
+    -fx-border-color: green;
+}
+
 #errorLabel {
     -fx-text-fill: red;
     -fx-font-size: 18px;
@@ -95,6 +99,11 @@
 
 #warningLabel {
     -fx-text-fill: yellow;
+    -fx-font-size: 18px;
+}
+
+#correctLabel {
+    -fx-text-fill: green;
     -fx-font-size: 18px;
 }
 

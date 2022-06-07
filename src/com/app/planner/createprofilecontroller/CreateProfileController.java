@@ -60,6 +60,8 @@ public class CreateProfileController extends BaseScreenController {
         setWeightTextFieldEventHandler();
         femaleRadioButton.setUserData("Female");
         maleRadioButton.setUserData("Male");
+
+
     }
 
     public void setAgeTextFieldEventHandler() {
@@ -107,13 +109,13 @@ public class CreateProfileController extends BaseScreenController {
             isAgeValid && isHeightValid && isWeightValid) {
             returnBoolean = true;
         }
+
+
         // split this if into each part so a different notification can pop up
         return returnBoolean;
     }
 
-    public void setErrorStyle() {
-        // TODO
-    }
+
 
     public void createNewProfile(ActionEvent event) {
         if (isFormCompleted()) {
@@ -125,12 +127,22 @@ public class CreateProfileController extends BaseScreenController {
             profile.setSex((String) sexToggleGroup.getSelectedToggle().getUserData());
             // TODO create activity level enum or something?
 
+            profile.initialiseProfile();
             goToProfileScreen(event,this.profile);
         } else {
-
-            //setErrorStyle()
+            // set error style to every part of the form and concatinate a string for the notification string
 
         }
+    }
 
+    public void testProfile(ActionEvent event) {
+        profile.setProfileName("testProfile");
+        profile.setAge(21);
+        profile.setHeight(175);
+        profile.setWeight(75);
+        profile.setSex("Male");
+
+        profile.initialiseProfile();
+        goToProfileScreen(event,this.profile);
     }
 }
