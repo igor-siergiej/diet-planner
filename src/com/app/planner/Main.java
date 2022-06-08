@@ -25,6 +25,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        // so that the program stops properly
         try {
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
@@ -47,9 +48,6 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
-
-
 
     // TODO move these methods to a separate class
     public static ArrayList<Food> initialiseData() { //this will load the json file with the dataset to an arraylist
