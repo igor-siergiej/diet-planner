@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -20,17 +19,18 @@ public class StartScreenController extends BaseScreenController {
 
     Profile profile;
     Timer timer;
-    Stack<NonInterruptableTask> emailTasks;
-    NonInterruptableTask passwordTask;
+    Stack<TimerTask> emailTasks;
+    Stack<TimerTask> passwordTasks;
 
     @FXML
     public void initialize() {
         loginButton.disableProperty().bind(Bindings.isEmpty(loginEmailTextField.textProperty()).or(Bindings.isEmpty(loginPasswordField.textProperty())));
         timer = new Timer();
         emailTasks = new Stack<>();
-        passwordTask = createPasswordTask();
+        passwordTasks = new Stack<>();
+    }
 
-        //Calendar poke code
+    //Calendar poke code
         /*DatePicker datePicker = new DatePicker(LocalDate.now());
         DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
         Node popupContent = datePickerSkin.getPopupContent();
@@ -38,7 +38,6 @@ public class StartScreenController extends BaseScreenController {
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("New Value: " + newValue);
         });*/
-    }
 
     @FXML
     private Pane mainPane;
@@ -140,33 +139,13 @@ public class StartScreenController extends BaseScreenController {
         pregnantComboBox.getSelectionModel().select(1);
     }
 
-    public abstract class NonInterruptableTask extends TimerTask {
-
-        protected boolean isRunning = false;
-
-        public boolean isRunning() {
-            return isRunning;
-        }
-
-        protected abstract void doTaskWork();
-
-        @Override
-        public void run() {
-            isRunning = true;
-            doTaskWork();
-            isRunning = false;
-        }
-    }
-
     public void handleLoginEmailTextfield() {
-        System.out.println(emailTasks);
         if (emailTasks.size() > 0) {
             emailTasks.pop();
             loginEmailMessage.setText("");
             loginEmailTextField.setId("");
             timer.cancel();
             timer.purge();
-            System.out.println("task cancelled");
             timer = new Timer();
             timer.schedule(createEmailTask(), 1000);
         } else {
@@ -176,10 +155,26 @@ public class StartScreenController extends BaseScreenController {
         }
     }
 
-    private NonInterruptableTask createEmailTask() {
-        NonInterruptableTask task = new NonInterruptableTask() {
+    public void handleLoginPasswordField() {
+        if (passwordTasks.size() > 0) {
+            passwordTasks.pop();
+            loginPasswordMessage.setText("");
+            loginPasswordField.setId("");
+            timer.cancel();
+            timer.purge();
+            timer = new Timer();
+            timer.schedule(createPasswordTask(), 1000);
+        } else {
+            timer.schedule(createPasswordTask(), 1000);
+            loginPasswordMessage.setText("");
+            loginPasswordField.setId("");
+        }
+    }
+
+    private TimerTask createEmailTask() {
+        TimerTask task = new TimerTask() {
             @Override
-            protected void doTaskWork() {
+            public void run() {
                 Platform.runLater(() -> {
                     String email = loginEmailTextField.getText().trim();
                     if (InputValidation.emailValidation(email)) {
@@ -195,31 +190,14 @@ public class StartScreenController extends BaseScreenController {
                 });
             }
         };
-        System.out.println("task created");
         emailTasks.push(task);
         return task;
     }
 
-
-    public void handleLoginPasswordField() {
-        if (passwordTask.isRunning()) {
-            timer.cancel();
-            timer.purge();
-            timer = new Timer();
-            timer.schedule(createPasswordTask(), 1000);
-        } else {
-            timer.schedule(createPasswordTask(), 1000);
-            loginPasswordMessage.setText("");
-            loginPasswordField.setId("");
-        }
-    }
-
-
-
-    private NonInterruptableTask createPasswordTask() {
-        NonInterruptableTask task = new NonInterruptableTask() {
+    private TimerTask createPasswordTask() {
+        TimerTask task = new TimerTask() {
             @Override
-            protected void doTaskWork() {
+            public void run() {
                 Platform.runLater(() -> {
                     String password = loginPasswordField.getText().trim();
                     if (InputValidation.passwordValidation(password) == "valid") {
@@ -234,7 +212,7 @@ public class StartScreenController extends BaseScreenController {
                 });
             }
         };
-        passwordTask = task;
+        passwordTasks.push(task);
         return task;
     }
 
