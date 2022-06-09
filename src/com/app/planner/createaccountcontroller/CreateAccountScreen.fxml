@@ -40,7 +40,7 @@
             </TextField>
             <Label fx:id="registerEmailMessage" />
             <PasswordField fx:id="registerPasswordField" onKeyTyped="#passwordStrengthHandler" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
-            <Label fx:id="registerPasswordMessage" />
+            <Label fx:id="registerPasswordMessage" alignment="CENTER" prefHeight="60.0" prefWidth="396.0" textAlignment="CENTER" wrapText="true" />
             <ProgressBar fx:id="passwordStrengthProgressBar" prefHeight="18.0" prefWidth="323.0" progress="0.0">
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
@@ -66,9 +66,13 @@
             </GridPane>
             <PasswordField fx:id="registerRetypePasswordField" prefHeight="48.0" prefWidth="331.0" promptText="Re-type Password">
                <VBox.margin>
-                  <Insets bottom="20.0" top="10.0" />
+                  <Insets top="10.0" />
                </VBox.margin></PasswordField>
-            <Label fx:id="registerRetypePasswordMessage" />
+            <Label fx:id="registerRetypePasswordMessage">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
             <Button id="signInButton" fx:id="registerButton" defaultButton="true" mnemonicParsing="false" onAction="#register" prefHeight="55.0" prefWidth="331.0" text="Sign up">
                <font>
                   <Font name="System Bold" size="25.0" />
