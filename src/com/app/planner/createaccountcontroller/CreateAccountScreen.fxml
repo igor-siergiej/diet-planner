@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.startscreencontroller.StartScreenController">
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.createaccountcontroller.CreateAccountController">
    <children>
       <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="800.0" prefWidth="500.0">
          <children>
@@ -38,7 +38,9 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </TextField>
+            <Label fx:id="registerEmailMessage" />
             <PasswordField fx:id="registerPasswordField" onKeyTyped="#passwordStrengthHandler" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
+            <Label fx:id="registerPasswordMessage" />
             <ProgressBar fx:id="passwordStrengthProgressBar" prefHeight="18.0" prefWidth="323.0" progress="0.0">
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
@@ -66,7 +68,8 @@
                <VBox.margin>
                   <Insets bottom="20.0" top="10.0" />
                </VBox.margin></PasswordField>
-            <Button id="signInButton" defaultButton="true" mnemonicParsing="false" onAction="#register" prefHeight="55.0" prefWidth="331.0" text="Sign up">
+            <Label fx:id="registerRetypePasswordMessage" />
+            <Button id="signInButton" fx:id="registerButton" defaultButton="true" mnemonicParsing="false" onAction="#register" prefHeight="55.0" prefWidth="331.0" text="Sign up">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>

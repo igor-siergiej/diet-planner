@@ -48,12 +48,12 @@
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="loginEmailTextField" onKeyTyped="#handleLoginEmailTextfield" prefHeight="48.0" prefWidth="331.0" promptText="Email">
+            <TextField fx:id="loginEmailTextField" prefHeight="48.0" prefWidth="331.0" promptText="Email">
                <VBox.margin>
                   <Insets />
                </VBox.margin></TextField>
             <Label fx:id="loginEmailMessage" />
-            <PasswordField fx:id="loginPasswordField" onKeyTyped="#handleLoginPasswordField" prefHeight="48.0" prefWidth="331.0" promptText="Password">
+            <PasswordField fx:id="loginPasswordField" prefHeight="48.0" prefWidth="331.0" promptText="Password">
                <VBox.margin>
                   <Insets />
                </VBox.margin></PasswordField>

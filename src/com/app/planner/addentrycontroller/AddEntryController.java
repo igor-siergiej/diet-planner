@@ -9,10 +9,8 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -22,7 +20,6 @@ import javafx.scene.text.Font;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -106,18 +103,18 @@ public class AddEntryController extends BaseScreenController{
     public void setTextFieldEventHandler() {
         searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             searchVBox.getChildren().clear();
-            searchTextField.setText(InputValidation.stringValidation(newValue));
+            searchTextField.setText(StringValidation.stringValidation(newValue));
             populateSearchResult();
         });
 
         mealNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            mealNameTextField.setText(InputValidation.stringValidation(newValue));
+            mealNameTextField.setText(StringValidation.stringValidation(newValue));
         });
     }
 
     public void setFoodPortionEventHandler(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            textField.setText(InputValidation.portionValidation(newValue));
+            textField.setText(StringValidation.portionValidation(newValue));
             updateNutrients();
         });
     }
