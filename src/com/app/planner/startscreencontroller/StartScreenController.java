@@ -17,8 +17,6 @@ import java.util.*;
 
 public class StartScreenController extends BaseScreenController {
 
-    Profile profile;
-
     //Calendar poke code
         /*DatePicker datePicker = new DatePicker(LocalDate.now());
         DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
