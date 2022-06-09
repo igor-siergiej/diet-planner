@@ -29,8 +29,9 @@ public class BaseScreenController {
         setWindow(event, root);
         return loader;
     }
+
     public void goToCreateAccountScreen(ActionEvent event) {
-        goToScreen(event, "startscreencontroller/CreateAccountScreen.fxml");
+        goToScreen(event, "createaccountcontroller/CreateAccountScreen.fxml");
     }
 
     public void goToStartScreen(ActionEvent event) {
@@ -79,5 +80,6 @@ public class BaseScreenController {
                 .show();
     }
 
-    public void createWarningNotification() {}
+    public void createWarningNotification() {
+    }
 }

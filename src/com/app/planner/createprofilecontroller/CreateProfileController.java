@@ -1,7 +1,7 @@
 package com.app.planner.createprofilecontroller;
 
 import com.app.planner.BaseScreenController;
-import com.app.planner.InputValidation;
+import com.app.planner.StringValidation;
 import com.app.planner.Profile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,8 +10,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
-import org.controlsfx.control.Notifications;
-import org.controlsfx.validation.Validator;
 
 
 public class CreateProfileController extends BaseScreenController {
@@ -66,19 +64,19 @@ public class CreateProfileController extends BaseScreenController {
 
     public void setAgeTextFieldEventHandler() {
         ageTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            ageTextField.setText(InputValidation.ageValidation(newValue));
+            ageTextField.setText(StringValidation.ageValidation(newValue));
         });
     }
 
     public void setHeightTextFieldEventHandler() {
         heightTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            heightTextField.setText(InputValidation.heightValidation(newValue));
+            heightTextField.setText(StringValidation.heightValidation(newValue));
         });
     }
 
     public void setWeightTextFieldEventHandler() {
         weightTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            weightTextField.setText(InputValidation.weightValidation(newValue));
+            weightTextField.setText(StringValidation.weightValidation(newValue));
         });
     }
 
@@ -100,7 +98,7 @@ public class CreateProfileController extends BaseScreenController {
 
         boolean isActivityToggleGroupSelected = activityToggleGroup.getSelectedToggle() != null;
         boolean isSexToggleGroupSelected = sexToggleGroup.getSelectedToggle() != null;
-        boolean isUsernameValid = InputValidation.usernameValidation(profileNameTextField.getText()) == "valid";
+        boolean isUsernameValid = StringValidation.usernameValidation(profileNameTextField.getText()) == "valid";
         boolean isAgeValid = !ageTextField.getText().isEmpty();
         boolean isHeightValid = !heightTextField.getText().isEmpty();
         boolean isWeightValid = !weightTextField.getText().isEmpty();

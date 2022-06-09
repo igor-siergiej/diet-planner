@@ -3,7 +3,7 @@ package com.app.planner;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
-public class InputValidation {
+public class StringValidation {
 
     private final static int PASSWORD_MIN_CHAR = 8;
     private final static int PASSWORD_MAX_CHAR = 15;
@@ -17,6 +17,7 @@ public class InputValidation {
     private final static int MAX_WEIGHT_DIGITS = 3;
     private final static int MAX_HEIGHT_DIGITS = 3;
     private final static int MAX_PORTION_DIGITS = 4;
+    public final static String RETURN_STRING = "Correct!";
 
     public static String ageValidation(String age) {
         return integerValidation(age, MAX_AGE_DIGITS);
@@ -34,29 +35,30 @@ public class InputValidation {
         return integerValidation(portion, MAX_PORTION_DIGITS);
     }
 
-    public static boolean containsUpperCase (String string) {
+    public static boolean containsUpperCase(String string) {
         return (string.matches(UPPER_CASE_REGEX));
     }
 
-    public static boolean contrainsLowerCase (String string) {
+    public static boolean contrainsLowerCase(String string) {
         return (string.matches(LOWER_CASE_REGEX));
     }
 
-    public static boolean containsNumber (String string){
+    public static boolean containsNumber(String string) {
         return (string.matches(NUMBER_REGEX));
     }
 
-    public static boolean containsSpecialChar (String string) {
+    public static boolean containsSpecialChar(String string) {
         return (string.matches(SPECIAL_CHAR_REGEX));
     }
 
     public static String usernameValidation(String userName) {
         if (userName.length() > USERNAME_MAX_CHAR || userName.length() < USERNAME_MIN_CHAR) {
             return "Username should be less than 20 and more than 4 characters in length.";
-        } if ((nameValidation(userName))) {
+        }
+        if ((nameValidation(userName))) {
             return "Username should not contain any special characters";
         }
-        return "valid";
+        return RETURN_STRING;
     }
 
     public static String passwordValidation(String password) {
@@ -79,18 +81,24 @@ public class InputValidation {
         if (!password.matches(SPECIAL_CHAR_REGEX)) {
             return "Password should contain at least one special character";
         }
-        return "valid";
+        return RETURN_STRING;
     }
 
-    static public Boolean emailValidation(String email) {
+    static public String emailValidation(String email) {
         boolean result = true;
+        String returnString = "";
         try {
             InternetAddress emailAddr = new InternetAddress(email);
             emailAddr.validate();
         } catch (AddressException ex) {
             result = false;
         }
-        return result;
+        if (result) {
+            returnString = RETURN_STRING;
+        } else {
+            returnString = "Please enter a valid email";
+        }
+        return returnString;
     }
 
     public static float getPasswordStrength(String password) {
@@ -119,7 +127,7 @@ public class InputValidation {
         return passwordStrengthValue;
     }
 
-    public static boolean isStringWithinCharLimit (String string) {
+    public static boolean isStringWithinCharLimit(String string) {
         return (string.length() > 8 && string.length() < 16);
     }
 
@@ -139,7 +147,7 @@ public class InputValidation {
         return name.matches("[a-zA-Z|\\s]");
     }
 
-    private static String integerValidation(String input , int numOfDigits) {
+    private static String integerValidation(String input, int numOfDigits) {
         if (!input.matches("\\d*")) {
             return input.replaceAll("[^\\d]", "");
         }
