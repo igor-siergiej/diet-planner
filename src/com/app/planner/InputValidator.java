@@ -14,6 +14,7 @@ import java.util.TimerTask;
 public class InputValidator {
     Timer timer;
     Stack<TimerTask> tasks;
+    private final static int VALIDATION_DELAY = 1000;
 
     public InputValidator() {
         timer = new Timer();
@@ -22,77 +23,93 @@ public class InputValidator {
 
     enum ValidatorType {
         EMAIL,
-        PASSWORD
+        PASSWORD,
+        RETYPE
     }
 
     public void createEmailValidator(TextField textField, Label messageLabel) {
-        createEventHandler(textField, messageLabel, ValidatorType.EMAIL);
+        createEventHandler(textField, messageLabel, ValidatorType.EMAIL, null);
     }
 
     public void createPasswordValidator(PasswordField passwordField, Label messageLabel) {
-        createEventHandler(passwordField, messageLabel, ValidatorType.PASSWORD);
+        createEventHandler(passwordField, messageLabel, ValidatorType.PASSWORD, null);
     }
 
-    public void createEventHandler(TextField field, Label messageLabel, ValidatorType validatorType) {
+    public void createRetypePasswordValidator(PasswordField passwordField, PasswordField retypePasswordField, Label messageLabel) {
+        createEventHandler(retypePasswordField, messageLabel, ValidatorType.RETYPE, passwordField);
+    }
+
+    public void createEventHandler(TextField field, Label messageLabel, ValidatorType validatorType, PasswordField retypePasswordField) {
         field.addEventHandler(KeyEvent.KEY_TYPED, keyEvent -> {
+            messageLabel.setText("");
+            field.setId("");
             if (tasks.size() > 0) {
                 tasks.pop();
-                messageLabel.setText("");
-                field.setId("");
                 timer.cancel();
                 timer.purge();
                 timer = new Timer();
-                if (validatorType == ValidatorType.EMAIL) {
-                    timer.schedule(createEmailTask(field, messageLabel), 1000);
-                } else {
-                    timer.schedule(createPasswordTask(field, messageLabel), 1000);
-                }
-
+            }
+            if (validatorType == ValidatorType.EMAIL) {
+                timer.schedule(createEmailTask(field, messageLabel), VALIDATION_DELAY);
+            } else  if (validatorType == ValidatorType.PASSWORD){
+                timer.schedule(createPasswordTask(field, messageLabel), VALIDATION_DELAY);
             } else {
-                if (validatorType == ValidatorType.EMAIL) {
-                    timer.schedule(createEmailTask(field, messageLabel), 1000);
-                } else {
-                    timer.schedule(createPasswordTask(field, messageLabel), 1000);
-                }
-                messageLabel.setText("");
-                field.setId("");
+                timer.schedule(createRetypePasswordTask(field,messageLabel,retypePasswordField), VALIDATION_DELAY);
             }
         });
     }
 
     private TimerTask createEmailTask(TextField textField, Label messageLabel) {
-        return getTimerTask(textField, messageLabel, ValidatorType.EMAIL);
+        return getTimerTask(textField, messageLabel, ValidatorType.EMAIL, null);
     }
 
     private TimerTask createPasswordTask(TextField passwordField, Label messageLabel) {
-        return getTimerTask(passwordField, messageLabel, ValidatorType.PASSWORD);
+        return getTimerTask(passwordField, messageLabel, ValidatorType.PASSWORD, null);
+    }
+
+    private TimerTask createRetypePasswordTask(TextField passwordField, Label messageLabel, PasswordField retypePasswordField) {
+        return getTimerTask(passwordField,messageLabel,ValidatorType.RETYPE, retypePasswordField);
     }
 
     @NotNull
-    private TimerTask getTimerTask(TextField field, Label messageLabel, ValidatorType validatorType) {
+    private TimerTask getTimerTask(TextField field, Label messageLabel, ValidatorType validatorType, PasswordField retypePasswordField) {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 Platform.runLater(() -> {
-                    String text = field.getText().trim();
+                    String fieldText = field.getText().trim();
+                    String retypeFieldText = "";
+                    if (retypePasswordField != null) {
+                        retypeFieldText = retypePasswordField.getText().trim();
+                    }
                     if (validatorType == ValidatorType.EMAIL) {
-                        if (StringValidation.emailValidation(text).equals(StringValidation.RETURN_STRING)) {
+                        if (StringValidation.emailValidation(fieldText).equals(StringValidation.RETURN_STRING)) {
                             messageLabel.setId("correctLabel");
                             messageLabel.setText(StringValidation.RETURN_STRING);
                             field.setId("text-field-correct");
                         } else {
                             messageLabel.setId("errorLabel");
-                            messageLabel.setText(StringValidation.emailValidation(text));
+                            messageLabel.setText(StringValidation.emailValidation(fieldText));
+                            field.setId("text-field-error");
+                        }
+                    } else if (validatorType == ValidatorType.PASSWORD){
+                        if (StringValidation.passwordValidation(fieldText).equals(StringValidation.RETURN_STRING)) {
+                            messageLabel.setId("correctLabel");
+                            messageLabel.setText(StringValidation.RETURN_STRING);
+                            field.setId("text-field-correct");
+                        } else {
+                            messageLabel.setId("errorLabel");
+                            messageLabel.setText(StringValidation.passwordValidation(fieldText));
                             field.setId("text-field-error");
                         }
                     } else {
-                        if (StringValidation.passwordValidation(text).equals(StringValidation.RETURN_STRING)) {
+                        if (fieldText.equals(retypeFieldText)) {
                             messageLabel.setId("correctLabel");
-                            messageLabel.setText(StringValidation.RETURN_STRING);
+                            messageLabel.setText("Passwords Match!");
                             field.setId("text-field-correct");
                         } else {
                             messageLabel.setId("errorLabel");
-                            messageLabel.setText(StringValidation.passwordValidation(text));
+                            messageLabel.setText("Passwords do not match!");
                             field.setId("text-field-error");
                         }
                     }

@@ -58,8 +58,6 @@ public class CreateProfileController extends BaseScreenController {
         setWeightTextFieldEventHandler();
         femaleRadioButton.setUserData("Female");
         maleRadioButton.setUserData("Male");
-
-
     }
 
     public void setAgeTextFieldEventHandler() {

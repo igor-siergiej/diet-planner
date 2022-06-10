@@ -58,6 +58,7 @@ public class CreateAccountController extends BaseScreenController {
         InputValidator inputValidator = new InputValidator();
         inputValidator.createEmailValidator(registerEmailTextField, registerEmailMessage);
         inputValidator.createPasswordValidator(registerPasswordField, registerPasswordMessage);
+        inputValidator.createRetypePasswordValidator(registerPasswordField,registerRetypePasswordField,registerRetypePasswordMessage);
     }
 
     public void passwordStrengthHandler() {
@@ -117,8 +118,8 @@ public class CreateAccountController extends BaseScreenController {
         registerPasswordField.setId("");
         registerRetypePasswordField.setId("");
 
-        if (StringValidation.emailValidation(email).equals(true)) {
-            if (StringValidation.passwordValidation(password).equals("valid")) {
+        if (StringValidation.emailValidation(email).equals(StringValidation.RETURN_STRING)) {
+            if (StringValidation.passwordValidation(password).equals(StringValidation.RETURN_STRING)) {
                 if (password.equals(retypePassword)) {
                     if (DatabaseConnection.register(email, password)) { // this will register if validation is ok?
                         goToCreateProfileScreenWithLogin(event, email, password);
