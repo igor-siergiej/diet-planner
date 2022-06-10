@@ -18,7 +18,7 @@
 
 <Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.createaccountcontroller.CreateAccountController">
    <children>
-      <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="800.0" prefWidth="500.0">
+      <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="5.0" prefHeight="800.0" prefWidth="500.0">
          <children>
             <ImageView fitHeight="113.0" fitWidth="353.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -68,7 +68,7 @@
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin></PasswordField>
-            <Label fx:id="registerRetypePasswordMessage">
+            <Label fx:id="registerRetypePasswordMessage" alignment="CENTER" prefHeight="29.0" prefWidth="286.0">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin>
