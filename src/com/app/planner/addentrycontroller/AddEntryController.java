@@ -28,8 +28,7 @@ import java.util.List;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-public class AddEntryController extends BaseScreenController{
-    private Profile profile;
+public class AddEntryController extends BaseScreenController {
     private ArrayList<TargetNutrients> rdiArrayList;
     private Entry entry;
     private ArrayList<Food> dataset = Main.initialiseData();
@@ -76,18 +75,16 @@ public class AddEntryController extends BaseScreenController{
     @FXML
     private Button addEntryButton;
 
-    public void initialize(Profile profile) {
+    public void initialise(Profile profile) {
         this.profile = profile;
         setTextFieldEventHandler();
         setAddEntryButtonDisable();
         populateMealTypeComboBox();
     }
 
-
-
     public void goToProfileScreen(ActionEvent event) {
         ProfileScreenController profileScreenController = goToScreenWithProfile(event, "profilescreencontroller/ProfileScreen.fxml").getController();
-        //profileScreenController.initialise(profile);
+        profileScreenController.initialise(profile);
     }
 
     public void addEntry(ActionEvent event) {
@@ -97,7 +94,7 @@ public class AddEntryController extends BaseScreenController{
         profile.getDiary().addEntry(entry);
 
         ProfileScreenController profileScreenController = goToScreenWithProfile(event, "profilescreencontroller/ProfileScreen.fxml").getController();
-        //profileScreenController.initialise(profile);
+        profileScreenController.initialise(profile);
     }
 
     public void setTextFieldEventHandler() {

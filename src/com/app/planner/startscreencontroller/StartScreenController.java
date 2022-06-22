@@ -95,8 +95,8 @@ public class StartScreenController extends BaseScreenController {
         diary.addEntry(entry2);
         diary.addEntry(entry3);
 
-        Profile profile = new Profile("", "", "testProfile", 0, 0, 14, "female", true, false, diary, new Option());
-        goToProfileScreen(event, profile);
+        profile = new Profile("", "", "testProfile", 0, 0, 14, "female", true, false, diary, new Option());
+        goToProfileScreen(event);
     }
 
     public void loadProfile(ActionEvent event) { // this is the method to call when load profile from file is pressed
@@ -104,7 +104,7 @@ public class StartScreenController extends BaseScreenController {
         File file = Main.chooseLoadFile(mainPane);
         if (!(file == null)) {
             profile.loadFromFile(file);
-            goToProfileScreen(event, profile);
+            goToProfileScreen(event);
         } else {
             System.out.println("Choosing File closed!");
         }
@@ -114,10 +114,11 @@ public class StartScreenController extends BaseScreenController {
         String email = loginEmailTextField.getText();
         String password = loginPasswordField.getText();
 
-        if (StringValidation.emailValidation(email).equals(true)) {
-            if (StringValidation.passwordValidation(password).equals("valid")) {
+        if (StringValidation.emailValidation(email).equals(StringValidation.RETURN_STRING)) {
+            if (StringValidation.passwordValidation(password).equals(StringValidation.RETURN_STRING)) {
                 if (DatabaseConnection.login(email, password)) {
-                    goToProfileScreen(event, DatabaseConnection.getProfileFromDb(email));
+                    profile = DatabaseConnection.getProfileFromDb(email);
+                    goToProfileScreen(event);
                 } else {
                     createErrorNotification(mainPane, "Account does not exist");
                     return;

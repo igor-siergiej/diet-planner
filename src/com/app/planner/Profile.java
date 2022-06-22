@@ -8,12 +8,11 @@ import java.io.*;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Profile {
     private String email;
     private String password;
+    private String salt;
     private String profileName;
     private int height;
     private int weight;
@@ -24,9 +23,8 @@ public class Profile {
     private Diary diary;
     private Option options;
     private DailyIntake dailyIntake;
-
+    private UndoRedoStack<BaseScreenController> undoRedoStack;
     // stack for undo and redo
-
 
     public Profile(String email,String password, String profileName, int height, int weight, int age, String sex, boolean pregnant, boolean breastFeeding, Diary diary, Option options) {
         this.password = password;

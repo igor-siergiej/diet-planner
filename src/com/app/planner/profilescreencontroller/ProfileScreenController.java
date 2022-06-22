@@ -1,12 +1,15 @@
 package com.app.planner.profilescreencontroller;
 
 import com.app.planner.*;
+import com.app.planner.addentrycontroller.AddEntryController;
 import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
@@ -62,8 +65,8 @@ public class ProfileScreenController extends BaseScreenController {
     private Label profileLabel;
 
     public void initialise(@NotNull Profile profile) {
-        homeButton.setSelected(true); // since we are in profileScreen set the toggleButton to be selected
         this.profile = profile;
+        homeButton.setSelected(true); // since we are in profileScreen set the toggleButton to be selected
         profileLabel.setText(profile.toString());
 
         // get goals of current profile profile
@@ -163,5 +166,16 @@ public class ProfileScreenController extends BaseScreenController {
             // messageLabel.setId("successfullMessage");
             // messageLabel.setText("This profile does not have an account");
         }
+    }
+
+    public void goToViewNutrientsScreen(ActionEvent event) {
+        ViewNutrientsController viewNutrientsController = goToScreen(event, "viewnutrientscontroller/ViewNutrientsScreen.fxml").getController();
+        viewNutrientsController.initialise(profile);
+    }
+
+    public void goToAddEntryScreen(ActionEvent event) {
+        AddEntryController addEntryController = goToScreen(event, "addentrycontroller/AddEntryScreen.fxml").getController();
+        addEntryController.initialise(profile);
+        // should the fxmlFilePath be hardcoded values instead?
     }
 }

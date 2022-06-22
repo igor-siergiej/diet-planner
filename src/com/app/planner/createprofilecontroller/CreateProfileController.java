@@ -14,8 +14,6 @@ import javafx.scene.layout.Pane;
 
 public class CreateProfileController extends BaseScreenController {
 
-    Profile profile;
-
     @FXML
     private Pane mainPane;
 
@@ -50,9 +48,9 @@ public class CreateProfileController extends BaseScreenController {
     private TextField profileNameTextField;
 
     public void initialise(String email, String password) {
-        this.profile = new Profile();
-        this.profile.setEmail(email);
-        this.profile.setPassword(password);
+
+        profile.setEmail(email);
+        profile.setPassword(password);
         setAgeTextFieldEventHandler();
         setHeightTextFieldEventHandler();
         setWeightTextFieldEventHandler();
@@ -124,7 +122,7 @@ public class CreateProfileController extends BaseScreenController {
             // TODO create activity level enum or something?
 
             profile.initialiseProfile();
-            goToProfileScreen(event,this.profile);
+            goToProfileScreen(event);
         } else {
             // set error style to every part of the form and concatinate a string for the notification string
 
@@ -139,6 +137,6 @@ public class CreateProfileController extends BaseScreenController {
         profile.setSex("Male");
 
         profile.initialiseProfile();
-        goToProfileScreen(event,this.profile);
+        goToProfileScreen(event);
     }
 }
