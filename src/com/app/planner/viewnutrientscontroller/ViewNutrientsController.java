@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class ViewNutrientsController extends BaseScreenController{
-    private Profile profile;
 
     @FXML
     private VBox sugarVBox;
@@ -58,20 +57,18 @@ public class ViewNutrientsController extends BaseScreenController{
     @FXML
     private ComboBox comboBox;
 
-    public void initialize(Profile profile) {
+    public void initialise(Profile profile) {
+        this.profile = profile;
         profile.setAge(20);
         profile.setBreastFeeding(false);
         profile.setPregnant(false);
         profile.setSex("male");
-        this.profile = profile;
         datePicker.showWeekNumbersProperty().set(false);
     }
 
-
-
     public void goToProfileScreen(ActionEvent event) {
         ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
-        //profileScreenController.initialise(profile);
+        profileScreenController.initialise(profile);
     }
 
     public void populateEntries(ArrayList<Entry> entries) {

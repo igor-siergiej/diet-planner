@@ -17,6 +17,32 @@ import java.io.*;
 
 public class BaseScreenController {
 
+    protected Profile profile;
+
+    // should have a undo  redo methods here which implement functionality in ui using undoRedoStack
+    protected void undo() {
+
+    }
+
+    protected void redo() {
+
+    }
+
+    // these methods can only be used on screens that do not require a Profile object to be carried
+    // on to the next screen if the method is called from an event handler
+    public void goToCreateAccountScreen(ActionEvent event) {
+        goToScreen(event, "createaccountcontroller/CreateAccountScreen.fxml");
+    }
+
+    public void goToStartScreen(ActionEvent event) {
+        goToScreen(event, "startscreencontroller/StartScreen.fxml");
+    }
+
+    public void goToProfileScreen(ActionEvent event) { // this method will open the profile screen window
+        ProfileScreenController profileScreenController = goToScreen(event, "profilescreencontroller/ProfileScreen.fxml").getController();
+        profileScreenController.initialise(profile);
+    }
+
     public FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) {
         Parent root = null;
         FXMLLoader loader = null;
@@ -30,15 +56,18 @@ public class BaseScreenController {
         return loader;
     }
 
-    public void goToCreateAccountScreen(ActionEvent event) {
-        goToScreen(event, "createaccountcontroller/CreateAccountScreen.fxml");
+    private void setWindow(ActionEvent event, Parent root) {
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/com/app/planner/style.css");
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        window.setX((primScreenBounds.getWidth() - window.getWidth()) / 2);
+        window.setY((primScreenBounds.getHeight() - window.getHeight()) / 2);
     }
 
-    public void goToStartScreen(ActionEvent event) {
-        goToScreen(event, "startscreencontroller/StartScreen.fxml");
-    }
-
-    public FXMLLoader goToScreen(ActionEvent event, String fxmlFilePath) {
+    protected FXMLLoader goToScreen(ActionEvent event, String fxmlFilePath) {
         Parent root = null;
         FXMLLoader loader = null;
         try {
@@ -51,23 +80,7 @@ public class BaseScreenController {
         return loader;
     }
 
-    public void goToProfileScreen(ActionEvent event, Profile profile) { // this method will open the profile screen window
-        ProfileScreenController profileScreenController = goToScreen(event, "profilescreencontroller/ProfileScreen.fxml").getController();
-        profileScreenController.initialise(profile);
-    }
-
-    public void setWindow(ActionEvent event, Parent root) {
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/com/app/planner/style.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        window.setX((primScreenBounds.getWidth() - window.getWidth()) / 2);
-        window.setY((primScreenBounds.getHeight() - window.getHeight()) / 2);
-    }
-
-    public void createErrorNotification(Node owner, String text) {
+    protected void createErrorNotification(Node owner, String text) {
         ImageView img = new ImageView(new Image("com/app/planner/img/error.png"));
         img.setFitHeight(50);
         img.setFitWidth(50);
@@ -78,8 +91,5 @@ public class BaseScreenController {
                 .graphic(img)
                 .threshold(3, Notifications.create().title("Collapsed Notification"))
                 .show();
-    }
-
-    public void createWarningNotification() {
     }
 }
