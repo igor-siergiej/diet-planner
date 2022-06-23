@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 public class Profile {
     private String email;
-    private String password;
-    private String salt;
-    private String profileName;
+    private String password; // TODO is password needed in the tool? no we only need it to log in and you only need email to change password
+
+    private String profileName; // TODO group up some of these variables so there is less instance variables
     private int height;
     private int weight;
     private int age;
@@ -23,6 +23,7 @@ public class Profile {
     private Diary diary;
     private Option options;
     private DailyIntake dailyIntake;
+    private int calorieTarget; //TODO implement
     private UndoRedoStack<BaseScreenController> undoRedoStack;
     // stack for undo and redo
 
