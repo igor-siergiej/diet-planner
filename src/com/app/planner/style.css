@@ -47,6 +47,10 @@
     -fx-text-fill: grey;
 }
 
+#nameLabel, #valueLabel, #percentLabel {
+    -fx-font-size: 15px;
+}
+
 .hyperlink:visited  {
     -fx-underline: false;
 }

@@ -90,7 +90,7 @@
                   <Image url="@../img/backgroundPattern.png" />
                </image>
             </ImageView>
-            <Button id="signInButton" fx:id="loginButton1" layoutX="123.0" layoutY="721.0" mnemonicParsing="false" onAction="#createTestProfile" prefHeight="55.0" prefWidth="331.0" text="Admin Login">
+            <Button id="signInButton" layoutX="123.0" layoutY="721.0" mnemonicParsing="false" onAction="#createTestProfile" prefHeight="55.0" prefWidth="331.0" text="Admin Login">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
