@@ -7,6 +7,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
@@ -41,6 +42,10 @@ public class BaseScreenController {
     public void goToProfileScreen(ActionEvent event) { // this method will open the profile screen window
         ProfileScreenController profileScreenController = goToScreen(event, "profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.initialise(profile);
+    }
+
+    public void logOut(ActionEvent event) { // this method will open the profile screen window
+        goToScreen(event, "startscreencontroller/StartScreen.fxml");
     }
 
     public FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) {
@@ -78,6 +83,14 @@ public class BaseScreenController {
         }
         setWindow(event, root);
         return loader;
+    }
+
+    protected void setToggleGroupHandler(ToggleGroup toggleGroup) {
+        // so that the user cannot unselect an already selected toggle group
+        toggleGroup.selectedToggleProperty().addListener((obsVal, oldVal, newVal) -> {
+            if (newVal == null)
+                oldVal.setSelected(true);
+        });
     }
 
     protected void createErrorNotification(Node owner, String text) {

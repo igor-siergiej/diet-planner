@@ -9,10 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import org.jetbrains.annotations.NotNull;
 import java.io.File;
@@ -64,8 +61,12 @@ public class ProfileScreenController extends BaseScreenController {
     @FXML
     private Label profileLabel;
 
+    @FXML
+    private ToggleGroup menuBarToggleGroup;
+
     public void initialise(@NotNull Profile profile) {
         this.profile = profile;
+        setToggleGroupHandler(menuBarToggleGroup);
         homeButton.setSelected(true); // since we are in profileScreen set the toggleButton to be selected
         profileLabel.setText(profile.toString());
 
@@ -134,9 +135,6 @@ public class ProfileScreenController extends BaseScreenController {
         }
     }
 
-    public void logOut(ActionEvent event) { // this method will open the profile screen window
-        goToScreen(event, "startscreencontroller/StartScreen.fxml");
-    }
 
     public void saveProfileToFile() {
         File file = Main.chooseSaveFile(mainPane);
