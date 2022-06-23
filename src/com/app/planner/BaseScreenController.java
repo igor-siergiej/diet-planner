@@ -92,4 +92,18 @@ public class BaseScreenController {
                 .threshold(3, Notifications.create().title("Collapsed Notification"))
                 .show();
     }
+
+    // this will be used for saving to file or db for instant feedback
+    protected void createCorrectNotification(Node owner, String text) {
+        ImageView img = new ImageView(new Image("com/app/planner/img/error.png"));
+        img.setFitHeight(50);
+        img.setFitWidth(50);
+        Notifications.create()
+                .title("Something went wrong!")
+                .owner(owner)
+                .text(text)
+                .graphic(img)
+                .threshold(3, Notifications.create().title("Collapsed Notification"))
+                .show();
+    }
 }

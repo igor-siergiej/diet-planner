@@ -2,6 +2,7 @@ package com.app.planner.addentrycontroller;
 
 import com.app.planner.*;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
+import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
@@ -86,6 +87,22 @@ public class AddEntryController extends BaseScreenController {
         ProfileScreenController profileScreenController = goToScreenWithProfile(event, "profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.initialise(profile);
     }
+
+    public void goToViewNutrientsScreen(ActionEvent event) {
+        ViewNutrientsController viewNutrientsController = goToScreen(event, "viewnutrientscontroller/ViewNutrientsScreen.fxml").getController();
+        viewNutrientsController.initialise(profile);
+    }
+
+    public void goToAddEntryScreen(ActionEvent event) {
+        AddEntryController addEntryController = goToScreen(event, "addentrycontroller/AddEntryScreen.fxml").getController();
+        addEntryController.initialise(profile);
+        // should the fxmlFilePath be hardcoded values instead?
+    }
+
+    public void logOut(ActionEvent event) { // this method will open the profile screen window
+        goToScreen(event, "startscreencontroller/StartScreen.fxml");
+    }
+
 
     public void addEntry(ActionEvent event) {
         Meal meal = getMeal();
