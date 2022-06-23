@@ -53,9 +53,6 @@ public class AddEntryController extends BaseScreenController {
     private VBox macroVBox;
 
     @FXML
-    private PieChart macroPieChart;
-
-    @FXML
     private Pane nutrientPane;
 
     @FXML
@@ -125,7 +122,7 @@ public class AddEntryController extends BaseScreenController {
 
     public void setFoodPortionEventHandler(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            textField.setText(StringValidation.portionValidation(newValue));
+            textField.setText(StringValidation.portionValidation(newValue));//letter causes a crash???
             updateNutrients();
         });
     }
@@ -301,13 +298,6 @@ public class AddEntryController extends BaseScreenController {
         populateVBox(macroList, macroVBox);
 
         float total = macroList.get(1).getNutrientValue() + macroList.get(2).getNutrientValue() + macroList.get(0).getNutrientValue();
-
-        ObservableList<PieChart.Data> pieChartData =
-                observableArrayList(
-                        new PieChart.Data("Fat " + String.format("%.1f", macroList.get(1).getNutrientValue() / total * 100) + "%", macroList.get(1).getNutrientValue()),
-                        new PieChart.Data("Carbohydrates " + String.format("%.1f", macroList.get(0).getNutrientValue() / total * 100) + "%", macroList.get(0).getNutrientValue()),
-                        new PieChart.Data("Protein " + String.format("%.1f", macroList.get(2).getNutrientValue() / total * 100) + "%", macroList.get(2).getNutrientValue()));
-        macroPieChart.setData(pieChartData);
     }
 
     public void populateVBox(ArrayList<Nutrient> list, VBox vbox) {

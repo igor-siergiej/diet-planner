@@ -70,6 +70,8 @@ public class ProfileScreenController extends BaseScreenController {
         homeButton.setSelected(true); // since we are in profileScreen set the toggleButton to be selected
         profileLabel.setText(profile.toString());
 
+        // TODO split this up into several methods so it's easier to read
+
         // get goals of current profile profile
         float carbsGoal = ViewNutrientsController.searchTargetNutrientsList("Carbohydrates", profile.getDailyIntake().getTargetNutrients());
         float fatGoal = ViewNutrientsController.searchTargetNutrientsList("Fat", profile.getDailyIntake().getTargetNutrients());
@@ -132,37 +134,6 @@ public class ProfileScreenController extends BaseScreenController {
             }
         } else {
             return;
-        }
-    }
-
-
-    public void saveProfileToFile() {
-        File file = Main.chooseSaveFile(mainPane);
-        if (!(file == null)) {
-            profile.saveToFile(file);
-            // instead of messageLabel this should be a type of alert/pop up
-            // messageLabel.setId("successfullMessage");
-            // messageLabel.setText("Successfully saved to file");
-        } else {
-            // messageLabel.setId("unsuccessfullMessage");
-            // messageLabel.setText("Failed to save to file");
-        }
-    }
-
-    public void saveProfileToDB() {
-        String email = profile.getEmail();
-        if (email != null) {
-            if (DatabaseConnection.saveProfileToDb(email, profile)) {
-                // instead of messageLabel this should be a type of alert/pop up
-                // messageLabel.setId("successfullMessage");
-                // messageLabel.setText("Successfully saved to DB");
-            } else {
-                // messageLabel.setId("successfullMessage");
-                // messageLabel.setText("Error in saving to DB");
-            }
-        } else {
-            // messageLabel.setId("successfullMessage");
-            // messageLabel.setText("This profile does not have an account");
         }
     }
 

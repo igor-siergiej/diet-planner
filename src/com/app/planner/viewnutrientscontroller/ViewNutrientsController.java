@@ -1,6 +1,7 @@
 package com.app.planner.viewnutrientscontroller;
 
 import com.app.planner.*;
+import com.app.planner.addentrycontroller.AddEntryController;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,8 +58,16 @@ public class ViewNutrientsController extends BaseScreenController{
     @FXML
     private ComboBox comboBox;
 
+    @FXML
+    private ToggleGroup menuBarToggleGroup;
+
+   @FXML
+   private ToggleButton viewNutrientsToggleButton;
+
     public void initialise(Profile profile) {
         this.profile = profile;
+        viewNutrientsToggleButton.setSelected(true);
+        setToggleGroupHandler(menuBarToggleGroup);
         profile.setAge(20);
         profile.setBreastFeeding(false);
         profile.setPregnant(false);
@@ -69,6 +78,12 @@ public class ViewNutrientsController extends BaseScreenController{
     public void goToProfileScreen(ActionEvent event) {
         ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.initialise(profile);
+    }
+
+    public void goToAddEntryScreen(ActionEvent event) {
+        AddEntryController addEntryController = goToScreen(event, "addentrycontroller/AddEntryScreen.fxml").getController();
+        addEntryController.initialise(profile);
+        // should the fxmlFilePath be hardcoded values instead?
     }
 
     public void populateEntries(ArrayList<Entry> entries) {
@@ -84,6 +99,8 @@ public class ViewNutrientsController extends BaseScreenController{
             entryVBox.getChildren().add(button);
         }
     }
+
+
 
     public void populateAllEntries() {
         populateEntries(profile.getDiary().getAllEntries());
