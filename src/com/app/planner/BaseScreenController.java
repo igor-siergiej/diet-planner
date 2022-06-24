@@ -7,6 +7,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -83,6 +84,16 @@ public class BaseScreenController {
         }
         setWindow(event, root);
         return loader;
+    }
+
+    public void setLimitProgressBar(ProgressBar progressBar, float percentValueToTarget, boolean isOverMaximumDose) {
+        if (percentValueToTarget >= 1 && isOverMaximumDose == false) { //targetDose hit but not over maximum dose
+            progressBar.setStyle("-fx-accent: green;");
+        } else if (isOverMaximumDose == true) {
+            progressBar.setStyle("-fx-accent: red"); // if over maximum does
+        } else {
+            progressBar.setStyle("-fx-accent: #007bff;"); // not 100% but not over maximum dose
+        }
     }
 
     protected void setToggleGroupHandler(ToggleGroup toggleGroup) {

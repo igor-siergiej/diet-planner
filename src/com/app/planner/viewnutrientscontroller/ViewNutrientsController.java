@@ -23,8 +23,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 
-public class ViewNutrientsController extends BaseScreenController{
+public class ViewNutrientsController extends BaseScreenController {
 
     @FXML
     private Pane calendarPane;
@@ -56,10 +57,8 @@ public class ViewNutrientsController extends BaseScreenController{
     @FXML
     private ToggleGroup menuBarToggleGroup;
 
-   @FXML
-   private ToggleButton viewNutrientsToggleButton;
-
-
+    @FXML
+    private ToggleButton viewNutrientsToggleButton;
 
 
     public void initialise(Profile profile) {
@@ -82,7 +81,7 @@ public class ViewNutrientsController extends BaseScreenController{
     }
 
     public void goToProfileScreen(ActionEvent event) {
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event,"profilescreencontroller/ProfileScreen.fxml").getController();
+        ProfileScreenController profileScreenController = goToScreenWithProfile(event, "profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.initialise(profile);
     }
 
@@ -94,7 +93,7 @@ public class ViewNutrientsController extends BaseScreenController{
 
     public void populateEntries(ArrayList<Entry> entries) {
         entryVBox.getChildren().clear();
-        for (Entry entry: entries) {
+        for (Entry entry : entries) {
             ArrayList<Entry> entryArrayList = new ArrayList<>();
             entryArrayList.add(entry);
             Button button = new Button();
@@ -114,7 +113,7 @@ public class ViewNutrientsController extends BaseScreenController{
         nutrientPane.setVisible(true);
         ArrayList<Nutrient> nutrients = new ArrayList<>();
         for (Entry entry : entries) {
-            for (Food food :entry.getMeal().getFoods()) {
+            for (Food food : entry.getMeal().getFoods()) {
                 nutrients.addAll(food.getNutrients());
             }
         }
@@ -123,36 +122,36 @@ public class ViewNutrientsController extends BaseScreenController{
         Collections.reverse(combinedList);
 
         ArrayList<String> vitaminNameList = new ArrayList<>();
-        String[] vitaminNameStrings = {"Vitamin A","Carotene","Vitamin D" ,"Vitamin E","Vitamin K","Vitamin B1","Vitamin B2","Vitamin B3","Tryptophan","Vitamin B6","Vitamin B12","Vitamin B9","Vitamin B5","Vitamin B7","Vitamin C"};
+        String[] vitaminNameStrings = {"Vitamin A", "Carotene", "Vitamin D", "Vitamin E", "Vitamin K", "Vitamin B1", "Vitamin B2", "Vitamin B3", "Tryptophan", "Vitamin B6", "Vitamin B12", "Vitamin B9", "Vitamin B5", "Vitamin B7", "Vitamin C"};
         vitaminNameList.addAll(Arrays.asList(vitaminNameStrings));
         ArrayList<Nutrient> vitaminList = new ArrayList<>();
 
         ArrayList<String> mineralNameList = new ArrayList<>();
-        String[] mineralNameStrings = {"Sodium","Potassium","Calcium","Magnesium","Phosphorus","Iron","Copper","Zinc","Chloride","Manganese","Selenium","Iodine"};
+        String[] mineralNameStrings = {"Sodium", "Potassium", "Calcium", "Magnesium", "Phosphorus", "Iron", "Copper", "Zinc", "Chloride", "Manganese", "Selenium", "Iodine"};
         mineralNameList.addAll(Arrays.asList(mineralNameStrings));
         ArrayList<Nutrient> mineralList = new ArrayList<>();
 
         ArrayList<String> sugarNameList = new ArrayList<>();
-        String[] sugarNameStrings = {"Total Sugar","Glucose","Galactose","Fructose","Sucrose","Maltose","Lactose"};
+        String[] sugarNameStrings = {"Total Sugar", "Glucose", "Galactose", "Fructose", "Sucrose", "Maltose", "Lactose"};
         sugarNameList.addAll(Arrays.asList(sugarNameStrings));
         ArrayList<Nutrient> sugarList = new ArrayList<>();
 
         ArrayList<String> fatNameList = new ArrayList<>();
-        String[] fatNameStrings = {"Trans FA","Saturated Fat","Omega 6","Omega 3","Mono FA","Poly FA","Cholesterol"};
+        String[] fatNameStrings = {"Trans FA", "Saturated Fat", "Omega 6", "Omega 3", "Mono FA", "Poly FA", "Cholesterol"};
         fatNameList.addAll(Arrays.asList(fatNameStrings));
         ArrayList<Nutrient> fatList = new ArrayList<>();
 
         ArrayList<String> macroNameList = new ArrayList<>();
-        String[] macroNameStrings = {"Protein","Fat","Carbohydrates"};
+        String[] macroNameStrings = {"Protein", "Fat", "Carbohydrates"};
         macroNameList.addAll(Arrays.asList(macroNameStrings));
         ArrayList<Nutrient> macroList = new ArrayList<>();
 
         ArrayList<String> otherNameList = new ArrayList<>();
-        String[] otherNameStrings = {"Water","Total Nitrogen","Energy (kcal)","Energy (kJ)","Starch","NSP Fibre","AOAC Fibre"};
+        String[] otherNameStrings = {"Water", "Total Nitrogen", "Energy (kcal)", "Energy (kJ)", "Starch", "NSP Fibre", "AOAC Fibre"};
         otherNameList.addAll(Arrays.asList(otherNameStrings));
         ArrayList<Nutrient> otherList = new ArrayList<>();
 
-        for (Nutrient nutrient: combinedList) {
+        for (Nutrient nutrient : combinedList) {
             if (vitaminNameList.contains(nutrient.getNutrientName())) {
                 vitaminList.add(nutrient);
             } else if (mineralNameList.contains(nutrient.getNutrientName())) {
@@ -168,15 +167,15 @@ public class ViewNutrientsController extends BaseScreenController{
             }
         }
 
-        populateVBox(sugarList,sugarVBox);
-        populateVBox(fatList,fatVBox);
-        populateVBox(vitaminList,vitaminVBox);
-        populateVBox(mineralList,mineralVBox);
-        populateVBox(otherList,otherVBox);
-        populateVBox(macroList,macroVBox);
+        populateVBox(sugarList, sugarVBox);
+        populateVBox(fatList, fatVBox);
+        populateVBox(vitaminList, vitaminVBox);
+        populateVBox(mineralList, mineralVBox);
+        populateVBox(otherList, otherVBox);
+        populateVBox(macroList, macroVBox);
     }
 
-    public void searchEntries() {
+    public void searchEntries() { // this should be called on click of the calendar
         /*String comboBoxValue = (String) comboBox.getValue();
         LocalDate date = datePicker.getValue();
 
@@ -189,77 +188,50 @@ public class ViewNutrientsController extends BaseScreenController{
         populateEntries(searchedEntries);*/
     }
 
-    public void populateVBox(ArrayList<Nutrient> list, VBox vbox) {
+    public void populateVBox(ArrayList<Nutrient> nutrients, VBox vbox) {
+        HashMap<String, TargetNutrients> maximumDoses = profile.getDailyIntake().getMaximumDoses();
+        HashMap<String, TargetNutrients> targetNutrients = profile.getDailyIntake().getTargetNutrients();
         int counter = 0;
-        for (Node node: vbox.getChildren()) {
-            HBox hbox = (HBox) node;
-            for (Node childNode: hbox.getChildren()) {
-                if (childNode.getId().equals("nameLabel")) {
-                    Label label = (Label) childNode;
-                    label.setText(list.get(counter).getNutrientName());
-                } else if (childNode instanceof ProgressBar) {
-                    ProgressBar progressBar = (ProgressBar) childNode;
-                    if (list.get(counter).getNutrientValue() == 0) {
-                        progressBar.setProgress(0);
-                    } else  if (searchTargetNutrientsList(list.get(counter).getNutrientName(), profile.getDailyIntake().getTargetNutrients()) == 0) {
-                        progressBar.setProgress(1);
-                        progressBar.setId("notFound");
-                    } else {
-                        float percentValueToTarget = list.get(counter).getNutrientValue()/searchTargetNutrientsList(list.get(counter).getNutrientName(), profile.getDailyIntake().getTargetNutrients());
-                        float maximumDose = searchTargetNutrientsList(list.get(counter).getNutrientName(),profile.getDailyIntake().getMaximumDoses());
-                        if (maximumDose == 0) { //0 means that the target dose is maximum dose
-                            maximumDose = searchTargetNutrientsList(list.get(counter).getNutrientName(), profile.getDailyIntake().getTargetNutrients());
-                        }
-                        boolean isOverMaximumDose = list.get(counter).getNutrientValue() > maximumDose;
-                        progressBar.setProgress(percentValueToTarget);
+        for (Node node : vbox.getChildren()) { // for every Hbox in the VBox, i.e. for every nutrient
 
-                        if (percentValueToTarget >= 1 && isOverMaximumDose == false) { //targetDose hit but not over maximum dose
-                            progressBar.setStyle("-fx-accent: green;");
-                        } else if (isOverMaximumDose == true ) {
-                            progressBar.setStyle("-fx-accent: red"); // if over maximum does
-                        } else {
-                            progressBar.setStyle("-fx-accent: #007bff;"); // not 100% but not over maximum dose
-                        }
-                    }
+            String nutrientName = nutrients.get(counter).getNutrientName();
+            float nutrientValue = nutrients.get(counter).getNutrientValue();
+            float nutrientTarget = targetNutrients.get(nutrientName).getValue();
+            float percentValueToTarget = nutrientValue / nutrientTarget;
+            String nutrientUnits = targetNutrients.get(nutrientName).getUnit();
+            float maximumDose;
+            if (maximumDoses.get(nutrients.get(counter).getNutrientName()) == null) { //if maxDose not found in hashmap then there is no maxDoge
+                maximumDose = 99999999;
+            } else if (maximumDoses.get(nutrients.get(counter).getNutrientName()).getValue() == 0.0) { // if maximum does = 0 means that the target dose is maximum dose
+                maximumDose = targetNutrients.get(nutrients.get(counter).getNutrientName()).getValue(); //set the maximum dose to be the same as target dose
+            } else {
+                maximumDose = maximumDoses.get(nutrients.get(counter).getNutrientName()).getValue(); // set the maximum dose
+            }
+            boolean isOverMaximumDose = nutrientValue > maximumDose;
+
+            HBox hbox = (HBox) node;
+            for (Node childNode : hbox.getChildren()) {
+                if (childNode.getId().equals("nameLabel")) { // for every name label
+                    Label label = (Label) childNode;
+                    label.setText(nutrients.get(counter).getNutrientName()); // set the label to be the nutrient name
+                } else if (childNode instanceof ProgressBar) { // for every progress bar
+                    ProgressBar progressBar = (ProgressBar) childNode;
+                    progressBar.setProgress(percentValueToTarget);
+
+                    setLimitProgressBar(progressBar, percentValueToTarget, isOverMaximumDose);
+
                 } else if (childNode.getId().equals("percentLabel")) {
                     Label label = (Label) childNode;
-                    if (list.get(counter).getNutrientValue() == 0) {
-                        label.setText("0.0%");
-                    } else  if (searchTargetNutrientsList(list.get(counter).getNutrientName(), profile.getDailyIntake().getTargetNutrients()) == 0) {
-                        label.setText("Not Found");
-                    } else {
-                        String percent = String.format("%.1f", list.get(counter).getNutrientValue()/searchTargetNutrientsList(list.get(counter).getNutrientName(), profile.getDailyIntake().getTargetNutrients()) * 100);
-                        label.setText(percent + "%");
-                    }
+                    String percent = String.format("%.1f", nutrientValue / nutrientTarget * 100);
+                    label.setText(percent + "%");
                 } else if (childNode.getId().equals("valueLabel")) {
                     Label label = (Label) childNode;
-                    String value = String.format("%.1f", list.get(counter).getNutrientValue());
-                    label.setText(value + getTargetNutrientsUnits(list.get(counter).getNutrientName()));
+                    String value = String.format("%.1f", nutrients.get(counter).getNutrientValue());
+                    label.setText(value + nutrientUnits);
                 }
             }
             counter++;
         }
-    }
 
-    // 0 = should be the targetdose, 99999999 = not found therefore no maximum dose, anything else actual value
-     public static float searchTargetNutrientsList(String nutrientName, ArrayList<TargetNutrients> arrayList) {
-        float returnValue = 99999999;
-        DecimalFormat df = new DecimalFormat("0.0");
-        for (TargetNutrients targetNutrients : arrayList) {
-            if (nutrientName.contains(targetNutrients.getNutrientName())) {
-                returnValue = targetNutrients.getValue();
-            }
-        }
-        return Float.parseFloat(df.format(returnValue));
-    }
-
-    public String getTargetNutrientsUnits(String nutrientName) {
-        String returnValue = "";
-        for (TargetNutrients rdi : profile.getDailyIntake().getTargetNutrients()) {
-            if (nutrientName.contains(rdi.getNutrientName())) {
-                returnValue = rdi.getUnit();
-            }
-        }
-        return returnValue;
     }
 }

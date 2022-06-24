@@ -140,7 +140,7 @@
     "value":300
   },
   {
-    "nutrientName":"Sugar",
+    "nutrientName":"Total Sugar",
     "unit":"g",
     "value":43
   },
@@ -175,7 +175,7 @@
     "value":5.82
   },
   {
-    "nutrientName":"Fat Saturated",
+    "nutrientName":"Saturated Fat",
     "unit":"g",
     "value":20
   },

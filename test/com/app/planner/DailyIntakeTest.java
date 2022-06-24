@@ -1,6 +1,5 @@
-package com.app.planner.testData;
+package com.app.planner;
 
-import com.app.planner.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,12 +18,7 @@ public class DailyIntakeTest {
     @Test
     void setTargetNutrientsTestMen14to18() {
         dailyIntake.setTargetNutrients(14,"male", false,false);
-
-        for (TargetNutrients nutrients : dailyIntake.getTargetNutrients()) {
-            if (nutrients.getNutrientName().equals("Energy (kcal)")) {
-                assertEquals(2600, nutrients.getValue(),"men14to18 daily intake of calories should be 2600");
-            }
-        }
+        assertEquals(2600, dailyIntake.getTargetNutrients().get("Energy (kcal)").getValue(),"men14to18 daily intake of calories should be 2600");
     }
 
     //TODO write more tests here for each file
