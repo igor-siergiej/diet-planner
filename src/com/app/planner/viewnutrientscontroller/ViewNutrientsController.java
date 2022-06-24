@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -24,6 +25,9 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class ViewNutrientsController extends BaseScreenController{
+
+    @FXML
+    private Pane calendarPane;
 
     @FXML
     private VBox sugarVBox;
@@ -44,25 +48,19 @@ public class ViewNutrientsController extends BaseScreenController{
     private VBox macroVBox;
 
     @FXML
-    private PieChart macroPieChart;
-
-    @FXML
     private VBox entryVBox;
 
     @FXML
-    private DatePicker datePicker;
-
-    @FXML
     private Pane nutrientPane;
-
-    @FXML
-    private ComboBox comboBox;
 
     @FXML
     private ToggleGroup menuBarToggleGroup;
 
    @FXML
    private ToggleButton viewNutrientsToggleButton;
+
+
+
 
     public void initialise(Profile profile) {
         this.profile = profile;
@@ -72,7 +70,15 @@ public class ViewNutrientsController extends BaseScreenController{
         profile.setBreastFeeding(false);
         profile.setPregnant(false);
         profile.setSex("male");
-        datePicker.showWeekNumbersProperty().set(false);
+        //datePicker.showWeekNumbersProperty().set(false);
+
+        DatePicker datePicker = new DatePicker(LocalDate.now());
+        DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
+        Node popupContent = datePickerSkin.getPopupContent();
+        calendarPane.getChildren().add(popupContent);
+        datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("New Value: " + newValue);
+        });
     }
 
     public void goToProfileScreen(ActionEvent event) {
@@ -99,8 +105,6 @@ public class ViewNutrientsController extends BaseScreenController{
             entryVBox.getChildren().add(button);
         }
     }
-
-
 
     public void populateAllEntries() {
         populateEntries(profile.getDiary().getAllEntries());
@@ -170,19 +174,10 @@ public class ViewNutrientsController extends BaseScreenController{
         populateVBox(mineralList,mineralVBox);
         populateVBox(otherList,otherVBox);
         populateVBox(macroList,macroVBox);
-
-        float total = macroList.get(1).getNutrientValue() + macroList.get(2).getNutrientValue() + macroList.get(0).getNutrientValue();
-
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("Fat " + String.format("%.1f", macroList.get(1).getNutrientValue() / total * 100) + "%", macroList.get(1).getNutrientValue()),
-                        new PieChart.Data("Carbohydrates " + String.format("%.1f", macroList.get(0).getNutrientValue() / total * 100) + "%", macroList.get(0).getNutrientValue()),
-                        new PieChart.Data("Protein " + String.format("%.1f", macroList.get(2).getNutrientValue() / total * 100) + "%", macroList.get(2).getNutrientValue()));
-        macroPieChart.setData(pieChartData);
     }
 
     public void searchEntries() {
-        String comboBoxValue = (String) comboBox.getValue();
+        /*String comboBoxValue = (String) comboBox.getValue();
         LocalDate date = datePicker.getValue();
 
         ArrayList<Entry> searchedEntries;
@@ -191,7 +186,7 @@ public class ViewNutrientsController extends BaseScreenController{
         } else {
             searchedEntries = profile.getDiary().getEntriesWeek(date);
         }
-        populateEntries(searchedEntries);
+        populateEntries(searchedEntries);*/
     }
 
     public void populateVBox(ArrayList<Nutrient> list, VBox vbox) {

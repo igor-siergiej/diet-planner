@@ -3,9 +3,6 @@ package com.app.planner.addentrycontroller;
 import com.app.planner.*;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
 import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,45 +12,17 @@ import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class AddEntryController extends BaseScreenController {
-    private ArrayList<TargetNutrients> rdiArrayList;
     private Entry entry;
     private ArrayList<Food> dataset = Main.initialiseData();
-
-    @FXML
-    private VBox sugarVBox;
-
-    @FXML
-    private VBox fatVBox;
-
-    @FXML
-    private VBox vitaminVBox;
-
-    @FXML
-    private VBox mineralVBox;
-
-    @FXML
-    private VBox otherVBox;
-
-    @FXML
-    private VBox macroVBox;
-
-    @FXML
-    private Pane nutrientPane;
 
     @FXML
     private TextField searchTextField;
@@ -78,6 +47,33 @@ public class AddEntryController extends BaseScreenController {
 
     @FXML
     private ToggleGroup menuBarToggleGroup;
+
+    @FXML
+    private PieChart caloriePieChart;
+
+    @FXML
+    private ProgressBar calorieProgressBar;
+
+    @FXML
+    private ProgressBar carbsProgressBar;
+
+    @FXML
+    private ProgressBar fatProgressBar;
+
+    @FXML
+    private ProgressBar proteinProgressBar;
+
+    @FXML
+    private Label calorieLabel;
+
+    @FXML
+    private Label carbsLabel;
+
+    @FXML
+    private Label fatLabel;
+
+    @FXML
+    private Label proteinLabel;
 
     public void initialise(Profile profile) {
         setToggleGroupHandler(menuBarToggleGroup);
@@ -229,122 +225,62 @@ public class AddEntryController extends BaseScreenController {
     }
 
     public void showNutrients(ArrayList<Food> foods) {
-        if (foods.isEmpty()) {
-            nutrientPane.setVisible(false);
-            return;
-        }
-        nutrientPane.setVisible(true);
         ArrayList<Nutrient> nutrients = new ArrayList<>();
         for (Food food : foods) {
             nutrients.addAll(food.getNutrients());
         }
-
+        // hashmap of all of the nutrients combined key = nutrient name, v = nutrient float
         ArrayList<Nutrient> combinedList = Main.combineNutrientList(nutrients);
-        Collections.sort(combinedList);
-        Collections.reverse(combinedList);
-
-        ArrayList<String> vitaminNameList = new ArrayList<>();
-        String[] vitaminNameStrings = {"Vitamin A", "Carotene", "Vitamin D", "Vitamin E", "Vitamin K", "Vitamin B1", "Vitamin B2", "Vitamin B3", "Tryptophan", "Vitamin B6", "Vitamin B12", "Vitamin B9", "Vitamin B5", "Vitamin B7", "Vitamin C"};
-        vitaminNameList.addAll(Arrays.asList(vitaminNameStrings));
-        ArrayList<Nutrient> vitaminList = new ArrayList<>();
-
-        ArrayList<String> mineralNameList = new ArrayList<>();
-        String[] mineralNameStrings = {"Sodium", "Potassium", "Calcium", "Magnesium", "Phosphorus", "Iron", "Copper", "Zinc", "Chloride", "Manganese", "Selenium", "Iodine"};
-        mineralNameList.addAll(Arrays.asList(mineralNameStrings));
-        ArrayList<Nutrient> mineralList = new ArrayList<>();
-
-        ArrayList<String> sugarNameList = new ArrayList<>();
-        String[] sugarNameStrings = {"Total Sugar", "Glucose", "Galactose", "Fructose", "Sucrose", "Maltose", "Lactose"};
-        sugarNameList.addAll(Arrays.asList(sugarNameStrings));
-        ArrayList<Nutrient> sugarList = new ArrayList<>();
-
-        ArrayList<String> fatNameList = new ArrayList<>();
-        String[] fatNameStrings = {"Trans FA", "Saturated Fat", "Omega 6", "Omega 3", "Mono FA", "Poly FA", "Cholesterol"};
-        fatNameList.addAll(Arrays.asList(fatNameStrings));
-        ArrayList<Nutrient> fatList = new ArrayList<>();
-
-        ArrayList<String> macroNameList = new ArrayList<>();
-        String[] macroNameStrings = {"Protein", "Fat", "Carbohydrates"};
-        macroNameList.addAll(Arrays.asList(macroNameStrings));
-        ArrayList<Nutrient> macroList = new ArrayList<>();
-
-        ArrayList<String> otherNameList = new ArrayList<>();
-        String[] otherNameStrings = {"Water", "Total Nitrogen", "Energy (kcal)", "Energy (kJ)", "Starch", "NSP Fibre", "AOAC Fibre"};
-        otherNameList.addAll(Arrays.asList(otherNameStrings));
-        ArrayList<Nutrient> otherList = new ArrayList<>();
-
+        HashMap<String, Float> nutrientList = new HashMap<>();
         for (Nutrient nutrient : combinedList) {
-            if (vitaminNameList.contains(nutrient.getNutrientName())) {
-                vitaminList.add(nutrient);
-            } else if (mineralNameList.contains(nutrient.getNutrientName())) {
-                mineralList.add(nutrient);
-            } else if (sugarNameList.contains(nutrient.getNutrientName())) {
-                sugarList.add(nutrient);
-            } else if (fatNameList.contains(nutrient.getNutrientName())) {
-                fatList.add(nutrient);
-            } else if (otherNameList.contains(nutrient.getNutrientName())) {
-                otherList.add(nutrient);
-            } else if (macroNameList.contains(nutrient.getNutrientName())) {
-                macroList.add(nutrient);
-            }
+            nutrientList.put(nutrient.getNutrientName(),nutrient.getNutrientValue());
         }
-        rdiArrayList = loadRDI();
 
-        populateVBox(sugarList, sugarVBox);
-        populateVBox(fatList, fatVBox);
-        populateVBox(vitaminList, vitaminVBox);
-        populateVBox(mineralList, mineralVBox);
-        populateVBox(otherList, otherVBox);
-        populateVBox(macroList, macroVBox);
+        // get goals of current profile profile
+        float carbsGoal = ViewNutrientsController.searchTargetNutrientsList("Carbohydrates", profile.getDailyIntake().getTargetNutrients());
+        float fatGoal = ViewNutrientsController.searchTargetNutrientsList("Fat", profile.getDailyIntake().getTargetNutrients());
+        float proteinGoal = ViewNutrientsController.searchTargetNutrientsList("Protein", profile.getDailyIntake().getTargetNutrients());
+        float calorieGoal = ViewNutrientsController.searchTargetNutrientsList("Energy (kcal)", profile.getDailyIntake().getTargetNutrients());
 
-        float total = macroList.get(1).getNutrientValue() + macroList.get(2).getNutrientValue() + macroList.get(0).getNutrientValue();
+        // get current values for profile macros for current day
+        float calories = nutrientList.get("Energy (kcal)");
+        float carbs = nutrientList.get("Carbohydrates");
+        float fat = nutrientList.get("Fat");
+        float protein =nutrientList.get ("Protein");
+
+        float total = carbs + fat + protein;
+
+        // set piechart values
+        ObservableList<PieChart.Data> pieChartData =
+                observableArrayList( // s = visual name, v = value where percentage will be calculated automatically
+                        new PieChart.Data("Fat " + String.format("%.1f", fat / total * 100) + "%", fat),
+                        new PieChart.Data("Carbohydrates " + String.format("%.1f", carbs / total * 100) + "%", carbs),
+                        new PieChart.Data("Protein " + String.format("%.1f", protein / total * 100) + "%", protein));
+
+        caloriePieChart.setData(pieChartData);
+        caloriePieChart.setLegendVisible(false);
+
+        carbsLabel.setText(carbs + "/" + carbsGoal);
+        fatLabel.setText(fat + "/" + fatGoal);
+        proteinLabel.setText(protein + "/" + proteinGoal);
+        calorieLabel.setText(calories + "/" + calorieGoal);
+
+        // set progressbar progress
+        float percentOfCalories = calories / calorieGoal;
+        calorieProgressBar.setProgress(percentOfCalories);
+
+        float percentOfCarbs = carbs / carbsGoal;
+        carbsProgressBar.setProgress(percentOfCarbs);
+
+        float percentOfFat = fat / fatGoal;
+        fatProgressBar.setProgress(percentOfFat);
+
+        float percentOfProtein = protein / proteinGoal;
+        proteinProgressBar.setProgress(percentOfProtein);
     }
 
-    public void populateVBox(ArrayList<Nutrient> list, VBox vbox) {
-        int counter = 0;
-        for (Node node : vbox.getChildren()) {
-            HBox hbox = (HBox) node;
-            for (Node childNode : hbox.getChildren()) {
-                if (childNode.getId().equals("nameLabel")) {
-                    Label label = (Label) childNode;
-                    label.setText(list.get(counter).getNutrientName());
-                } else if (childNode instanceof ProgressBar) {
-                    ProgressBar progressBar = (ProgressBar) childNode;
-                    if (list.get(counter).getNutrientValue() == 0) {
-                        progressBar.setProgress(0);
-                    } else if (searchRDIListValue(list.get(counter).getNutrientName()) == 0) {
-                        progressBar.setProgress(1);
-                        progressBar.setId("notFound");
-                    } else {
-                        float percent = list.get(counter).getNutrientValue() / searchRDIListValue(list.get(counter).getNutrientName());
-                        progressBar.setProgress(percent);
-                        if (percent >= 1) {
-                            progressBar.setStyle("-fx-accent: green;");
-                        } else {
-                            progressBar.setStyle("-fx-accent: #007bff;");
-                        }
-                    }
-                } else if (childNode.getId().equals("percentLabel")) {
-                    Label label = (Label) childNode;
-                    if (list.get(counter).getNutrientValue() == 0) {
-                        label.setText("N/A");
-                    } else if (searchRDIListValue(list.get(counter).getNutrientName()) == 0) {
-                        label.setText("Not Found");
-                    } else {
-                        String percent = String.format("%.1f", list.get(counter).getNutrientValue() / searchRDIListValue(list.get(counter).getNutrientName()) * 100);
-                        label.setText(percent + "%");
-                    }
-                } else if (childNode.getId().equals("valueLabel")) {
-                    Label label = (Label) childNode;
-                    String value = String.format("%.1f", list.get(counter).getNutrientValue());
-                    label.setText(value + searchRDIListUnit(list.get(counter).getNutrientName()));
-                }
-            }
-            counter++;
-        }
-    }
-
-    public ArrayList<TargetNutrients> loadRDI() {
+    // legacy way of getting RDI
+    /*public ArrayList<TargetNutrients> loadRDI() {
         ArrayList<TargetNutrients> rdiArrayList = new ArrayList<>();
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -377,5 +313,5 @@ public class AddEntryController extends BaseScreenController {
             }
         }
         return returnValue;
-    }
+    }*/
 }

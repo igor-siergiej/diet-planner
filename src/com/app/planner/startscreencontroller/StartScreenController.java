@@ -17,15 +17,6 @@ import java.util.*;
 
 public class StartScreenController extends BaseScreenController {
 
-    //Calendar poke code
-        /*DatePicker datePicker = new DatePicker(LocalDate.now());
-        DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
-        Node popupContent = datePickerSkin.getPopupContent();
-        mainPane.getChildren().add(popupContent);
-        datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("New Value: " + newValue);
-        });*/
-
     @FXML
     private Pane mainPane;
 

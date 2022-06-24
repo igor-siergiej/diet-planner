@@ -29,7 +29,8 @@ public class Nutrient implements Comparable {
     }
 
     public float getNutrientValue() {
-        return nutrientValue;
+        DecimalFormat df = new DecimalFormat("0.00");
+        return Float.parseFloat(df.format(nutrientValue));
     }
 
     public void setNutrientValue(float nutrientValue) {
