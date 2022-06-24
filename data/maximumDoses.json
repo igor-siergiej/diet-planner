@@ -95,7 +95,7 @@
     "value":"0"
   },
   {
-    "nutrientName":"Sugar",
+    "nutrientName":"Total Sugar",
     "unit":"g",
     "value":"0"
   },
@@ -105,12 +105,12 @@
     "value":"0"
   },
   {
-    "nutrientName":"Fat Saturated",
+    "nutrientName":"Fat",
     "unit":"g",
     "value":"0"
   },
   {
-    "nutrientName":"Fat Total",
+    "nutrientName":"Saturated Fat",
     "unit":"g",
     "value":"0"
   },

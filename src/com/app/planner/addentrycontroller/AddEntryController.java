@@ -236,11 +236,18 @@ public class AddEntryController extends BaseScreenController {
             nutrientList.put(nutrient.getNutrientName(),nutrient.getNutrientValue());
         }
 
+        HashMap<String, TargetNutrients> maximumDoses = profile.getDailyIntake().getMaximumDoses();
+
+        float carbsMaxDose = maximumDoses.get("Carbohydrates").getValue(); // max dose = 0 therefore max dose is target dose
+        float fatMaxDose = maximumDoses.get("Fat").getValue();
+        float proteinMaxDose = maximumDoses.get("Protein").getValue();
+
+        HashMap<String, TargetNutrients> targetNutrients = profile.getDailyIntake().getTargetNutrients();
         // get goals of current profile profile
-        float carbsGoal = ViewNutrientsController.searchTargetNutrientsList("Carbohydrates", profile.getDailyIntake().getTargetNutrients());
-        float fatGoal = ViewNutrientsController.searchTargetNutrientsList("Fat", profile.getDailyIntake().getTargetNutrients());
-        float proteinGoal = ViewNutrientsController.searchTargetNutrientsList("Protein", profile.getDailyIntake().getTargetNutrients());
-        float calorieGoal = ViewNutrientsController.searchTargetNutrientsList("Energy (kcal)", profile.getDailyIntake().getTargetNutrients());
+        float carbsGoal = targetNutrients.get("Carbohydrates").getValue();
+        float fatGoal = targetNutrients.get("Fat").getValue();
+        float proteinGoal = targetNutrients.get("Protein").getValue();
+        float calorieGoal = targetNutrients.get("Energy (kcal)").getValue();
 
         // get current values for profile macros for current day
         float calories = nutrientList.get("Energy (kcal)");
@@ -268,50 +275,18 @@ public class AddEntryController extends BaseScreenController {
         // set progressbar progress
         float percentOfCalories = calories / calorieGoal;
         calorieProgressBar.setProgress(percentOfCalories);
+        //setLimitProgressBar(calorieProgressBar, percentOfCalories, calories > calorieMaxDose);
 
         float percentOfCarbs = carbs / carbsGoal;
         carbsProgressBar.setProgress(percentOfCarbs);
+        setLimitProgressBar(carbsProgressBar, percentOfCarbs, carbs > carbsMaxDose);
 
         float percentOfFat = fat / fatGoal;
         fatProgressBar.setProgress(percentOfFat);
+        setLimitProgressBar(fatProgressBar, percentOfFat, fat > fatMaxDose);
 
         float percentOfProtein = protein / proteinGoal;
         proteinProgressBar.setProgress(percentOfProtein);
+        setLimitProgressBar(proteinProgressBar, percentOfProtein, protein > proteinMaxDose);
     }
-
-    // legacy way of getting RDI
-    /*public ArrayList<TargetNutrients> loadRDI() {
-        ArrayList<TargetNutrients> rdiArrayList = new ArrayList<>();
-        try {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            JsonReader reader = new JsonReader(new FileReader("./data/men19to50.json"));
-            TargetNutrients[] rdiFromJson = gson.fromJson(reader, TargetNutrients[].class);
-            List<TargetNutrients> rdiList = Arrays.asList(rdiFromJson);
-            rdiArrayList.addAll(rdiList);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return rdiArrayList;
-    }
-
-    public float searchRDIListValue(String nutrientName) {
-        float returnValue = 0;
-        for (TargetNutrients rdi : rdiArrayList) {
-            if (nutrientName.contains(rdi.getNutrientName())) {
-                returnValue = rdi.getValue();
-            }
-        }
-        return returnValue;
-    }
-
-    public String searchRDIListUnit(String nutrientName) {
-        String returnValue = "";
-        for (TargetNutrients rdi : rdiArrayList) {
-            if (nutrientName.contains(rdi.getNutrientName())) {
-                returnValue = rdi.getUnit();
-            }
-        }
-        return returnValue;
-    }*/
 }
