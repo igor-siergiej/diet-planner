@@ -5,14 +5,12 @@ import com.app.planner.addentrycontroller.AddEntryController;
 import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import org.jetbrains.annotations.NotNull;
-import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import static javafx.collections.FXCollections.observableArrayList;
@@ -21,9 +19,6 @@ public class ProfileScreenController extends BaseScreenController {
 
     static final int MAX_NUM_ENTRIES = 4;
     private Profile profile;
-
-    @FXML
-    private Pane mainPane;
 
     @FXML
     private PieChart caloriePieChart;

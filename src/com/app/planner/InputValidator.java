@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +41,10 @@ public class InputValidator {
     }
 
     public void createEventHandler(TextField field, Label messageLabel, ValidatorType validatorType, PasswordField retypePasswordField) {
-        field.addEventHandler(KeyEvent.KEY_TYPED, keyEvent -> {
+        field.addEventHandler(KeyEvent.KEY_RELEASED, keyEvent -> {
+            if (keyEvent.getCode().equals(KeyCode.TAB)) {
+                return; //when tab was pressed it would run the task on the textfield that the tab press sent you to, this is a workaround
+            }
             messageLabel.setText("");
             field.setId("");
             if (tasks.size() > 0) {
