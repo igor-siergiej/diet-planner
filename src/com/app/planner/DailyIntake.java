@@ -57,31 +57,27 @@ public class DailyIntake {
 
     public void setTargetNutrients(int age, String sex, boolean pregnant, boolean breastFeeding) {
         if (sex.equals("male")) {
-            if (age >= 14 && age <= 18) {
-                targetNutrients = loadNutrientsFromFile(men14to18FilePath);
-            } else if (age >= 19 && age <= 50) {
-                targetNutrients = loadNutrientsFromFile(men19to50FilePath);
-            } else if (age >= 51) {
-                targetNutrients = loadNutrientsFromFile(men50plusFilePath);
-            } else {
-                targetNutrients = null;
-            }
+            setNutrientsDependingOnAge(age, men14to18FilePath, men19to50FilePath, men50plusFilePath);
         } else {
             if (pregnant) {
                 targetNutrients = loadNutrientsFromFile(pregnantFilePath);
             } else if (breastFeeding) {
                 targetNutrients = loadNutrientsFromFile(breastfeedingFilePath);
             } else {
-                if (age >= 14 && age <= 18) {
-                    targetNutrients = loadNutrientsFromFile(women14to18FilePath);
-                } else if (age >= 19 && age <= 50) {
-                    targetNutrients = loadNutrientsFromFile(women19to50FilePath);
-                } else if (age >= 51) {
-                    targetNutrients = loadNutrientsFromFile(women50plusFilePath);
-                } else {
-                    targetNutrients = null;
-                }
+                setNutrientsDependingOnAge(age, women14to18FilePath, women19to50FilePath, women50plusFilePath);
             }
+        }
+    }
+
+    private void setNutrientsDependingOnAge(int age, String women14to18FilePath, String women19to50FilePath, String women50plusFilePath) {
+        if (age >= 14 && age <= 18) {
+            targetNutrients = loadNutrientsFromFile(women14to18FilePath);
+        } else if (age >= 19 && age <= 50) {
+            targetNutrients = loadNutrientsFromFile(women19to50FilePath);
+        } else if (age >= 51) {
+            targetNutrients = loadNutrientsFromFile(women50plusFilePath);
+        } else {
+            targetNutrients = null;
         }
     }
 

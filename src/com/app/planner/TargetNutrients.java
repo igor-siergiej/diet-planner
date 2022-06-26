@@ -31,13 +31,4 @@ public class TargetNutrients {
     public void setValue(float value) {
         this.value = value;
     }
-
-    @Override
-    public String toString() {
-        return "RDI{" +
-                "nutrientName='" + nutrientName + '\'' +
-                ", unit='" + unit + '\'' +
-                ", value=" + value +
-                '}';
-    }
 }

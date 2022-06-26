@@ -19,7 +19,7 @@ import java.io.*;
 
 public class BaseScreenController {
 
-    protected Profile profile;
+    protected static Profile profile;
 
     // should have a undo  redo methods here which implement functionality in ui using undoRedoStack
     protected void undo() {
@@ -86,7 +86,7 @@ public class BaseScreenController {
         return loader;
     }
 
-    public void setLimitProgressBar(ProgressBar progressBar, float percentValueToTarget, boolean isOverMaximumDose) {
+    public static void setLimitProgressBar(ProgressBar progressBar, float percentValueToTarget, boolean isOverMaximumDose) {
         if (percentValueToTarget >= 1 && isOverMaximumDose == false) { //targetDose hit but not over maximum dose
             progressBar.setStyle("-fx-accent: green;");
         } else if (isOverMaximumDose == true) {

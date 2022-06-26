@@ -66,21 +66,6 @@ public class ProfileScreenController extends BaseScreenController {
         homeButton.setSelected(true); // since we are in profileScreen set the toggleButton to be selected
         profileLabel.setText(profile.toString());
 
-        // TODO split this up into several methods so it's easier to read
-
-        HashMap<String, TargetNutrients> targetNutrients = profile.getDailyIntake().getTargetNutrients();
-        // get goals of current profile profile
-        float carbsGoal = targetNutrients.get("Carbohydrates").getValue();
-        float fatGoal = targetNutrients.get("Fat").getValue();
-        float proteinGoal = targetNutrients.get("Protein").getValue();
-        float calorieGoal = targetNutrients.get("Energy (kcal)").getValue();
-
-        HashMap<String, TargetNutrients> maximumDoses = profile.getDailyIntake().getMaximumDoses();
-
-        float carbsMaxDose = maximumDoses.get("Carbohydrates").getValue(); // max dose = 0 therefore max dose is target dose
-        float fatMaxDose = maximumDoses.get("Fat").getValue();
-        float proteinMaxDose = maximumDoses.get("Protein").getValue();
-        //float calorieMaxDose = maximumDoses.get("Energy (kcal)").getValue(); need to check if this is null and therefore there is no max dose
         // TODO need some kind of framework or method to make it easier to determine max doses
         // TODO also need some kind of way to dynamically change max doses to change macros and calorie target
 
@@ -90,39 +75,8 @@ public class ProfileScreenController extends BaseScreenController {
         float fat = profile.getNutrientValueForCurrentDay("Fat");
         float protein = profile.getNutrientValueForCurrentDay("Protein");
 
-        float total = carbs + fat + protein;
-
-        // set piechart values
-        ObservableList<PieChart.Data> pieChartData =
-                observableArrayList( // javadoc :: s = visual name, v = value where percentage will be calculated automatically
-                        new PieChart.Data("Fat " + String.format("%.1f", fat / total * 100) + "%", fat),
-                        new PieChart.Data("Carbohydrates " + String.format("%.1f", carbs / total * 100) + "%", carbs),
-                        new PieChart.Data("Protein " + String.format("%.1f", protein / total * 100) + "%", protein));
-
-        caloriePieChart.setData(pieChartData);
-        caloriePieChart.setLegendVisible(false);
-
-        carbsLabel.setText(carbs + "/" + carbsGoal);
-        fatLabel.setText(fat + "/" + fatGoal);
-        proteinLabel.setText(protein + "/" + proteinGoal);
-        calorieLabel.setText(calories + "/" + calorieGoal);
-
-        // set progressbar progress
-        float percentOfCalories = calories / calorieGoal;
-        calorieProgressBar.setProgress(percentOfCalories);
-        //setLimitProgressBar(calorieProgressBar, percentOfCalories, calories > calorieMaxDose);
-
-        float percentOfCarbs = carbs / carbsGoal;
-        carbsProgressBar.setProgress(percentOfCarbs);
-        setLimitProgressBar(carbsProgressBar, percentOfCarbs, carbs > carbsMaxDose);
-
-        float percentOfFat = fat / fatGoal;
-        fatProgressBar.setProgress(percentOfFat);
-        setLimitProgressBar(fatProgressBar, percentOfFat, fat > fatMaxDose);
-
-        float percentOfProtein = protein / proteinGoal;
-        proteinProgressBar.setProgress(percentOfProtein);
-        setLimitProgressBar(proteinProgressBar, percentOfProtein, protein > proteinMaxDose);
+        AddEntryController.updateMacroUI(calories,fat,carbs,protein,carbsLabel,fatLabel,proteinLabel,calorieLabel,calorieProgressBar,carbsProgressBar
+        ,proteinProgressBar,fatProgressBar,caloriePieChart);
 
         populateEntries();
     }
