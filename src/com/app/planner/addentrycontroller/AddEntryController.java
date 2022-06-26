@@ -224,24 +224,8 @@ public class AddEntryController extends BaseScreenController {
         foodVBox.getChildren().add(hbox);
     }
 
-    public void showNutrients(ArrayList<Food> foods) {
-        ArrayList<Nutrient> nutrients = new ArrayList<>();
-        for (Food food : foods) {
-            nutrients.addAll(food.getNutrients());
-        }
-        // hashmap of all of the nutrients combined key = nutrient name, v = nutrient float
-        ArrayList<Nutrient> combinedList = Main.combineNutrientList(nutrients);
-        HashMap<String, Float> nutrientList = new HashMap<>();
-        for (Nutrient nutrient : combinedList) {
-            nutrientList.put(nutrient.getNutrientName(),nutrient.getNutrientValue());
-        }
-
-        HashMap<String, TargetNutrients> maximumDoses = profile.getDailyIntake().getMaximumDoses();
-
-        float carbsMaxDose = maximumDoses.get("Carbohydrates").getValue(); // max dose = 0 therefore max dose is target dose
-        float fatMaxDose = maximumDoses.get("Fat").getValue();
-        float proteinMaxDose = maximumDoses.get("Protein").getValue();
-
+    public static void updateMacroUI(float calories, float fat, float carbs, float protein, Label carbsLabel, Label fatLabel, Label proteinLabel, Label calorieLabel,
+                                     ProgressBar calorieProgressBar, ProgressBar carbsProgressBar, ProgressBar proteinProgressBar, ProgressBar fatProgressBar, PieChart caloriePieChart) {
         HashMap<String, TargetNutrients> targetNutrients = profile.getDailyIntake().getTargetNutrients();
         // get goals of current profile profile
         float carbsGoal = targetNutrients.get("Carbohydrates").getValue();
@@ -249,23 +233,13 @@ public class AddEntryController extends BaseScreenController {
         float proteinGoal = targetNutrients.get("Protein").getValue();
         float calorieGoal = targetNutrients.get("Energy (kcal)").getValue();
 
-        // get current values for profile macros for current day
-        float calories = nutrientList.get("Energy (kcal)");
-        float carbs = nutrientList.get("Carbohydrates");
-        float fat = nutrientList.get("Fat");
-        float protein =nutrientList.get ("Protein");
-
         float total = carbs + fat + protein;
 
-        // set piechart values
-        ObservableList<PieChart.Data> pieChartData =
-                observableArrayList( // s = visual name, v = value where percentage will be calculated automatically
-                        new PieChart.Data("Fat " + String.format("%.1f", fat / total * 100) + "%", fat),
-                        new PieChart.Data("Carbohydrates " + String.format("%.1f", carbs / total * 100) + "%", carbs),
-                        new PieChart.Data("Protein " + String.format("%.1f", protein / total * 100) + "%", protein));
+        HashMap<String, TargetNutrients> maximumDoses = profile.getDailyIntake().getMaximumDoses();
 
-        caloriePieChart.setData(pieChartData);
-        caloriePieChart.setLegendVisible(false);
+        float carbsMaxDose = maximumDoses.get("Carbohydrates").getValue(); // max dose = 0 therefore max dose is target dose
+        float fatMaxDose = maximumDoses.get("Fat").getValue();
+        float proteinMaxDose = maximumDoses.get("Protein").getValue();
 
         carbsLabel.setText(carbs + "/" + carbsGoal);
         fatLabel.setText(fat + "/" + fatGoal);
@@ -288,5 +262,37 @@ public class AddEntryController extends BaseScreenController {
         float percentOfProtein = protein / proteinGoal;
         proteinProgressBar.setProgress(percentOfProtein);
         setLimitProgressBar(proteinProgressBar, percentOfProtein, protein > proteinMaxDose);
+
+        // set piechart values
+        ObservableList<PieChart.Data> pieChartData =
+                observableArrayList( // s = visual name, v = value where percentage will be calculated automatically
+                        new PieChart.Data("Fat " + String.format("%.1f", fat / total * 100) + "%", fat),
+                        new PieChart.Data("Carbohydrates " + String.format("%.1f", carbs / total * 100) + "%", carbs),
+                        new PieChart.Data("Protein " + String.format("%.1f", protein / total * 100) + "%", protein));
+
+        caloriePieChart.setData(pieChartData);
+        caloriePieChart.setLegendVisible(false);
+    }
+
+    public void showNutrients(ArrayList<Food> foods) {
+        ArrayList<Nutrient> nutrients = new ArrayList<>();
+        for (Food food : foods) {
+            nutrients.addAll(food.getNutrients());
+        }
+        // hashmap of all of the nutrients combined key = nutrient name, v = nutrient float
+        ArrayList<Nutrient> combinedList = Main.combineNutrientList(nutrients);
+        HashMap<String, Float> nutrientList = new HashMap<>();
+        for (Nutrient nutrient : combinedList) {
+            nutrientList.put(nutrient.getNutrientName(), nutrient.getNutrientValue());
+        }
+
+        float calorie = nutrientList.get("Energy (kcal)");
+        float fat = nutrientList.get("Fat");
+        float carbs = nutrientList.get("Carbohydrates");
+        float protein = nutrientList.get("Protein");
+
+        updateMacroUI(calorie, fat, carbs, protein, carbsLabel,
+                fatLabel, proteinLabel, calorieLabel, calorieProgressBar, carbsProgressBar, proteinProgressBar, fatProgressBar, caloriePieChart);
+
     }
 }
