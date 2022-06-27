@@ -1,6 +1,9 @@
 package com.app.planner;
 
+import com.app.planner.addentrycontroller.AddEntryController;
+import com.app.planner.createprofilecontroller.CreateProfileController;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
+import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -40,26 +43,29 @@ public class BaseScreenController {
         goToScreen(event, "startscreencontroller/StartScreen.fxml");
     }
 
+    public void goToViewNutrientsScreen(ActionEvent event) {
+        ViewNutrientsController viewNutrientsController = goToScreen(event, "viewnutrientscontroller/ViewNutrientsScreen.fxml").getController();
+        viewNutrientsController.initialise(profile);
+    }
+
+    public void goToAddEntryScreen(ActionEvent event) {
+        AddEntryController addEntryController = goToScreen(event, "addentrycontroller/AddEntryScreen.fxml").getController();
+        addEntryController.initialise(profile);
+        // should the fxmlFilePath be hardcoded values instead?
+    }
+
     public void goToProfileScreen(ActionEvent event) { // this method will open the profile screen window
         ProfileScreenController profileScreenController = goToScreen(event, "profilescreencontroller/ProfileScreen.fxml").getController();
         profileScreenController.initialise(profile);
     }
 
-    public void logOut(ActionEvent event) { // this method will open the profile screen window
-        goToScreen(event, "startscreencontroller/StartScreen.fxml");
+    public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
+        CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
+        createProfileController.initialise(null, null);
     }
 
-    public FXMLLoader goToScreenWithProfile(ActionEvent event, String fxmlFilePath) {
-        Parent root = null;
-        FXMLLoader loader = null;
-        try {
-            loader = new FXMLLoader(getClass().getResource("/com/app/planner/" + fxmlFilePath));
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        setWindow(event, root);
-        return loader;
+    public void logOut(ActionEvent event) { // this method will open the profile screen window
+        goToScreen(event, "startscreencontroller/StartScreen.fxml");
     }
 
     private void setWindow(ActionEvent event, Parent root) {
@@ -85,6 +91,9 @@ public class BaseScreenController {
         setWindow(event, root);
         return loader;
     }
+
+
+
 
     public static void setLimitProgressBar(ProgressBar progressBar, float percentValueToTarget, boolean isOverMaximumDose) {
         if (percentValueToTarget >= 1 && isOverMaximumDose == false) { //targetDose hit but not over maximum dose

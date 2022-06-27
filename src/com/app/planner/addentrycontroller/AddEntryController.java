@@ -76,22 +76,12 @@ public class AddEntryController extends BaseScreenController {
     private Label proteinLabel;
 
     public void initialise(Profile profile) {
-        setToggleGroupHandler(menuBarToggleGroup);
         this.profile = profile;
+        setToggleGroupHandler(menuBarToggleGroup);
         addEntryToggleButton.setSelected(true);
         setTextFieldEventHandler();
         setAddEntryButtonDisable();
         populateMealTypeComboBox();
-    }
-
-    public void goToProfileScreen(ActionEvent event) {
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event, "profilescreencontroller/ProfileScreen.fxml").getController();
-        profileScreenController.initialise(profile);
-    }
-
-    public void goToViewNutrientsScreen(ActionEvent event) {
-        ViewNutrientsController viewNutrientsController = goToScreen(event, "viewnutrientscontroller/ViewNutrientsScreen.fxml").getController();
-        viewNutrientsController.initialise(profile);
     }
 
     public void addEntry(ActionEvent event) {
@@ -100,8 +90,7 @@ public class AddEntryController extends BaseScreenController {
         entry = new Entry(meal, LocalDateTime.now(), (EntryType) mealTypeComboBox.getValue());
         profile.getDiary().addEntry(entry);
 
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event, "profilescreencontroller/ProfileScreen.fxml").getController();
-        profileScreenController.initialise(profile);
+        goToProfileScreen(event);
     }
 
     public void setTextFieldEventHandler() {
