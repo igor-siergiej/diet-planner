@@ -358,8 +358,49 @@
     -fx-text-fill: #ffffff;
 }
 
-#datePicker .label {
-    -fx-text-fill: black;
+.date-picker-popup{
+    -fx-min-height: 230;
+    -fx-min-width: 400;
+    -fx-background-color: #1a1a1a;
+
+}
+
+.date-picker-popup .button{
+    -fx-background-color: #1a1a1a;
+    -fx-background-radius: 0px;
+    -fx-border-radius: 0px;
+    -fx-border-color: #4b4b4b;
+    -fx-border-width: 0px;
+}
+
+.date-picker-popup .button:hover {
+    -fx-background-color: black;
+}
+
+.date-picker-popup .button .arrow {
+    -fx-background-color: white;
+}
+
+.date-picker-popup .cell {
+    -fx-border-color: #1a1a1a; /* this gets rid of the grid-like border in the calendar*/
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: white;
+}
+
+.date-picker-popup .cell:hover {
+    -fx-background-color: black;
+}
+
+.date-picker-popup .selected {
+    -fx-background-color: #007bffff;
+    -fx-text-fill: white;
+}
+
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #1a1a1a;
+}
+.date-picker-popup .month-year-pane .label {
+    -fx-text-fill: white;
 }
 
 #message {

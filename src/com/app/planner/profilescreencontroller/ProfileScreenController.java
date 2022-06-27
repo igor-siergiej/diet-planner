@@ -105,14 +105,4 @@ public class ProfileScreenController extends BaseScreenController {
         }
     }
 
-    public void goToViewNutrientsScreen(ActionEvent event) {
-        ViewNutrientsController viewNutrientsController = goToScreen(event, "viewnutrientscontroller/ViewNutrientsScreen.fxml").getController();
-        viewNutrientsController.initialise(profile);
-    }
-
-    public void goToAddEntryScreen(ActionEvent event) {
-        AddEntryController addEntryController = goToScreen(event, "addentrycontroller/AddEntryScreen.fxml").getController();
-        addEntryController.initialise(profile);
-        // should the fxmlFilePath be hardcoded values instead?
-    }
 }

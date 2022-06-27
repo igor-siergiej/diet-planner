@@ -624,6 +624,6 @@
             </VBox>
          </children>
       </Pane>
-      <Pane fx:id="calendarPane" layoutX="80.0" layoutY="57.0" prefHeight="283.0" prefWidth="338.0" />
+      <Pane fx:id="calendarPane" layoutX="80.0" layoutY="57.0" prefHeight="97.0" prefWidth="135.0" />
    </children>
 </Pane>

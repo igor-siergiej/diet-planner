@@ -43,11 +43,6 @@ public class StartScreenController extends BaseScreenController {
         inputValidator.createPasswordValidator(loginPasswordField, loginPasswordMessage);
     }
 
-    public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
-        CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
-        createProfileController.initialise(null, null);
-    }
-
     // TODO move this to test class in the future
     public void createTestProfile(ActionEvent event) {
         Diary diary = new Diary();

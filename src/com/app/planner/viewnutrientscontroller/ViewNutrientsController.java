@@ -69,26 +69,16 @@ public class ViewNutrientsController extends BaseScreenController {
         profile.setBreastFeeding(false);
         profile.setPregnant(false);
         profile.setSex("male");
-        //datePicker.showWeekNumbersProperty().set(false);
 
         DatePicker datePicker = new DatePicker(LocalDate.now());
+        datePicker.setShowWeekNumbers(false);
         DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
         Node popupContent = datePickerSkin.getPopupContent();
+
         calendarPane.getChildren().add(popupContent);
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("New Value: " + newValue);
         });
-    }
-
-    public void goToProfileScreen(ActionEvent event) {
-        ProfileScreenController profileScreenController = goToScreenWithProfile(event, "profilescreencontroller/ProfileScreen.fxml").getController();
-        profileScreenController.initialise(profile);
-    }
-
-    public void goToAddEntryScreen(ActionEvent event) {
-        AddEntryController addEntryController = goToScreen(event, "addentrycontroller/AddEntryScreen.fxml").getController();
-        addEntryController.initialise(profile);
-        // should the fxmlFilePath be hardcoded values instead?
     }
 
     public void populateEntries(ArrayList<Entry> entries) {
