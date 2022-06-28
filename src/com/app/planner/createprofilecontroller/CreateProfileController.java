@@ -47,10 +47,8 @@ public class CreateProfileController extends BaseScreenController {
     @FXML
     private TextField profileNameTextField;
 
-    public void initialise(String email, String password) {
-
+    public void initialise(String email) {
         profile.setEmail(email);
-        profile.setPassword(password);
         setAgeTextFieldEventHandler();
         setHeightTextFieldEventHandler();
         setWeightTextFieldEventHandler();

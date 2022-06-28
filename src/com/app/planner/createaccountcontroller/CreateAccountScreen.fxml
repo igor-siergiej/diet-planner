@@ -38,8 +38,18 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </TextField>
-            <Label fx:id="registerEmailMessage" />
-            <PasswordField fx:id="registerPasswordField" onKeyTyped="#passwordStrengthHandler" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
+            <Label fx:id="registerEmailMessage" prefHeight="29.0" prefWidth="376.0" />
+            <Pane prefHeight="44.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="showPasswordTextField" layoutX="-65.0" prefHeight="48.0" prefWidth="331.0" />
+                  <PasswordField fx:id="registerPasswordField" layoutX="-65.0" onKeyTyped="#passwordStrengthHandler" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
+               </children>
+            </Pane>
+            <RadioButton id="blueRadioButton" fx:id="showPasswordButton" alignment="CENTER_LEFT" mnemonicParsing="false" text="Show Password?">
+               <VBox.margin>
+                  <Insets left="220.0" top="10.0" />
+               </VBox.margin>
+            </RadioButton>
             <Label fx:id="registerPasswordMessage" alignment="CENTER" prefHeight="60.0" prefWidth="396.0" textAlignment="CENTER" wrapText="true" />
             <ProgressBar fx:id="passwordStrengthProgressBar" prefHeight="18.0" prefWidth="323.0" progress="0.0">
                <VBox.margin>

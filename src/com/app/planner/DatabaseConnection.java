@@ -12,7 +12,7 @@ public class DatabaseConnection {
     public static boolean register(String email, String password) { // call when you are creating a new login to db
         Profile profile = new Profile();
         profile.setEmail(email);
-        profile.setPassword(password);
+
         Diary diary = new Diary();
         profile.setDiary(diary); // should we encrypt locally stored passwords?
         String salt = PasswordUtils.getSalt(30);

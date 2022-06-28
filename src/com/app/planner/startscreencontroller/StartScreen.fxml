@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -53,10 +54,17 @@
                   <Insets />
                </VBox.margin></TextField>
             <Label fx:id="loginEmailMessage" />
-            <PasswordField fx:id="loginPasswordField" prefHeight="48.0" prefWidth="331.0" promptText="Password">
+            <Pane prefHeight="44.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="showPasswordTextField" layoutX="-65.0" prefHeight="48.0" prefWidth="331.0" />
+                  <PasswordField fx:id="loginPasswordField" layoutX="-65.0" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
+               </children>
+            </Pane>
+            <RadioButton id="blueRadioButton" fx:id="showPasswordButton" alignment="CENTER_LEFT" mnemonicParsing="false" text="Show Password?">
                <VBox.margin>
-                  <Insets />
-               </VBox.margin></PasswordField>
+                  <Insets left="220.0" top="10.0" />
+               </VBox.margin>
+            </RadioButton>
             <Label fx:id="loginPasswordMessage" alignment="CENTER" prefHeight="60.0" prefWidth="396.0" textAlignment="CENTER" wrapText="true">
                <VBox.margin>
                   <Insets />
