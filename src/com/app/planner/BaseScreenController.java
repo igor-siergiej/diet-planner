@@ -10,8 +10,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
@@ -45,23 +44,23 @@ public class BaseScreenController {
 
     public void goToViewNutrientsScreen(ActionEvent event) {
         ViewNutrientsController viewNutrientsController = goToScreen(event, "viewnutrientscontroller/ViewNutrientsScreen.fxml").getController();
-        viewNutrientsController.initialise(profile);
+        viewNutrientsController.initialise();
     }
 
     public void goToAddEntryScreen(ActionEvent event) {
         AddEntryController addEntryController = goToScreen(event, "addentrycontroller/AddEntryScreen.fxml").getController();
-        addEntryController.initialise(profile);
+        addEntryController.initialise();
         // should the fxmlFilePath be hardcoded values instead?
     }
 
     public void goToProfileScreen(ActionEvent event) { // this method will open the profile screen window
         ProfileScreenController profileScreenController = goToScreen(event, "profilescreencontroller/ProfileScreen.fxml").getController();
-        profileScreenController.initialise(profile);
+        profileScreenController.initialise();
     }
 
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
         CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
-        createProfileController.initialise(null, null);
+        createProfileController.initialise( null);
     }
 
     public void logOut(ActionEvent event) { // this method will open the profile screen window
@@ -92,8 +91,24 @@ public class BaseScreenController {
         return loader;
     }
 
+    public void setShowPasswordInit(TextField showPasswordTextField, RadioButton showPasswordButton, PasswordField passwordField) {
+        showPasswordTextField.setManaged(false);
+        showPasswordTextField.setVisible(false);
 
 
+        // Bind properties. Toggle textField and passwordField
+        // visibility and managability properties mutually when checkbox's state is changed.
+        // Because we want to display only one component (textField or passwordField)
+        // on the scene at a time.
+        showPasswordTextField.managedProperty().bind(showPasswordButton.selectedProperty());
+        showPasswordTextField.visibleProperty().bind(showPasswordButton.selectedProperty());
+
+        passwordField.managedProperty().bind(showPasswordButton.selectedProperty().not());
+        passwordField.visibleProperty().bind(showPasswordButton.selectedProperty().not());
+
+        // Bind the textField and passwordField text values bidirectionally.
+        showPasswordTextField.textProperty().bindBidirectional(passwordField.textProperty());
+    }
 
     public static void setLimitProgressBar(ProgressBar progressBar, float percentValueToTarget, boolean isOverMaximumDose) {
         if (percentValueToTarget >= 1 && isOverMaximumDose == false) { //targetDose hit but not over maximum dose

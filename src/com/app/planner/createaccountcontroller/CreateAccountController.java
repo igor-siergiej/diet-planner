@@ -53,12 +53,19 @@ public class CreateAccountController extends BaseScreenController {
     private Button registerButton;
 
     @FXML
+    private TextField showPasswordTextField;
+
+    @FXML
+    private RadioButton showPasswordButton;
+
+    @FXML
     public void initialize() {
         registerButton.disableProperty().bind(Bindings.isEmpty(registerEmailTextField.textProperty()).or(Bindings.isEmpty(registerPasswordField.textProperty())).or(Bindings.isEmpty(registerRetypePasswordField.textProperty())));
         InputValidator inputValidator = new InputValidator();
         inputValidator.createEmailValidator(registerEmailTextField, registerEmailMessage);
-        inputValidator.createPasswordValidator(registerPasswordField, registerPasswordMessage);
+        inputValidator.createPasswordValidator(registerPasswordField, registerPasswordMessage, showPasswordTextField);
         inputValidator.createRetypePasswordValidator(registerPasswordField,registerRetypePasswordField,registerRetypePasswordMessage);
+        setShowPasswordInit(showPasswordTextField,showPasswordButton,registerPasswordField);
     }
 
     public void passwordStrengthHandler() {
@@ -122,7 +129,7 @@ public class CreateAccountController extends BaseScreenController {
             if (StringValidation.passwordValidation(password).equals(StringValidation.RETURN_STRING)) {
                 if (password.equals(retypePassword)) {
                     if (DatabaseConnection.register(email, password)) { // this will register if validation is ok?
-                        goToCreateProfileScreenWithLogin(event, email, password);
+                        goToCreateProfileScreenWithLogin(event, email);
                     } else {
                         createErrorNotification(mainPane, "An account with this email already exists");
                         registerEmailTextField.setId("text-field-warning");
@@ -163,11 +170,11 @@ public class CreateAccountController extends BaseScreenController {
     // TODO this method should be used for testing to bypass having to register a new account for each test.
     public void testRegister(ActionEvent event) {
         CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
-        createProfileController.initialise("test", "test");
+        createProfileController.initialise("test");
     }
 
-    public void goToCreateProfileScreenWithLogin(ActionEvent event, String email, String password) { // this method will open the profile screen window
+    public void goToCreateProfileScreenWithLogin(ActionEvent event, String email) { // this method will open the profile screen window
         CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
-        createProfileController.initialise(email, password);
+        createProfileController.initialise(email);
     }
 }

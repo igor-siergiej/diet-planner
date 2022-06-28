@@ -1,24 +1,14 @@
 package com.app.planner.viewnutrientscontroller;
 
 import com.app.planner.*;
-import com.app.planner.addentrycontroller.AddEntryController;
-import com.app.planner.profilescreencontroller.ProfileScreenController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,8 +51,7 @@ public class ViewNutrientsController extends BaseScreenController {
     private ToggleButton viewNutrientsToggleButton;
 
 
-    public void initialise(Profile profile) {
-        this.profile = profile;
+    public void initialise() {
         viewNutrientsToggleButton.setSelected(true);
         setToggleGroupHandler(menuBarToggleGroup);
         profile.setAge(20);

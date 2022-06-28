@@ -2,20 +2,14 @@ package com.app.planner.profilescreencontroller;
 
 import com.app.planner.*;
 import com.app.planner.addentrycontroller.AddEntryController;
-import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import org.jetbrains.annotations.NotNull;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import static javafx.collections.FXCollections.observableArrayList;
 
 public class ProfileScreenController extends BaseScreenController {
 
@@ -60,23 +54,28 @@ public class ProfileScreenController extends BaseScreenController {
     @FXML
     private ToggleGroup menuBarToggleGroup;
 
-    public void initialise(@NotNull Profile profile) {
-        this.profile = profile;
+    public void initialise() {
         setToggleGroupHandler(menuBarToggleGroup);
         homeButton.setSelected(true); // since we are in profileScreen set the toggleButton to be selected
-        profileLabel.setText(profile.toString());
+        profileLabel.setText(profile.toString()); // DEBUG
+        loadUI();
 
         // TODO need some kind of framework or method to make it easier to determine max doses
         // TODO also need some kind of way to dynamically change max doses to change macros and calorie target
 
+
+    }
+
+    public void loadUI() {
         // get current values for profile macros for current day
         float calories = profile.getNutrientValueForCurrentDay("Energy (kcal)");
         float carbs = profile.getNutrientValueForCurrentDay("Carbohydrates");
         float fat = profile.getNutrientValueForCurrentDay("Fat");
         float protein = profile.getNutrientValueForCurrentDay("Protein");
 
+        // load up the progressbars and pie chart
         AddEntryController.updateMacroUI(calories,fat,carbs,protein,carbsLabel,fatLabel,proteinLabel,calorieLabel,calorieProgressBar,carbsProgressBar
-        ,proteinProgressBar,fatProgressBar,caloriePieChart);
+                ,proteinProgressBar,fatProgressBar,caloriePieChart);
 
         populateEntries();
     }
@@ -104,5 +103,4 @@ public class ProfileScreenController extends BaseScreenController {
             return;
         }
     }
-
 }

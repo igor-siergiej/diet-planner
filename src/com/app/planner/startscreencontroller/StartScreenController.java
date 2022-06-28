@@ -36,11 +36,18 @@ public class StartScreenController extends BaseScreenController {
     private Button loginButton;
 
     @FXML
+    private TextField showPasswordTextField;
+
+    @FXML
+    private RadioButton showPasswordButton;
+
+    @FXML
     public void initialize() {
         loginButton.disableProperty().bind(Bindings.isEmpty(loginEmailTextField.textProperty()).or(Bindings.isEmpty(loginPasswordField.textProperty())));
         InputValidator inputValidator = new InputValidator();
         inputValidator.createEmailValidator(loginEmailTextField, loginEmailMessage);
-        inputValidator.createPasswordValidator(loginPasswordField, loginPasswordMessage);
+        inputValidator.createPasswordValidator(loginPasswordField, loginPasswordMessage, showPasswordTextField);
+        setShowPasswordInit(showPasswordTextField,showPasswordButton,loginPasswordField);
     }
 
     // TODO move this to test class in the future
@@ -81,7 +88,7 @@ public class StartScreenController extends BaseScreenController {
         diary.addEntry(entry2);
         diary.addEntry(entry3);
 
-        profile = new Profile("", "", "testProfile", 0, 0, 14, "female", true, false, diary, new Option());
+        profile = new Profile("", "testProfile", 0, 0, 14, "female", true, false, diary, new Option());
         goToProfileScreen(event);
     }
 

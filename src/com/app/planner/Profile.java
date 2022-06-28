@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 public class Profile {
     private String email;
-    private String password; // TODO is password needed in the tool? no we only need it to log in and you only need email to change password
-
     private String profileName; // TODO group up some of these variables so there is less instance variables
     private int height;
     private int weight;
@@ -27,8 +25,8 @@ public class Profile {
     private UndoRedoStack<BaseScreenController> undoRedoStack;
     // stack for undo and redo
 
-    public Profile(String email,String password, String profileName, int height, int weight, int age, String sex, boolean pregnant, boolean breastFeeding, Diary diary, Option options) {
-        this.password = password;
+    public Profile(String email, String profileName, int height, int weight, int age, String sex, boolean pregnant, boolean breastFeeding, Diary diary, Option options) {
+
         this.email = email;
         this.profileName = profileName;
         this.height = height;
@@ -59,7 +57,6 @@ public class Profile {
     public String toString() {
         return "Profile{" +
                 "email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", profileName='" + profileName + '\'' +
                 ", height=" + height +
                 ", weight=" + weight +
@@ -70,6 +67,8 @@ public class Profile {
                 ", diary=" + diary +
                 ", options=" + options +
                 ", dailyIntake=" + dailyIntake +
+                ", calorieTarget=" + calorieTarget +
+                ", undoRedoStack=" + undoRedoStack +
                 '}';
     }
 
@@ -143,14 +142,6 @@ public class Profile {
 
     public void setDiary(Diary diary) {
         this.diary = diary;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Option getOptions() {

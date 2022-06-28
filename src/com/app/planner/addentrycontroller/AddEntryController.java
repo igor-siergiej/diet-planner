@@ -1,8 +1,6 @@
 package com.app.planner.addentrycontroller;
 
 import com.app.planner.*;
-import com.app.planner.profilescreencontroller.ProfileScreenController;
-import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -75,10 +73,9 @@ public class AddEntryController extends BaseScreenController {
     @FXML
     private Label proteinLabel;
 
-    public void initialise(Profile profile) {
-        this.profile = profile;
+    public void initialise() {
         setToggleGroupHandler(menuBarToggleGroup);
-        addEntryToggleButton.setSelected(true);
+        addEntryToggleButton.setSelected(true); // need to select the toggle button of which screen we are on
         setTextFieldEventHandler();
         setAddEntryButtonDisable();
         populateMealTypeComboBox();
@@ -119,7 +116,6 @@ public class AddEntryController extends BaseScreenController {
     public void setAddEntryButtonDisable() {
         addEntryButton.disableProperty().bind(mealNameTextField.textProperty().isEmpty().or((mealTypeComboBox.valueProperty().isNull())).or(Bindings.isEmpty(foodVBox.getChildren())));
         //disabling the button until the form is filled out
-
     }
 
     public void populateSearchResult() {

@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 import java.util.Stack;
 import java.util.Timer;
@@ -29,18 +30,18 @@ public class InputValidator {
     }
 
     public void createEmailValidator(TextField textField, Label messageLabel) {
-        createEventHandler(textField, messageLabel, ValidatorType.EMAIL, null);
+        createEventHandler(textField, messageLabel, ValidatorType.EMAIL, null, null);
     }
 
-    public void createPasswordValidator(PasswordField passwordField, Label messageLabel) {
-        createEventHandler(passwordField, messageLabel, ValidatorType.PASSWORD, null);
+    public void createPasswordValidator(PasswordField passwordField, Label messageLabel, TextField showPasswordTextField) {
+        createEventHandler(passwordField, messageLabel, ValidatorType.PASSWORD, null, showPasswordTextField);
     }
 
     public void createRetypePasswordValidator(PasswordField passwordField, PasswordField retypePasswordField, Label messageLabel) {
-        createEventHandler(retypePasswordField, messageLabel, ValidatorType.RETYPE, passwordField);
+        createEventHandler(retypePasswordField, messageLabel, ValidatorType.RETYPE, passwordField, null);
     }
 
-    public void createEventHandler(TextField field, Label messageLabel, ValidatorType validatorType, PasswordField retypePasswordField) {
+    public void createEventHandler(TextField field, Label messageLabel, ValidatorType validatorType, PasswordField retypePasswordField, TextField showPasswordTextField) {
         field.addEventHandler(KeyEvent.KEY_RELEASED, keyEvent -> {
             if (keyEvent.getCode().equals(KeyCode.TAB)) {
                 return; //when tab was pressed it would run the task on the textfield that the tab press sent you to, this is a workaround
@@ -56,7 +57,7 @@ public class InputValidator {
             if (validatorType == ValidatorType.EMAIL) {
                 timer.schedule(createEmailTask(field, messageLabel), VALIDATION_DELAY);
             } else  if (validatorType == ValidatorType.PASSWORD){
-                timer.schedule(createPasswordTask(field, messageLabel), VALIDATION_DELAY);
+                timer.schedule(createPasswordTask(field, messageLabel, showPasswordTextField), VALIDATION_DELAY);
             } else {
                 timer.schedule(createRetypePasswordTask(field,messageLabel,retypePasswordField), VALIDATION_DELAY);
             }
@@ -64,19 +65,19 @@ public class InputValidator {
     }
 
     private TimerTask createEmailTask(TextField textField, Label messageLabel) {
-        return getTimerTask(textField, messageLabel, ValidatorType.EMAIL, null);
+        return getTimerTask(textField, messageLabel, ValidatorType.EMAIL, null,null);
     }
 
-    private TimerTask createPasswordTask(TextField passwordField, Label messageLabel) {
-        return getTimerTask(passwordField, messageLabel, ValidatorType.PASSWORD, null);
+    private TimerTask createPasswordTask(TextField passwordField, Label messageLabel, TextField showPasswordTextField) {
+        return getTimerTask(passwordField, messageLabel, ValidatorType.PASSWORD, null, showPasswordTextField);
     }
 
     private TimerTask createRetypePasswordTask(TextField passwordField, Label messageLabel, PasswordField retypePasswordField) {
-        return getTimerTask(passwordField,messageLabel,ValidatorType.RETYPE, retypePasswordField);
+        return getTimerTask(passwordField,messageLabel,ValidatorType.RETYPE, retypePasswordField, null);
     }
 
     @NotNull
-    private TimerTask getTimerTask(TextField field, Label messageLabel, ValidatorType validatorType, PasswordField retypePasswordField) {
+    private TimerTask getTimerTask(TextField field, Label messageLabel, ValidatorType validatorType, PasswordField retypePasswordField, TextField showPasswordTextField) {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -101,10 +102,12 @@ public class InputValidator {
                             messageLabel.setId("correctLabel");
                             messageLabel.setText(StringValidation.RETURN_STRING);
                             field.setId("text-field-correct");
+                            showPasswordTextField.setId("text-field-correct");
                         } else {
                             messageLabel.setId("errorLabel");
                             messageLabel.setText(StringValidation.passwordValidation(fieldText));
                             field.setId("text-field-error");
+                            showPasswordTextField.setId("text-field-error");
                         }
                     } else {
                         if (fieldText.equals(retypeFieldText)) {
