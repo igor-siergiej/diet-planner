@@ -1,12 +1,14 @@
 package com.app.planner;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.text.DecimalFormat;
-import java.time.LocalDate;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 
 public class Profile {
@@ -158,7 +160,7 @@ public class Profile {
 
     public void saveToFile(File file) {
         try {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            Gson gson = createCustomGson();
             Writer writer = new FileWriter(file);
             gson.toJson(this, writer);
             writer.flush();
@@ -170,7 +172,7 @@ public class Profile {
 
     public void loadFromFile(File file) {
         try {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            Gson gson = createCustomGson();
             JsonReader reader = new JsonReader(new FileReader(file));
             Profile profile = gson.fromJson(reader, Profile.class);
             this.setDiary(profile.getDiary());
@@ -181,16 +183,26 @@ public class Profile {
     }
 
     public void loadFromString(String loadString) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = createCustomGson();
         Profile profile = gson.fromJson(loadString, Profile.class);
         this.setProfileName(profile.getProfileName());
         this.setDiary(profile.getDiary());
     }
 
     public String saveToString() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = createCustomGson();
         String returnString = gson.toJson(this);
         return returnString;
+    }
+
+    public Gson createCustomGson() {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+
+        gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
+        gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer());
+        // this is needed because the standard Gson serializer and deserializer doesn't handle LocalDateTime well
+
+        return gsonBuilder.setPrettyPrinting().create();
     }
 
     public float getNutrientValueForCurrentDay(String nutrientName) {
@@ -209,6 +221,24 @@ public class Profile {
             }
         }
         return Float.parseFloat(df.format(value));
+    }
+
+    class LocalDateTimeSerializer implements JsonSerializer<LocalDateTime> {
+        private static final DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+
+        @Override
+        public JsonElement serialize(LocalDateTime localDateTime, Type srcType, JsonSerializationContext context) {
+            return new JsonPrimitive(formatter.format(localDateTime));
+        }
+    }
+
+    class LocalDateTimeDeserializer implements JsonDeserializer<LocalDateTime> {
+        @Override
+        public LocalDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+                throws JsonParseException {
+            return LocalDateTime.parse(json.getAsString(),
+                    DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+        }
     }
 }
 

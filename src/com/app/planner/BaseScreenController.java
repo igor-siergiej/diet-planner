@@ -5,6 +5,7 @@ import com.app.planner.createprofilecontroller.CreateProfileController;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
 import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
@@ -13,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
@@ -22,6 +24,9 @@ import java.io.*;
 public class BaseScreenController {
 
     protected static Profile profile;
+
+    @FXML
+    protected static Pane mainPane;
 
     // should have a undo  redo methods here which implement functionality in ui using undoRedoStack
     protected void undo() {
@@ -120,6 +125,29 @@ public class BaseScreenController {
         }
     }
 
+    // maybe this should be done on a different thread so that it doesn't make the UI stuck
+    public void saveProfileToDB() {
+        if (DatabaseConnection.saveProfileToDb(profile.getEmail(),profile)) {
+            createCorrectNotification(mainPane,"Profile saved successfully!");
+        } else {
+            createErrorNotification(mainPane,"An error occurred while saving profile to database");
+        }
+    }
+
+    public void saveProfileToFile() {
+        File file = Main.chooseSaveFile(mainPane);
+        if (!(file == null)) {
+            try {
+                profile.saveToFile(file);
+            } catch (Exception e) {
+                createErrorNotification(mainPane,"An error has occurred while saving profile to file!");
+            }
+            createCorrectNotification(mainPane,"Profile saved successfully!");
+        } else {
+            createErrorNotification(mainPane,"File chooser has been closed!");
+        }
+    }
+
     protected void setToggleGroupHandler(ToggleGroup toggleGroup) {
         // so that the user cannot unselect an already selected toggle group
         toggleGroup.selectedToggleProperty().addListener((obsVal, oldVal, newVal) -> {
@@ -143,11 +171,11 @@ public class BaseScreenController {
 
     // this will be used for saving to file or db for instant feedback
     protected void createCorrectNotification(Node owner, String text) {
-        ImageView img = new ImageView(new Image("com/app/planner/img/error.png"));
+        ImageView img = new ImageView(new Image("com/app/planner/img/tick.png"));
         img.setFitHeight(50);
         img.setFitWidth(50);
         Notifications.create()
-                .title("Something went wrong!")
+                .title("Success!")
                 .owner(owner)
                 .text(text)
                 .graphic(img)

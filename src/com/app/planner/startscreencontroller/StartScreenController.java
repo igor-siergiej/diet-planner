@@ -43,6 +43,7 @@ public class StartScreenController extends BaseScreenController {
 
     @FXML
     public void initialize() {
+        super.mainPane = this.mainPane;
         loginButton.disableProperty().bind(Bindings.isEmpty(loginEmailTextField.textProperty()).or(Bindings.isEmpty(loginPasswordField.textProperty())));
         InputValidator inputValidator = new InputValidator();
         inputValidator.createEmailValidator(loginEmailTextField, loginEmailMessage);

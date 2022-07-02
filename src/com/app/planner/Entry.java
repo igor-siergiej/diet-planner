@@ -2,6 +2,8 @@ package com.app.planner;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 
 public class Entry implements Comparable {
@@ -43,7 +45,7 @@ public class Entry implements Comparable {
     public String toString() {
         return "Entry{" +
                 "meal=" + meal +
-                ", timeEaten=" + timeEaten +
+                ", timeEaten=" + DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).format(timeEaten) +
                 ", entryType=" + entryType +
                 '}';
     }

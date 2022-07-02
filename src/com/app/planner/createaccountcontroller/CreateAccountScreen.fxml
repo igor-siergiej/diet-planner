@@ -41,7 +41,7 @@
             <Label fx:id="registerEmailMessage" prefHeight="29.0" prefWidth="376.0" />
             <Pane prefHeight="44.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="showPasswordTextField" layoutX="-65.0" prefHeight="48.0" prefWidth="331.0" />
+                  <TextField fx:id="showPasswordTextField" layoutX="-65.0" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
                   <PasswordField fx:id="registerPasswordField" layoutX="-65.0" onKeyTyped="#passwordStrengthHandler" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
                </children>
             </Pane>

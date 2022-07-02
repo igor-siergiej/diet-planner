@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
@@ -73,7 +74,11 @@ public class AddEntryController extends BaseScreenController {
     @FXML
     private Label proteinLabel;
 
+    @FXML
+    private Pane mainPane;
+
     public void initialise() {
+        super.mainPane = mainPane;
         setToggleGroupHandler(menuBarToggleGroup);
         addEntryToggleButton.setSelected(true); // need to select the toggle button of which screen we are on
         setTextFieldEventHandler();
