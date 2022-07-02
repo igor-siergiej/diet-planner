@@ -48,6 +48,7 @@ public class CreateProfileController extends BaseScreenController {
     private TextField profileNameTextField;
 
     public void initialise(String email) {
+        profile = new Profile();
         profile.setEmail(email);
         setAgeTextFieldEventHandler();
         setHeightTextFieldEventHandler();

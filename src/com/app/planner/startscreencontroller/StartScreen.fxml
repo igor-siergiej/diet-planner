@@ -56,7 +56,7 @@
             <Label fx:id="loginEmailMessage" />
             <Pane prefHeight="44.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="showPasswordTextField" layoutX="-65.0" prefHeight="48.0" prefWidth="331.0" />
+                  <TextField fx:id="showPasswordTextField" layoutX="-65.0" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
                   <PasswordField fx:id="loginPasswordField" layoutX="-65.0" prefHeight="48.0" prefWidth="331.0" promptText="Password" />
                </children>
             </Pane>

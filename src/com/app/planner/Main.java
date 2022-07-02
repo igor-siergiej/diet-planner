@@ -74,7 +74,6 @@ public class Main extends Application {
     }
 
     public static File chooseSaveFile(Pane pane) {
-
         FileChooser fileChooser = new FileChooser();
         Stage stage = (Stage) pane.getScene().getWindow();
         fileChooser.getExtensionFilters().addAll(

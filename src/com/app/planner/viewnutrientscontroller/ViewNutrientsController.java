@@ -50,8 +50,11 @@ public class ViewNutrientsController extends BaseScreenController {
     @FXML
     private ToggleButton viewNutrientsToggleButton;
 
+    @FXML
+    private Pane mainPane;
 
     public void initialise() {
+        super.mainPane = mainPane;
         viewNutrientsToggleButton.setSelected(true);
         setToggleGroupHandler(menuBarToggleGroup);
         profile.setAge(20);

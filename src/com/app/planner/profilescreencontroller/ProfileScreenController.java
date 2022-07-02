@@ -54,7 +54,11 @@ public class ProfileScreenController extends BaseScreenController {
     @FXML
     private ToggleGroup menuBarToggleGroup;
 
+    @FXML
+    private Pane mainPane;
+
     public void initialise() {
+        super.mainPane = mainPane;
         setToggleGroupHandler(menuBarToggleGroup);
         homeButton.setSelected(true); // since we are in profileScreen set the toggleButton to be selected
         profileLabel.setText(profile.toString()); // DEBUG
@@ -62,8 +66,6 @@ public class ProfileScreenController extends BaseScreenController {
 
         // TODO need some kind of framework or method to make it easier to determine max doses
         // TODO also need some kind of way to dynamically change max doses to change macros and calorie target
-
-
     }
 
     public void loadUI() {
