@@ -43,7 +43,7 @@
                   <ToggleGroup fx:id="menuBarToggleGroup" />
                </toggleGroup>
             </ToggleButton>
-            <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0" toggleGroup="$menuBarToggleGroup">
+            <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#goToProfileDetailsScreen" prefHeight="53.0" prefWidth="80.0" toggleGroup="$menuBarToggleGroup">
                <graphic>
                   <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
