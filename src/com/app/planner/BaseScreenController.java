@@ -2,6 +2,7 @@ package com.app.planner;
 
 import com.app.planner.addentrycontroller.AddEntryController;
 import com.app.planner.createprofilecontroller.CreateProfileController;
+import com.app.planner.profiledetailscontroller.ProfileDetailsController;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
 import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.event.ActionEvent;
@@ -65,7 +66,12 @@ public class BaseScreenController {
 
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
         CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
-        createProfileController.initialise( null);
+        createProfileController.initialise(null);
+    }
+
+    public void goToProfileDetailsScreen(ActionEvent event) {
+        ProfileDetailsController profileDetailsController = goToScreen(event, "profiledetailscontroller/ProfileDetailsScreen.fxml").getController();
+        profileDetailsController.initialise();
     }
 
     public void logOut(ActionEvent event) { // this method will open the profile screen window
