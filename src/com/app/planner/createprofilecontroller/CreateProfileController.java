@@ -1,16 +1,14 @@
 package com.app.planner.createprofilecontroller;
 
 import com.app.planner.BaseScreenController;
+import com.app.planner.Mail;
 import com.app.planner.StringValidation;
 import com.app.planner.Profile;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-
 
 public class CreateProfileController extends BaseScreenController {
 
@@ -47,31 +45,38 @@ public class CreateProfileController extends BaseScreenController {
     @FXML
     private TextField profileNameTextField;
 
+    @FXML
+    private Button createProfileButton;
+
     public void initialise(String email) {
         profile = new Profile();
         profile.setEmail(email);
+        super.mainPane = this.mainPane;
         setAgeTextFieldEventHandler();
         setHeightTextFieldEventHandler();
         setWeightTextFieldEventHandler();
+        // setting the user data so that it's easier to get the value of it later
         femaleRadioButton.setUserData("Female");
         maleRadioButton.setUserData("Male");
+        // Disable create profile button until a profile name is given
+        createProfileButton.disableProperty().bind(Bindings.isEmpty(profileNameTextField.textProperty()));
     }
 
     public void setAgeTextFieldEventHandler() {
         ageTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            ageTextField.setText(StringValidation.ageValidation(newValue));
+            ageTextField.setText(StringValidation.integerValidation(newValue, StringValidation.MAX_AGE_DIGITS));
         });
     }
 
     public void setHeightTextFieldEventHandler() {
         heightTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            heightTextField.setText(StringValidation.heightValidation(newValue));
+            heightTextField.setText(StringValidation.integerValidation(newValue, StringValidation.MAX_HEIGHT_DIGITS));
         });
     }
 
     public void setWeightTextFieldEventHandler() {
         weightTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            weightTextField.setText(StringValidation.weightValidation(newValue));
+            weightTextField.setText(StringValidation.integerValidation(newValue, StringValidation.MAX_WEIGHT_DIGITS));
         });
     }
 
@@ -90,24 +95,67 @@ public class CreateProfileController extends BaseScreenController {
 
     public boolean isFormCompleted() {
         boolean returnBoolean = false;
+        profileNameTextField.setId("");
+
+
+        boolean isProfileNameValid = StringValidation.usernameValidation(profileNameTextField.getText()) == StringValidation.RETURN_STRING;
+        if (!isProfileNameValid) {
+            createErrorNotification(mainPane, "Please enter a valid profile name");
+            profileNameTextField.setId("text-field-error");
+            return false;
+        }
+
+        boolean isAgeValid = StringValidation.ageValidation(ageTextField.getText());
+        if (!isTextFieldValid(ageTextField, isAgeValid, "age", "Please enter an age between " +
+                StringValidation.MIN_AGE + " and " + StringValidation.MAX_AGE)) {
+            return false;
+        }
+
+        boolean isHeightValid = StringValidation.heightValidation(heightTextField.getText());
+        if (!isTextFieldValid(heightTextField, isHeightValid, "height", "Please enter a height between " +
+                StringValidation.MIN_HEIGHT + "cm and " + StringValidation.MAX_HEIGHT + "cm")) {
+            return false;
+        }
+
+        boolean isWeightValid = StringValidation.weightValidation(weightTextField.getText());
+        if (!isTextFieldValid(weightTextField, isWeightValid, "weight", "Please enter a weight between " +
+                StringValidation.MIN_WEIGHT + "kg and " + StringValidation.MAX_WEIGHT + "kg")) {
+            return false;
+        }
+
+        boolean isSexToggleGroupSelected = sexToggleGroup.getSelectedToggle() != null;
+        if (!isSexToggleGroupSelected) {
+            createErrorNotification(mainPane, "Please select your sex");
+            return false;
+        }
 
         boolean isActivityToggleGroupSelected = activityToggleGroup.getSelectedToggle() != null;
-        boolean isSexToggleGroupSelected = sexToggleGroup.getSelectedToggle() != null;
-        boolean isUsernameValid = StringValidation.usernameValidation(profileNameTextField.getText()) == "valid";
-        boolean isAgeValid = !ageTextField.getText().isEmpty();
-        boolean isHeightValid = !heightTextField.getText().isEmpty();
-        boolean isWeightValid = !weightTextField.getText().isEmpty();
+        if (!isActivityToggleGroupSelected) {
+            createErrorNotification(mainPane, "Please select your activity level");
+            return false;
+        }
 
-        if (isActivityToggleGroupSelected && isSexToggleGroupSelected && isUsernameValid &&
-            isAgeValid && isHeightValid && isWeightValid) {
+        if (isActivityToggleGroupSelected && isSexToggleGroupSelected && isProfileNameValid &&
+                isAgeValid && isHeightValid && isWeightValid) {
             returnBoolean = true;
         }
 
-
-        // split this if into each part so a different notification can pop up
         return returnBoolean;
     }
 
+    public boolean isTextFieldValid(TextField textField, boolean isValid, String formValue, String text) {
+        textField.setId("");
+        if (textField.getText().isBlank()) {
+            createErrorNotification(mainPane, "Please enter your " + formValue);
+            textField.setId("text-field-error");
+            return false;
+        } else if (!isValid) {
+            createErrorNotification(mainPane, text);
+            textField.setId("text-field-error");
+            return false;
+        }
+        return true;
+    }
 
 
     public void createNewProfile(ActionEvent event) {

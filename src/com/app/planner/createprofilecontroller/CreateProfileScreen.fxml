@@ -166,7 +166,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </GridPane>
-            <Button id="signInButton" defaultButton="true" mnemonicParsing="false" onAction="#createNewProfile" prefHeight="55.0" prefWidth="331.0" text="Create Profile">
+            <Button id="signInButton" fx:id="createProfileButton" defaultButton="true" mnemonicParsing="false" onAction="#createNewProfile" prefHeight="55.0" prefWidth="331.0" text="Create Profile">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>

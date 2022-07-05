@@ -26,7 +26,9 @@ public class InputValidator {
     enum ValidatorType {
         EMAIL,
         PASSWORD,
-        RETYPE
+        RETYPE,
+        AGE,
+
     }
 
     public void createEmailValidator(TextField textField, Label messageLabel) {
@@ -41,7 +43,7 @@ public class InputValidator {
         createEventHandler(retypePasswordField, messageLabel, ValidatorType.RETYPE, passwordField, null);
     }
 
-    public void createEventHandler(TextField field, Label messageLabel, ValidatorType validatorType, PasswordField retypePasswordField, TextField showPasswordTextField) {
+    private void createEventHandler(TextField field, Label messageLabel, ValidatorType validatorType, PasswordField retypePasswordField, TextField showPasswordTextField) {
         field.addEventHandler(KeyEvent.KEY_RELEASED, keyEvent -> {
             if (keyEvent.getCode().equals(KeyCode.TAB)) {
                 return; //when tab was pressed it would run the task on the textfield that the tab press sent you to, this is a workaround

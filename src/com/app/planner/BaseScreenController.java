@@ -20,6 +20,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
 
+import javax.mail.MessagingException;
 import java.io.*;
 
 public class BaseScreenController {

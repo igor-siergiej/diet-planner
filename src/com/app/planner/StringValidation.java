@@ -5,30 +5,48 @@ import javax.mail.internet.InternetAddress;
 
 public class StringValidation {
 
-    private final static int PASSWORD_MIN_CHAR = 8;
-    private final static int PASSWORD_MAX_CHAR = 15;
-    private final static String UPPER_CASE_REGEX = "(.*[A-Z].*)";
-    private final static String LOWER_CASE_REGEX = "(.*[a-z].*)";
-    private final static String NUMBER_REGEX = "(.*[0-9].*)";
-    private final static String SPECIAL_CHAR_REGEX = "(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)";
-    private final static int USERNAME_MIN_CHAR = 4;
-    private final static int USERNAME_MAX_CHAR = 20;
-    private final static int MAX_AGE_DIGITS = 2;
-    private final static int MAX_WEIGHT_DIGITS = 3;
-    private final static int MAX_HEIGHT_DIGITS = 3;
-    private final static int MAX_PORTION_DIGITS = 4;
+    public final static int PASSWORD_MIN_CHAR = 8;
+    public final static int PASSWORD_MAX_CHAR = 15;
+    public final static String UPPER_CASE_REGEX = "(.*[A-Z].*)";
+    public final static String LOWER_CASE_REGEX = "(.*[a-z].*)";
+    public final static String NUMBER_REGEX = "(.*[0-9].*)";
+    public final static String SPECIAL_CHAR_REGEX = "(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)";
+    public final static int USERNAME_MIN_CHAR = 4;
+    public final static int USERNAME_MAX_CHAR = 20;
+    public final static int MAX_AGE_DIGITS = 2;
+    public final static int MAX_WEIGHT_DIGITS = 3;
+    public final static int MAX_HEIGHT_DIGITS = 3;
+    public final static int MAX_PORTION_DIGITS = 4;
+    public final static int MIN_AGE = 14;
+    public final static int MAX_AGE = 90;
+    public final static int MIN_HEIGHT = 140;
+    public final static int MAX_HEIGHT = 230;
+    public final static int MIN_WEIGHT = 40;
+    public final static int MAX_WEIGHT = 200;
     public final static String RETURN_STRING = "Correct!";
 
-    public static String ageValidation(String age) {
-        return integerValidation(age, MAX_AGE_DIGITS);
+    public static boolean ageValidation(String age) {
+        if (!age.equals("")) {
+            int integer = Integer.valueOf(age);
+            return integer >= MIN_AGE && integer <= MAX_AGE;
+        }
+        return false;
     }
 
-    public static String heightValidation(String height) {
-        return integerValidation(height, MAX_HEIGHT_DIGITS);
+    public static boolean heightValidation(String height) {
+        if (!height.equals("")) {
+            int integer = Integer.valueOf(height);
+            return integer >= MIN_HEIGHT && integer <= MAX_HEIGHT;
+        }
+        return false;
     }
 
-    public static String weightValidation(String weight) {
-        return integerValidation(weight, MAX_WEIGHT_DIGITS);
+    public static boolean weightValidation(String weight) {
+        if (!weight.equals("")) {
+            int integer = Integer.valueOf(weight);
+            return integer >= MIN_WEIGHT && integer <= MAX_WEIGHT;
+        }
+        return false;
     }
 
     public static String portionValidation(String portion) {
@@ -147,7 +165,7 @@ public class StringValidation {
         return name.matches("[a-zA-Z|\\s]");
     }
 
-    private static String integerValidation(String input, int numOfDigits) {
+    public static String integerValidation(String input, int numOfDigits) {
         if (!input.matches("\\d*")) {
             return input.replaceAll("[^\\d]", "");
         }

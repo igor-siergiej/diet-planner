@@ -1,7 +1,5 @@
 package com.app.planner;
 
-
-
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
@@ -19,14 +17,14 @@ public class Mail {
         Session session = Session.getInstance(prop, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("igipopcoool@gmail.com", "xxxxxxx");
+                return new PasswordAuthentication("dietplanner.hello@gmail.com", "hdqrzxffiphxfkrq");
             }
         });
 
         Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("igipopcoool@gmail.com"));
+        message.setFrom(new InternetAddress("dietplanner.hello@gmail.com"));
         message.setRecipients(
-                Message.RecipientType.TO, InternetAddress.parse("igorsiergiej@gmail.com"));
+                Message.RecipientType.TO, InternetAddress.parse("gregormai@mail.de"));
         message.setSubject("Mail Subject");
 
         String msg = "This is my first email using JavaMailer";
