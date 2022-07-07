@@ -77,10 +77,15 @@ public class AddEntryController extends BaseScreenController {
     @FXML
     private Pane mainPane;
 
-    public void initialise() {
-        super.mainPane = mainPane;
-        setToggleGroupHandler(menuBarToggleGroup);
-        addEntryToggleButton.setSelected(true); // need to select the toggle button of which screen we are on
+    @FXML
+    private Button undoButton;
+
+    @FXML
+    private Button redoButton;
+
+    @FXML
+    public void initialize() {
+        super.initialize(mainPane,menuBarToggleGroup,addEntryToggleButton,undoButton,redoButton);
         setTextFieldEventHandler();
         setAddEntryButtonDisable();
         populateMealTypeComboBox();

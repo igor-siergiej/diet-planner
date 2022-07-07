@@ -2,6 +2,8 @@ package com.app.planner.profilescreencontroller;
 
 import com.app.planner.*;
 import com.app.planner.addentrycontroller.AddEntryController;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
@@ -57,10 +59,16 @@ public class ProfileScreenController extends BaseScreenController {
     @FXML
     private Pane mainPane;
 
-    public void initialise() {
-        super.mainPane = mainPane;
-        setToggleGroupHandler(menuBarToggleGroup);
-        homeButton.setSelected(true); // since we are in profileScreen set the toggleButton to be selected
+    @FXML
+    private Button undoButton;
+
+    @FXML
+    private Button redoButton;
+
+    @FXML
+    public void initialize() {
+        super.initialize(mainPane,menuBarToggleGroup,homeButton,undoButton,redoButton);
+
         profileLabel.setText(profile.toString()); // DEBUG
         loadUI();
 

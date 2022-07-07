@@ -5,6 +5,8 @@ import com.app.planner.createprofilecontroller.CreateProfileController;
 import com.app.planner.profiledetailscontroller.ProfileDetailsController;
 import com.app.planner.profilescreencontroller.ProfileScreenController;
 import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,23 +22,38 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
 
-import javax.mail.MessagingException;
 import java.io.*;
 
 public class BaseScreenController {
 
     protected static Profile profile;
+    protected static UndoRedoStack<String> undoRedoStack = new UndoRedoStack<>();
 
     @FXML
     protected static Pane mainPane;
 
-    // should have a undo  redo methods here which implement functionality in ui using undoRedoStack
-    protected void undo() {
+    @FXML
+    public void initialize(Pane mainPane, ToggleGroup toggleGroup, ToggleButton button, Button undoButton, Button redoButton) {
+        BaseScreenController.mainPane = mainPane;
+        setToggleGroupHandler(toggleGroup);
+        button.setSelected(true); // since we are in profileScreen set the toggleButton to be selected
 
+        // TODO add this to every Controller, ideally figure out a baseclass initialiZe
+        BooleanBinding canUndo = Bindings.createBooleanBinding(() -> undoRedoStack.canUndo());
+        undoButton.disableProperty().bind(canUndo.not());
+        BooleanBinding canRedo = Bindings.createBooleanBinding(() -> undoRedoStack.canRedo());
+        redoButton.disableProperty().bind(canRedo.not());
     }
 
-    protected void redo() {
+    // should have a undo  redo methods here which implement functionality in ui using undoRedoStack
+    public void undo(ActionEvent event) {
+        goToScreen(event,undoRedoStack.undo());
+        System.out.println(undoRedoStack.toString());
+    }
 
+    public void redo(ActionEvent event) {
+        goToScreen(event,undoRedoStack.redo());
+        System.out.println(undoRedoStack.toString());
     }
 
     // these methods can only be used on screens that do not require a Profile object to be carried
@@ -50,36 +67,32 @@ public class BaseScreenController {
     }
 
     public void goToViewNutrientsScreen(ActionEvent event) {
-        ViewNutrientsController viewNutrientsController = goToScreen(event, "viewnutrientscontroller/ViewNutrientsScreen.fxml").getController();
-        viewNutrientsController.initialise();
+        goToScreen(event, "viewnutrientscontroller/ViewNutrientsScreen.fxml");
     }
 
     public void goToAddEntryScreen(ActionEvent event) {
-        AddEntryController addEntryController = goToScreen(event, "addentrycontroller/AddEntryScreen.fxml").getController();
-        addEntryController.initialise();
+        goToScreen(event, "addentrycontroller/AddEntryScreen.fxml");
         // should the fxmlFilePath be hardcoded values instead?
     }
 
     public void goToProfileScreen(ActionEvent event) { // this method will open the profile screen window
-        ProfileScreenController profileScreenController = goToScreen(event, "profilescreencontroller/ProfileScreen.fxml").getController();
-        profileScreenController.initialise();
+        goToScreen(event, "profilescreencontroller/ProfileScreen.fxml");
     }
 
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
         CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
-        createProfileController.initialise(null);
+        createProfileController.initialize();
     }
 
     public void goToProfileDetailsScreen(ActionEvent event) {
-        ProfileDetailsController profileDetailsController = goToScreen(event, "profiledetailscontroller/ProfileDetailsScreen.fxml").getController();
-        profileDetailsController.initialise();
+        goToScreen(event, "profiledetailscontroller/ProfileDetailsScreen.fxml");
     }
 
     public void logOut(ActionEvent event) { // this method will open the profile screen window
         goToScreen(event, "startscreencontroller/StartScreen.fxml");
     }
 
-    private void setWindow(ActionEvent event, Parent root) {
+    private static void setWindow(ActionEvent event, Parent root) {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/com/app/planner/style.css");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -90,7 +103,9 @@ public class BaseScreenController {
         window.setY((primScreenBounds.getHeight() - window.getHeight()) / 2);
     }
 
-    protected FXMLLoader goToScreen(ActionEvent event, String fxmlFilePath) {
+    public static FXMLLoader goToScreen(ActionEvent event, String fxmlFilePath) {
+        undoRedoStack.addScreen(fxmlFilePath);
+        System.out.println(undoRedoStack.toString());
         Parent root = null;
         FXMLLoader loader = null;
         try {

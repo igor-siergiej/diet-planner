@@ -53,10 +53,15 @@ public class ViewNutrientsController extends BaseScreenController {
     @FXML
     private Pane mainPane;
 
-    public void initialise() {
-        super.mainPane = mainPane;
-        viewNutrientsToggleButton.setSelected(true);
-        setToggleGroupHandler(menuBarToggleGroup);
+    @FXML
+    private Button undoButton;
+
+    @FXML
+    private Button redoButton;
+
+    @FXML
+    public void initialize() {
+        super.initialize(mainPane,menuBarToggleGroup,viewNutrientsToggleButton,undoButton,redoButton);
         profile.setAge(20);
         profile.setBreastFeeding(false);
         profile.setPregnant(false);

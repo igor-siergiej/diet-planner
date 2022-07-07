@@ -2,56 +2,38 @@ package com.app.planner;
 
 import java.util.*;
 
-// copied from https://courses.cs.washington.edu/courses/cse143/12au/lectures/UndoRedoStack.java
-
 public class UndoRedoStack<E> extends Stack<E> {
     private Stack undoStack;
     private Stack redoStack;
 
-    // post: constructs an empty UndoRedoStack
     public UndoRedoStack() {
         undoStack = new Stack();
         redoStack = new Stack();
     }
 
-    // post: pushes and returns the given value on top of the stack
-    public E push(E value) {
-        super.push(value);
-        undoStack.push("push");
-        redoStack.clear();
-        return value;
+    @Override
+    public String toString() {
+        return "UndoRedoStack{" +
+                "undoStack=" + undoStack +
+                ", redoStack=" + redoStack +
+                '}';
     }
 
-    // post: pops and returns the value at the top of the stack
-    public E pop() {
-        E value = super.pop();
-        undoStack.push(value);
-        undoStack.push("pop");
-        redoStack.clear();
-        return value;
-    }
-
-    // post: returns whether or not an undo can be done
     public boolean canUndo() {
         return !undoStack.isEmpty();
     }
 
-    // pre : canUndo() (throws IllegalStateException if not)
-    // post: undoes the last stack push or pop command
-    public void undo() {
+    public void addScreen(E value) {
+        undoStack.push(value);
+    }
+
+    public E undo() {
         if (!canUndo()) {
             throw new IllegalStateException();
         }
-        Object action = undoStack.pop();
-        if (action.equals("push")) {
-            E value = super.pop();
-            redoStack.push(value);
-            redoStack.push("push");
-        } else {
-            E value = (E) undoStack.pop();
-            super.push(value);
-            redoStack.push("pop");
-        }
+        E value = (E) undoStack.pop();
+        redoStack.push(value); // pop the latest screen to the redo stack
+        return (E) undoStack.pop(); // pop the previous screen which will be the one we go to
     }
 
     // post: returns whether or not a redo can be done
@@ -61,19 +43,12 @@ public class UndoRedoStack<E> extends Stack<E> {
 
     // pre : canRedo() (throws IllegalStateException if not)
     // post: redoes the last undone operation
-    public void redo() {
+    public E redo() {
         if (!canRedo()) {
             throw new IllegalStateException();
         }
-        Object action = redoStack.pop();
-        if (action.equals("push")) {
-            E value = (E) redoStack.pop();
-            super.push(value);
-            undoStack.push("push");
-        } else {
-            E value = super.pop();
-            undoStack.push(value);
-            undoStack.push("pop");
-        }
+        E value = (E) redoStack.pop();
+        undoStack.push(value); // pop from the redo stack and push it to the undo stack
+        return value;
     }
 }
