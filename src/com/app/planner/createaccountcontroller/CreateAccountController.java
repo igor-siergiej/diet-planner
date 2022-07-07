@@ -60,6 +60,7 @@ public class CreateAccountController extends BaseScreenController {
 
     @FXML
     public void initialize() {
+        profile = new Profile();
         registerButton.disableProperty().bind(Bindings.isEmpty(registerEmailTextField.textProperty()).or(Bindings.isEmpty(registerPasswordField.textProperty())).or(Bindings.isEmpty(registerRetypePasswordField.textProperty())));
         InputValidator inputValidator = new InputValidator();
         inputValidator.createEmailValidator(registerEmailTextField, registerEmailMessage);
@@ -169,12 +170,12 @@ public class CreateAccountController extends BaseScreenController {
 
     // TODO this method should be used for testing to bypass having to register a new account for each test.
     public void testRegister(ActionEvent event) {
-        CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
-        //createProfileController.initialise("test");
+        profile.setEmail("test@mail.com");
+        goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml");
     }
 
     public void goToCreateProfileScreenWithLogin(ActionEvent event, String email) { // this method will open the profile screen window
-        CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
-        //createProfileController.initialise(email);
+        profile.setEmail(email);
+        goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml");
     }
 }
