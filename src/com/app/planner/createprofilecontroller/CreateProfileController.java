@@ -50,8 +50,6 @@ public class CreateProfileController extends BaseScreenController {
 
     @FXML
     public void initialize() {
-        profile = new Profile();
-        profile.setEmail("");
         super.mainPane = this.mainPane;
         setAgeTextFieldEventHandler();
         setHeightTextFieldEventHandler();
