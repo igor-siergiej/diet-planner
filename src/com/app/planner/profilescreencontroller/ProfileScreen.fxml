@@ -206,7 +206,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button id="menuBarItem" layoutX="10.0" layoutY="174.0" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0">
+            <Button id="menuBarItem" fx:id="undoButton" layoutX="10.0" layoutY="174.0" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#undo" prefHeight="53.0" prefWidth="80.0">
                <graphic>
                   <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -215,7 +215,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button id="menuBarItem" layoutX="10.0" layoutY="121.0" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0">
+            <Button id="menuBarItem" fx:id="redoButton" layoutX="10.0" layoutY="121.0" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#redo" prefHeight="53.0" prefWidth="80.0">
                <graphic>
                   <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>

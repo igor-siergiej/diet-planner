@@ -170,11 +170,11 @@ public class CreateAccountController extends BaseScreenController {
     // TODO this method should be used for testing to bypass having to register a new account for each test.
     public void testRegister(ActionEvent event) {
         CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
-        createProfileController.initialise("test");
+        //createProfileController.initialise("test");
     }
 
     public void goToCreateProfileScreenWithLogin(ActionEvent event, String email) { // this method will open the profile screen window
         CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
-        createProfileController.initialise(email);
+        //createProfileController.initialise(email);
     }
 }
