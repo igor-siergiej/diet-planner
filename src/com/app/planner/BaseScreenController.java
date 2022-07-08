@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
 
 import java.io.*;
+import java.util.Optional;
 
 public class BaseScreenController {
 
@@ -89,7 +90,29 @@ public class BaseScreenController {
     }
 
     public void logOut(ActionEvent event) { // this method will open the profile screen window
-        goToScreen(event, "startscreencontroller/StartScreen.fxml");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Warning!");
+        alert.setHeaderText("Log out?");
+        alert.setContentText("Are you sure you want to log out?");
+
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.APPLY);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        // Remove default ButtonTypes
+        alert.getButtonTypes().clear();
+
+        alert.getButtonTypes().addAll(yes, no);
+
+        // option != null.
+        Optional<ButtonType> option = alert.showAndWait();
+
+        if (option.get() == null) {
+            return;
+        } else if (option.get() == yes) {
+            goToScreen(event, "startscreencontroller/StartScreen.fxml");
+        } else {
+            return;
+        }
     }
 
     private static void setWindow(ActionEvent event, Parent root) {
