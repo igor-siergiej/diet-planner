@@ -1,10 +1,5 @@
 package com.app.planner;
 
-import com.app.planner.addentrycontroller.AddEntryController;
-import com.app.planner.createprofilecontroller.CreateProfileController;
-import com.app.planner.profiledetailscontroller.ProfileDetailsController;
-import com.app.planner.profilescreencontroller.ProfileScreenController;
-import com.app.planner.viewnutrientscontroller.ViewNutrientsController;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
@@ -30,25 +25,22 @@ public class BaseScreenController {
 
     protected static Profile profile;
     protected static UndoRedoStack<String> undoRedoStack = new UndoRedoStack<>();
-    protected static String currentScreen;
 
     @FXML
     protected static Pane mainPane;
 
     @FXML
-    public void initialize(Pane mainPane, ToggleGroup toggleGroup, ToggleButton button, Button undoButton, Button redoButton) {
+    public void initialize(Pane mainPane, ToggleGroup toggleGroup, ToggleButton toggleButton, Button undoButton, Button redoButton) {
         BaseScreenController.mainPane = mainPane;
-        setToggleGroupHandler(toggleGroup);
-        button.setSelected(true); // since we are in profileScreen set the toggleButton to be selected
+        setToggleGroupHandler(toggleGroup); // handler to make it impossible to unToggle current ToggleButton
+        toggleButton.setSelected(true); // load the current screen with the current screen ToggleButton pressed
 
-        // TODO add this to every Controller, ideally figure out a baseclass initialiZe
         BooleanBinding canUndo = Bindings.createBooleanBinding(() -> undoRedoStack.canUndo());
-        undoButton.disableProperty().bind(canUndo.not());
+        undoButton.disableProperty().bind(canUndo.not()); // setting undo button disable
         BooleanBinding canRedo = Bindings.createBooleanBinding(() -> undoRedoStack.canRedo());
-        redoButton.disableProperty().bind(canRedo.not());
+        redoButton.disableProperty().bind(canRedo.not()); // setting redo button disable
     }
 
-    // should have a undo  redo methods here which implement functionality in ui using undoRedoStack
     public void undo(ActionEvent event) {
         goToScreen(event,undoRedoStack.undo());
     }
@@ -57,8 +49,6 @@ public class BaseScreenController {
         goToScreen(event,undoRedoStack.redo());
     }
 
-    // these methods can only be used on screens that do not require a Profile object to be carried
-    // on to the next screen if the method is called from an event handler
     public void goToCreateAccountScreen(ActionEvent event) {
         goToScreenWithoutAddingScreen(event, "createaccountcontroller/CreateAccountScreen.fxml");
     }
@@ -88,28 +78,29 @@ public class BaseScreenController {
         goToScreen(event, "profiledetailscontroller/ProfileDetailsScreen.fxml");
     }
 
-    public void logOut(ActionEvent event) { // this method will open the profile screen window
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Warning!");
-        alert.setHeaderText("Log out?");
-        alert.setContentText("Are you sure you want to log out?");
+    protected Optional<ButtonType> createYesNoAlert(Alert.AlertType alertType, String title, String headerText, String contentText) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
 
         alert.getDialogPane().getStylesheets().add("/com/app/planner/style.css");
 
         ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.APPLY);
         ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        // Remove default ButtonTypes
         alert.getButtonTypes().clear();
-
         alert.getButtonTypes().addAll(yes, no);
 
-        // option != null.
-        Optional<ButtonType> option = alert.showAndWait();
+        return alert.showAndWait();
+    }
+
+    public void logOut(ActionEvent event) { // this method will open the profile screen window
+        Optional<ButtonType> option = createYesNoAlert(Alert.AlertType.CONFIRMATION, "Warning!", "Log out?", "Are you sure you want to log out?");
 
         if (option.get() == null) {
             return;
-        } else if (option.get() == yes) {
+        } else if (option.get() == ButtonType.APPLY) {
             goToScreen(event, "startscreencontroller/StartScreen.fxml");
         } else {
             return;
@@ -134,11 +125,11 @@ public class BaseScreenController {
 
     public static FXMLLoader goToScreenWithoutAddingScreen(ActionEvent event, String fxmlFilePath) {
         return getLoader(event, fxmlFilePath);
+        // this method exists to prevent adding to undoRedoStack before loading profile Screen
     }
 
     @NotNull
     private static FXMLLoader getLoader(ActionEvent event, String fxmlFilePath) {
-        System.out.println(undoRedoStack.toString());
         Parent root = null;
         FXMLLoader loader = null;
         try {
@@ -151,22 +142,18 @@ public class BaseScreenController {
         return loader;
     }
 
-    public void setShowPasswordInit(TextField showPasswordTextField, RadioButton showPasswordButton, PasswordField passwordField) {
+    public void setShowPasswordHandlers(TextField showPasswordTextField, RadioButton showPasswordButton, PasswordField passwordField) {
         showPasswordTextField.setManaged(false);
         showPasswordTextField.setVisible(false);
 
+        // group of handlers to implement show password button functionality
 
-        // Bind properties. Toggle textField and passwordField
-        // visibility and managability properties mutually when checkbox's state is changed.
-        // Because we want to display only one component (textField or passwordField)
-        // on the scene at a time.
         showPasswordTextField.managedProperty().bind(showPasswordButton.selectedProperty());
         showPasswordTextField.visibleProperty().bind(showPasswordButton.selectedProperty());
 
         passwordField.managedProperty().bind(showPasswordButton.selectedProperty().not());
         passwordField.visibleProperty().bind(showPasswordButton.selectedProperty().not());
 
-        // Bind the textField and passwordField text values bidirectionally.
         showPasswordTextField.textProperty().bindBidirectional(passwordField.textProperty());
     }
 

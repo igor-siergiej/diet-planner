@@ -48,7 +48,7 @@ public class StartScreenController extends BaseScreenController {
         InputValidator inputValidator = new InputValidator();
         inputValidator.createEmailValidator(loginEmailTextField, loginEmailMessage);
         inputValidator.createPasswordValidator(loginPasswordField, loginPasswordMessage, showPasswordTextField);
-        setShowPasswordInit(showPasswordTextField,showPasswordButton,loginPasswordField);
+        setShowPasswordHandlers(showPasswordTextField,showPasswordButton,loginPasswordField);
     }
 
     // TODO move this to test class in the future

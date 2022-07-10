@@ -48,8 +48,6 @@ public class UndoRedoStack<E> extends Stack<E> {
             throw new IllegalStateException();
         }
         E value = (E) redoStack.pop();
-
-        //undoStack.push(value); // pop from the redo stack and push it to the undo stack
         return value;
     }
 }

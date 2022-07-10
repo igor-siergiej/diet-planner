@@ -66,7 +66,7 @@ public class CreateAccountController extends BaseScreenController {
         inputValidator.createEmailValidator(registerEmailTextField, registerEmailMessage);
         inputValidator.createPasswordValidator(registerPasswordField, registerPasswordMessage, showPasswordTextField);
         inputValidator.createRetypePasswordValidator(registerPasswordField,registerRetypePasswordField,registerRetypePasswordMessage);
-        setShowPasswordInit(showPasswordTextField,showPasswordButton,registerPasswordField);
+        setShowPasswordHandlers(showPasswordTextField,showPasswordButton,registerPasswordField);
     }
 
     public void passwordStrengthHandler() {
