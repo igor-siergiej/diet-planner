@@ -21,6 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.util.Optional;
@@ -29,6 +30,7 @@ public class BaseScreenController {
 
     protected static Profile profile;
     protected static UndoRedoStack<String> undoRedoStack = new UndoRedoStack<>();
+    protected static String currentScreen;
 
     @FXML
     protected static Pane mainPane;
@@ -49,22 +51,20 @@ public class BaseScreenController {
     // should have a undo  redo methods here which implement functionality in ui using undoRedoStack
     public void undo(ActionEvent event) {
         goToScreen(event,undoRedoStack.undo());
-        System.out.println(undoRedoStack.toString());
     }
 
     public void redo(ActionEvent event) {
         goToScreen(event,undoRedoStack.redo());
-        System.out.println(undoRedoStack.toString());
     }
 
     // these methods can only be used on screens that do not require a Profile object to be carried
     // on to the next screen if the method is called from an event handler
     public void goToCreateAccountScreen(ActionEvent event) {
-        goToScreen(event, "createaccountcontroller/CreateAccountScreen.fxml");
+        goToScreenWithoutAddingScreen(event, "createaccountcontroller/CreateAccountScreen.fxml");
     }
 
     public void goToStartScreen(ActionEvent event) {
-        goToScreen(event, "startscreencontroller/StartScreen.fxml");
+        goToScreenWithoutAddingScreen(event, "startscreencontroller/StartScreen.fxml");
     }
 
     public void goToViewNutrientsScreen(ActionEvent event) {
@@ -81,8 +81,7 @@ public class BaseScreenController {
     }
 
     public void goToCreateProfileScreen(ActionEvent event) { // this method will open the profile screen window
-        CreateProfileController createProfileController = goToScreen(event, "createprofilecontroller/CreateProfileScreen.fxml").getController();
-        createProfileController.initialize();
+         goToScreenWithoutAddingScreen(event, "createprofilecontroller/CreateProfileScreen.fxml");
     }
 
     public void goToProfileDetailsScreen(ActionEvent event) {
@@ -94,6 +93,8 @@ public class BaseScreenController {
         alert.setTitle("Warning!");
         alert.setHeaderText("Log out?");
         alert.setContentText("Are you sure you want to log out?");
+
+        alert.getDialogPane().getStylesheets().add("/com/app/planner/style.css");
 
         ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.APPLY);
         ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -128,6 +129,15 @@ public class BaseScreenController {
 
     public static FXMLLoader goToScreen(ActionEvent event, String fxmlFilePath) {
         undoRedoStack.addScreen(fxmlFilePath);
+        return getLoader(event, fxmlFilePath);
+    }
+
+    public static FXMLLoader goToScreenWithoutAddingScreen(ActionEvent event, String fxmlFilePath) {
+        return getLoader(event, fxmlFilePath);
+    }
+
+    @NotNull
+    private static FXMLLoader getLoader(ActionEvent event, String fxmlFilePath) {
         System.out.println(undoRedoStack.toString());
         Parent root = null;
         FXMLLoader loader = null;

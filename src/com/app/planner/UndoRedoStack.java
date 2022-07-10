@@ -20,7 +20,7 @@ public class UndoRedoStack<E> extends Stack<E> {
     }
 
     public boolean canUndo() {
-        return !undoStack.isEmpty();
+        return undoStack.size() >= 2;
     }
 
     public void addScreen(E value) {
@@ -48,7 +48,8 @@ public class UndoRedoStack<E> extends Stack<E> {
             throw new IllegalStateException();
         }
         E value = (E) redoStack.pop();
-        undoStack.push(value); // pop from the redo stack and push it to the undo stack
+
+        //undoStack.push(value); // pop from the redo stack and push it to the undo stack
         return value;
     }
 }
