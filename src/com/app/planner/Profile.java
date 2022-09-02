@@ -5,17 +5,20 @@ import com.google.gson.stream.JsonReader;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.math.BigDecimal;
 
 public class Profile {
     private String email;
     private String profileName; // TODO group up some of these variables so there is less instance variables
     private int height;
-    private int weight;
+    private double weight;
     private int age;
     private String sex;
     private boolean pregnant;
@@ -23,11 +26,10 @@ public class Profile {
     private Diary diary;
     private Option options;
     private DailyIntake dailyIntake;
-    private int calorieTarget; //TODO implement
-    private UndoRedoStack<BaseScreenController> undoRedoStack;
-    // stack for undo and redo
+    private double BMI;
+    private ActivityLevelType activityLevel;
 
-    public Profile(String email, String profileName, int height, int weight, int age, String sex, boolean pregnant, boolean breastFeeding, Diary diary, Option options) {
+    public Profile(String email, String profileName, int height, int weight, int age, String sex, boolean pregnant, boolean breastFeeding, Diary diary, ActivityLevelType activityLevel) {
 
         this.email = email;
         this.profileName = profileName;
@@ -38,21 +40,25 @@ public class Profile {
         this.pregnant = pregnant;
         this.breastFeeding = breastFeeding;
         this.diary = diary;
-        this.options = options;
+        this.activityLevel = activityLevel;
 
+        this.options = new Option();
         dailyIntake = new DailyIntake();
         dailyIntake.setMaximumDoses();
         dailyIntake.setTargetNutrients(age, sex, pregnant, breastFeeding);
+        setBMI();
+        setCalorieTarget();
     }
 
     public void initialiseProfile() {
         diary = new Diary();
         dailyIntake = new DailyIntake();
+        options = new Option();
+
         dailyIntake.setMaximumDoses();
         dailyIntake.setTargetNutrients(age, sex, pregnant, breastFeeding);
-    }
-
-    public Profile() {
+        setBMI();
+        setCalorieTarget();
     }
 
     @Override
@@ -66,12 +72,61 @@ public class Profile {
                 ", sex='" + sex + '\'' +
                 ", pregnant=" + pregnant +
                 ", breastFeeding=" + breastFeeding +
-                ", diary=" + diary +
+                //", diary=" + diary +
                 ", options=" + options +
                 ", dailyIntake=" + dailyIntake +
-                ", calorieTarget=" + calorieTarget +
-                ", undoRedoStack=" + undoRedoStack +
+                ", BMI=" + BMI +
+                ", activityLevel=" + activityLevel +
                 '}';
+    }
+
+    public Profile() {
+    }
+
+    private void setBMI() {
+        double heightM = (double) height / 100.0;
+        double heightSquared = Math.pow(heightM, 2.0);
+
+        this.BMI = Math.round(weight / heightSquared * 100.0) / 100.0;
+    }
+
+    private void setCalorieTarget() {
+        BigDecimal bmr;
+        if (sex == "male") {
+            bmr = BigDecimal.valueOf(13.397d * weight + 4.799d * height - 5.677d * age + 88.362d);
+        } else {
+            bmr = BigDecimal.valueOf(9.247d * weight + 3.098d * height - 4.330d * age + 447.593d);
+            if (breastFeeding) {
+                bmr = bmr.add(BigDecimal.valueOf(400d));
+            } else if (pregnant) {
+                bmr = bmr.add(BigDecimal.valueOf(300d));
+            }
+        }
+
+        // multiplying the bmr by the activity level
+        switch (activityLevel) {
+            case SEDENTARY -> bmr = bmr.multiply(BigDecimal.valueOf(1.2d));
+            case LITTLE_EXERCISE -> bmr = bmr.multiply(BigDecimal.valueOf(1.375d));
+            case MODERATE_EXERCISE -> bmr = bmr.multiply(BigDecimal.valueOf(1.465d));
+            case DAILY_EXERCISE -> bmr = bmr.multiply(BigDecimal.valueOf(1.55d));
+            case INTENSE_EXERCISE -> bmr = bmr.multiply(BigDecimal.valueOf(1.725d));
+            case VERY_INTENSIVE_EXERCISE -> bmr = bmr.multiply(BigDecimal.valueOf(1.9d));
+        }
+
+        bmr = bmr.setScale(1,RoundingMode.CEILING);
+
+        TargetNutrients calories = new TargetNutrients();
+        calories.setUnit("kcal");
+        calories.setNutrientName("Energy (kcal)");
+        calories.setValue(bmr.floatValue());
+
+        TargetNutrients caloriesJoules = new TargetNutrients();
+        caloriesJoules.setUnit("kJ");
+        caloriesJoules.setNutrientName("Energy (kJ)");
+        caloriesJoules.setValue(bmr.multiply(BigDecimal.valueOf(4.184)).floatValue()); // kcal to kJ conversion
+
+        dailyIntake.getTargetNutrients().replace("Energy (kcal)", calories);
+        dailyIntake.getTargetNutrients().replace("Energy (kJ)", caloriesJoules);
     }
 
     public String getEmail() {
@@ -90,7 +145,7 @@ public class Profile {
         this.height = height;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 

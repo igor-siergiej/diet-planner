@@ -100,7 +100,7 @@ public class BaseScreenController {
 
         if (option.get() == null) {
             return;
-        } else if (option.get() == ButtonType.APPLY) {
+        } else if (option.get().getButtonData() == ButtonBar.ButtonData.APPLY) {
             goToScreen(event, "startscreencontroller/StartScreen.fxml");
         } else {
             return;
