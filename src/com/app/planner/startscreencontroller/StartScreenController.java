@@ -1,7 +1,6 @@
 package com.app.planner.startscreencontroller;
 
 import com.app.planner.*;
-import com.app.planner.createprofilecontroller.CreateProfileController;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -89,7 +88,7 @@ public class StartScreenController extends BaseScreenController {
         diary.addEntry(entry2);
         diary.addEntry(entry3);
 
-        profile = new Profile("", "testProfile", 0, 0, 14, "female", true, false, diary, new Option());
+        profile = new Profile("", "testProfile", 175, 75, 21, "male", false, false, diary, ActivityLevelType.DAILY_EXERCISE);
         goToProfileScreen(event);
     }
 

@@ -187,6 +187,8 @@ public class ViewNutrientsController extends BaseScreenController {
             float percentValueToTarget = nutrientValue / nutrientTarget;
             String nutrientUnits = targetNutrients.get(nutrientName).getUnit();
             float maximumDose;
+            //TODO create a method for this
+
             if (maximumDoses.get(nutrients.get(counter).getNutrientName()) == null) { //if maxDose not found in hashmap then there is no maxDoge
                 maximumDose = 99999999;
             } else if (maximumDoses.get(nutrients.get(counter).getNutrientName()).getValue() == 0.0) { // if maximum does = 0 means that the target dose is maximum dose

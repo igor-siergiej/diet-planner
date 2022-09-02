@@ -2,11 +2,13 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -143,5 +145,15 @@
             </Button>
          </children>
       </VBox>
+      <Label layoutX="90.0" layoutY="30.0" text="Profile Details" />
+      <HBox layoutX="90.0" layoutY="59.0" prefHeight="44.0" prefWidth="637.0">
+         <children>
+            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+         </children>
+      </HBox>
    </children>
 </Pane>

@@ -2,8 +2,6 @@ package com.app.planner.profilescreencontroller;
 
 import com.app.planner.*;
 import com.app.planner.addentrycontroller.AddEntryController;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;

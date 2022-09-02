@@ -231,7 +231,8 @@ public class AddEntryController extends BaseScreenController {
         float total = carbs + fat + protein;
 
         HashMap<String, TargetNutrients> maximumDoses = profile.getDailyIntake().getMaximumDoses();
-
+        // TODO figure out colours for max doses vs if someone is 20x over their protein goal, shouldn't be green right?
+        // TODO need to create a method to get maximum dose and if it returns 0 then get target dose
         float carbsMaxDose = maximumDoses.get("Carbohydrates").getValue(); // max dose = 0 therefore max dose is target dose
         float fatMaxDose = maximumDoses.get("Fat").getValue();
         float proteinMaxDose = maximumDoses.get("Protein").getValue();

@@ -1,9 +1,7 @@
 package com.app.planner.createprofilecontroller;
 
 import com.app.planner.BaseScreenController;
-import com.app.planner.Mail;
 import com.app.planner.StringValidation;
-import com.app.planner.Profile;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
