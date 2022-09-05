@@ -222,6 +222,7 @@ public class AddEntryController extends BaseScreenController {
     public static void updateMacroUI(float calories, float fat, float carbs, float protein, Label carbsLabel, Label fatLabel, Label proteinLabel, Label calorieLabel,
                                      ProgressBar calorieProgressBar, ProgressBar carbsProgressBar, ProgressBar proteinProgressBar, ProgressBar fatProgressBar, PieChart caloriePieChart) {
         HashMap<String, TargetNutrients> targetNutrients = profile.getDailyIntake().getTargetNutrients();
+        DailyIntake dailyIntake = profile.getDailyIntake();
         // get goals of current profile profile
         float carbsGoal = targetNutrients.get("Carbohydrates").getValue();
         float fatGoal = targetNutrients.get("Fat").getValue();
@@ -230,12 +231,12 @@ public class AddEntryController extends BaseScreenController {
 
         float total = carbs + fat + protein;
 
-        HashMap<String, TargetNutrients> maximumDoses = profile.getDailyIntake().getMaximumDoses();
-        // TODO figure out colours for max doses vs if someone is 20x over their protein goal, shouldn't be green right?
-        // TODO need to create a method to get maximum dose and if it returns 0 then get target dose
-        float carbsMaxDose = maximumDoses.get("Carbohydrates").getValue(); // max dose = 0 therefore max dose is target dose
-        float fatMaxDose = maximumDoses.get("Fat").getValue();
-        float proteinMaxDose = maximumDoses.get("Protein").getValue();
+        // TODO figure out colours for max doses vs if someone is 20x over their fat goal, shouldn't be green right?
+
+        float carbsMaxDose = dailyIntake.getDose("Carbohydrates");
+        float fatMaxDose = dailyIntake.getDose("Fat");
+        float calorieMaxDose = dailyIntake.getDose("Energy (kcal)");
+        float proteinMaxDose = dailyIntake.getDose("Protein");
 
         carbsLabel.setText(carbs + "/" + carbsGoal);
         fatLabel.setText(fat + "/" + fatGoal);
@@ -245,7 +246,7 @@ public class AddEntryController extends BaseScreenController {
         // set progressbar progress
         float percentOfCalories = calories / calorieGoal;
         calorieProgressBar.setProgress(percentOfCalories);
-        //setLimitProgressBar(calorieProgressBar, percentOfCalories, calories > calorieMaxDose);
+        setLimitProgressBar(calorieProgressBar, percentOfCalories, calories > calorieMaxDose);
 
         float percentOfCarbs = carbs / carbsGoal;
         carbsProgressBar.setProgress(percentOfCarbs);
