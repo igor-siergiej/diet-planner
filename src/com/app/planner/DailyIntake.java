@@ -85,7 +85,7 @@ public class DailyIntake {
         maximumDoses = loadNutrientsFromFile(maximumDosesFilePath);
     }
 
-    public float getDose(String nutrientName) {
+    public float getMaximumDose(String nutrientName) {
         float maximumDose = 0;
         if (maximumDoses.get(nutrientName) == null) { //if maxDose not found in hashmap then there is no maxDoge
             maximumDose = 99999999;
@@ -95,5 +95,13 @@ public class DailyIntake {
             maximumDose = maximumDoses.get(nutrientName).getValue(); // set the maximum dose
         }
         return maximumDose;
+    }
+
+    public float getTargetDose(String nutrientName) {
+        return targetNutrients.get(nutrientName).getValue();
+    }
+
+    public String getDoseUnit(String nutrientName) {
+        return targetNutrients.get(nutrientName).getUnit();
     }
 }

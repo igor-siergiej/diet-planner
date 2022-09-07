@@ -233,10 +233,10 @@ public class AddEntryController extends BaseScreenController {
 
         // TODO figure out colours for max doses vs if someone is 20x over their fat goal, shouldn't be green right?
 
-        float carbsMaxDose = dailyIntake.getDose("Carbohydrates");
-        float fatMaxDose = dailyIntake.getDose("Fat");
-        float calorieMaxDose = dailyIntake.getDose("Energy (kcal)");
-        float proteinMaxDose = dailyIntake.getDose("Protein");
+        float carbsMaxDose = dailyIntake.getMaximumDose("Carbohydrates");
+        float fatMaxDose = dailyIntake.getMaximumDose("Fat");
+        float calorieMaxDose = dailyIntake.getMaximumDose("Energy (kcal)");
+        float proteinMaxDose = dailyIntake.getMaximumDose("Protein");
 
         carbsLabel.setText(carbs + "/" + carbsGoal);
         fatLabel.setText(fat + "/" + fatGoal);
