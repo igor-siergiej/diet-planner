@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 
 public class ViewNutrientsController extends BaseScreenController {
 
@@ -74,7 +73,7 @@ public class ViewNutrientsController extends BaseScreenController {
 
         calendarPane.getChildren().add(popupContent);
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("New Value: " + newValue);
+            searchEntries(newValue);
         });
     }
 
@@ -162,40 +161,23 @@ public class ViewNutrientsController extends BaseScreenController {
         populateVBox(macroList, macroVBox);
     }
 
-    public void searchEntries() { // this should be called on click of the calendar
-        /*String comboBoxValue = (String) comboBox.getValue();
-        LocalDate date = datePicker.getValue();
-
-        ArrayList<Entry> searchedEntries;
-        if (comboBoxValue.equals("Get Day")) {
-            searchedEntries = profile.getDiary().getEntriesDay(date);
-        } else {
-            searchedEntries = profile.getDiary().getEntriesWeek(date);
-        }
-        populateEntries(searchedEntries);*/
+    public void searchEntries(LocalDate localDate) { // caled when a day on the calendar is clicked
+        populateEntries(profile.getDiary().getEntriesDay(localDate));
     }
 
     public void populateVBox(ArrayList<Nutrient> nutrients, VBox vbox) {
-        HashMap<String, TargetNutrients> maximumDoses = profile.getDailyIntake().getMaximumDoses();
-        HashMap<String, TargetNutrients> targetNutrients = profile.getDailyIntake().getTargetNutrients();
+        DailyIntake dailyIntake = profile.getDailyIntake();
         int counter = 0;
         for (Node node : vbox.getChildren()) { // for every Hbox in the VBox, i.e. for every nutrient
 
             String nutrientName = nutrients.get(counter).getNutrientName();
             float nutrientValue = nutrients.get(counter).getNutrientValue();
-            float nutrientTarget = targetNutrients.get(nutrientName).getValue();
+            float nutrientTarget = dailyIntake.getTargetDose(nutrientName);
             float percentValueToTarget = nutrientValue / nutrientTarget;
-            String nutrientUnits = targetNutrients.get(nutrientName).getUnit();
+            String nutrientUnits = dailyIntake.getDoseUnit(nutrientName);
             float maximumDose;
-            //TODO create a method for this
 
-            if (maximumDoses.get(nutrients.get(counter).getNutrientName()) == null) { //if maxDose not found in hashmap then there is no maxDoge
-                maximumDose = 99999999;
-            } else if (maximumDoses.get(nutrients.get(counter).getNutrientName()).getValue() == 0.0) { // if maximum does = 0 means that the target dose is maximum dose
-                maximumDose = targetNutrients.get(nutrients.get(counter).getNutrientName()).getValue(); //set the maximum dose to be the same as target dose
-            } else {
-                maximumDose = maximumDoses.get(nutrients.get(counter).getNutrientName()).getValue(); // set the maximum dose
-            }
+            maximumDose = profile.getDailyIntake().getMaximumDose(nutrients.get(counter).getNutrientName());
             boolean isOverMaximumDose = nutrientValue > maximumDose;
 
             HBox hbox = (HBox) node;
@@ -221,6 +203,5 @@ public class ViewNutrientsController extends BaseScreenController {
             }
             counter++;
         }
-
     }
 }
