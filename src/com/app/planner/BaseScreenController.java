@@ -78,6 +78,10 @@ public class BaseScreenController {
         goToScreen(event, "profiledetailscontroller/ProfileDetailsScreen.fxml");
     }
 
+    public void goToGraphViewScreen(ActionEvent event) {
+        goToScreen(event, "graphviewcontroller/GraphViewScreen.fxml");
+    }
+
     protected Optional<ButtonType> createYesNoAlert(Alert.AlertType alertType, String title, String headerText, String contentText) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

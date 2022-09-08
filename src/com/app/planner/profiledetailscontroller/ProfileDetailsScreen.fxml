@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.profiledetailscontroller.ProfileDetailsController">
    <children>
@@ -67,7 +68,7 @@
                   </ImageView>
                </graphic>
             </ToggleButton>
-            <ToggleButton id="menuBarItem" layoutX="10.0" layoutY="368.0" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0" toggleGroup="$menuBarToggleGroup">
+            <ToggleButton id="menuBarItem" layoutX="10.0" layoutY="368.0" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#goToGraphViewScreen" prefHeight="53.0" prefWidth="80.0" toggleGroup="$menuBarToggleGroup">
                <graphic>
                   <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -145,15 +146,27 @@
             </Button>
          </children>
       </VBox>
-      <Label layoutX="90.0" layoutY="30.0" text="Profile Details" />
-      <HBox layoutX="90.0" layoutY="59.0" prefHeight="44.0" prefWidth="637.0">
+      <Label id="titleLabel" layoutX="114.0" layoutY="17.0" prefHeight="64.0" prefWidth="291.0" text="Profile Details">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
+      <VBox layoutX="114.0" layoutY="70.0" prefHeight="88.0" prefWidth="769.0">
          <children>
-            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
-            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
-            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
-            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
-            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+            <HBox prefHeight="50.0" prefWidth="769.0">
+               <children>
+                  <ToggleButton id="plainButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" text="My Details">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="profileDetailsToggleGroup" />
+                     </toggleGroup>
+                  </ToggleButton>
+                  <ToggleButton id="plainButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" text="My Goals" toggleGroup="$profileDetailsToggleGroup" />
+                  <ToggleButton id="plainButton" layoutX="135.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" text="Edit Profile" toggleGroup="$profileDetailsToggleGroup" />
+                  <ToggleButton id="plainButton" layoutX="260.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" text="ToggleButton" toggleGroup="$profileDetailsToggleGroup" />
+                  <ToggleButton id="plainButton" layoutX="385.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" text="ToggleButton" toggleGroup="$profileDetailsToggleGroup" />
+               </children>
+            </HBox>
+            <HBox prefHeight="7.0" prefWidth="769.0" />
          </children>
-      </HBox>
+      </VBox>
    </children>
 </Pane>
