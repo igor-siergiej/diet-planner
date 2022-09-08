@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.planner.profilescreencontroller.ProfileScreenController">
+   <children>
+      <VBox id="menuBar" alignment="TOP_CENTER" prefHeight="534.0" prefWidth="80.0">
+         <children>
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+               <image>
+                  <Image url="@img/whiteLogo.png" />
+               </image>
+            </ImageView>
+            <Separator prefWidth="200.0">
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding></Separator>
+            <ToggleButton id="menuBarItem" fx:id="homeButton" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0">
+               <graphic>
+                  <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/houseIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuBarToggleGroup" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0" toggleGroup="$menuBarToggleGroup">
+               <graphic>
+                  <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/profileIconWhite.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
+            <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#goToAddEntryScreen" prefHeight="53.0" prefWidth="80.0" toggleGroup="$menuBarToggleGroup">
+               <graphic>
+                  <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/addIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
+            <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#goToViewNutrientsScreen" prefHeight="53.0" prefWidth="80.0" toggleGroup="$menuBarToggleGroup">
+               <graphic>
+                  <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/calendar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
+            <ToggleButton id="menuBarItem" layoutX="10.0" layoutY="368.0" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0" toggleGroup="$menuBarToggleGroup">
+               <graphic>
+                  <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/graph.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
+            <ToggleButton id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0" toggleGroup="$menuBarToggleGroup">
+               <graphic>
+                  <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/aboutUs.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
+            <ToggleButton id="menuBarItem" layoutX="10.0" layoutY="368.0" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="80.0" toggleGroup="$menuBarToggleGroup">
+               <graphic>
+                  <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/settings.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
+         </children>
+      </VBox>
+      <VBox id="menuBar" alignment="BOTTOM_CENTER" layoutY="530.0" prefHeight="270.0" prefWidth="80.0">
+         <children>
+            <Button id="menuBarItem" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#saveProfileToDB" prefHeight="53.0" prefWidth="80.0">
+               <graphic>
+                  <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/saveDB.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button id="menuBarItem" layoutX="10.0" layoutY="227.0" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#saveProfileToFile" prefHeight="53.0" prefWidth="80.0">
+               <graphic>
+                  <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/saveFile.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button id="menuBarItem" fx:id="undoButton" layoutX="10.0" layoutY="174.0" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#undo" prefHeight="53.0" prefWidth="80.0">
+               <graphic>
+                  <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/undo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button id="menuBarItem" fx:id="redoButton" layoutX="10.0" layoutY="121.0" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#redo" prefHeight="53.0" prefWidth="80.0">
+               <graphic>
+                  <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/redo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button id="menuBarItem" layoutX="10.0" layoutY="227.0" maxHeight="53.0" maxWidth="82.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#logOut" prefHeight="53.0" prefWidth="80.0">
+               <graphic>
+                  <ImageView id="menuBarItem" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/logOut.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</Pane>
