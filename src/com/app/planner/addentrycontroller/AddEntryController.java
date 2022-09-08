@@ -221,13 +221,12 @@ public class AddEntryController extends BaseScreenController {
 
     public static void updateMacroUI(float calories, float fat, float carbs, float protein, Label carbsLabel, Label fatLabel, Label proteinLabel, Label calorieLabel,
                                      ProgressBar calorieProgressBar, ProgressBar carbsProgressBar, ProgressBar proteinProgressBar, ProgressBar fatProgressBar, PieChart caloriePieChart) {
-        HashMap<String, TargetNutrients> targetNutrients = profile.getDailyIntake().getTargetNutrients();
         DailyIntake dailyIntake = profile.getDailyIntake();
-        // get goals of current profile profile
-        float carbsGoal = targetNutrients.get("Carbohydrates").getValue();
-        float fatGoal = targetNutrients.get("Fat").getValue();
-        float proteinGoal = targetNutrients.get("Protein").getValue();
-        float calorieGoal = targetNutrients.get("Energy (kcal)").getValue();
+
+        float carbsGoal = dailyIntake.getTargetDose("Carbohydrates");
+        float fatGoal = dailyIntake.getTargetDose("Fat");
+        float proteinGoal = dailyIntake.getTargetDose("Protein");
+        float calorieGoal = dailyIntake.getTargetDose("Energy (kcal)");
 
         float total = carbs + fat + protein;
 

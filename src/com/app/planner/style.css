@@ -23,6 +23,18 @@
     -fx-background-color: #101010;
 }
 
+#plainButton {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: transparent transparent white transparent;
+    -fx-border-width: 2px;
+    -fx-text-fill: white;
+}
+
+#plainButton:selected {
+    -fx-border-color: transparent transparent #007bffff transparent;
+    -fx-text-fill: #007bffff;
+}
+
 #signInButton {
     -fx-background-color: linear-gradient(to top right, #007bffff, #6f2284);
     -fx-text-fill: white;
