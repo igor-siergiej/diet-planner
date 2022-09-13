@@ -7,6 +7,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.util.Callback;
+
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class CreateProfileController extends BaseScreenController {
 
@@ -47,6 +52,9 @@ public class CreateProfileController extends BaseScreenController {
     private Button createProfileButton;
 
     @FXML
+    private DatePicker birthDatePicker;
+
+    @FXML
     public void initialize() {
         super.mainPane = this.mainPane;
         setAgeTextFieldEventHandler();
@@ -57,6 +65,25 @@ public class CreateProfileController extends BaseScreenController {
         maleRadioButton.setUserData("Male");
         // Disable create profile button until a profile name is given
         createProfileButton.disableProperty().bind(Bindings.isEmpty(profileNameTextField.textProperty()));
+        initializeBirthdayPicker();
+    }
+
+    private void initializeBirthdayPicker() {
+        Callback<DatePicker, DateCell> callB = new Callback<>() {
+            @Override
+            public DateCell call(final DatePicker param) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        LocalDate today = LocalDate.now();
+                        setDisable(empty || item.isAfter(today.minus(16, ChronoUnit.YEARS)));
+                    } // disabling dates so that user has to be 16
+                };
+            }
+        };
+        birthDatePicker.setDayCellFactory(callB);
+        birthDatePicker.setShowWeekNumbers(false);
     }
 
     public void setAgeTextFieldEventHandler() {
@@ -132,8 +159,14 @@ public class CreateProfileController extends BaseScreenController {
             return false;
         }
 
+        boolean isBirthDatePicked = birthDatePicker.getValue() != null;
+        if (!isBirthDatePicked) {
+            createErrorNotification(mainPane, "Please select your date of birth");
+            return false;
+        }
+
         if (isActivityToggleGroupSelected && isSexToggleGroupSelected && isProfileNameValid &&
-                isAgeValid && isHeightValid && isWeightValid) {
+                isAgeValid && isHeightValid && isWeightValid && isBirthDatePicked) {
             returnBoolean = true;
         }
 
@@ -164,11 +197,11 @@ public class CreateProfileController extends BaseScreenController {
             // TODO if sex is female check for null and get pregnant and breastfeeding checkbox
             profile.setSex((String) sexToggleGroup.getSelectedToggle().getUserData());
             // TODO create activity level enum or something?
-
+            profile.setBirthDate(birthDatePicker.getValue());
             profile.initialiseProfile();
             goToProfileScreen(event);
         } else {
-            // set error style to every part of the form and concatinate a string for the notification string
+            // set error style to every part of the form and concatenate a string for the notification string
 
         }
     }

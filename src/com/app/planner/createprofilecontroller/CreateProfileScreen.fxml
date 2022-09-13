@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
@@ -48,14 +49,16 @@
                </rowConstraints>
                <children>
                   <Label id="greyLabel" text="Age" />
-                  <TextField fx:id="ageTextField" prefHeight="48.0" prefWidth="128.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="ageTextField" prefHeight="48.0" prefWidth="73.0" GridPane.columnIndex="1" />
                </children>
                <VBox.margin>
                   <Insets bottom="20.0" top="10.0" />
                </VBox.margin>
             </GridPane>
-            <GridPane prefHeight="30.0" prefWidth="214.0">
+            <GridPane prefHeight="30.0" prefWidth="446.0">
                <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
@@ -63,14 +66,16 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label id="greyLabel" text="Height (cm)" />
+                  <Label id="greyLabel" prefHeight="29.0" prefWidth="119.0" text="Height (cm)" />
                   <TextField fx:id="heightTextField" prefHeight="48.0" prefWidth="128.0" GridPane.columnIndex="1" />
+                  <Label id="greyLabel" prefHeight="29.0" prefWidth="128.0" text="Weight (kg)" GridPane.columnIndex="2" />
+                  <TextField fx:id="weightTextField" prefHeight="48.0" prefWidth="128.0" GridPane.columnIndex="3" />
                </children>
                <VBox.margin>
                   <Insets bottom="20.0" top="10.0" />
                </VBox.margin>
             </GridPane>
-            <GridPane prefHeight="30.0" prefWidth="214.0">
+            <GridPane prefHeight="30.0" prefWidth="361.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -78,13 +83,13 @@
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
-               <children>
-                  <Label id="greyLabel" prefHeight="29.0" prefWidth="128.0" text="Weight (kg)" />
-                  <TextField fx:id="weightTextField" prefHeight="48.0" prefWidth="128.0" GridPane.columnIndex="1" />
-               </children>
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
+               <children>
+                  <DatePicker fx:id="birthDatePicker" GridPane.columnIndex="1" />
+                  <Label id="greyLabel" text="Date of Birth" />
+               </children>
             </GridPane>
             <GridPane>
               <columnConstraints>

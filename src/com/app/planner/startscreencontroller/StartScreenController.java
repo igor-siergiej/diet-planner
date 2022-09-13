@@ -11,7 +11,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class StartScreenController extends BaseScreenController {
@@ -88,7 +90,10 @@ public class StartScreenController extends BaseScreenController {
         diary.addEntry(entry2);
         diary.addEntry(entry3);
 
-        profile = new Profile("", "testProfile", 175, 75, 21, "male", false, false, diary, ActivityLevelType.DAILY_EXERCISE);
+        LocalDate birthdate = LocalDate.now();
+        birthdate = birthdate.minus(16, ChronoUnit.YEARS);
+
+        profile = new Profile("", "testProfile", 175, 75, birthdate, "male", false, false, diary, ActivityLevelType.DAILY_EXERCISE);
         goToProfileScreen(event);
     }
 

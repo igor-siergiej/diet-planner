@@ -5,7 +5,6 @@ import com.google.gson.stream.JsonReader;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.time.*;
@@ -21,6 +20,7 @@ public class Profile {
     private double weight;
     private int age;
     private String sex;
+    private LocalDate birthDate;
     private boolean pregnant;
     private boolean breastFeeding;
     private Diary diary;
@@ -29,13 +29,14 @@ public class Profile {
     private double BMI;
     private ActivityLevelType activityLevel;
 
-    public Profile(String email, String profileName, int height, int weight, int age, String sex, boolean pregnant, boolean breastFeeding, Diary diary, ActivityLevelType activityLevel) {
+    public Profile(String email, String profileName, int height, int weight, LocalDate birthDate, String sex, boolean pregnant, boolean breastFeeding, Diary diary, ActivityLevelType activityLevel) {
 
         this.email = email;
         this.profileName = profileName;
         this.height = height;
         this.weight = weight;
-        this.age = age;
+        this.birthDate = birthDate;
+        this.age = Period.between(birthDate, LocalDate.now()).getYears();
         this.sex = sex;
         this.pregnant = pregnant;
         this.breastFeeding = breastFeeding;
@@ -127,6 +128,14 @@ public class Profile {
 
         dailyIntake.getTargetNutrients().replace("Energy (kcal)", calories);
         dailyIntake.getTargetNutrients().replace("Energy (kJ)", caloriesJoules);
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getEmail() {
