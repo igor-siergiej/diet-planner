@@ -7,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
 
 import java.util.Stack;
 import java.util.Timer;

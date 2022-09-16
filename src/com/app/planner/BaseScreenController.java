@@ -215,7 +215,6 @@ public class BaseScreenController {
                 .show();
     }
 
-    // this will be used for saving to file or db for instant feedback
     protected void createCorrectNotification(Node owner, String text) {
         ImageView img = new ImageView(new Image("com/app/planner/img/tick.png"));
         img.setFitHeight(50);

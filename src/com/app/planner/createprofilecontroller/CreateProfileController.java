@@ -1,5 +1,6 @@
 package com.app.planner.createprofilecontroller;
 
+import com.app.planner.ActivityLevelType;
 import com.app.planner.BaseScreenController;
 import com.app.planner.StringValidation;
 import javafx.beans.binding.Bindings;
@@ -9,9 +10,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateProfileController extends BaseScreenController {
 
@@ -29,9 +31,6 @@ public class CreateProfileController extends BaseScreenController {
 
     @FXML
     private RadioButton maleRadioButton;
-
-    @FXML
-    private TextField ageTextField;
 
     @FXML
     private TextField heightTextField;
@@ -52,20 +51,58 @@ public class CreateProfileController extends BaseScreenController {
     private Button createProfileButton;
 
     @FXML
-    private DatePicker birthDatePicker;
+    private DatePicker birthDatePicker; //TODO CSS for this
+
+    @FXML
+    private RadioButton SEDENTARY;
+
+    @FXML
+    private RadioButton LITTLE_EXERCISE;
+
+    @FXML
+    private RadioButton MODERATE_EXERCISE;
+
+    @FXML
+    private RadioButton DAILY_EXERCISE;
+
+    @FXML
+    private RadioButton INTENSE_EXERCISE;
+
+    @FXML
+    private RadioButton VERY_INTENSIVE_EXERCISE;
 
     @FXML
     public void initialize() {
         super.mainPane = this.mainPane;
-        setAgeTextFieldEventHandler();
+        //setAgeTextFieldEventHandler();
         setHeightTextFieldEventHandler();
         setWeightTextFieldEventHandler();
         // setting the user data so that it's easier to get the value of it later
         femaleRadioButton.setUserData("Female");
         maleRadioButton.setUserData("Male");
         // Disable create profile button until a profile name is given
-        createProfileButton.disableProperty().bind(Bindings.isEmpty(profileNameTextField.textProperty()));
+        //createProfileButton.disableProperty().bind(Bindings.isEmpty(profileNameTextField.textProperty()));
         initializeBirthdayPicker();
+
+        List<Toggle> toggleList = activityToggleGroup.getToggles();
+        ActivityLevelType[] values = ActivityLevelType.values();
+        for (int i = 0; i < toggleList.size(); i++) {
+            toggleList.get(i).setUserData(values[i]);
+        }
+
+        sexToggleGroup.selectedToggleProperty().addListener((observableValue, oldToggle, newToggle) -> {
+            femaleRadioButton.setId("blueRadioButton");
+            maleRadioButton.setId("blueRadioButton");
+        });
+
+        activityToggleGroup.selectedToggleProperty().addListener((observableValue, oldToggle, newToggle) -> {
+            SEDENTARY.setId("blueRadioButton");
+            LITTLE_EXERCISE.setId("blueRadioButton");
+            MODERATE_EXERCISE.setId("blueRadioButton");
+            DAILY_EXERCISE.setId("blueRadioButton");
+            INTENSE_EXERCISE.setId("blueRadioButton");
+            VERY_INTENSIVE_EXERCISE.setId("blueRadioButton");
+        });
     }
 
     private void initializeBirthdayPicker() {
@@ -86,12 +123,6 @@ public class CreateProfileController extends BaseScreenController {
         birthDatePicker.setShowWeekNumbers(false);
     }
 
-    public void setAgeTextFieldEventHandler() {
-        ageTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            ageTextField.setText(StringValidation.integerValidation(newValue, StringValidation.MAX_AGE_DIGITS));
-        });
-    }
-
     public void setHeightTextFieldEventHandler() {
         heightTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             heightTextField.setText(StringValidation.integerValidation(newValue, StringValidation.MAX_HEIGHT_DIGITS));
@@ -105,7 +136,6 @@ public class CreateProfileController extends BaseScreenController {
     }
 
     public void handleFemaleCheckBoxes() {
-        System.out.println(sexToggleGroup.getSelectedToggle().getUserData());
         if (femaleRadioButton.isSelected()) {
             pregnantCheckBox.setDisable(false);
             breastfeedingCheckBox.setDisable(false);
@@ -117,92 +147,105 @@ public class CreateProfileController extends BaseScreenController {
         }
     }
 
-    public boolean isFormCompleted() {
-        boolean returnBoolean = false;
-        profileNameTextField.setId("");
-
+    public List<String> getListOfErrorMessages() {
+        List<String> returnList = new ArrayList<>();
 
         boolean isProfileNameValid = StringValidation.usernameValidation(profileNameTextField.getText()) == StringValidation.RETURN_STRING;
-        if (!isProfileNameValid) {
-            createErrorNotification(mainPane, "Please enter a valid profile name");
+        String profileNameErrorMessage = StringValidation.usernameValidation(profileNameTextField.getText());
+        if (profileNameTextField.getText().isEmpty()) {
+            profileNameErrorMessage = "Please enter a profile name";
             profileNameTextField.setId("text-field-error");
-            return false;
-        }
-
-        boolean isAgeValid = StringValidation.ageValidation(ageTextField.getText());
-        if (!isTextFieldValid(ageTextField, isAgeValid, "age", "Please enter an age between " +
-                StringValidation.MIN_AGE + " and " + StringValidation.MAX_AGE)) {
-            return false;
+            returnList.add(profileNameErrorMessage);
+        } else if (!isProfileNameValid) {
+            profileNameTextField.setId("text-field-error");
+            returnList.add(profileNameErrorMessage);
         }
 
         boolean isHeightValid = StringValidation.heightValidation(heightTextField.getText());
-        if (!isTextFieldValid(heightTextField, isHeightValid, "height", "Please enter a height between " +
-                StringValidation.MIN_HEIGHT + "cm and " + StringValidation.MAX_HEIGHT + "cm")) {
-            return false;
+        String heightErrorMessage = "Please enter a height between " + StringValidation.MIN_HEIGHT + "cm and " + StringValidation.MAX_HEIGHT + "cm";
+        if (heightTextField.getText().isEmpty()) {
+            heightErrorMessage = "Please enter your height";
+            heightTextField.setId("text-field-error");
+            returnList.add(heightErrorMessage);
+        } else if (!isHeightValid) {
+            heightTextField.setId("text-field-error");
+            returnList.add(heightErrorMessage);
         }
 
         boolean isWeightValid = StringValidation.weightValidation(weightTextField.getText());
-        if (!isTextFieldValid(weightTextField, isWeightValid, "weight", "Please enter a weight between " +
-                StringValidation.MIN_WEIGHT + "kg and " + StringValidation.MAX_WEIGHT + "kg")) {
-            return false;
-        }
-
-        boolean isSexToggleGroupSelected = sexToggleGroup.getSelectedToggle() != null;
-        if (!isSexToggleGroupSelected) {
-            createErrorNotification(mainPane, "Please select your sex");
-            return false;
-        }
-
-        boolean isActivityToggleGroupSelected = activityToggleGroup.getSelectedToggle() != null;
-        if (!isActivityToggleGroupSelected) {
-            createErrorNotification(mainPane, "Please select your activity level");
-            return false;
+        String weightErrorMessage = "Please enter a weight between " + StringValidation.MIN_WEIGHT + "kg and " + StringValidation.MAX_WEIGHT + "kg";
+        if (weightTextField.getText().isEmpty()) {
+            weightErrorMessage = "Please enter your weight";
+            weightTextField.setId("text-field-error");
+            returnList.add(weightErrorMessage);
+        } else if (!isWeightValid) {
+            weightTextField.setId("text-field-error");
+            returnList.add(weightErrorMessage);
         }
 
         boolean isBirthDatePicked = birthDatePicker.getValue() != null;
         if (!isBirthDatePicked) {
-            createErrorNotification(mainPane, "Please select your date of birth");
-            return false;
+            birthDatePicker.setId("text-field-error");
+            String birthDateErrorMessage = "Please select your date of birth";
+            returnList.add(birthDateErrorMessage);
         }
 
-        if (isActivityToggleGroupSelected && isSexToggleGroupSelected && isProfileNameValid &&
-                isAgeValid && isHeightValid && isWeightValid && isBirthDatePicked) {
-            returnBoolean = true;
+        boolean isSexToggleGroupSelected = sexToggleGroup.getSelectedToggle() != null;
+        if (!isSexToggleGroupSelected) {
+            String sexErrorMessage = "Please select your sex";
+            maleRadioButton.setId("errorRadioButton");
+            femaleRadioButton.setId("errorRadioButton");
+            returnList.add(sexErrorMessage);
         }
 
-        return returnBoolean;
+        boolean isActivityToggleGroupSelected = activityToggleGroup.getSelectedToggle() != null;
+        if (!isActivityToggleGroupSelected) {
+            String activityLevelErrorMessage = "Please select your activity level";
+            SEDENTARY.setId("errorRadioButton");
+            LITTLE_EXERCISE.setId("errorRadioButton");
+            MODERATE_EXERCISE.setId("errorRadioButton");
+            DAILY_EXERCISE.setId("errorRadioButton");
+            INTENSE_EXERCISE.setId("errorRadioButton");
+            VERY_INTENSIVE_EXERCISE.setId("errorRadioButton");
+            returnList.add(activityLevelErrorMessage);
+        }
+
+        return returnList;
     }
-
-    public boolean isTextFieldValid(TextField textField, boolean isValid, String formValue, String text) {
-        textField.setId("");
-        if (textField.getText().isBlank()) {
-            createErrorNotification(mainPane, "Please enter your " + formValue);
-            textField.setId("text-field-error");
-            return false;
-        } else if (!isValid) {
-            createErrorNotification(mainPane, text);
-            textField.setId("text-field-error");
-            return false;
-        }
-        return true;
-    }
-
 
     public void createNewProfile(ActionEvent event) {
-        if (isFormCompleted()) {
+        List<String> listOfErrorMessages = getListOfErrorMessages();
+        if (listOfErrorMessages.isEmpty()) {
             profile.setProfileName(profileNameTextField.getText());
-            profile.setAge(Integer.parseInt(ageTextField.getText()));
+            //profile.setAge(Integer.parseInt(ageTextField.getText()));
             profile.setHeight(Integer.parseInt(heightTextField.getText()));
             profile.setWeight(Integer.parseInt(weightTextField.getText()));
-            // TODO if sex is female check for null and get pregnant and breastfeeding checkbox
-            profile.setSex((String) sexToggleGroup.getSelectedToggle().getUserData());
-            // TODO create activity level enum or something?
+
+            String sex = (String) sexToggleGroup.getSelectedToggle().getUserData();
+            profile.setSex(sex);
+            if (sex.equals("Female")) {
+                if (pregnantCheckBox.isSelected()) {
+                    profile.setPregnant(true);
+                } else {
+                    profile.setPregnant(false);
+                }
+                if (breastfeedingCheckBox.isSelected()) {
+                    profile.setBreastFeeding(true);
+                } else {
+                    profile.setBreastFeeding(false);
+                }
+            }
+            profile.setActivityLevel((ActivityLevelType) activityToggleGroup.getSelectedToggle().getUserData());
             profile.setBirthDate(birthDatePicker.getValue());
             profile.initialiseProfile();
             goToProfileScreen(event);
         } else {
-            // set error style to every part of the form and concatenate a string for the notification string
-
+            StringBuilder sb = new StringBuilder();
+            for (String errorMessage : listOfErrorMessages) {
+                sb.append(errorMessage);
+                sb.append("\n");
+            }
+            createErrorNotification(mainPane, sb.toString());
         }
     }
 
