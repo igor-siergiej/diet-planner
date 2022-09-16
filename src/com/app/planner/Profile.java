@@ -35,7 +35,7 @@ public class Profile {
         this.profileName = profileName;
         this.height = height;
         this.weight = weight;
-        this.birthDate = birthDate;
+        this.birthDate = birthDate; //TODO update age if today is birthday
         this.age = Period.between(birthDate, LocalDate.now()).getYears();
         this.sex = sex;
         this.pregnant = pregnant;
@@ -136,6 +136,15 @@ public class Profile {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+        this.age = Period.between(birthDate, LocalDate.now()).getYears();
+    }
+
+    public ActivityLevelType getActivityLevel() {
+        return activityLevel;
+    }
+
+    public void setActivityLevel(ActivityLevelType activityLevel) {
+        this.activityLevel = activityLevel;
     }
 
     public String getEmail() {

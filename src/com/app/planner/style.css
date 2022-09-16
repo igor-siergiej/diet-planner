@@ -286,7 +286,7 @@
 }
 
 #errorRadioButton {
-    -fx-text-fill: red;
+    /*-fx-text-fill: red;*/
 }
 
 #titleLabel .text {
@@ -370,11 +370,28 @@
     -fx-text-fill: #ffffff;
 }
 
+#birthDatePicker  {
+    -fx-background-color: #4b4b4b;
+    -fx-border-radius: 3px;
+    -fx-font-weight: bold;
+    -fx-text-fill: grey;
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #4b4b4b;
+    -fx-border-width: 2px;
+}
+
+#birthDatePicker .text-field {
+    -fx-background-color: #1a1a1a;
+    -fx-background-radius: 0px;
+    -fx-border-radius: 0px;
+    -fx-border-color: #4b4b4b;
+    -fx-border-width: 0px;
+}
+
 .date-picker-popup{
     -fx-min-height: 230;
     -fx-min-width: 400;
     -fx-background-color: #1a1a1a;
-
 }
 
 .date-picker-popup .button{
