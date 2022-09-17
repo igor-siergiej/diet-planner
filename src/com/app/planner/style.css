@@ -388,6 +388,18 @@
     -fx-border-width: 0px;
 }
 
+#errorDatePicker {
+    -fx-background-color: red;
+}
+
+#errorDatePicker .text-field {
+    -fx-background-color: #1a1a1a;
+    -fx-background-radius: 0px;
+    -fx-border-radius: 0px;
+    -fx-border-color: red;
+    -fx-border-width: 0px;
+}
+
 .date-picker-popup{
     -fx-min-height: 230;
     -fx-min-width: 400;

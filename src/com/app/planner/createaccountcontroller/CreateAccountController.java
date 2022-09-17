@@ -1,7 +1,6 @@
 package com.app.planner.createaccountcontroller;
 
 import com.app.planner.*;
-import com.app.planner.createprofilecontroller.CreateProfileController;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
