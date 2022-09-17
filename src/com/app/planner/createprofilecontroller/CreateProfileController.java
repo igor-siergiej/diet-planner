@@ -3,7 +3,6 @@ package com.app.planner.createprofilecontroller;
 import com.app.planner.ActivityLevelType;
 import com.app.planner.BaseScreenController;
 import com.app.planner.StringValidation;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -48,9 +47,6 @@ public class CreateProfileController extends BaseScreenController {
     private TextField profileNameTextField;
 
     @FXML
-    private Button createProfileButton;
-
-    @FXML
     private DatePicker birthDatePicker; //TODO CSS for this
 
     @FXML
@@ -80,8 +76,6 @@ public class CreateProfileController extends BaseScreenController {
         // setting the user data so that it's easier to get the value of it later
         femaleRadioButton.setUserData("Female");
         maleRadioButton.setUserData("Male");
-        // Disable create profile button until a profile name is given
-        //createProfileButton.disableProperty().bind(Bindings.isEmpty(profileNameTextField.textProperty()));
         initializeBirthdayPicker();
 
         List<Toggle> toggleList = activityToggleGroup.getToggles();
@@ -90,9 +84,25 @@ public class CreateProfileController extends BaseScreenController {
             toggleList.get(i).setUserData(values[i]);
         }
 
+        profileNameTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            profileNameTextField.setId("");
+        }));
+
+        heightTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            heightTextField.setId("");
+        }));
+
+        weightTextField.textProperty().addListener(((observableValue, oldValue, newValue) -> {
+            weightTextField.setId("");
+        }));
+
         sexToggleGroup.selectedToggleProperty().addListener((observableValue, oldToggle, newToggle) -> {
             femaleRadioButton.setId("blueRadioButton");
             maleRadioButton.setId("blueRadioButton");
+        });
+
+        birthDatePicker.valueProperty().addListener((observableValue, oldDate, newDate) -> {
+            birthDatePicker.setId("birthDatePicker");
         });
 
         activityToggleGroup.selectedToggleProperty().addListener((observableValue, oldToggle, newToggle) -> {
@@ -185,7 +195,7 @@ public class CreateProfileController extends BaseScreenController {
 
         boolean isBirthDatePicked = birthDatePicker.getValue() != null;
         if (!isBirthDatePicked) {
-            birthDatePicker.setId("text-field-error");
+            birthDatePicker.setId("errorDatePicker");
             String birthDateErrorMessage = "Please select your date of birth";
             returnList.add(birthDateErrorMessage);
         }

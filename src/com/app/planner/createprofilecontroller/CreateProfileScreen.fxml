@@ -51,7 +51,10 @@
                </rowConstraints>
                <children>
                   <Label id="greyLabel" prefHeight="29.0" prefWidth="119.0" text="Height (cm)" />
-                  <TextField fx:id="heightTextField" prefHeight="48.0" prefWidth="128.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="heightTextField" prefHeight="48.0" prefWidth="128.0" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin></TextField>
                   <Label id="greyLabel" prefHeight="29.0" prefWidth="128.0" text="Weight (kg)" GridPane.columnIndex="2" />
                   <TextField fx:id="weightTextField" prefHeight="48.0" prefWidth="128.0" GridPane.columnIndex="3" />
                </children>
@@ -71,7 +74,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
                <children>
-                  <DatePicker fx:id="birthDatePicker" GridPane.columnIndex="1" />
+                  <DatePicker id="birthDatePicker" fx:id="birthDatePicker" GridPane.columnIndex="1" />
                   <Label id="greyLabel" text="Date of Birth" />
                </children>
             </GridPane>
