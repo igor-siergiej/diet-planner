@@ -93,7 +93,7 @@ public class StartScreenController extends BaseScreenController {
         LocalDate birthdate = LocalDate.now();
         birthdate = birthdate.minus(16, ChronoUnit.YEARS);
 
-        profile = new Profile("", "testProfile", 175, 75, birthdate, "male", false, false, diary, ActivityLevelType.DAILY_EXERCISE);
+        profile = new Profile("test@mail.com", "testProfile", 175, 75, birthdate, "male", false, false, diary, ActivityLevelType.DAILY_EXERCISE);
         goToProfileScreen(event);
     }
 

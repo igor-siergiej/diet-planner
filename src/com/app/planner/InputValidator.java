@@ -15,7 +15,7 @@ import java.util.TimerTask;
 public class InputValidator {
     Timer timer;
     Stack<TimerTask> tasks;
-    private final static int VALIDATION_DELAY = 1000;
+    private final static int VALIDATION_DELAY = 800;
 
     public InputValidator() {
         timer = new Timer();
@@ -26,8 +26,7 @@ public class InputValidator {
         EMAIL,
         PASSWORD,
         RETYPE,
-        AGE,
-
+        AGE
     }
 
     public void createEmailValidator(TextField textField, Label messageLabel) {
