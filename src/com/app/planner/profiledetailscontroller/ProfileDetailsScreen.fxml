@@ -405,7 +405,7 @@
             </GridPane>
             <Line endX="1023.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0">
                <VBox.margin>
-                  <Insets bottom="10.0" />
+                  <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </Line>
             <HBox prefHeight="34.0" prefWidth="1125.0">

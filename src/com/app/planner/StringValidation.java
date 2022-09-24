@@ -14,7 +14,7 @@ public class StringValidation {
     public final static int USERNAME_MIN_CHAR = 4;
     public final static int USERNAME_MAX_CHAR = 20;
     public final static int MAX_AGE_DIGITS = 2;
-    public final static int MAX_WEIGHT_DIGITS = 3;
+    public final static int MAX_WEIGHT_DIGITS = 4;
     public final static int MAX_HEIGHT_DIGITS = 3;
     public final static int MAX_PORTION_DIGITS = 4;
     public final static int MIN_AGE = 14;
@@ -172,6 +172,19 @@ public class StringValidation {
         if (input.equals("0") || input.equals("00") || input.equals("000") || input.equals("0000")) {
             return "";
         }
+        if (input.length() > numOfDigits) {
+            return input.substring(0, numOfDigits);
+        }
+        return input;
+    }
+
+    public static String floatValidation(String input, int numOfDigits) {
+        if (!input.matches("[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)")) {
+            return input.replaceAll("[^\\d]", "");
+        }
+        /*if (input.equals("0") || input.equals("00") || input.equals("000") || input.equals("0000")) {
+            return "";
+        }*/
         if (input.length() > numOfDigits) {
             return input.substring(0, numOfDigits);
         }

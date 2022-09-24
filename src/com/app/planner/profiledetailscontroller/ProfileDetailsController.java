@@ -1,6 +1,7 @@
 package com.app.planner.profiledetailscontroller;
 
 import com.app.planner.BaseScreenController;
+import com.app.planner.StringValidation;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
@@ -119,6 +120,15 @@ public class ProfileDetailsController extends BaseScreenController {
             detailsBreastfeedingCheckBox.setDisable(true);
             detailsPregnantCheckBox.setDisable(true);
         }
+
+        // adding listeners to prevent user from typing in invalid input to integer and float textFields
+        editHeightTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            editHeightTextField.setText(StringValidation.integerValidation(newValue, StringValidation.MAX_HEIGHT_DIGITS));
+        });
+
+        editWeightTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            editWeightTextField.setText(StringValidation.floatValidation(newValue, StringValidation.MAX_WEIGHT_DIGITS));
+        });
     }
 
     public void goToDetailsVBox() {
