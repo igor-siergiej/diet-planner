@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class Mail {
 
-    public static void sendMail() throws MessagingException {
+    public static void sendMail(String emailAdress, String subject ,String emailMessage) throws MessagingException {
         Properties prop = new Properties();
         prop.put("mail.smtp.auth", true);
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -25,12 +25,10 @@ public class Mail {
         message.setFrom(new InternetAddress("dietplanner.hello@gmail.com"));
         message.setRecipients(
                 Message.RecipientType.TO, InternetAddress.parse("gregormai@mail.de"));
-        message.setSubject("Mail Subject");
-
-        String msg = "This is my first email using JavaMailer";
+        message.setSubject(subject);
 
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
-        mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
+        mimeBodyPart.setContent(emailMessage, "text/html; charset=utf-8");
 
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(mimeBodyPart);
