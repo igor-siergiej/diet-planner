@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import org.w3c.dom.Text;
 
 public class ProfileDetailsController extends BaseScreenController {
 
@@ -97,37 +96,61 @@ public class ProfileDetailsController extends BaseScreenController {
     private VBox editVBox;
 
     @FXML
+    private CheckBox detailsPregnantCheckBox;
+
+    @FXML
+    private CheckBox detailsBreastfeedingCheckBox;
+
+    @FXML
+    private CheckBox editPregnantCheckBox;
+
+    @FXML
+    private CheckBox editBreastfeedingCheckBox;
+
+    @FXML
     public void initialize() {
-        super.initialize(mainPane,menuBarToggleGroup,profileDetailsToggleButton,undoButton,redoButton);
+        super.initialize(mainPane, menuBarToggleGroup, profileDetailsToggleButton, undoButton, redoButton);
         goToDetailsVBox();
         setToggleGroupHandler(profileDetailsToggleGroup);
         detailsToggleButton.setSelected(true);
+        if (profile.getSex().equals("Male")) { // could switch this to remove the entire HBox instead
+            editBreastfeedingCheckBox.setDisable(true);
+            editPregnantCheckBox.setDisable(true);
+            detailsBreastfeedingCheckBox.setDisable(true);
+            detailsPregnantCheckBox.setDisable(true);
+        }
     }
 
     public void goToDetailsVBox() {
         detailsVBox.setVisible(true);
         editVBox.setVisible(false);
-        setLabels(detailsEmailTextField,detailsProfileNameTextField,detailsHeightTextField,detailsWeightTextField);
-        setActivityLevel(detailsSedentary,detailsLittleExercise,detailsModerateExercise,detailsDailyExercise,detailsIntenseExercise,detailsVeryIntensiveExercise);
+        setLabels(detailsEmailTextField, detailsProfileNameTextField, detailsHeightTextField, detailsWeightTextField, detailsBreastfeedingCheckBox, detailsPregnantCheckBox);
+        setActivityLevel(detailsSedentary, detailsLittleExercise, detailsModerateExercise, detailsDailyExercise, detailsIntenseExercise, detailsVeryIntensiveExercise);
     }
 
     public void goToEditVBox() {
         editVBox.setVisible(true);
         detailsVBox.setVisible(false);
-        setLabels(editEmailTextField,editProfileNameTextField,editHeightTextField,editWeightTextField);
-        setActivityLevel(editSedentary,editLittleExercise,editModerateExercise,editDailyExercise,editIntenseExercise,editVeryIntensiveExercise);
+        setLabels(editEmailTextField, editProfileNameTextField, editHeightTextField, editWeightTextField, editBreastfeedingCheckBox, editPregnantCheckBox);
+        setActivityLevel(editSedentary, editLittleExercise, editModerateExercise, editDailyExercise, editIntenseExercise, editVeryIntensiveExercise);
     }
 
-    public void setLabels(TextField emailtextField, TextField profileNameTextField, TextField heightTextField, TextField weightTextField) {
+    public void setLabels(TextField emailtextField, TextField profileNameTextField, TextField heightTextField, TextField weightTextField, CheckBox breastfeedingCheckBox, CheckBox pregnantCheckBox) {
         emailtextField.setText(profile.getEmail());
         profileNameTextField.setText(profile.getProfileName());
         heightTextField.setText(Integer.toString(profile.getHeight()));
         weightTextField.setText(Double.toString(profile.getWeight()));
+        if (profile.isBreastFeeding()) {
+            breastfeedingCheckBox.setSelected(true);
+        }
+        if (profile.isPregnant()) {
+            pregnantCheckBox.setSelected(true);
+        }
     }
 
     public void resetEditField() {
-        setLabels(editEmailTextField,editProfileNameTextField,editHeightTextField,editWeightTextField);
-        setActivityLevel(editSedentary,editLittleExercise,editModerateExercise,editDailyExercise,editIntenseExercise,editVeryIntensiveExercise);
+        setLabels(editEmailTextField, editProfileNameTextField, editHeightTextField, editWeightTextField, editBreastfeedingCheckBox, editPregnantCheckBox);
+        setActivityLevel(editSedentary, editLittleExercise, editModerateExercise, editDailyExercise, editIntenseExercise, editVeryIntensiveExercise);
     }
 
     public void setActivityLevel(RadioButton sedentary, RadioButton littleExercise, RadioButton moderateExercise, RadioButton dailyExercise, RadioButton intenseExercise, RadioButton veryIntenseExercise) {

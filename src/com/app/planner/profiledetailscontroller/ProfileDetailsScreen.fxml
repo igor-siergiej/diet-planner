@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
@@ -271,9 +272,26 @@
             </GridPane>
             <Line endX="1023.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets bottom="10.0" top="20.0" />
                </VBox.margin>
             </Line>
+            <HBox prefHeight="34.0" prefWidth="1125.0">
+               <children>
+                  <Label id="greyLabel" prefHeight="29.0" prefWidth="250.0" text="Breastfeeding" />
+                  <CheckBox fx:id="detailsBreastfeedingCheckBox" mnemonicParsing="false" />
+               </children>
+            </HBox>
+            <HBox prefHeight="30.0" prefWidth="1125.0">
+               <children>
+                  <Label id="greyLabel" prefHeight="29.0" prefWidth="250.0" text="Pregnant">
+                     <HBox.margin>
+                        <Insets bottom="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <CheckBox fx:id="detailsPregnantCheckBox" mnemonicParsing="false" />
+               </children>
+            </HBox>
+            <Line endX="1023.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" />
          </children>
       </VBox>
       <VBox fx:id="editVBox" layoutX="112.0" layoutY="126.0" prefHeight="645.0" prefWidth="1125.0">
@@ -381,12 +399,32 @@
                   <RadioButton id="blueRadioButton" fx:id="editIntenseExercise" mnemonicParsing="false" text="Intense exercise 6-7 times/week" toggleGroup="$activityToggleGroup1" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <RadioButton id="blueRadioButton" fx:id="editVeryIntensiveExercise" mnemonicParsing="false" text="Very intense exercise daily, or physical job" toggleGroup="$activityToggleGroup1" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
             </GridPane>
             <Line endX="1023.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets bottom="10.0" />
                </VBox.margin>
             </Line>
+            <HBox prefHeight="34.0" prefWidth="1125.0">
+               <children>
+                  <Label id="greyLabel" prefHeight="29.0" prefWidth="250.0" text="Breastfeeding" />
+                  <CheckBox fx:id="editBreastfeedingCheckBox" mnemonicParsing="false" />
+               </children>
+            </HBox>
+            <HBox prefHeight="30.0" prefWidth="1125.0">
+               <children>
+                  <Label id="greyLabel" prefHeight="29.0" prefWidth="250.0" text="Pregnant">
+                     <HBox.margin>
+                        <Insets bottom="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <CheckBox fx:id="editPregnantCheckBox" mnemonicParsing="false" />
+               </children>
+            </HBox>
+            <Line endX="1023.0" startX="-100.0" stroke="WHITE" strokeWidth="2.0" />
          </children>
       </VBox>
    </children>
