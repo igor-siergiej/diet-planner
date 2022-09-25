@@ -8,6 +8,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -62,6 +63,11 @@ public class GraphViewController extends BaseScreenController {
         lineChart.setLayoutX(100);
         lineChart.setLayoutY(67);
         lineChart.setLegendVisible(false);
+        lineChart.lookup(".chart-plot-background").setStyle("-fx-background-color: transparent;");
+
+        xAxis.setTickLabelFill(Color.WHITE);
+        yAxis.setTickLabelFill(Color.WHITE);
+
 
         mainPane.getChildren().add(lineChart);
     }
