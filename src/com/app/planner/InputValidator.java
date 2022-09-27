@@ -15,11 +15,14 @@ import java.util.TimerTask;
 public class InputValidator {
     Timer timer;
     Stack<TimerTask> tasks;
-    private final static int VALIDATION_DELAY = 800;
+    private final static int VALIDATION_DELAY = 500;
 
     public InputValidator() {
         timer = new Timer();
         tasks = new Stack<>();
+        //SEPARATE TIMERS FOR EACH VALIDATOR
+        //CREATE VALIDATOR IN BASE SCREEN??
+        // STATIC OBJECT IN BASE CLASS???
     }
 
     enum ValidatorType {
@@ -37,29 +40,33 @@ public class InputValidator {
         createEventHandler(passwordField, messageLabel, ValidatorType.PASSWORD, null, showPasswordTextField);
     }
 
-    public void createRetypePasswordValidator(PasswordField passwordField, PasswordField retypePasswordField, Label messageLabel) {
-        createEventHandler(retypePasswordField, messageLabel, ValidatorType.RETYPE, passwordField, null);
+    public void createRetypePasswordValidator(PasswordField passwordField, PasswordField retypePasswordField, Label messageLabel, TextField showRetypePasswordTextField) {
+        createEventHandler(retypePasswordField, messageLabel, ValidatorType.RETYPE, passwordField, showRetypePasswordTextField);
     }
 
-    private void createEventHandler(TextField field, Label messageLabel, ValidatorType validatorType, PasswordField retypePasswordField, TextField showPasswordTextField) {
+    private void createEventHandler(TextField field, Label messageLabel, ValidatorType validatorType, PasswordField passwordField, TextField showPasswordTextField) {
         field.addEventHandler(KeyEvent.KEY_RELEASED, keyEvent -> {
+            System.out.println(keyEvent.getText());
             if (keyEvent.getCode().equals(KeyCode.TAB)) {
                 return; //when tab was pressed it would run the task on the textfield that the tab press sent you to, this is a workaround
             }
             messageLabel.setText("");
             field.setId("");
             if (tasks.size() > 0) {
-                tasks.pop();
+                System.out.println("Task Cancelled");
                 timer.cancel();
                 timer.purge();
                 timer = new Timer();
             }
             if (validatorType == ValidatorType.EMAIL) {
+                System.out.println("Task Scheduled");
                 timer.schedule(createEmailTask(field, messageLabel), VALIDATION_DELAY);
             } else  if (validatorType == ValidatorType.PASSWORD){
+                System.out.println("Task Scheduled");
                 timer.schedule(createPasswordTask(field, messageLabel, showPasswordTextField), VALIDATION_DELAY);
             } else {
-                timer.schedule(createRetypePasswordTask(field,messageLabel,retypePasswordField), VALIDATION_DELAY);
+                System.out.println("Task Scheduled");
+                timer.schedule(createRetypePasswordTask(field,messageLabel,passwordField, showPasswordTextField), VALIDATION_DELAY);
             }
         });
     }
@@ -72,8 +79,8 @@ public class InputValidator {
         return getTimerTask(passwordField, messageLabel, ValidatorType.PASSWORD, null, showPasswordTextField);
     }
 
-    private TimerTask createRetypePasswordTask(TextField passwordField, Label messageLabel, PasswordField retypePasswordField) {
-        return getTimerTask(passwordField,messageLabel,ValidatorType.RETYPE, retypePasswordField, null);
+    private TimerTask createRetypePasswordTask(TextField passwordField, Label messageLabel, PasswordField retypePasswordField, TextField showRetypePasswordTextField) {
+        return getTimerTask(passwordField,messageLabel,ValidatorType.RETYPE, retypePasswordField, showRetypePasswordTextField);
     }
 
     @NotNull
@@ -82,6 +89,7 @@ public class InputValidator {
             @Override
             public void run() {
                 Platform.runLater(() -> {
+                    System.out.println("Task executed");
                     String fieldText = field.getText().trim();
                     String retypeFieldText = "";
                     if (retypePasswordField != null) {
@@ -118,6 +126,7 @@ public class InputValidator {
                             messageLabel.setId("errorLabel");
                             messageLabel.setText("Passwords do not match!");
                             field.setId("text-field-error");
+                            showPasswordTextField.setId("text-field-error");
                         }
                     }
                 });
