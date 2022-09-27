@@ -74,10 +74,12 @@
                   <RadioButton id="greenRadioButton" fx:id="numberRadioButton" disable="true" mnemonicParsing="false" text="One number" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            <PasswordField fx:id="registerRetypePasswordField" prefHeight="48.0" prefWidth="331.0" promptText="Re-type Password">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin></PasswordField>
+            <Pane prefHeight="44.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="showRetypePasswordTextField" layoutX="-65.0" prefHeight="48.0" prefWidth="331.0" promptText="Re-type Password" />
+                  <PasswordField fx:id="retypePasswordField" layoutX="-65.0" onKeyTyped="#passwordStrengthHandler" prefHeight="48.0" prefWidth="331.0" promptText="Re-type Password" />
+               </children>
+            </Pane>
             <Label fx:id="registerRetypePasswordMessage" alignment="CENTER" prefHeight="29.0" prefWidth="286.0">
                <VBox.margin>
                   <Insets bottom="20.0" />

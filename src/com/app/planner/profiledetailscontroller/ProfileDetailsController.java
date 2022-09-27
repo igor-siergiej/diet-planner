@@ -1,6 +1,7 @@
 package com.app.planner.profiledetailscontroller;
 
 import com.app.planner.BaseScreenController;
+import com.app.planner.InputValidator;
 import com.app.planner.StringValidation;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -16,6 +17,9 @@ public class ProfileDetailsController extends BaseScreenController {
     private ToggleGroup menuBarToggleGroup;
 
     @FXML
+    private ToggleGroup profileDetailsToggleGroup;
+
+    @FXML
     private ToggleButton profileDetailsToggleButton;
 
     @FXML
@@ -25,128 +29,134 @@ public class ProfileDetailsController extends BaseScreenController {
     private Button redoButton;
 
     @FXML
-    private ToggleButton detailsToggleButton;
+    private ToggleButton editProfileToggleButton;
 
     @FXML
-    private ToggleGroup profileDetailsToggleGroup;
+    private ToggleButton changePasswordToggleButton;
 
     @FXML
-    private TextField detailsEmailTextField;
+    private ToggleButton goalsToggleButton;
 
     @FXML
-    private TextField detailsProfileNameTextField;
+    private ToggleGroup activityToggleGroup;
 
     @FXML
-    private TextField detailsHeightTextField;
+    private TextField emailTextField;
 
     @FXML
-    private TextField detailsWeightTextField;
+    private TextField profileNameTextField;
 
     @FXML
-    private TextField editEmailTextField;
+    private TextField heightTextField;
 
     @FXML
-    private TextField editProfileNameTextField;
+    private TextField weightTextField;
 
     @FXML
-    private TextField editHeightTextField;
+    private RadioButton sedentaryButton;
 
     @FXML
-    private TextField editWeightTextField;
+    private RadioButton littleExerciseButton;
 
     @FXML
-    private RadioButton detailsSedentary;
+    private RadioButton moderateExerciseButton;
 
     @FXML
-    private RadioButton detailsLittleExercise;
+    private RadioButton dailyExerciseButton;
 
     @FXML
-    private RadioButton detailsModerateExercise;
+    private RadioButton intenseExerciseButton;
 
     @FXML
-    private RadioButton detailsDailyExercise;
+    private RadioButton veryIntensiveExerciseButton;
 
     @FXML
-    private RadioButton detailsIntenseExercise;
-
-    @FXML
-    private RadioButton detailsVeryIntensiveExercise;
-
-    @FXML
-    private RadioButton editSedentary;
-
-    @FXML
-    private RadioButton editLittleExercise;
-
-    @FXML
-    private RadioButton editModerateExercise;
-
-    @FXML
-    private RadioButton editDailyExercise;
-
-    @FXML
-    private RadioButton editIntenseExercise;
-
-    @FXML
-    private RadioButton editVeryIntensiveExercise;
-
-    @FXML
-    private VBox detailsVBox;
+    private VBox changePasswordVBox;
 
     @FXML
     private VBox editVBox;
 
     @FXML
-    private CheckBox detailsPregnantCheckBox;
+    private VBox goalsVBox;
 
     @FXML
-    private CheckBox detailsBreastfeedingCheckBox;
+    private CheckBox pregnantCheckBox;
 
     @FXML
-    private CheckBox editPregnantCheckBox;
+    private CheckBox breastfeedingCheckBox;
 
     @FXML
-    private CheckBox editBreastfeedingCheckBox;
+    private TextField passwordTextField;
+
+    @FXML
+    private PasswordField passwordField;
+
+    @FXML
+    private TextField retypePasswordTextField;
+
+    @FXML
+    private PasswordField retypePasswordField;
+
+    @FXML
+    private RadioButton showPasswordButton;
+
+    @FXML
+    private Label passwordMessage;
+
+    @FXML
+    private Label retypePasswordMessage;
 
     @FXML
     public void initialize() {
         super.initialize(mainPane, menuBarToggleGroup, profileDetailsToggleButton, undoButton, redoButton);
-        goToDetailsVBox();
+        goToEditVBox(); // selecting the initial screen from the menuBar
+        editProfileToggleButton.setSelected(true);
         setToggleGroupHandler(profileDetailsToggleGroup);
-        detailsToggleButton.setSelected(true);
-        if (profile.getSex().equals("Male")) { // could switch this to remove the entire HBox instead
-            editBreastfeedingCheckBox.setDisable(true);
-            editPregnantCheckBox.setDisable(true);
-            detailsBreastfeedingCheckBox.setDisable(true);
-            detailsPregnantCheckBox.setDisable(true);
+
+        setShowPasswordHandlers(passwordTextField, showPasswordButton, passwordField);
+        setShowPasswordHandlers(retypePasswordTextField, showPasswordButton, retypePasswordField);
+
+        InputValidator passwordValidator = new InputValidator();
+        passwordValidator.createPasswordValidator(passwordField, passwordMessage, passwordTextField);
+        InputValidator retypePasswordValidator = new InputValidator();
+        retypePasswordValidator.createRetypePasswordValidator(passwordField, retypePasswordField, retypePasswordMessage, retypePasswordTextField);
+
+        if (profile.getSex().equals("Male")) { // could switch this to remove the entire HBox instead?
+            breastfeedingCheckBox.setDisable(true);
+            pregnantCheckBox.setDisable(true);
         }
 
         // adding listeners to prevent user from typing in invalid input to integer and float textFields
-        editHeightTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            editHeightTextField.setText(StringValidation.integerValidation(newValue, StringValidation.MAX_HEIGHT_DIGITS));
+        heightTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            heightTextField.setText(StringValidation.integerValidation(newValue, StringValidation.MAX_HEIGHT_DIGITS));
         });
 
-        editWeightTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            editWeightTextField.setText(StringValidation.floatValidation(newValue, StringValidation.MAX_WEIGHT_DIGITS));
+        weightTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            weightTextField.setText(StringValidation.floatValidation(newValue, StringValidation.MAX_WEIGHT_DIGITS));
         });
     }
 
-    public void goToDetailsVBox() {
-        detailsVBox.setVisible(true);
+    public void goToChangePassword() {
+        changePasswordVBox.setVisible(true);
         editVBox.setVisible(false);
-        setLabels(detailsEmailTextField, detailsProfileNameTextField, detailsHeightTextField, detailsWeightTextField, detailsBreastfeedingCheckBox, detailsPregnantCheckBox);
-        setActivityLevel(detailsSedentary, detailsLittleExercise, detailsModerateExercise, detailsDailyExercise, detailsIntenseExercise, detailsVeryIntensiveExercise);
+        clearPasswordFields();
+        showPasswordButton.setSelected(false);
+    }
+
+    public void goToEditGoals() {
+        changePasswordVBox.setVisible(true);
+        editVBox.setVisible(false);
     }
 
     public void goToEditVBox() {
         editVBox.setVisible(true);
-        detailsVBox.setVisible(false);
-        setLabels(editEmailTextField, editProfileNameTextField, editHeightTextField, editWeightTextField, editBreastfeedingCheckBox, editPregnantCheckBox);
-        setActivityLevel(editSedentary, editLittleExercise, editModerateExercise, editDailyExercise, editIntenseExercise, editVeryIntensiveExercise);
+        changePasswordVBox.setVisible(false);
+        setLabels(emailTextField, profileNameTextField, heightTextField, weightTextField, breastfeedingCheckBox, pregnantCheckBox);
+        setActivityLevel(sedentaryButton, littleExerciseButton, moderateExerciseButton, dailyExerciseButton, intenseExerciseButton, veryIntensiveExerciseButton);
     }
 
-    public void setLabels(TextField emailtextField, TextField profileNameTextField, TextField heightTextField, TextField weightTextField, CheckBox breastfeedingCheckBox, CheckBox pregnantCheckBox) {
-        emailtextField.setText(profile.getEmail());
+    public void setLabels(TextField emailTextField, TextField profileNameTextField, TextField heightTextField, TextField weightTextField, CheckBox breastfeedingCheckBox, CheckBox pregnantCheckBox) {
+        emailTextField.setText(profile.getEmail());
         profileNameTextField.setText(profile.getProfileName());
         heightTextField.setText(Integer.toString(profile.getHeight()));
         weightTextField.setText(Double.toString(profile.getWeight()));
@@ -159,8 +169,8 @@ public class ProfileDetailsController extends BaseScreenController {
     }
 
     public void resetEditField() {
-        setLabels(editEmailTextField, editProfileNameTextField, editHeightTextField, editWeightTextField, editBreastfeedingCheckBox, editPregnantCheckBox);
-        setActivityLevel(editSedentary, editLittleExercise, editModerateExercise, editDailyExercise, editIntenseExercise, editVeryIntensiveExercise);
+        setLabels(emailTextField, profileNameTextField, heightTextField, weightTextField, breastfeedingCheckBox, pregnantCheckBox);
+        setActivityLevel(sedentaryButton, littleExerciseButton, moderateExerciseButton, dailyExerciseButton, intenseExerciseButton, veryIntensiveExerciseButton);
     }
 
     public void setActivityLevel(RadioButton sedentary, RadioButton littleExercise, RadioButton moderateExercise, RadioButton dailyExercise, RadioButton intenseExercise, RadioButton veryIntenseExercise) {
@@ -172,5 +182,19 @@ public class ProfileDetailsController extends BaseScreenController {
             case INTENSE_EXERCISE -> intenseExercise.setSelected(true);
             case VERY_INTENSIVE_EXERCISE -> veryIntenseExercise.setSelected(true);
         }
+    }
+
+    public void clearPasswordFields() {
+        showPasswordButton.setSelected(false);
+
+        passwordField.clear();
+        passwordField.setId("");
+        passwordMessage.setText("");
+        passwordTextField.setId("");
+
+        retypePasswordField.clear();
+        retypePasswordTextField.setId("");
+        retypePasswordMessage.setText("");
+        retypePasswordField.setId("");
     }
 }

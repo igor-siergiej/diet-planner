@@ -19,9 +19,6 @@ public class CreateAccountController extends BaseScreenController {
     private PasswordField registerPasswordField;
 
     @FXML
-    private PasswordField registerRetypePasswordField;
-
-    @FXML
     private Label registerEmailMessage;
 
     @FXML
@@ -29,6 +26,12 @@ public class CreateAccountController extends BaseScreenController {
 
     @FXML
     private Label registerPasswordMessage;
+
+    @FXML
+    private TextField showRetypePasswordTextField;
+
+    @FXML
+    private PasswordField retypePasswordField;
 
     @FXML
     private RadioButton charLimitRadioButton;
@@ -60,12 +63,15 @@ public class CreateAccountController extends BaseScreenController {
     @FXML
     public void initialize() {
         profile = new Profile();
-        registerButton.disableProperty().bind(Bindings.isEmpty(registerEmailTextField.textProperty()).or(Bindings.isEmpty(registerPasswordField.textProperty())).or(Bindings.isEmpty(registerRetypePasswordField.textProperty())));
+        registerButton.disableProperty().bind(Bindings.isEmpty(registerEmailTextField.textProperty()).or
+                (Bindings.isEmpty(registerPasswordField.textProperty())).or
+                (Bindings.isEmpty(retypePasswordField.textProperty())));
         InputValidator inputValidator = new InputValidator();
         inputValidator.createEmailValidator(registerEmailTextField, registerEmailMessage);
         inputValidator.createPasswordValidator(registerPasswordField, registerPasswordMessage, showPasswordTextField);
-        inputValidator.createRetypePasswordValidator(registerPasswordField,registerRetypePasswordField,registerRetypePasswordMessage);
+        inputValidator.createRetypePasswordValidator(registerPasswordField,retypePasswordField,registerRetypePasswordMessage,showRetypePasswordTextField);
         setShowPasswordHandlers(showPasswordTextField,showPasswordButton,registerPasswordField);
+        setShowPasswordHandlers(showRetypePasswordTextField,showPasswordButton,retypePasswordField);
     }
 
     public void passwordStrengthHandler() {
@@ -119,11 +125,11 @@ public class CreateAccountController extends BaseScreenController {
     public void register(ActionEvent event) {
         String email = registerEmailTextField.getText();
         String password = registerPasswordField.getText();
-        String retypePassword = registerRetypePasswordField.getText();
+        String retypePassword = retypePasswordField.getText();
 
         registerEmailTextField.setId("");
         registerPasswordField.setId("");
-        registerRetypePasswordField.setId("");
+        retypePasswordField.setId("");
 
         if (StringValidation.emailValidation(email).equals(StringValidation.RETURN_STRING)) {
             if (StringValidation.passwordValidation(password).equals(StringValidation.RETURN_STRING)) {
@@ -137,7 +143,7 @@ public class CreateAccountController extends BaseScreenController {
                     }
                 } else {
                     createErrorNotification(mainPane, "Passwords not Matching");
-                    registerRetypePasswordField.setId("text-field-error");
+                    retypePasswordField.setId("text-field-error");
                     return;
                 }
             } else {
