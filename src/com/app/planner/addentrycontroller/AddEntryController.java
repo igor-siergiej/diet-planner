@@ -2,7 +2,6 @@ package com.app.planner.addentrycontroller;
 
 import com.app.planner.*;
 import javafx.beans.binding.Bindings;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -217,57 +216,6 @@ public class AddEntryController extends BaseScreenController {
         hbox.getChildren().add(button);
 
         foodVBox.getChildren().add(hbox);
-    }
-
-    public static void updateMacroUI(float calories, float fat, float carbs, float protein, Label carbsLabel, Label fatLabel, Label proteinLabel, Label calorieLabel,
-                                     ProgressBar calorieProgressBar, ProgressBar carbsProgressBar, ProgressBar proteinProgressBar, ProgressBar fatProgressBar, PieChart caloriePieChart) {
-        DailyIntake dailyIntake = profile.getDailyIntake();
-
-        float carbsGoal = dailyIntake.getTargetDose("Carbohydrates");
-        float fatGoal = dailyIntake.getTargetDose("Fat");
-        float proteinGoal = dailyIntake.getTargetDose("Protein");
-        float calorieGoal = dailyIntake.getTargetDose("Energy (kcal)");
-
-        float total = carbs + fat + protein;
-
-        // TODO figure out colours for max doses vs if someone is 20x over their fat goal, shouldn't be green right?
-
-        float carbsMaxDose = dailyIntake.getMaximumDose("Carbohydrates");
-        float fatMaxDose = dailyIntake.getMaximumDose("Fat");
-        float calorieMaxDose = dailyIntake.getMaximumDose("Energy (kcal)");
-        float proteinMaxDose = dailyIntake.getMaximumDose("Protein");
-
-        carbsLabel.setText(carbs + "/" + carbsGoal);
-        fatLabel.setText(fat + "/" + fatGoal);
-        proteinLabel.setText(protein + "/" + proteinGoal);
-        calorieLabel.setText(calories + "/" + calorieGoal);
-
-        // set progressbar progress
-        float percentOfCalories = calories / calorieGoal;
-        calorieProgressBar.setProgress(percentOfCalories);
-        setLimitProgressBar(calorieProgressBar, percentOfCalories, calories > calorieMaxDose);
-
-        float percentOfCarbs = carbs / carbsGoal;
-        carbsProgressBar.setProgress(percentOfCarbs);
-        setLimitProgressBar(carbsProgressBar, percentOfCarbs, carbs > carbsMaxDose);
-
-        float percentOfFat = fat / fatGoal;
-        fatProgressBar.setProgress(percentOfFat);
-        setLimitProgressBar(fatProgressBar, percentOfFat, fat > fatMaxDose);
-
-        float percentOfProtein = protein / proteinGoal;
-        proteinProgressBar.setProgress(percentOfProtein);
-        setLimitProgressBar(proteinProgressBar, percentOfProtein, protein > proteinMaxDose);
-
-        // set piechart values
-        ObservableList<PieChart.Data> pieChartData =
-                observableArrayList( // s = visual name, v = value where percentage will be calculated automatically
-                        new PieChart.Data("Fat " + String.format("%.1f", fat / total * 100) + "%", fat),
-                        new PieChart.Data("Carbohydrates " + String.format("%.1f", carbs / total * 100) + "%", carbs),
-                        new PieChart.Data("Protein " + String.format("%.1f", protein / total * 100) + "%", protein));
-
-        caloriePieChart.setData(pieChartData);
-        caloriePieChart.setLegendVisible(false);
     }
 
     public void showNutrients(ArrayList<Food> foods) {
