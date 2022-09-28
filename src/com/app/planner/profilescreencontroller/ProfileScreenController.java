@@ -1,7 +1,6 @@
 package com.app.planner.profilescreencontroller;
 
 import com.app.planner.*;
-import com.app.planner.addentrycontroller.AddEntryController;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
@@ -82,7 +81,7 @@ public class ProfileScreenController extends BaseScreenController {
         float protein = profile.getNutrientValueForCurrentDay("Protein");
 
         // load up the progressbars and pie chart
-        AddEntryController.updateMacroUI(calories,fat,carbs,protein,carbsLabel,fatLabel,proteinLabel,calorieLabel,calorieProgressBar,carbsProgressBar
+        updateMacroUI(calories,fat,carbs,protein,carbsLabel,fatLabel,proteinLabel,calorieLabel,calorieProgressBar,carbsProgressBar
                 ,proteinProgressBar,fatProgressBar,caloriePieChart);
 
         populateEntries();

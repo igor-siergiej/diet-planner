@@ -2,6 +2,7 @@ package com.app.planner;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +23,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.util.Optional;
 
+import static javafx.collections.FXCollections.observableArrayList;
+
 public class BaseScreenController {
 
     protected static Profile profile;
@@ -29,6 +33,7 @@ public class BaseScreenController {
     @FXML
     protected static Pane mainPane;
 
+    //TODO should all the methods here be protected
     @FXML
     public void initialize(Pane mainPane, ToggleGroup toggleGroup, ToggleButton toggleButton, Button undoButton, Button redoButton) {
         BaseScreenController.mainPane = mainPane;
@@ -132,8 +137,62 @@ public class BaseScreenController {
         // this method exists to prevent adding to undoRedoStack before loading profile Screen
     }
 
+    public static void updateMacroUI(float calories, float fat, float carbs, float protein, Label carbsLabel, Label fatLabel, Label proteinLabel, Label calorieLabel,
+                                     ProgressBar calorieProgressBar, ProgressBar carbsProgressBar, ProgressBar proteinProgressBar, ProgressBar fatProgressBar, PieChart caloriePieChart) {
+        DailyIntake dailyIntake = profile.getDailyIntake();
+
+        float carbsGoal = dailyIntake.getTargetDose("Carbohydrates");
+        float fatGoal = dailyIntake.getTargetDose("Fat");
+        float proteinGoal = dailyIntake.getTargetDose("Protein");
+        float calorieGoal = dailyIntake.getTargetDose("Energy (kcal)");
+
+        // TODO figure out colours for max doses vs if someone is 20x over their fat goal, shouldn't be green right?
+
+        float carbsMaxDose = dailyIntake.getMaximumDose("Carbohydrates");
+        float fatMaxDose = dailyIntake.getMaximumDose("Fat");
+        float calorieMaxDose = dailyIntake.getMaximumDose("Energy (kcal)");
+        float proteinMaxDose = dailyIntake.getMaximumDose("Protein");
+
+        carbsLabel.setText(carbs + "/" + carbsGoal);
+        fatLabel.setText(fat + "/" + fatGoal);
+        proteinLabel.setText(protein + "/" + proteinGoal);
+        calorieLabel.setText(calories + "/" + calorieGoal);
+
+        // set progressbar progress
+        float percentOfCalories = calories / calorieGoal;
+        calorieProgressBar.setProgress(percentOfCalories);
+        setLimitProgressBar(calorieProgressBar, percentOfCalories, calories > calorieMaxDose);
+
+        float percentOfCarbs = carbs / carbsGoal;
+        carbsProgressBar.setProgress(percentOfCarbs);
+        setLimitProgressBar(carbsProgressBar, percentOfCarbs, carbs > carbsMaxDose);
+
+        float percentOfFat = fat / fatGoal;
+        fatProgressBar.setProgress(percentOfFat);
+        setLimitProgressBar(fatProgressBar, percentOfFat, fat > fatMaxDose);
+
+        float percentOfProtein = protein / proteinGoal;
+        proteinProgressBar.setProgress(percentOfProtein);
+        setLimitProgressBar(proteinProgressBar, percentOfProtein, protein > proteinMaxDose);
+
+        // set piechart values
+        setPieChartValues(fat, carbs, protein, caloriePieChart);
+    }
+
+    protected static void setPieChartValues(float fat, float carbs, float protein, PieChart caloriePieChart) {
+        float total = fat + carbs + protein;
+        ObservableList<PieChart.Data> pieChartData =
+                observableArrayList( // s = visual name, v = value where percentage will be calculated automatically
+                        new PieChart.Data("Fat " + String.format("%.1f", fat / total * 100) + "%", fat),
+                        new PieChart.Data("Carbohydrates " + String.format("%.1f", carbs / total * 100) + "%", carbs),
+                        new PieChart.Data("Protein " + String.format("%.1f", protein / total * 100) + "%", protein));
+
+        caloriePieChart.setData(pieChartData);
+        caloriePieChart.setLegendVisible(false);
+    }
+
     @NotNull
-    private static FXMLLoader getLoader(ActionEvent event, String fxmlFilePath) {
+    public static FXMLLoader getLoader(ActionEvent event, String fxmlFilePath) {
         Parent root = null;
         FXMLLoader loader = null;
         try {

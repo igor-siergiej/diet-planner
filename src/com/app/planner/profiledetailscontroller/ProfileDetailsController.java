@@ -4,6 +4,7 @@ import com.app.planner.BaseScreenController;
 import com.app.planner.InputValidator;
 import com.app.planner.StringValidation;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -107,6 +108,18 @@ public class ProfileDetailsController extends BaseScreenController {
     private Label retypePasswordMessage;
 
     @FXML
+    private PieChart pieChart;
+
+    @FXML
+    private TextField fatTextField;
+
+    @FXML
+    private TextField proteinTextField;
+
+    @FXML
+    private TextField carbsTextField;
+
+    @FXML
     public void initialize() {
         super.initialize(mainPane, menuBarToggleGroup, profileDetailsToggleButton, undoButton, redoButton);
         goToEditVBox(); // selecting the initial screen from the menuBar
@@ -134,23 +147,65 @@ public class ProfileDetailsController extends BaseScreenController {
         weightTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             weightTextField.setText(StringValidation.floatValidation(newValue, StringValidation.MAX_WEIGHT_DIGITS));
         });
+
+        fatTextField.setText(String.valueOf(profile.getDailyIntake().getTargetNutrients().get("Fat").getValue()));
+        proteinTextField.setText(String.valueOf(profile.getDailyIntake().getTargetNutrients().get("Protein").getValue()));
+        carbsTextField.setText(String.valueOf(profile.getDailyIntake().getTargetNutrients().get("Carbohydrates").getValue()));
+
+        updatePieChart();
+
+        fatTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            fatTextField.setText(StringValidation.integerValidation(newValue, 3));//string validation
+            updatePieChart();
+        });
+
+        proteinTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            proteinTextField.setText(StringValidation.integerValidation(newValue, 3));//string validation
+            updatePieChart();
+        });
+
+        carbsTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            carbsTextField.setText(StringValidation.integerValidation(newValue, 3));//string validation
+            updatePieChart();
+        });
+
+
     }
 
     public void goToChangePassword() {
         changePasswordVBox.setVisible(true);
         editVBox.setVisible(false);
+        goalsVBox.setVisible(false);
         clearPasswordFields();
         showPasswordButton.setSelected(false);
     }
 
+    public void updatePieChart() {
+        float fat = getMacroNutrient(fatTextField);
+        float carbs = getMacroNutrient(carbsTextField);
+        float protein = getMacroNutrient(proteinTextField);
+
+        setPieChartValues(fat,carbs,protein,pieChart);
+    }
+
+    private float getMacroNutrient(TextField textField) {
+        float value = 0;
+        if (!textField.getText().isBlank()) {
+            value = Float.valueOf(textField.getText());
+        }
+        return value;
+    }
+
     public void goToEditGoals() {
-        changePasswordVBox.setVisible(true);
+        goalsVBox.setVisible(true);
+        changePasswordVBox.setVisible(false);
         editVBox.setVisible(false);
     }
 
     public void goToEditVBox() {
         editVBox.setVisible(true);
         changePasswordVBox.setVisible(false);
+        goalsVBox.setVisible(false);
         setLabels(emailTextField, profileNameTextField, heightTextField, weightTextField, breastfeedingCheckBox, pregnantCheckBox);
         setActivityLevel(sedentaryButton, littleExerciseButton, moderateExerciseButton, dailyExerciseButton, intenseExerciseButton, veryIntensiveExerciseButton);
     }
