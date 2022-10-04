@@ -48,8 +48,8 @@ public class StartScreenController extends BaseScreenController {
         loginButton.disableProperty().bind(Bindings.isEmpty(loginEmailTextField.textProperty()).or(Bindings.isEmpty(loginPasswordField.textProperty())));
         InputValidator inputValidator = new InputValidator();
         inputValidator.createEmailValidator(loginEmailTextField, loginEmailMessage);
-        inputValidator.createPasswordValidator(loginPasswordField, loginPasswordMessage, showPasswordTextField);
-        setShowPasswordHandlers(showPasswordTextField,showPasswordButton,loginPasswordField);
+        inputValidator.createPasswordValidator(loginPasswordField, showPasswordTextField, loginPasswordMessage);
+        setShowPasswordHandlers(showPasswordTextField, showPasswordButton, loginPasswordField);
     }
 
     // TODO move this to test class in the future
