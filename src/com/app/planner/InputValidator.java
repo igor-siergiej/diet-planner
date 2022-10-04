@@ -33,26 +33,26 @@ public class InputValidator {
     }
 
     public void createEmailValidator(TextField textField, Label messageLabel) {
-        createEventHandler(textField, messageLabel, ValidatorType.EMAIL, null, null);
+        createEventHandler(textField, null, messageLabel, null, ValidatorType.EMAIL);
     }
 
-    public void createPasswordValidator(PasswordField passwordField, Label messageLabel, TextField showPasswordTextField) {
-        createEventHandler(passwordField, messageLabel, ValidatorType.PASSWORD, null, showPasswordTextField);
+    public void createPasswordValidator(PasswordField passwordField, TextField showPasswordTextField, Label messageLabel) {
+        createEventHandler(passwordField, null, messageLabel, showPasswordTextField, ValidatorType.PASSWORD);
     }
 
-    public void createPasswordValidator(TextField showPasswordTextField, Label messageLabel, PasswordField passwordField) {
-        createEventHandler(showPasswordTextField, messageLabel, ValidatorType.PASSWORD, passwordField, null);
+    public void createPasswordValidator(TextField showPasswordTextField, PasswordField passwordField, Label messageLabel) {
+        createEventHandler(showPasswordTextField, null, messageLabel, passwordField, ValidatorType.PASSWORD);
     }
 
     public void createRetypePasswordValidator(PasswordField passwordField, PasswordField retypePasswordField, Label messageLabel, TextField showRetypePasswordTextField) {
-        createEventHandler(retypePasswordField, messageLabel, ValidatorType.RETYPE, passwordField, showRetypePasswordTextField);
+        createEventHandler(retypePasswordField, passwordField, messageLabel, showRetypePasswordTextField, ValidatorType.RETYPE);
     }
 
-    public void createRetypePasswordTextValidator(TextField showRetypePasswordTextField, TextField showPasswordTextField, Label messageLabel, PasswordField retypePasswordField) {
-        createEventHandler(showPasswordTextField, messageLabel, ValidatorType.RETYPE, retypePasswordField, showRetypePasswordTextField);
+    public void createRetypePasswordValidator(TextField showRetypePasswordTextField, TextField showPasswordTextField, Label messageLabel, PasswordField retypePasswordField) {
+        createEventHandler(showRetypePasswordTextField, showPasswordTextField, messageLabel, retypePasswordField, ValidatorType.RETYPE);
     }
 
-    private void createEventHandler(TextField field, Label messageLabel, ValidatorType validatorType, PasswordField passwordField, TextField showPasswordTextField) {
+    private void createEventHandler(TextField field, TextField passwordField, Label messageLabel, TextField showPasswordTextField, ValidatorType validatorType) {
         field.addEventHandler(KeyEvent.KEY_RELEASED, keyEvent -> {
             System.out.println(keyEvent.getText());
             if (keyEvent.getCode().equals(KeyCode.TAB)) {
@@ -71,37 +71,37 @@ public class InputValidator {
                 timer.schedule(createEmailTask(field, messageLabel), VALIDATION_DELAY);
             } else if (validatorType == ValidatorType.PASSWORD) {
                 System.out.println("Task Scheduled");
-                timer.schedule(createPasswordTask(field, messageLabel, showPasswordTextField), VALIDATION_DELAY);
+                timer.schedule(createPasswordTask(field, showPasswordTextField, messageLabel), VALIDATION_DELAY);
             } else {
                 System.out.println("Task Scheduled");
-                timer.schedule(createRetypePasswordTask(field, messageLabel, passwordField, showPasswordTextField), VALIDATION_DELAY);
+                timer.schedule(createRetypePasswordTask(field, passwordField, messageLabel, showPasswordTextField), VALIDATION_DELAY);
             }
         });
     }
 
     private TimerTask createEmailTask(TextField textField, Label messageLabel) {
-        return getTimerTask(textField, messageLabel, ValidatorType.EMAIL, null, null);
+        return getTimerTask(textField, null, messageLabel, null, ValidatorType.EMAIL);
     }
 
-    private TimerTask createPasswordTask(TextField passwordField, Label messageLabel, TextField showPasswordTextField) {
-        return getTimerTask(passwordField, messageLabel, ValidatorType.PASSWORD, null, showPasswordTextField);
+    private TimerTask createPasswordTask(TextField passwordField, TextField showPasswordTextField, Label messageLabel) {
+        return getTimerTask(passwordField, null, messageLabel, showPasswordTextField, ValidatorType.PASSWORD);
     }
 
-    private TimerTask createRetypePasswordTask(TextField passwordField, Label messageLabel, PasswordField retypePasswordField, TextField showRetypePasswordTextField) {
-        return getTimerTask(passwordField, messageLabel, ValidatorType.RETYPE, retypePasswordField, showRetypePasswordTextField);
+    private TimerTask createRetypePasswordTask(TextField passwordField, TextField retypePasswordField, Label messageLabel, TextField showRetypePasswordTextField) {
+        return getTimerTask(passwordField, retypePasswordField, messageLabel, showRetypePasswordTextField, ValidatorType.RETYPE);
     }
 
     @NotNull
-    private TimerTask getTimerTask(TextField field, Label messageLabel, ValidatorType validatorType, PasswordField retypePasswordField, TextField showPasswordTextField) {
+    private TimerTask getTimerTask(TextField field, TextField compareField, Label messageLabel, TextField showPasswordTextField, ValidatorType validatorType) {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 Platform.runLater(() -> {
                     System.out.println("Task executed");
                     String fieldText = field.getText().trim();
-                    String retypeFieldText = "";
-                    if (retypePasswordField != null) {
-                        retypeFieldText = retypePasswordField.getText().trim();
+                    String comapareFieldText = "";
+                    if (compareField != null) {
+                        comapareFieldText = compareField.getText().trim();
                     }
                     if (validatorType == ValidatorType.EMAIL) {
                         if (StringValidation.emailValidation(fieldText).equals(StringValidation.RETURN_STRING)) {
@@ -125,17 +125,20 @@ public class InputValidator {
                             field.setId("text-field-error");
                             showPasswordTextField.setId("text-field-error");
                         }
-                    } else {
-                        if (fieldText.equals(retypeFieldText)) {
+                    } else if (validatorType == ValidatorType.RETYPE) {
+                        if (fieldText.equals(comapareFieldText)) {
                             messageLabel.setId("correctLabel");
                             messageLabel.setText("Passwords Match!");
                             field.setId("text-field-correct");
+                            showPasswordTextField.setId("text-field-correct");
                         } else {
                             messageLabel.setId("errorLabel");
                             messageLabel.setText("Passwords do not match!");
                             field.setId("text-field-error");
                             showPasswordTextField.setId("text-field-error");
                         }
+                    } else {
+                        throw new RuntimeException("Unknown ValidatorType provided");
                     }
                 });
             }

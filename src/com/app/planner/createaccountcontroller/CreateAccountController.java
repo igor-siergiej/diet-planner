@@ -68,10 +68,10 @@ public class CreateAccountController extends BaseScreenController {
                 (Bindings.isEmpty(retypePasswordField.textProperty())));
         InputValidator inputValidator = new InputValidator();
         inputValidator.createEmailValidator(registerEmailTextField, registerEmailMessage);
-        inputValidator.createPasswordValidator(registerPasswordField, registerPasswordMessage, showPasswordTextField);
-        inputValidator.createRetypePasswordValidator(registerPasswordField,retypePasswordField,registerRetypePasswordMessage,showRetypePasswordTextField);
-        setShowPasswordHandlers(showPasswordTextField,showPasswordButton,registerPasswordField);
-        setShowPasswordHandlers(showRetypePasswordTextField,showPasswordButton,retypePasswordField);
+        inputValidator.createPasswordValidator(registerPasswordField, showPasswordTextField, registerPasswordMessage);
+        inputValidator.createRetypePasswordValidator(registerPasswordField, retypePasswordField, registerRetypePasswordMessage, showRetypePasswordTextField);
+        setShowPasswordHandlers(showPasswordTextField, showPasswordButton, registerPasswordField);
+        setShowPasswordHandlers(showRetypePasswordTextField, showPasswordButton, retypePasswordField);
     }
 
     public void passwordStrengthHandler() {

@@ -142,12 +142,12 @@ public class ProfileDetailsController extends BaseScreenController {
         setShowPasswordHandlers(retypePasswordTextField, showPasswordButton, retypePasswordField);
 
         InputValidator passwordValidator = new InputValidator();
-        passwordValidator.createPasswordValidator(passwordField, passwordMessage, passwordTextField);
-        passwordValidator.createPasswordValidator(passwordTextField,passwordMessage,passwordField);
+        passwordValidator.createPasswordValidator(passwordField, passwordTextField, passwordMessage);
+        passwordValidator.createPasswordValidator(passwordTextField, passwordField, passwordMessage);
 
         InputValidator retypePasswordValidator = new InputValidator();
         retypePasswordValidator.createRetypePasswordValidator(passwordField, retypePasswordField, retypePasswordMessage, retypePasswordTextField);
-        retypePasswordValidator.createRetypePasswordTextValidator(passwordField, retypePasswordTextField, retypePasswordMessage, retypePasswordField);
+        retypePasswordValidator.createRetypePasswordValidator(retypePasswordTextField, passwordField, retypePasswordMessage, retypePasswordField);
 
         if (profile.getSex().equals("Male")) { // could switch this to remove the entire HBox instead?
             breastfeedingCheckBox.setDisable(true);
