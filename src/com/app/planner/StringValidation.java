@@ -2,6 +2,8 @@ package com.app.planner;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringValidation {
 
@@ -182,12 +184,7 @@ public class StringValidation {
         if (!input.matches("[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)")) {
             return input.replaceAll("[^\\d]", "");
         }
-        /*if (input.equals("0") || input.equals("00") || input.equals("000") || input.equals("0000")) {
-            return "";
-        }*/
-        if (input.length() > numOfDigits) {
-            return input.substring(0, numOfDigits);
-        }
+
         return input;
     }
 }

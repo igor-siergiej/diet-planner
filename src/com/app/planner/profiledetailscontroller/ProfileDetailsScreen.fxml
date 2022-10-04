@@ -399,7 +399,7 @@
                   <Pane prefHeight="80.0" prefWidth="184.0">
                      <children>
                         <Button alignment="CENTER_RIGHT" layoutX="105.0" layoutY="11.0" mnemonicParsing="false" text="Save" />
-                        <Button alignment="CENTER_RIGHT" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#resetEditField" text="Cancel" />
+                        <Button alignment="CENTER_RIGHT" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#resetMacroFields" text="Cancel" />
                      </children>
                   </Pane>
                </children>

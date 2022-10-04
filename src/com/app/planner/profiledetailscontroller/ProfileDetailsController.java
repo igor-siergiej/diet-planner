@@ -8,6 +8,11 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.util.converter.IntegerStringConverter;
+
+import java.text.DecimalFormat;
+import java.text.ParsePosition;
+import java.util.function.UnaryOperator;
 
 public class ProfileDetailsController extends BaseScreenController {
 
@@ -122,6 +127,13 @@ public class ProfileDetailsController extends BaseScreenController {
     @FXML
     public void initialize() {
         super.initialize(mainPane, menuBarToggleGroup, profileDetailsToggleButton, undoButton, redoButton);
+        // adding listeners to prevent user from typing in invalid input to integer and float textFields
+        createFloatTextFormatter(fatTextField, 5);
+        createFloatTextFormatter(proteinTextField, 5);
+        createFloatTextFormatter(carbsTextField, 5);
+        createIntegerTextFormatter(heightTextField, StringValidation.MAX_HEIGHT_DIGITS);
+        createFloatTextFormatter(weightTextField, StringValidation.MAX_WEIGHT_DIGITS);
+
         goToEditVBox(); // selecting the initial screen from the menuBar
         editProfileToggleButton.setSelected(true);
         setToggleGroupHandler(profileDetailsToggleGroup);
@@ -131,45 +143,31 @@ public class ProfileDetailsController extends BaseScreenController {
 
         InputValidator passwordValidator = new InputValidator();
         passwordValidator.createPasswordValidator(passwordField, passwordMessage, passwordTextField);
+        passwordValidator.createPasswordValidator(passwordTextField,passwordMessage,passwordField);
+
         InputValidator retypePasswordValidator = new InputValidator();
         retypePasswordValidator.createRetypePasswordValidator(passwordField, retypePasswordField, retypePasswordMessage, retypePasswordTextField);
+        retypePasswordValidator.createRetypePasswordTextValidator(passwordField, retypePasswordTextField, retypePasswordMessage, retypePasswordField);
 
         if (profile.getSex().equals("Male")) { // could switch this to remove the entire HBox instead?
             breastfeedingCheckBox.setDisable(true);
             pregnantCheckBox.setDisable(true);
         }
 
-        // adding listeners to prevent user from typing in invalid input to integer and float textFields
-        heightTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            heightTextField.setText(StringValidation.integerValidation(newValue, StringValidation.MAX_HEIGHT_DIGITS));
-        });
-
-        weightTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            weightTextField.setText(StringValidation.floatValidation(newValue, StringValidation.MAX_WEIGHT_DIGITS));
-        });
-
-        fatTextField.setText(String.valueOf(profile.getDailyIntake().getTargetNutrients().get("Fat").getValue()));
-        proteinTextField.setText(String.valueOf(profile.getDailyIntake().getTargetNutrients().get("Protein").getValue()));
-        carbsTextField.setText(String.valueOf(profile.getDailyIntake().getTargetNutrients().get("Carbohydrates").getValue()));
-
+        resetMacroFields();
         updatePieChart();
 
         fatTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            fatTextField.setText(StringValidation.integerValidation(newValue, 3));//string validation
             updatePieChart();
         });
 
         proteinTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            proteinTextField.setText(StringValidation.integerValidation(newValue, 3));//string validation
             updatePieChart();
         });
 
         carbsTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            carbsTextField.setText(StringValidation.integerValidation(newValue, 3));//string validation
             updatePieChart();
         });
-
-
     }
 
     public void goToChangePassword() {
@@ -185,7 +183,7 @@ public class ProfileDetailsController extends BaseScreenController {
         float carbs = getMacroNutrient(carbsTextField);
         float protein = getMacroNutrient(proteinTextField);
 
-        setPieChartValues(fat,carbs,protein,pieChart);
+        setPieChartValues(fat, carbs, protein, pieChart);
     }
 
     private float getMacroNutrient(TextField textField) {
@@ -226,6 +224,12 @@ public class ProfileDetailsController extends BaseScreenController {
     public void resetEditField() {
         setLabels(emailTextField, profileNameTextField, heightTextField, weightTextField, breastfeedingCheckBox, pregnantCheckBox);
         setActivityLevel(sedentaryButton, littleExerciseButton, moderateExerciseButton, dailyExerciseButton, intenseExerciseButton, veryIntensiveExerciseButton);
+    }
+
+    public void resetMacroFields() {
+        fatTextField.setText(String.valueOf(profile.getDailyIntake().getTargetNutrients().get("Fat").getValue()));
+        proteinTextField.setText(String.valueOf(profile.getDailyIntake().getTargetNutrients().get("Protein").getValue()));
+        carbsTextField.setText(String.valueOf(profile.getDailyIntake().getTargetNutrients().get("Carbohydrates").getValue()));
     }
 
     public void setActivityLevel(RadioButton sedentary, RadioButton littleExercise, RadioButton moderateExercise, RadioButton dailyExercise, RadioButton intenseExercise, RadioButton veryIntenseExercise) {

@@ -17,11 +17,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
 import org.controlsfx.control.Notifications;
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 import java.io.*;
+import java.text.DecimalFormat;
+import java.text.ParsePosition;
 import java.util.Optional;
+import java.util.function.UnaryOperator;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
@@ -237,6 +242,52 @@ public class BaseScreenController {
         } else {
             createErrorNotification(mainPane,"An error occurred while saving profile to database");
         }
+    }
+
+    public void createFloatTextFormatter(TextField textField, int length) {
+        DecimalFormat format = new DecimalFormat("#.#");
+        textField.setTextFormatter(new TextFormatter<>(c ->
+        {
+            String newText = c.getControlNewText();
+            if (newText.isEmpty()) {
+                return c;
+            }
+
+            if (newText.length() > length) {
+                return null;
+            }
+
+            if (newText.equals("0") || newText.equals("00") || newText.equals("000") || newText.equals("0000")) {
+                return null;
+            }
+
+            ParsePosition parsePosition = new ParsePosition(0);
+            Object object = format.parse(c.getControlNewText(), parsePosition);
+
+            if (object == null || parsePosition.getIndex() < c.getControlNewText().length()) {
+                return null;
+            } else {
+                return c;
+            }
+        }));
+    }
+
+    public void createIntegerTextFormatter(TextField textField, int length) {
+        UnaryOperator<TextFormatter.Change> integerFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.length() > length) {
+                return null;
+            }
+
+            if (newText.matches("-?([1-9][0-9]*)?")) {
+                return change;
+            }
+
+            return null;
+        };
+
+        textField.setTextFormatter(
+                new TextFormatter<>(new IntegerStringConverter(), 0, integerFilter));
     }
 
     public void saveProfileToFile() {
