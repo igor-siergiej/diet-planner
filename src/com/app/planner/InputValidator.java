@@ -36,18 +36,22 @@ public class InputValidator {
         createEventHandler(textField, null, messageLabel, null, ValidatorType.EMAIL);
     }
 
+    // this method is used to give instant feedback to user for writing a password in a field
     public void createPasswordValidator(PasswordField passwordField, TextField showPasswordTextField, Label messageLabel) {
         createEventHandler(passwordField, null, messageLabel, showPasswordTextField, ValidatorType.PASSWORD);
     }
 
+    // same as above just used for the text version of the PasswordField when the user has selected for the password to be seen in text format
     public void createPasswordValidator(TextField showPasswordTextField, PasswordField passwordField, Label messageLabel) {
         createEventHandler(showPasswordTextField, null, messageLabel, passwordField, ValidatorType.PASSWORD);
     }
 
+    // this method is used to give instant feedback for when typing in their password for a second time. Feedback is given if the passwords match
     public void createRetypePasswordValidator(PasswordField passwordField, PasswordField retypePasswordField, Label messageLabel, TextField showRetypePasswordTextField) {
         createEventHandler(retypePasswordField, passwordField, messageLabel, showRetypePasswordTextField, ValidatorType.RETYPE);
     }
 
+    // same as above just for text version of the password fields
     public void createRetypePasswordValidator(TextField showRetypePasswordTextField, TextField showPasswordTextField, Label messageLabel, PasswordField retypePasswordField) {
         createEventHandler(showRetypePasswordTextField, showPasswordTextField, messageLabel, retypePasswordField, ValidatorType.RETYPE);
     }

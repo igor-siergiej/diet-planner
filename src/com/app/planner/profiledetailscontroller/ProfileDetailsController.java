@@ -8,11 +8,6 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.util.converter.IntegerStringConverter;
-
-import java.text.DecimalFormat;
-import java.text.ParsePosition;
-import java.util.function.UnaryOperator;
 
 public class ProfileDetailsController extends BaseScreenController {
 
@@ -128,9 +123,11 @@ public class ProfileDetailsController extends BaseScreenController {
     public void initialize() {
         super.initialize(mainPane, menuBarToggleGroup, profileDetailsToggleButton, undoButton, redoButton);
         // adding listeners to prevent user from typing in invalid input to integer and float textFields
+
         createFloatTextFormatter(fatTextField, 5);
         createFloatTextFormatter(proteinTextField, 5);
         createFloatTextFormatter(carbsTextField, 5);
+
         createIntegerTextFormatter(heightTextField, StringValidation.MAX_HEIGHT_DIGITS);
         createFloatTextFormatter(weightTextField, StringValidation.MAX_WEIGHT_DIGITS);
 
@@ -142,11 +139,12 @@ public class ProfileDetailsController extends BaseScreenController {
         setShowPasswordHandlers(retypePasswordTextField, showPasswordButton, retypePasswordField);
 
         InputValidator passwordValidator = new InputValidator();
-        passwordValidator.createPasswordValidator(passwordField, passwordTextField, passwordMessage);
-        passwordValidator.createPasswordValidator(passwordTextField, passwordField, passwordMessage);
+        passwordValidator.createPasswordValidator(passwordField, passwordTextField, passwordMessage); //validator for password field in change password tab
+        passwordValidator.createPasswordValidator(passwordTextField, passwordField, passwordMessage); //validator for password field when the show password radio button is selected
 
         InputValidator retypePasswordValidator = new InputValidator();
-        retypePasswordValidator.createRetypePasswordValidator(passwordField, retypePasswordField, retypePasswordMessage, retypePasswordTextField);
+        // new InputValidator is required because both share the same timer, having the same stack on two fields cancels the previous task if typed too fast
+        retypePasswordValidator.createRetypePasswordValidator(passwordField, retypePasswordField, retypePasswordMessage, retypePasswordTextField); // same as above just for the retype password field
         retypePasswordValidator.createRetypePasswordValidator(retypePasswordTextField, passwordField, retypePasswordMessage, retypePasswordField);
 
         if (profile.getSex().equals("Male")) { // could switch this to remove the entire HBox instead?
@@ -244,6 +242,7 @@ public class ProfileDetailsController extends BaseScreenController {
     }
 
     public void clearPasswordFields() {
+        // this resets the fields as well as styling for said fields
         showPasswordButton.setSelected(false);
 
         passwordField.clear();
