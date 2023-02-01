@@ -65,9 +65,13 @@ public class ProfileScreenController extends BaseScreenController {
     @FXML
     public void initialize() {
         super.initialize(mainPane,menuBarToggleGroup,homeButton,undoButton,redoButton);
-
-        profileLabel.setText(profile.toString()); // DEBUG
+        profileLabel.setText(profile.getProfileName());
         loadUI();
+        /*if (!profile.getDiary().getAllEntries().isEmpty()) {
+
+        } else {
+
+        }*/
 
         // TODO need some kind of framework or method to make it easier to determine max doses
         // TODO also need some kind of way to dynamically change max doses to change macros and calorie target
@@ -91,7 +95,7 @@ public class ProfileScreenController extends BaseScreenController {
         // this will populate entriesVBox with only 4 of the entries for current day displaying details
         if (!profile.getDiary().getEntriesDay(LocalDate.now()).isEmpty()) {
             ArrayList<Entry> entries = profile.getDiary().getEntriesDay(LocalDate.now());
-            for (int i = 0; i < MAX_NUM_ENTRIES; i++) {
+            for (int i = 0; i < MAX_NUM_ENTRIES && i < entries.size(); i++) {
                 Label entryName = new Label(entries.get(i).getMeal().getMealName() + " " + entries.get(i).getEntryType().toString());
                 Label calorie = new Label(entries.get(i).getNutrientValueForEntry("Energy (kcal)") + " Kcal");
 

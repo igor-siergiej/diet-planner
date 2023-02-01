@@ -31,7 +31,7 @@
                   <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <Button id="greyButton" mnemonicParsing="false" onAction="#loadProfile" prefHeight="48.0" prefWidth="331.0" text="Load from file">
+            <Button id="signInButton" mnemonicParsing="false" onAction="#loadProfile" prefHeight="48.0" prefWidth="331.0" text="Load from file">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
@@ -39,7 +39,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Button>
-            <Button id="greyButton" mnemonicParsing="false" onAction="#goToCreateProfileScreen" prefHeight="48.0" prefWidth="331.0" text="Create offline profile">
+            <Button id="signInButton" mnemonicParsing="false" onAction="#goToCreateProfileScreen" prefHeight="48.0" prefWidth="331.0" text="Create offline profile">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
@@ -98,11 +98,6 @@
                   <Image url="@../img/backgroundPattern.png" />
                </image>
             </ImageView>
-            <Button id="signInButton" layoutX="123.0" layoutY="721.0" mnemonicParsing="false" onAction="#createTestProfile" prefHeight="55.0" prefWidth="331.0" text="Admin Login">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Button>
          </children>
       </Pane>
    </children>

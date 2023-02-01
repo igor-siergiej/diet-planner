@@ -155,17 +155,11 @@ public class ProfileDetailsController extends BaseScreenController {
         resetMacroFields();
         updatePieChart();
 
-        fatTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            updatePieChart();
-        });
+        fatTextField.textProperty().addListener((observable, oldValue, newValue) -> updatePieChart());
 
-        proteinTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            updatePieChart();
-        });
+        proteinTextField.textProperty().addListener((observable, oldValue, newValue) -> updatePieChart());
 
-        carbsTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            updatePieChart();
-        });
+        carbsTextField.textProperty().addListener((observable, oldValue, newValue) -> updatePieChart());
     }
 
     public void goToChangePassword() {
@@ -187,7 +181,7 @@ public class ProfileDetailsController extends BaseScreenController {
     private float getMacroNutrient(TextField textField) {
         float value = 0;
         if (!textField.getText().isBlank()) {
-            value = Float.valueOf(textField.getText());
+            value = Float.parseFloat(textField.getText());
         }
         return value;
     }

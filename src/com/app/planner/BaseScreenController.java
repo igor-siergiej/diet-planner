@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import org.controlsfx.control.Notifications;
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
 
 import java.io.*;
 import java.text.DecimalFormat;
@@ -38,7 +37,7 @@ public class BaseScreenController {
     @FXML
     protected static Pane mainPane;
 
-    //TODO should all the methods here be protected
+    //TODO should all the methods here be protected?
     @FXML
     public void initialize(Pane mainPane, ToggleGroup toggleGroup, ToggleButton toggleButton, Button undoButton, Button redoButton) {
         BaseScreenController.mainPane = mainPane;

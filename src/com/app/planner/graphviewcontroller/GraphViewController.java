@@ -29,6 +29,8 @@ public class GraphViewController extends BaseScreenController {
     @FXML
     private Button redoButton;
 
+    // TODO create a button to switch between days and weeks on xAxis
+
     @FXML
     public void initialize() {
         super.initialize(mainPane,menuBarToggleGroup,graphViewButton,undoButton,redoButton);
