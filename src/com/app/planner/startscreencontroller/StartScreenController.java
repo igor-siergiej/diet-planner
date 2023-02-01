@@ -98,10 +98,11 @@ public class StartScreenController extends BaseScreenController {
     }
 
     public void loadProfile(ActionEvent event) { // this is the method to call when load profile from file is pressed
-        Profile profile = new Profile();
+        Profile loadedProfile = new Profile();
         File file = Main.chooseLoadFile(mainPane);
         if (!(file == null)) {
-            profile.loadFromFile(file);
+            loadedProfile.loadFromFile(file);
+            profile = loadedProfile;
             goToProfileScreen(event);
         } else {
             System.out.println("Choosing File closed!");

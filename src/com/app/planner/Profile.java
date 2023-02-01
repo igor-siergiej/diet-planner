@@ -52,7 +52,7 @@ public class Profile {
     }
 
     public void initialiseProfile() {
-        diary = new Diary();
+
         dailyIntake = new DailyIntake();
         options = new Option();
 
@@ -167,7 +167,7 @@ public class Profile {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 
@@ -250,6 +250,18 @@ public class Profile {
             Profile profile = gson.fromJson(reader, Profile.class);
             this.setDiary(profile.getDiary());
             this.setProfileName(profile.getProfileName());
+            this.setActivityLevel(profile.getActivityLevel());
+            this.setPregnant(profile.isPregnant());
+            this.setBreastFeeding(profile.isBreastFeeding());
+            this.setBirthDate(profile.getBirthDate());
+            this.setSex(profile.getSex());
+            this.setWeight(profile.getWeight());
+            this.setHeight(profile.getHeight());
+            this.setAge(profile.getAge());
+            if (profile.getDiary().getAllEntries().isEmpty()) {
+                this.setDiary(new Diary());
+            }
+            initialiseProfile();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

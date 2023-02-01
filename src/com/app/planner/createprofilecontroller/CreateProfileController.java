@@ -2,6 +2,7 @@ package com.app.planner.createprofilecontroller;
 
 import com.app.planner.ActivityLevelType;
 import com.app.planner.BaseScreenController;
+import com.app.planner.Profile;
 import com.app.planner.StringValidation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,7 +48,7 @@ public class CreateProfileController extends BaseScreenController {
     private TextField profileNameTextField;
 
     @FXML
-    private DatePicker birthDatePicker; //TODO CSS for this
+    private DatePicker birthDatePicker;
 
     @FXML
     private RadioButton SEDENTARY;
@@ -226,10 +227,11 @@ public class CreateProfileController extends BaseScreenController {
     public void createNewProfile(ActionEvent event) {
         List<String> listOfErrorMessages = getListOfErrorMessages();
         if (listOfErrorMessages.isEmpty()) {
+            profile = new Profile();
             profile.setProfileName(profileNameTextField.getText());
             //profile.setAge(Integer.parseInt(ageTextField.getText()));
             profile.setHeight(Integer.parseInt(heightTextField.getText()));
-            profile.setWeight(Integer.parseInt(weightTextField.getText()));
+            profile.setWeight(Double.parseDouble(weightTextField.getText()));
 
             String sex = (String) sexToggleGroup.getSelectedToggle().getUserData();
             profile.setSex(sex);
@@ -263,7 +265,7 @@ public class CreateProfileController extends BaseScreenController {
         profile.setProfileName("testProfile");
         profile.setAge(21);
         profile.setHeight(175);
-        profile.setWeight(75);
+        profile.setWeight(75.0);
         profile.setSex("Male");
 
         profile.initialiseProfile();
